@@ -1,0 +1,17 @@
+//
+//  GenShelf-Prefix.pch
+//  GenShelf
+//
+//  Created by Gen on 16/2/17.
+//  Copyright © 2016年 AirRaidClub. All rights reserved.
+//
+
+
+#import <Availability.h>
+#ifdef __OBJC__
+
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+
+#endif
+

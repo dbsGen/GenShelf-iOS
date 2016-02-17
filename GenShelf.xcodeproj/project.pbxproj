@@ -1,0 +1,623 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B20A34121C745E37000CCFA3 /* encrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = B20A340A1C745E37000CCFA3 /* encrypt.c */; };
+		B20A34141C745E37000CCFA3 /* local.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A340F1C745E37000CCFA3 /* local.m */; };
+		B20A34151C745E37000CCFA3 /* table.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A34111C745E37000CCFA3 /* table.m */; };
+		B20A341A1C745F2F000CCFA3 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B20A34171C745F2F000CCFA3 /* libsodium.a */; };
+		B20A341B1C745F2F000CCFA3 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B20A34181C745F2F000CCFA3 /* libcrypto.a */; };
+		B20A341C1C745F2F000CCFA3 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B20A34191C745F2F000CCFA3 /* libssl.a */; };
+		B20A341E1C745FA5000CCFA3 /* ev.c in Sources */ = {isa = PBXBuildFile; fileRef = B20A341D1C745FA5000CCFA3 /* ev.c */; };
+		B20A34231C746541000CCFA3 /* ShadowsocksRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A34221C746541000CCFA3 /* ShadowsocksRunner.m */; };
+		B250EE2E1C73054D00198CDE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE2D1C73054D00198CDE /* main.m */; };
+		B250EE311C73054D00198CDE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE301C73054D00198CDE /* AppDelegate.m */; };
+		B250EE341C73054D00198CDE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE331C73054D00198CDE /* ViewController.m */; };
+		B250EE371C73054D00198CDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B250EE351C73054D00198CDE /* Main.storyboard */; };
+		B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B250EE381C73054D00198CDE /* GenShelf.xcdatamodeld */; };
+		B250EE3C1C73054D00198CDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B250EE3B1C73054D00198CDE /* Assets.xcassets */; };
+		B250EE3F1C73054D00198CDE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B250EE3D1C73054D00198CDE /* LaunchScreen.storyboard */; };
+		B250EE4A1C73054D00198CDE /* GenShelfTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE491C73054D00198CDE /* GenShelfTests.m */; };
+		B250EE551C73054D00198CDE /* GenShelfUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE541C73054D00198CDE /* GenShelfUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B250EE461C73054D00198CDE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B250EE211C73054D00198CDE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B250EE281C73054D00198CDE;
+			remoteInfo = GenShelf;
+		};
+		B250EE511C73054D00198CDE /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B250EE211C73054D00198CDE /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B250EE281C73054D00198CDE;
+			remoteInfo = GenShelf;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		B20A340A1C745E37000CCFA3 /* encrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = encrypt.c; sourceTree = "<group>"; };
+		B20A340B1C745E37000CCFA3 /* encrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encrypt.h; sourceTree = "<group>"; };
+		B20A340E1C745E37000CCFA3 /* local.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = local.h; sourceTree = "<group>"; };
+		B20A340F1C745E37000CCFA3 /* local.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = local.m; sourceTree = "<group>"; };
+		B20A34101C745E37000CCFA3 /* table.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = table.h; sourceTree = "<group>"; };
+		B20A34111C745E37000CCFA3 /* table.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = table.m; sourceTree = "<group>"; };
+		B20A34171C745F2F000CCFA3 /* libsodium.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libsodium.a; path = "GenShelf/OpenSSL-for-iPhone/lib/libsodium.a"; sourceTree = "<group>"; };
+		B20A34181C745F2F000CCFA3 /* libcrypto.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libcrypto.a; path = "GenShelf/OpenSSL-for-iPhone/lib/libcrypto.a"; sourceTree = "<group>"; };
+		B20A34191C745F2F000CCFA3 /* libssl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libssl.a; path = "GenShelf/OpenSSL-for-iPhone/lib/libssl.a"; sourceTree = "<group>"; };
+		B20A341D1C745FA5000CCFA3 /* ev.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ev.c; path = GenShelf/libev/ev.c; sourceTree = SOURCE_ROOT; };
+		B20A341F1C745FE7000CCFA3 /* socks5.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = socks5.h; sourceTree = "<group>"; };
+		B20A34201C746497000CCFA3 /* GenShelf-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GenShelf-Prefix.pch"; sourceTree = "<group>"; };
+		B20A34211C746541000CCFA3 /* ShadowsocksRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowsocksRunner.h; sourceTree = "<group>"; };
+		B20A34221C746541000CCFA3 /* ShadowsocksRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadowsocksRunner.m; sourceTree = "<group>"; };
+		B250EE291C73054D00198CDE /* GenShelf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenShelf.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B250EE2D1C73054D00198CDE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		B250EE2F1C73054D00198CDE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B250EE301C73054D00198CDE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B250EE321C73054D00198CDE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		B250EE331C73054D00198CDE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		B250EE361C73054D00198CDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B250EE391C73054D00198CDE /* GenShelf.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GenShelf.xcdatamodel; sourceTree = "<group>"; };
+		B250EE3B1C73054D00198CDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B250EE3E1C73054D00198CDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B250EE401C73054D00198CDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B250EE451C73054D00198CDE /* GenShelfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenShelfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B250EE491C73054D00198CDE /* GenShelfTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenShelfTests.m; sourceTree = "<group>"; };
+		B250EE4B1C73054D00198CDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B250EE501C73054D00198CDE /* GenShelfUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenShelfUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B250EE541C73054D00198CDE /* GenShelfUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenShelfUITests.m; sourceTree = "<group>"; };
+		B250EE561C73054D00198CDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B250EE261C73054D00198CDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B20A341B1C745F2F000CCFA3 /* libcrypto.a in Frameworks */,
+				B20A341A1C745F2F000CCFA3 /* libsodium.a in Frameworks */,
+				B20A341C1C745F2F000CCFA3 /* libssl.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B250EE421C73054D00198CDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B250EE4D1C73054D00198CDE /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B20A34091C745E37000CCFA3 /* Shadowsocks */ = {
+			isa = PBXGroup;
+			children = (
+				B20A34211C746541000CCFA3 /* ShadowsocksRunner.h */,
+				B20A34221C746541000CCFA3 /* ShadowsocksRunner.m */,
+				B20A341D1C745FA5000CCFA3 /* ev.c */,
+				B20A340A1C745E37000CCFA3 /* encrypt.c */,
+				B20A340B1C745E37000CCFA3 /* encrypt.h */,
+				B20A341F1C745FE7000CCFA3 /* socks5.h */,
+				B20A340E1C745E37000CCFA3 /* local.h */,
+				B20A340F1C745E37000CCFA3 /* local.m */,
+				B20A34101C745E37000CCFA3 /* table.h */,
+				B20A34111C745E37000CCFA3 /* table.m */,
+			);
+			path = Shadowsocks;
+			sourceTree = "<group>";
+		};
+		B20A34161C745F1B000CCFA3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B20A34171C745F2F000CCFA3 /* libsodium.a */,
+				B20A34181C745F2F000CCFA3 /* libcrypto.a */,
+				B20A34191C745F2F000CCFA3 /* libssl.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B250EE201C73054D00198CDE = {
+			isa = PBXGroup;
+			children = (
+				B250EE2B1C73054D00198CDE /* GenShelf */,
+				B250EE481C73054D00198CDE /* GenShelfTests */,
+				B250EE531C73054D00198CDE /* GenShelfUITests */,
+				B250EE2A1C73054D00198CDE /* Products */,
+				B20A34161C745F1B000CCFA3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B250EE2A1C73054D00198CDE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B250EE291C73054D00198CDE /* GenShelf.app */,
+				B250EE451C73054D00198CDE /* GenShelfTests.xctest */,
+				B250EE501C73054D00198CDE /* GenShelfUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B250EE2B1C73054D00198CDE /* GenShelf */ = {
+			isa = PBXGroup;
+			children = (
+				B20A34091C745E37000CCFA3 /* Shadowsocks */,
+				B250EE2F1C73054D00198CDE /* AppDelegate.h */,
+				B250EE301C73054D00198CDE /* AppDelegate.m */,
+				B250EE321C73054D00198CDE /* ViewController.h */,
+				B250EE331C73054D00198CDE /* ViewController.m */,
+				B250EE351C73054D00198CDE /* Main.storyboard */,
+				B250EE3B1C73054D00198CDE /* Assets.xcassets */,
+				B250EE3D1C73054D00198CDE /* LaunchScreen.storyboard */,
+				B250EE401C73054D00198CDE /* Info.plist */,
+				B250EE381C73054D00198CDE /* GenShelf.xcdatamodeld */,
+				B250EE2C1C73054D00198CDE /* Supporting Files */,
+				B20A34201C746497000CCFA3 /* GenShelf-Prefix.pch */,
+			);
+			path = GenShelf;
+			sourceTree = "<group>";
+		};
+		B250EE2C1C73054D00198CDE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B250EE2D1C73054D00198CDE /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B250EE481C73054D00198CDE /* GenShelfTests */ = {
+			isa = PBXGroup;
+			children = (
+				B250EE491C73054D00198CDE /* GenShelfTests.m */,
+				B250EE4B1C73054D00198CDE /* Info.plist */,
+			);
+			path = GenShelfTests;
+			sourceTree = "<group>";
+		};
+		B250EE531C73054D00198CDE /* GenShelfUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B250EE541C73054D00198CDE /* GenShelfUITests.m */,
+				B250EE561C73054D00198CDE /* Info.plist */,
+			);
+			path = GenShelfUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B250EE281C73054D00198CDE /* GenShelf */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B250EE591C73054D00198CDE /* Build configuration list for PBXNativeTarget "GenShelf" */;
+			buildPhases = (
+				B250EE251C73054D00198CDE /* Sources */,
+				B250EE261C73054D00198CDE /* Frameworks */,
+				B250EE271C73054D00198CDE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GenShelf;
+			productName = GenShelf;
+			productReference = B250EE291C73054D00198CDE /* GenShelf.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B250EE441C73054D00198CDE /* GenShelfTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B250EE5C1C73054D00198CDE /* Build configuration list for PBXNativeTarget "GenShelfTests" */;
+			buildPhases = (
+				B250EE411C73054D00198CDE /* Sources */,
+				B250EE421C73054D00198CDE /* Frameworks */,
+				B250EE431C73054D00198CDE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B250EE471C73054D00198CDE /* PBXTargetDependency */,
+			);
+			name = GenShelfTests;
+			productName = GenShelfTests;
+			productReference = B250EE451C73054D00198CDE /* GenShelfTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B250EE4F1C73054D00198CDE /* GenShelfUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B250EE5F1C73054D00198CDE /* Build configuration list for PBXNativeTarget "GenShelfUITests" */;
+			buildPhases = (
+				B250EE4C1C73054D00198CDE /* Sources */,
+				B250EE4D1C73054D00198CDE /* Frameworks */,
+				B250EE4E1C73054D00198CDE /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B250EE521C73054D00198CDE /* PBXTargetDependency */,
+			);
+			name = GenShelfUITests;
+			productName = GenShelfUITests;
+			productReference = B250EE501C73054D00198CDE /* GenShelfUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B250EE211C73054D00198CDE /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = AirRaidClub;
+				TargetAttributes = {
+					B250EE281C73054D00198CDE = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					B250EE441C73054D00198CDE = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = B250EE281C73054D00198CDE;
+					};
+					B250EE4F1C73054D00198CDE = {
+						CreatedOnToolsVersion = 7.1.1;
+						TestTargetID = B250EE281C73054D00198CDE;
+					};
+				};
+			};
+			buildConfigurationList = B250EE241C73054D00198CDE /* Build configuration list for PBXProject "GenShelf" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B250EE201C73054D00198CDE;
+			productRefGroup = B250EE2A1C73054D00198CDE /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B250EE281C73054D00198CDE /* GenShelf */,
+				B250EE441C73054D00198CDE /* GenShelfTests */,
+				B250EE4F1C73054D00198CDE /* GenShelfUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B250EE271C73054D00198CDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B250EE3F1C73054D00198CDE /* LaunchScreen.storyboard in Resources */,
+				B250EE3C1C73054D00198CDE /* Assets.xcassets in Resources */,
+				B250EE371C73054D00198CDE /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B250EE431C73054D00198CDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B250EE4E1C73054D00198CDE /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B250EE251C73054D00198CDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B20A341E1C745FA5000CCFA3 /* ev.c in Sources */,
+				B250EE341C73054D00198CDE /* ViewController.m in Sources */,
+				B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */,
+				B20A34151C745E37000CCFA3 /* table.m in Sources */,
+				B250EE311C73054D00198CDE /* AppDelegate.m in Sources */,
+				B20A34121C745E37000CCFA3 /* encrypt.c in Sources */,
+				B20A34141C745E37000CCFA3 /* local.m in Sources */,
+				B250EE2E1C73054D00198CDE /* main.m in Sources */,
+				B20A34231C746541000CCFA3 /* ShadowsocksRunner.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B250EE411C73054D00198CDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B250EE4A1C73054D00198CDE /* GenShelfTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B250EE4C1C73054D00198CDE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B250EE551C73054D00198CDE /* GenShelfUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B250EE471C73054D00198CDE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B250EE281C73054D00198CDE /* GenShelf */;
+			targetProxy = B250EE461C73054D00198CDE /* PBXContainerItemProxy */;
+		};
+		B250EE521C73054D00198CDE /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B250EE281C73054D00198CDE /* GenShelf */;
+			targetProxy = B250EE511C73054D00198CDE /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		B250EE351C73054D00198CDE /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B250EE361C73054D00198CDE /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B250EE3D1C73054D00198CDE /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B250EE3E1C73054D00198CDE /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B250EE571C73054D00198CDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B250EE581C73054D00198CDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B250EE5A1C73054D00198CDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				GCC_PREFIX_HEADER = "GenShelf/GenShelf-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/GenShelf/OpenSSL-for-iPhone/include\"",
+					"\"$(SRCROOT)/GenShelf\"",
+				);
+				INFOPLIST_FILE = GenShelf/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GenShelf/OpenSSL-for-iPhone/lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B250EE5B1C73054D00198CDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ENABLE_BITCODE = NO;
+				GCC_PREFIX_HEADER = "GenShelf/GenShelf-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/GenShelf/OpenSSL-for-iPhone/include\"",
+					"\"$(SRCROOT)/GenShelf\"",
+				);
+				INFOPLIST_FILE = GenShelf/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/GenShelf/OpenSSL-for-iPhone/lib",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		B250EE5D1C73054D00198CDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = GenShelfTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelfTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenShelf.app/GenShelf";
+			};
+			name = Debug;
+		};
+		B250EE5E1C73054D00198CDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = GenShelfTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelfTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/GenShelf.app/GenShelf";
+			};
+			name = Release;
+		};
+		B250EE601C73054D00198CDE /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = GenShelfUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelfUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = GenShelf;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		B250EE611C73054D00198CDE /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = GenShelfUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelfUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = GenShelf;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B250EE241C73054D00198CDE /* Build configuration list for PBXProject "GenShelf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B250EE571C73054D00198CDE /* Debug */,
+				B250EE581C73054D00198CDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B250EE591C73054D00198CDE /* Build configuration list for PBXNativeTarget "GenShelf" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B250EE5A1C73054D00198CDE /* Debug */,
+				B250EE5B1C73054D00198CDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B250EE5C1C73054D00198CDE /* Build configuration list for PBXNativeTarget "GenShelfTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B250EE5D1C73054D00198CDE /* Debug */,
+				B250EE5E1C73054D00198CDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B250EE5F1C73054D00198CDE /* Build configuration list for PBXNativeTarget "GenShelfUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B250EE601C73054D00198CDE /* Debug */,
+				B250EE611C73054D00198CDE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B250EE381C73054D00198CDE /* GenShelf.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B250EE391C73054D00198CDE /* GenShelf.xcdatamodel */,
+			);
+			currentVersion = B250EE391C73054D00198CDE /* GenShelf.xcdatamodel */;
+			path = GenShelf.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = B250EE211C73054D00198CDE /* Project object */;
+}
