@@ -35,6 +35,7 @@
 		B250EE3C1C73054D00198CDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B250EE3B1C73054D00198CDE /* Assets.xcassets */; };
 		B250EE4A1C73054D00198CDE /* GenShelfTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE491C73054D00198CDE /* GenShelfTests.m */; };
 		B250EE551C73054D00198CDE /* GenShelfUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE541C73054D00198CDE /* GenShelfUITests.m */; };
+		B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CE81301C74B6DA00980186 /* GSSelectCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +124,8 @@
 		B250EE501C73054D00198CDE /* GenShelfUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenShelfUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B250EE541C73054D00198CDE /* GenShelfUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenShelfUITests.m; sourceTree = "<group>"; };
 		B250EE561C73054D00198CDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2CE812F1C74B6DA00980186 /* GSSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSelectCell.h; sourceTree = "<group>"; };
+		B2CE81301C74B6DA00980186 /* GSSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSelectCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -241,6 +244,8 @@
 			children = (
 				B20A348C1C7482A8000CCFA3 /* GSInputCell.h */,
 				B20A348D1C7482A8000CCFA3 /* GSInputCell.m */,
+				B2CE812F1C74B6DA00980186 /* GSSelectCell.h */,
+				B2CE81301C74B6DA00980186 /* GSSelectCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -476,6 +481,7 @@
 				B20A34731C746BBB000CCFA3 /* GSSSSettingViewController.m in Sources */,
 				B20A346B1C746AA3000CCFA3 /* ASIHTTPRequest.m in Sources */,
 				B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */,
+				B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */,
 				B20A346C1C746AA3000CCFA3 /* ASIInputStream.m in Sources */,
 				B250EE311C73054D00198CDE /* AppDelegate.m in Sources */,
 				B20A34671C746AA3000CCFA3 /* ASIDataDecompressor.m in Sources */,
@@ -739,6 +745,7 @@
 				B20A34821C747283000CCFA3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		B250EE241C73054D00198CDE /* Build configuration list for PBXProject "GenShelf" */ = {
 			isa = XCConfigurationList;

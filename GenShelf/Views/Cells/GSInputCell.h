@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GSInputCell : UIView
+@interface GSInputCell : UITableViewCell
+
+@property (nonatomic, readonly) UITextField *inputView;
 
 @end
