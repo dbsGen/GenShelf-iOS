@@ -21,9 +21,9 @@
     }
 }
 
-+ (BOOL)runProxy {
++ (BOOL)runProxy:(NSString *)port {
     if (![ShadowsocksRunner settingsAreNotComplete]) {
-        local_main();
+        local_main(port.UTF8String);
         return YES;
     } else {
 #ifdef DEBUG

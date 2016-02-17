@@ -7,21 +7,32 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B20A34121C745E37000CCFA3 /* encrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = B20A340A1C745E37000CCFA3 /* encrypt.c */; };
-		B20A34141C745E37000CCFA3 /* local.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A340F1C745E37000CCFA3 /* local.m */; };
-		B20A34151C745E37000CCFA3 /* table.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A34111C745E37000CCFA3 /* table.m */; };
 		B20A341A1C745F2F000CCFA3 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B20A34171C745F2F000CCFA3 /* libsodium.a */; };
 		B20A341B1C745F2F000CCFA3 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B20A34181C745F2F000CCFA3 /* libcrypto.a */; };
 		B20A341C1C745F2F000CCFA3 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B20A34191C745F2F000CCFA3 /* libssl.a */; };
-		B20A341E1C745FA5000CCFA3 /* ev.c in Sources */ = {isa = PBXBuildFile; fileRef = B20A341D1C745FA5000CCFA3 /* ev.c */; };
 		B20A34231C746541000CCFA3 /* ShadowsocksRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A34221C746541000CCFA3 /* ShadowsocksRunner.m */; };
+		B20A34651C746AA3000CCFA3 /* ASIAuthenticationDialog.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A344C1C746AA3000CCFA3 /* ASIAuthenticationDialog.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B20A34661C746AA3000CCFA3 /* ASIDataCompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A344F1C746AA3000CCFA3 /* ASIDataCompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B20A34671C746AA3000CCFA3 /* ASIDataDecompressor.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A34511C746AA3000CCFA3 /* ASIDataDecompressor.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B20A34681C746AA3000CCFA3 /* ASIDownloadCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A34531C746AA3000CCFA3 /* ASIDownloadCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B20A34691C746AA3000CCFA3 /* ASIFormDataRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A34551C746AA3000CCFA3 /* ASIFormDataRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B20A346B1C746AA3000CCFA3 /* ASIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A34591C746AA3000CCFA3 /* ASIHTTPRequest.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B20A346C1C746AA3000CCFA3 /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A345D1C746AA3000CCFA3 /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B20A346D1C746AA3000CCFA3 /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A345F1C746AA3000CCFA3 /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B20A346F1C746AA3000CCFA3 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A34641C746AA3000CCFA3 /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B20A34731C746BBB000CCFA3 /* GSSSSettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A34721C746BBB000CCFA3 /* GSSSSettingViewController.m */; };
+		B20A34751C746D24000CCFA3 /* libz.1.2.5.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B20A34741C746D24000CCFA3 /* libz.1.2.5.tbd */; };
+		B20A34831C7472B6000CCFA3 /* ev.c in Sources */ = {isa = PBXBuildFile; fileRef = B20A341D1C745FA5000CCFA3 /* ev.c */; };
+		B20A34841C7472BD000CCFA3 /* encrypt.c in Sources */ = {isa = PBXBuildFile; fileRef = B20A340A1C745E37000CCFA3 /* encrypt.c */; };
+		B20A34851C7472C2000CCFA3 /* local.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A340F1C745E37000CCFA3 /* local.m */; };
+		B20A34861C7472C7000CCFA3 /* table.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A34111C745E37000CCFA3 /* table.m */; };
+		B20A34871C747306000CCFA3 /* libshadowsocks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B20A347A1C747283000CCFA3 /* libshadowsocks.a */; };
+		B20A34891C747FB7000CCFA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B20A34881C747FB7000CCFA3 /* LaunchScreen.storyboard */; };
+		B20A348E1C7482A8000CCFA3 /* GSInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A348D1C7482A8000CCFA3 /* GSInputCell.m */; };
 		B250EE2E1C73054D00198CDE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE2D1C73054D00198CDE /* main.m */; };
 		B250EE311C73054D00198CDE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE301C73054D00198CDE /* AppDelegate.m */; };
-		B250EE341C73054D00198CDE /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE331C73054D00198CDE /* ViewController.m */; };
-		B250EE371C73054D00198CDE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B250EE351C73054D00198CDE /* Main.storyboard */; };
 		B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B250EE381C73054D00198CDE /* GenShelf.xcdatamodeld */; };
 		B250EE3C1C73054D00198CDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B250EE3B1C73054D00198CDE /* Assets.xcassets */; };
-		B250EE3F1C73054D00198CDE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B250EE3D1C73054D00198CDE /* LaunchScreen.storyboard */; };
 		B250EE4A1C73054D00198CDE /* GenShelfTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE491C73054D00198CDE /* GenShelfTests.m */; };
 		B250EE551C73054D00198CDE /* GenShelfUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE541C73054D00198CDE /* GenShelfUITests.m */; };
 /* End PBXBuildFile section */
@@ -43,6 +54,18 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B20A34781C747283000CCFA3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		B20A340A1C745E37000CCFA3 /* encrypt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = encrypt.c; sourceTree = "<group>"; };
 		B20A340B1C745E37000CCFA3 /* encrypt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = encrypt.h; sourceTree = "<group>"; };
@@ -58,16 +81,41 @@
 		B20A34201C746497000CCFA3 /* GenShelf-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GenShelf-Prefix.pch"; sourceTree = "<group>"; };
 		B20A34211C746541000CCFA3 /* ShadowsocksRunner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShadowsocksRunner.h; sourceTree = "<group>"; };
 		B20A34221C746541000CCFA3 /* ShadowsocksRunner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShadowsocksRunner.m; sourceTree = "<group>"; };
+		B20A344B1C746AA3000CCFA3 /* ASIAuthenticationDialog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIAuthenticationDialog.h; sourceTree = "<group>"; };
+		B20A344C1C746AA3000CCFA3 /* ASIAuthenticationDialog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIAuthenticationDialog.m; sourceTree = "<group>"; };
+		B20A344D1C746AA3000CCFA3 /* ASICacheDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASICacheDelegate.h; sourceTree = "<group>"; };
+		B20A344E1C746AA3000CCFA3 /* ASIDataCompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataCompressor.h; sourceTree = "<group>"; };
+		B20A344F1C746AA3000CCFA3 /* ASIDataCompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataCompressor.m; sourceTree = "<group>"; };
+		B20A34501C746AA3000CCFA3 /* ASIDataDecompressor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDataDecompressor.h; sourceTree = "<group>"; };
+		B20A34511C746AA3000CCFA3 /* ASIDataDecompressor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDataDecompressor.m; sourceTree = "<group>"; };
+		B20A34521C746AA3000CCFA3 /* ASIDownloadCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIDownloadCache.h; sourceTree = "<group>"; };
+		B20A34531C746AA3000CCFA3 /* ASIDownloadCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIDownloadCache.m; sourceTree = "<group>"; };
+		B20A34541C746AA3000CCFA3 /* ASIFormDataRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIFormDataRequest.h; sourceTree = "<group>"; };
+		B20A34551C746AA3000CCFA3 /* ASIFormDataRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIFormDataRequest.m; sourceTree = "<group>"; };
+		B20A34581C746AA3000CCFA3 /* ASIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequest.h; sourceTree = "<group>"; };
+		B20A34591C746AA3000CCFA3 /* ASIHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIHTTPRequest.m; sourceTree = "<group>"; };
+		B20A345A1C746AA3000CCFA3 /* ASIHTTPRequestConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestConfig.h; sourceTree = "<group>"; };
+		B20A345B1C746AA3000CCFA3 /* ASIHTTPRequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIHTTPRequestDelegate.h; sourceTree = "<group>"; };
+		B20A345C1C746AA3000CCFA3 /* ASIInputStream.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIInputStream.h; sourceTree = "<group>"; };
+		B20A345D1C746AA3000CCFA3 /* ASIInputStream.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASIInputStream.m; sourceTree = "<group>"; };
+		B20A345E1C746AA3000CCFA3 /* ASINetworkQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASINetworkQueue.h; sourceTree = "<group>"; };
+		B20A345F1C746AA3000CCFA3 /* ASINetworkQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASINetworkQueue.m; sourceTree = "<group>"; };
+		B20A34601C746AA3000CCFA3 /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
+		B20A34631C746AA3000CCFA3 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		B20A34641C746AA3000CCFA3 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		B20A34711C746BBB000CCFA3 /* GSSSSettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSSSettingViewController.h; sourceTree = "<group>"; };
+		B20A34721C746BBB000CCFA3 /* GSSSSettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSSSettingViewController.m; sourceTree = "<group>"; };
+		B20A34741C746D24000CCFA3 /* libz.1.2.5.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.2.5.tbd; path = usr/lib/libz.1.2.5.tbd; sourceTree = SDKROOT; };
+		B20A347A1C747283000CCFA3 /* libshadowsocks.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libshadowsocks.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B20A34881C747FB7000CCFA3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B20A348C1C7482A8000CCFA3 /* GSInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSInputCell.h; sourceTree = "<group>"; };
+		B20A348D1C7482A8000CCFA3 /* GSInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSInputCell.m; sourceTree = "<group>"; };
 		B250EE291C73054D00198CDE /* GenShelf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenShelf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B250EE2D1C73054D00198CDE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B250EE2F1C73054D00198CDE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B250EE301C73054D00198CDE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B250EE321C73054D00198CDE /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		B250EE331C73054D00198CDE /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		B250EE361C73054D00198CDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B250EE391C73054D00198CDE /* GenShelf.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GenShelf.xcdatamodel; sourceTree = "<group>"; };
 		B250EE3B1C73054D00198CDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		B250EE3E1C73054D00198CDE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B250EE401C73054D00198CDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B250EE451C73054D00198CDE /* GenShelfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenShelfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B250EE491C73054D00198CDE /* GenShelfTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenShelfTests.m; sourceTree = "<group>"; };
@@ -78,10 +126,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B20A34771C747283000CCFA3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B250EE261C73054D00198CDE /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B20A34871C747306000CCFA3 /* libshadowsocks.a in Frameworks */,
+				B20A34751C746D24000CCFA3 /* libz.1.2.5.tbd in Frameworks */,
 				B20A341B1C745F2F000CCFA3 /* libcrypto.a in Frameworks */,
 				B20A341A1C745F2F000CCFA3 /* libsodium.a in Frameworks */,
 				B20A341C1C745F2F000CCFA3 /* libssl.a in Frameworks */,
@@ -125,11 +182,67 @@
 		B20A34161C745F1B000CCFA3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B20A34741C746D24000CCFA3 /* libz.1.2.5.tbd */,
 				B20A34171C745F2F000CCFA3 /* libsodium.a */,
 				B20A34181C745F2F000CCFA3 /* libcrypto.a */,
 				B20A34191C745F2F000CCFA3 /* libssl.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B20A344A1C746AA3000CCFA3 /* ASIHTTPRequest */ = {
+			isa = PBXGroup;
+			children = (
+				B20A344B1C746AA3000CCFA3 /* ASIAuthenticationDialog.h */,
+				B20A344C1C746AA3000CCFA3 /* ASIAuthenticationDialog.m */,
+				B20A344D1C746AA3000CCFA3 /* ASICacheDelegate.h */,
+				B20A344E1C746AA3000CCFA3 /* ASIDataCompressor.h */,
+				B20A344F1C746AA3000CCFA3 /* ASIDataCompressor.m */,
+				B20A34501C746AA3000CCFA3 /* ASIDataDecompressor.h */,
+				B20A34511C746AA3000CCFA3 /* ASIDataDecompressor.m */,
+				B20A34521C746AA3000CCFA3 /* ASIDownloadCache.h */,
+				B20A34531C746AA3000CCFA3 /* ASIDownloadCache.m */,
+				B20A34541C746AA3000CCFA3 /* ASIFormDataRequest.h */,
+				B20A34551C746AA3000CCFA3 /* ASIFormDataRequest.m */,
+				B20A34581C746AA3000CCFA3 /* ASIHTTPRequest.h */,
+				B20A34591C746AA3000CCFA3 /* ASIHTTPRequest.m */,
+				B20A345A1C746AA3000CCFA3 /* ASIHTTPRequestConfig.h */,
+				B20A345B1C746AA3000CCFA3 /* ASIHTTPRequestDelegate.h */,
+				B20A345C1C746AA3000CCFA3 /* ASIInputStream.h */,
+				B20A345D1C746AA3000CCFA3 /* ASIInputStream.m */,
+				B20A345E1C746AA3000CCFA3 /* ASINetworkQueue.h */,
+				B20A345F1C746AA3000CCFA3 /* ASINetworkQueue.m */,
+				B20A34601C746AA3000CCFA3 /* ASIProgressDelegate.h */,
+				B20A34631C746AA3000CCFA3 /* Reachability.h */,
+				B20A34641C746AA3000CCFA3 /* Reachability.m */,
+			);
+			path = ASIHTTPRequest;
+			sourceTree = "<group>";
+		};
+		B20A34701C746B80000CCFA3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B20A34711C746BBB000CCFA3 /* GSSSSettingViewController.h */,
+				B20A34721C746BBB000CCFA3 /* GSSSSettingViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B20A348A1C7481DF000CCFA3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B20A348B1C748292000CCFA3 /* Cells */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B20A348B1C748292000CCFA3 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				B20A348C1C7482A8000CCFA3 /* GSInputCell.h */,
+				B20A348D1C7482A8000CCFA3 /* GSInputCell.m */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		B250EE201C73054D00198CDE = {
@@ -149,6 +262,7 @@
 				B250EE291C73054D00198CDE /* GenShelf.app */,
 				B250EE451C73054D00198CDE /* GenShelfTests.xctest */,
 				B250EE501C73054D00198CDE /* GenShelfUITests.xctest */,
+				B20A347A1C747283000CCFA3 /* libshadowsocks.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -156,18 +270,18 @@
 		B250EE2B1C73054D00198CDE /* GenShelf */ = {
 			isa = PBXGroup;
 			children = (
+				B20A348A1C7481DF000CCFA3 /* Views */,
+				B20A34701C746B80000CCFA3 /* Controllers */,
+				B20A344A1C746AA3000CCFA3 /* ASIHTTPRequest */,
 				B20A34091C745E37000CCFA3 /* Shadowsocks */,
 				B250EE2F1C73054D00198CDE /* AppDelegate.h */,
 				B250EE301C73054D00198CDE /* AppDelegate.m */,
-				B250EE321C73054D00198CDE /* ViewController.h */,
-				B250EE331C73054D00198CDE /* ViewController.m */,
-				B250EE351C73054D00198CDE /* Main.storyboard */,
 				B250EE3B1C73054D00198CDE /* Assets.xcassets */,
-				B250EE3D1C73054D00198CDE /* LaunchScreen.storyboard */,
 				B250EE401C73054D00198CDE /* Info.plist */,
 				B250EE381C73054D00198CDE /* GenShelf.xcdatamodeld */,
 				B250EE2C1C73054D00198CDE /* Supporting Files */,
 				B20A34201C746497000CCFA3 /* GenShelf-Prefix.pch */,
+				B20A34881C747FB7000CCFA3 /* LaunchScreen.storyboard */,
 			);
 			path = GenShelf;
 			sourceTree = "<group>";
@@ -201,6 +315,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B20A34791C747283000CCFA3 /* shadowsocks */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B20A34801C747283000CCFA3 /* Build configuration list for PBXNativeTarget "shadowsocks" */;
+			buildPhases = (
+				B20A34761C747283000CCFA3 /* Sources */,
+				B20A34771C747283000CCFA3 /* Frameworks */,
+				B20A34781C747283000CCFA3 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = shadowsocks;
+			productName = shadowsocks;
+			productReference = B20A347A1C747283000CCFA3 /* libshadowsocks.a */;
+			productType = "com.apple.product-type.library.static";
+		};
 		B250EE281C73054D00198CDE /* GenShelf */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B250EE591C73054D00198CDE /* Build configuration list for PBXNativeTarget "GenShelf" */;
@@ -263,6 +394,9 @@
 				LastUpgradeCheck = 0710;
 				ORGANIZATIONNAME = AirRaidClub;
 				TargetAttributes = {
+					B20A34791C747283000CCFA3 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
 					B250EE281C73054D00198CDE = {
 						CreatedOnToolsVersion = 7.1.1;
 					};
@@ -292,6 +426,7 @@
 				B250EE281C73054D00198CDE /* GenShelf */,
 				B250EE441C73054D00198CDE /* GenShelfTests */,
 				B250EE4F1C73054D00198CDE /* GenShelfUITests */,
+				B20A34791C747283000CCFA3 /* shadowsocks */,
 			);
 		};
 /* End PBXProject section */
@@ -301,9 +436,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B250EE3F1C73054D00198CDE /* LaunchScreen.storyboard in Resources */,
 				B250EE3C1C73054D00198CDE /* Assets.xcassets in Resources */,
-				B250EE371C73054D00198CDE /* Main.storyboard in Resources */,
+				B20A34891C747FB7000CCFA3 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,18 +458,35 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B20A34761C747283000CCFA3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B20A34861C7472C7000CCFA3 /* table.m in Sources */,
+				B20A34851C7472C2000CCFA3 /* local.m in Sources */,
+				B20A34841C7472BD000CCFA3 /* encrypt.c in Sources */,
+				B20A34831C7472B6000CCFA3 /* ev.c in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B250EE251C73054D00198CDE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B20A341E1C745FA5000CCFA3 /* ev.c in Sources */,
-				B250EE341C73054D00198CDE /* ViewController.m in Sources */,
+				B20A34731C746BBB000CCFA3 /* GSSSSettingViewController.m in Sources */,
+				B20A346B1C746AA3000CCFA3 /* ASIHTTPRequest.m in Sources */,
 				B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */,
-				B20A34151C745E37000CCFA3 /* table.m in Sources */,
+				B20A346C1C746AA3000CCFA3 /* ASIInputStream.m in Sources */,
 				B250EE311C73054D00198CDE /* AppDelegate.m in Sources */,
-				B20A34121C745E37000CCFA3 /* encrypt.c in Sources */,
-				B20A34141C745E37000CCFA3 /* local.m in Sources */,
+				B20A34671C746AA3000CCFA3 /* ASIDataDecompressor.m in Sources */,
+				B20A34691C746AA3000CCFA3 /* ASIFormDataRequest.m in Sources */,
+				B20A34651C746AA3000CCFA3 /* ASIAuthenticationDialog.m in Sources */,
+				B20A34661C746AA3000CCFA3 /* ASIDataCompressor.m in Sources */,
 				B250EE2E1C73054D00198CDE /* main.m in Sources */,
+				B20A34681C746AA3000CCFA3 /* ASIDownloadCache.m in Sources */,
+				B20A346D1C746AA3000CCFA3 /* ASINetworkQueue.m in Sources */,
+				B20A346F1C746AA3000CCFA3 /* Reachability.m in Sources */,
+				B20A348E1C7482A8000CCFA3 /* GSInputCell.m in Sources */,
 				B20A34231C746541000CCFA3 /* ShadowsocksRunner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -371,26 +522,43 @@
 		};
 /* End PBXTargetDependency section */
 
-/* Begin PBXVariantGroup section */
-		B250EE351C73054D00198CDE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B250EE361C73054D00198CDE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		B250EE3D1C73054D00198CDE /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				B250EE3E1C73054D00198CDE /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
-
 /* Begin XCBuildConfiguration section */
+		B20A34811C747283000CCFA3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GenShelf/GenShelf-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/GenShelf/OpenSSL-for-iPhone/include\"",
+					"$(PROJECT_DIR)/GenShelf",
+				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/GenShelf/OpenSSL-for-iPhone/lib";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos9.1;
+				SKIP_INSTALL = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		B20A34821C747283000CCFA3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "GenShelf/GenShelf-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"\"$(SRCROOT)/GenShelf/OpenSSL-for-iPhone/include\"",
+					"$(PROJECT_DIR)/GenShelf",
+				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/GenShelf/OpenSSL-for-iPhone/lib";
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos9.1;
+				SKIP_INSTALL = YES;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
 		B250EE571C73054D00198CDE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -481,15 +649,13 @@
 				GCC_PREFIX_HEADER = "GenShelf/GenShelf-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/GenShelf/OpenSSL-for-iPhone/include\"",
-					"\"$(SRCROOT)/GenShelf\"",
+					"$(PROJECT_DIR)/GenShelf",
 				);
 				INFOPLIST_FILE = GenShelf/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GenShelf/OpenSSL-for-iPhone/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/GenShelf/OpenSSL-for-iPhone/lib";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -503,15 +669,13 @@
 				GCC_PREFIX_HEADER = "GenShelf/GenShelf-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
 					"\"$(SRCROOT)/GenShelf/OpenSSL-for-iPhone/include\"",
-					"\"$(SRCROOT)/GenShelf\"",
+					"$(PROJECT_DIR)/GenShelf",
 				);
 				INFOPLIST_FILE = GenShelf/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/GenShelf/OpenSSL-for-iPhone/lib",
-				);
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/GenShelf/OpenSSL-for-iPhone/lib";
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -568,6 +732,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B20A34801C747283000CCFA3 /* Build configuration list for PBXNativeTarget "shadowsocks" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B20A34811C747283000CCFA3 /* Debug */,
+				B20A34821C747283000CCFA3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		B250EE241C73054D00198CDE /* Build configuration list for PBXProject "GenShelf" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

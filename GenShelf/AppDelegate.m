@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "ShadowsocksRunner.h"
+#import "GSSSSettingViewController.h"
 
 @interface AppDelegate ()
 
@@ -14,9 +16,28 @@
 
 @implementation AppDelegate
 
+- (void)runProxy {
+    [ShadowsocksRunner reloadConfig];
+    for (; ;) {
+        if ([ShadowsocksRunner runProxy:@"11080"]) {
+            sleep(1);
+        } else {
+            sleep(2);
+        }
+    }
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    
+    dispatch_queue_t proxy = dispatch_queue_create("proxy", NULL);
+    dispatch_async(proxy, ^{
+        [self runProxy];
+    });
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    self.window.rootViewController = [[GSSSSettingViewController alloc] init];
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

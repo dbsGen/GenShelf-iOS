@@ -17,7 +17,7 @@
 @interface ShadowsocksRunner : NSObject
 
 + (BOOL)settingsAreNotComplete;
-+ (BOOL)runProxy;
++ (BOOL)runProxy:(NSString*)port;
 + (void)reloadConfig;
 + (BOOL)openSSURL:(NSURL *)url;
 + (NSURL *)generateSSURL;
