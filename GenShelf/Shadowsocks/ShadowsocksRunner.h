@@ -13,11 +13,16 @@
 #define kShadowsocksProxyModeKey @"proxy mode"
 #define kShadowsocksUsePublicServer @"public server"
 
+#define SHADOWSOCKS_BIND_ERR    @"SHADOWSOCKS_BIND_ERR"
+#define SHADOWSOCKS_LISTEN_ERR  @"SHADOWSOCKS_LISTEN_ERR"
+#define SHADOWSOCKS_SUCCESS     @"SHADOWSOCKS_SUCCESS"
+
 
 @interface ShadowsocksRunner : NSObject
 
 + (BOOL)settingsAreNotComplete;
 + (BOOL)runProxy:(NSString*)port;
++ (void)cancel;
 + (void)reloadConfig;
 + (BOOL)openSSURL:(NSURL *)url;
 + (NSURL *)generateSSURL;

@@ -12,13 +12,17 @@
 
 @synthesize inputView = _inputView;
 
-- (id)initWithFrame:(CGRect)frame {
-    self = [super initWithFrame:CGRectMake(0, 0, 360, 60)];
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _inputView = [[UITextField alloc] initWithFrame:CGRectMake(160, 10, 200, 40)];
+        CGRect bounds = self.contentView.bounds;
+        _inputView = [[UITextField alloc] initWithFrame:CGRectMake(bounds.size.width/2, 10,
+                                                                   bounds.size.width/2-10,
+                                                                   bounds.size.height-20)];
         [_inputView setTextAlignment:NSTextAlignmentRight];
-        [_inputView setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin|UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
-        [self addSubview:_inputView];
+        [_inputView setAutoresizingMask:UIViewAutoresizingFlexibleWidth|UIViewAutoresizingFlexibleHeight];
+        [self.contentView addSubview:_inputView];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

@@ -53,12 +53,12 @@ int create_and_bind(const char *port) {
         } else {
             perror("bind");
         }
-
+        
         close(listen_sock);
     }
 
     if (rp == NULL) {
-        NSLog(@"Could not bind");
+        NSLog(@"Could not bind %s", port);
         return -1;
     }
 
@@ -561,6 +561,40 @@ void set_config(const char *server, const char *remote_port, const char* passwor
     config_encryption(password, method);
 }
 
+int sd_prepare(const char *port, struct ev_loop **loop) {
+    int listenfd;
+    listenfd = create_and_bind(port);
+    if (listenfd < 0) {
+#ifdef DEBUG
+        NSLog(@"bind() error..");
+#endif
+        return 1;
+    }
+    if (listen(listenfd, SOMAXCONN) == -1) {
+        NSLog(@"listen() error.");
+        return 2;
+    }
+#ifdef DEBUG
+    NSLog(@"server listening at port %s\n", port);
+#endif
+    
+    setnonblocking(listenfd);
+    struct listen_ctx listen_ctx;
+    listen_ctx.fd = listenfd;
+    *loop = EV_DEFAULT;
+    ev_io_init (&listen_ctx.io, accept_cb, listenfd, EV_READ);
+    ev_io_start (*loop, &listen_ctx.io);
+    return 0;
+}
+
+void sd_run_loop(struct ev_loop *loop) {
+    ev_run (loop, 0);
+}
+
+void sd_cancel(struct ev_loop *loop) {
+    ev_break(loop, EVBREAK_CANCEL);
+}
+
 int local_main (const char *port)
 {
     int listenfd;
@@ -573,12 +607,12 @@ int local_main (const char *port)
     }
     if (listen(listenfd, SOMAXCONN) == -1) {
         NSLog(@"listen() error.");
-        return 1;
+        return 2;
     }
 #ifdef DEBUG
     NSLog(@"server listening at port %s\n", port);
 #endif
-
+    
     setnonblocking(listenfd);
     struct listen_ctx listen_ctx;
     listen_ctx.fd = listenfd;

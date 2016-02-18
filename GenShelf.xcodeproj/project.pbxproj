@@ -36,6 +36,14 @@
 		B250EE4A1C73054D00198CDE /* GenShelfTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE491C73054D00198CDE /* GenShelfTests.m */; };
 		B250EE551C73054D00198CDE /* GenShelfUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE541C73054D00198CDE /* GenShelfUITests.m */; };
 		B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CE81301C74B6DA00980186 /* GSSelectCell.m */; };
+		B2F02F151C75637700D93119 /* GSGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F141C75637700D93119 /* GSGlobals.m */; };
+		B2F02F181C75B24600D93119 /* GSSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F171C75B24600D93119 /* GSSwitchCell.m */; };
+		B2F02F251C75BE0D00D93119 /* GCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F1C1C75BE0D00D93119 /* GCallback.m */; };
+		B2F02F261C75BE0D00D93119 /* GEase.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F1E1C75BE0D00D93119 /* GEase.m */; };
+		B2F02F271C75BE0D00D93119 /* GTween.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F201C75BE0D00D93119 /* GTween.m */; };
+		B2F02F281C75BE0D00D93119 /* GTweenProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F221C75BE0D00D93119 /* GTweenProperty.m */; };
+		B2F02F291C75BE0D00D93119 /* GValue.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F241C75BE0D00D93119 /* GValue.m */; };
+		B2F02F2D1C75C1E200D93119 /* GSSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F2C1C75C1E200D93119 /* GSSelectView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -126,6 +134,22 @@
 		B250EE561C73054D00198CDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B2CE812F1C74B6DA00980186 /* GSSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSelectCell.h; sourceTree = "<group>"; };
 		B2CE81301C74B6DA00980186 /* GSSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSelectCell.m; sourceTree = "<group>"; };
+		B2F02F131C75637700D93119 /* GSGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGlobals.h; sourceTree = "<group>"; };
+		B2F02F141C75637700D93119 /* GSGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSGlobals.m; sourceTree = "<group>"; };
+		B2F02F161C75B24600D93119 /* GSSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSwitchCell.h; sourceTree = "<group>"; };
+		B2F02F171C75B24600D93119 /* GSSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSwitchCell.m; sourceTree = "<group>"; };
+		B2F02F1B1C75BE0D00D93119 /* GCallback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCallback.h; sourceTree = "<group>"; };
+		B2F02F1C1C75BE0D00D93119 /* GCallback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCallback.m; sourceTree = "<group>"; };
+		B2F02F1D1C75BE0D00D93119 /* GEase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GEase.h; sourceTree = "<group>"; };
+		B2F02F1E1C75BE0D00D93119 /* GEase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GEase.m; sourceTree = "<group>"; };
+		B2F02F1F1C75BE0D00D93119 /* GTween.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTween.h; sourceTree = "<group>"; };
+		B2F02F201C75BE0D00D93119 /* GTween.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTween.m; sourceTree = "<group>"; };
+		B2F02F211C75BE0D00D93119 /* GTweenProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTweenProperty.h; sourceTree = "<group>"; };
+		B2F02F221C75BE0D00D93119 /* GTweenProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTweenProperty.m; sourceTree = "<group>"; };
+		B2F02F231C75BE0D00D93119 /* GValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GValue.h; sourceTree = "<group>"; };
+		B2F02F241C75BE0D00D93119 /* GValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GValue.m; sourceTree = "<group>"; };
+		B2F02F2B1C75C1E200D93119 /* GSSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSelectView.h; sourceTree = "<group>"; };
+		B2F02F2C1C75C1E200D93119 /* GSSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSelectView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +258,7 @@
 		B20A348A1C7481DF000CCFA3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B2F02F2A1C75C15500D93119 /* Widgets */,
 				B20A348B1C748292000CCFA3 /* Cells */,
 			);
 			path = Views;
@@ -246,6 +271,8 @@
 				B20A348D1C7482A8000CCFA3 /* GSInputCell.m */,
 				B2CE812F1C74B6DA00980186 /* GSSelectCell.h */,
 				B2CE81301C74B6DA00980186 /* GSSelectCell.m */,
+				B2F02F161C75B24600D93119 /* GSSwitchCell.h */,
+				B2F02F171C75B24600D93119 /* GSSwitchCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -275,6 +302,8 @@
 		B250EE2B1C73054D00198CDE /* GenShelf */ = {
 			isa = PBXGroup;
 			children = (
+				B2F02F191C75BE0D00D93119 /* Utils */,
+				B2F02F121C75635200D93119 /* Globals */,
 				B20A348A1C7481DF000CCFA3 /* Views */,
 				B20A34701C746B80000CCFA3 /* Controllers */,
 				B20A344A1C746AA3000CCFA3 /* ASIHTTPRequest */,
@@ -315,6 +344,49 @@
 				B250EE561C73054D00198CDE /* Info.plist */,
 			);
 			path = GenShelfUITests;
+			sourceTree = "<group>";
+		};
+		B2F02F121C75635200D93119 /* Globals */ = {
+			isa = PBXGroup;
+			children = (
+				B2F02F131C75637700D93119 /* GSGlobals.h */,
+				B2F02F141C75637700D93119 /* GSGlobals.m */,
+			);
+			path = Globals;
+			sourceTree = "<group>";
+		};
+		B2F02F191C75BE0D00D93119 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B2F02F1A1C75BE0D00D93119 /* Tween */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		B2F02F1A1C75BE0D00D93119 /* Tween */ = {
+			isa = PBXGroup;
+			children = (
+				B2F02F1B1C75BE0D00D93119 /* GCallback.h */,
+				B2F02F1C1C75BE0D00D93119 /* GCallback.m */,
+				B2F02F1D1C75BE0D00D93119 /* GEase.h */,
+				B2F02F1E1C75BE0D00D93119 /* GEase.m */,
+				B2F02F1F1C75BE0D00D93119 /* GTween.h */,
+				B2F02F201C75BE0D00D93119 /* GTween.m */,
+				B2F02F211C75BE0D00D93119 /* GTweenProperty.h */,
+				B2F02F221C75BE0D00D93119 /* GTweenProperty.m */,
+				B2F02F231C75BE0D00D93119 /* GValue.h */,
+				B2F02F241C75BE0D00D93119 /* GValue.m */,
+			);
+			path = Tween;
+			sourceTree = "<group>";
+		};
+		B2F02F2A1C75C15500D93119 /* Widgets */ = {
+			isa = PBXGroup;
+			children = (
+				B2F02F2B1C75C1E200D93119 /* GSSelectView.h */,
+				B2F02F2C1C75C1E200D93119 /* GSSelectView.m */,
+			);
+			path = Widgets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -478,21 +550,29 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2F02F281C75BE0D00D93119 /* GTweenProperty.m in Sources */,
 				B20A34731C746BBB000CCFA3 /* GSSSSettingViewController.m in Sources */,
 				B20A346B1C746AA3000CCFA3 /* ASIHTTPRequest.m in Sources */,
 				B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */,
 				B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */,
 				B20A346C1C746AA3000CCFA3 /* ASIInputStream.m in Sources */,
+				B2F02F291C75BE0D00D93119 /* GValue.m in Sources */,
 				B250EE311C73054D00198CDE /* AppDelegate.m in Sources */,
 				B20A34671C746AA3000CCFA3 /* ASIDataDecompressor.m in Sources */,
 				B20A34691C746AA3000CCFA3 /* ASIFormDataRequest.m in Sources */,
+				B2F02F251C75BE0D00D93119 /* GCallback.m in Sources */,
 				B20A34651C746AA3000CCFA3 /* ASIAuthenticationDialog.m in Sources */,
 				B20A34661C746AA3000CCFA3 /* ASIDataCompressor.m in Sources */,
+				B2F02F261C75BE0D00D93119 /* GEase.m in Sources */,
+				B2F02F2D1C75C1E200D93119 /* GSSelectView.m in Sources */,
 				B250EE2E1C73054D00198CDE /* main.m in Sources */,
 				B20A34681C746AA3000CCFA3 /* ASIDownloadCache.m in Sources */,
+				B2F02F271C75BE0D00D93119 /* GTween.m in Sources */,
 				B20A346D1C746AA3000CCFA3 /* ASINetworkQueue.m in Sources */,
 				B20A346F1C746AA3000CCFA3 /* Reachability.m in Sources */,
 				B20A348E1C7482A8000CCFA3 /* GSInputCell.m in Sources */,
+				B2F02F181C75B24600D93119 /* GSSwitchCell.m in Sources */,
+				B2F02F151C75637700D93119 /* GSGlobals.m in Sources */,
 				B20A34231C746541000CCFA3 /* ShadowsocksRunner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

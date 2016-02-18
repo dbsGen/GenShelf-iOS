@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GSSelectView.h"
 
-@interface GSSelectCell : UITableViewCell
+@interface GSSelectCell : UITableViewCell <UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic, readonly) UILabel *contentLabel;
 
 @property (nonatomic, strong) NSArray *options;
 @property (nonatomic, assign) NSInteger opetionSelected;
+
+- (GSSelectView *)makePickView;
 
 @end

@@ -9,11 +9,19 @@
 #import "GSSSSettingViewController.h"
 #import "GSInputCell.h"
 #import "GSSelectCell.h"
+#import "GSSwitchCell.h"
+#import "GSGlobals.h"
+#import "ShadowsocksRunner.h"
+#import "GTween.h"
 
-@interface GSSSSettingViewController ()
-
-- (GSSelectCell *)selectCell:(UITableView*)tableView;
-- (GSInputCell *)inputCell:(UITableView*)tableView;
+@interface GSSSSettingViewController () {
+    GSSwitchCell *_toggleProxyCell;
+    GSInputCell *_currentPortCell;
+    GSInputCell *_serverIpCell;
+    GSInputCell *_serverPortCell;
+    GSInputCell *_passwordCell;
+    GSSelectCell *_encryptionTypeCell;
+}
 
 @end
 
@@ -21,10 +29,59 @@
 
 @synthesize tableView = _tableView;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.title = @"设置";
+        UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+                                                                                    target:self
+                                                                                    action:@selector(saveClicked)];
+        self.navigationItem.rightBarButtonItem = saveButton;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
-    self.view.backgroundColor = [UIColor redColor];
+    _toggleProxyCell = [[GSSwitchCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:@"ToggleProxy"];
+    _toggleProxyCell.textLabel.text = @"开启代理";
+    _toggleProxyCell.switchItem.on = [GSGlobals isProxyOn];
+    [_toggleProxyCell.switchItem addTarget:self
+                                action:@selector(toggleProxy:)
+                      forControlEvents:UIControlEventValueChanged];
+    
+    _currentPortCell = [[GSInputCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                          reuseIdentifier:@"CurrentPort"];
+    _currentPortCell.textLabel.text = @"本地端口";
+    _currentPortCell.inputView.placeholder = @"Port";
+    _currentPortCell.inputView.text = [GSGlobals currentPort];
+    
+    _serverIpCell = [[GSInputCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:@"ServerIP"];
+    _serverIpCell.textLabel.text = @"服务器地址";
+    _serverIpCell.inputView.placeholder = @"IP";
+    _serverIpCell.inputView.text = [GSGlobals serverIP];
+    
+    _serverPortCell = [[GSInputCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                         reuseIdentifier:@"ServerPort"];
+    _serverPortCell.textLabel.text = @"服务器端口";
+    _serverPortCell.inputView.placeholder = @"Port";
+    _serverPortCell.inputView.text = [GSGlobals serverPort];
+    
+    _passwordCell = [[GSInputCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                       reuseIdentifier:@"Password"];
+    _passwordCell.textLabel.text = @"密码";
+    _passwordCell.inputView.placeholder = @"Password";
+    _passwordCell.inputView.text = [GSGlobals password];
+    
+    _encryptionTypeCell = [[GSSelectCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                              reuseIdentifier:@"EncrytionType"];
+    _encryptionTypeCell.textLabel.text = @"加密类型";
+    _encryptionTypeCell.options = [GSGlobals encryptionTypes];
+    _encryptionTypeCell.opetionSelected = [_encryptionTypeCell.options indexOfObject:[GSGlobals encryptionType]];
+    
     self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectInset(self.view.bounds, 20, 20)
+    self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds
                                                   style:UITableViewStyleGrouped];
     self.tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.tableView.delegate = self;
@@ -34,25 +91,50 @@
 
 - (void)didReceiveMemoryWarning {
     _tableView = NULL;
+    _currentPortCell = NULL;
+    _serverIpCell = NULL;
+    _serverPortCell = NULL;
+    _passwordCell = NULL;
+    _encryptionTypeCell = NULL;
+    _toggleProxyCell = NULL;
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
 }
 
+- (void)saveClicked {
+    [GSGlobals setServerIP:_serverIpCell.inputView.text];
+    [GSGlobals setServerPort:_serverPortCell.inputView.text];
+    [GSGlobals setPassword:_passwordCell.inputView.text];
+    [GSGlobals setEncryptionType:_encryptionTypeCell.contentLabel.text];
+    if (![_currentPortCell.inputView.text isEqualToString:[GSGlobals currentPort]]) {
+        [GSGlobals setCurrentPort:_currentPortCell.inputView.text];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [GSGlobals resetShadowsocks];
+    }else {
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [GSGlobals reloadShadowsocksConfig];
+    }
+}
+
+- (void)toggleProxy:(UISwitch*)sender {
+    [GSGlobals turnProxy:sender.isOn];
+}
+
 #pragma mark - table view
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return 1;
-            break;
         case 1:
-            return 3;
+            return 1;
+        case 2:
+            return 4;
             
         default:
             break;
@@ -63,17 +145,27 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
         case 0:
+            return _toggleProxyCell;
+            
+        case 1:
         {
-            GSInputCell *cell = [self inputCell:tableView];
-            cell.textLabel.text = @"本地端口";
-            cell.inputView.placeholder = @"IP";
-            return cell;
+            return _currentPortCell;
         }
             break;
-        case 1: {
+        case 2: {
             switch (indexPath.row) {
-                case 0:
-                    break;
+                case 0: {
+                    return _serverIpCell;
+                }
+                case 1: {
+                    return _serverPortCell;
+                }
+                case 2: {
+                    return _passwordCell;
+                }
+                case 3: {
+                    return _encryptionTypeCell;
+                }
                     
                 default:
                     break;
@@ -86,26 +178,12 @@
     return NULL;
 }
 
-- (GSSelectCell *)selectCell:(UITableView*)tableView {
-    
-    static NSString *selectCell = @"SDSelectCell";
-    GSSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:selectCell];
-    if (!cell) {
-        cell = [[GSSelectCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                   reuseIdentifier:selectCell];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2 && indexPath.row == 3) {
+        GSSelectView *pickerView = [_encryptionTypeCell makePickView];
+        [self.view addSubview:pickerView];
+        [pickerView show];
     }
-    return cell;
-}
-
-- (GSInputCell *)inputCell:(UITableView *)tableView {
-    
-    static NSString *inputCell = @"SDInputCell";
-    GSInputCell *cell = [tableView dequeueReusableCellWithIdentifier:inputCell];
-    if (!cell) {
-        cell = [[GSInputCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                  reuseIdentifier:inputCell];
-    }
-    return cell;
 }
 
 @end
