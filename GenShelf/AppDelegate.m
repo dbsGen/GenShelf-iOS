@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "GSSSSettingViewController.h"
+#import "GSideMenuController.h"
+#import "GSShelfViewController.h"
 #import "GSGlobals.h"
 
 @interface AppDelegate ()
@@ -21,7 +23,10 @@
     [GSGlobals runShadowsocksThread];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:[[GSSSSettingViewController alloc] init]];
+    GSideMenuController *menu = [[GSideMenuController alloc] init];
+    menu.controllers = @[[[UINavigationController alloc] initWithRootViewController:[[GSShelfViewController alloc] init]]];
+    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:menu];
+    nav.navigationBarHidden = YES;
     self.window.rootViewController = nav;
     [self.window makeKeyAndVisible];
     

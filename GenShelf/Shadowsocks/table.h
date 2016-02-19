@@ -1,7 +1,5 @@
+#pragma once
 
-
-#ifndef SHADOWSOCKS_TABLE_H
-#define SHADOWSOCKS_TABLE_H
 
 unsigned char encrypt_table[256];
 unsigned char decrypt_table[256];
@@ -11,5 +9,3 @@ void table_decrypt(unsigned char *buf, size_t len);
 
 unsigned int _i;
 unsigned long long _a;
-
-#endif

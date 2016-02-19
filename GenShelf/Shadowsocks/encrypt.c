@@ -4,7 +4,7 @@
 #include <openssl/md5.h>
 #include <sodium.h>
 #include "local.h"
-#import "table.h"
+#include "table.h"
 #include "encrypt.h"
 
 #define CIPHER_TABLE 0

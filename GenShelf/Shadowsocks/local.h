@@ -1,6 +1,4 @@
-
-#ifndef SHADOWSOCKS_LOCAL_H
-#define SHADOWSOCKS_LOCAL_H
+#pragma once
 
 #include <sys/socket.h>
 #include "libev/ev.h"
@@ -57,9 +55,6 @@ struct server* new_server(int fd);
 void free_server(struct server *server);
 void close_and_free_server(EV_P_ struct server *server);
 void set_config(const char *server, const char *remote_port, const char* password, const char* method);
-int sd_prepare(const char *port, struct ev_loop **loop);
-void sd_run_loop(struct ev_loop *loop);
-void sd_cancel(struct ev_loop *loop);
-int local_main();
+int local_main(const char *port);
+void sd_cancel();
 
-#endif

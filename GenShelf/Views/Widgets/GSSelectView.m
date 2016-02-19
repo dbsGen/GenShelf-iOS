@@ -71,9 +71,8 @@
                                                          bounds.size.width,
                                                          260);
                          self.backgroundColor = [UIColor colorWithWhite:0 alpha:0];
-                         [self performSelector:@selector(removeFromSuperview)
-                                    withObject:self
-                                    afterDelay:0.1];
+                     } completion:^(BOOL finished) {
+                         [self removeFromSuperview];
                      }];
 }
 

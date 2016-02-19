@@ -26,21 +26,22 @@ static NSString *shadowsocksStatus = SHADOWSOCKS_SUCCESS;
 
 + (BOOL)runProxy:(NSString *)port {
     if (![ShadowsocksRunner settingsAreNotComplete]) {
-        int res = sd_prepare(port.UTF8String, &current_loop);
-        switch (res) {
-            case 0:
-                shadowsocksStatus = SHADOWSOCKS_SUCCESS;
-                sd_run_loop(current_loop);
-                break;
-            case 1:
-                shadowsocksStatus = SHADOWSOCKS_BIND_ERR;
-                break;
-            case 2:
-                shadowsocksStatus = SHADOWSOCKS_LISTEN_ERR;
-                break;
-            default:
-                break;
-        }
+        local_main(port.UTF8String);
+//        int res = sd_prepare(port.UTF8String, &current_loop);
+//        switch (res) {
+//            case 0:
+//                shadowsocksStatus = SHADOWSOCKS_SUCCESS;
+//                sd_run_loop(current_loop);
+//                break;
+//            case 1:
+//                shadowsocksStatus = SHADOWSOCKS_BIND_ERR;
+//                break;
+//            case 2:
+//                shadowsocksStatus = SHADOWSOCKS_LISTEN_ERR;
+//                break;
+//            default:
+//                break;
+//        }
         current_loop = NULL;
         return YES;
     } else {

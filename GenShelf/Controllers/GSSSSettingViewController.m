@@ -10,9 +10,11 @@
 #import "GSInputCell.h"
 #import "GSSelectCell.h"
 #import "GSSwitchCell.h"
+#import "GSLoadingCell.h"
 #import "GSGlobals.h"
 #import "ShadowsocksRunner.h"
 #import "GTween.h"
+#import "ASIHTTPRequest.h"
 
 @interface GSSSSettingViewController () {
     GSSwitchCell *_toggleProxyCell;
@@ -21,6 +23,7 @@
     GSInputCell *_serverPortCell;
     GSInputCell *_passwordCell;
     GSSelectCell *_encryptionTypeCell;
+    GSLoadingCell *_testCell;
 }
 
 @end
@@ -80,6 +83,10 @@
     _encryptionTypeCell.options = [GSGlobals encryptionTypes];
     _encryptionTypeCell.opetionSelected = [_encryptionTypeCell.options indexOfObject:[GSGlobals encryptionType]];
     
+    _testCell = [[GSLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                     reuseIdentifier:@"TestCell"];
+    _testCell.textLabel.text = @"测试";
+    
     self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds
                                                   style:UITableViewStyleGrouped];
@@ -97,6 +104,7 @@
     _passwordCell = NULL;
     _encryptionTypeCell = NULL;
     _toggleProxyCell = NULL;
+    _testCell = NULL;
 }
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
@@ -125,7 +133,7 @@
 #pragma mark - table view
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 3;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -135,7 +143,8 @@
             return 1;
         case 2:
             return 4;
-            
+        case 3:
+            return 1;
         default:
             break;
     }
@@ -171,6 +180,8 @@
                     break;
             }
         }
+        case 3:
+            return _testCell;
             
         default:
             break;
@@ -179,10 +190,32 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2 && indexPath.row == 3) {
+    NSUInteger row = indexPath.row;
+    NSUInteger section = indexPath.section;
+    if (section == 2 && row == 3) {
         GSSelectView *pickerView = [_encryptionTypeCell makePickView];
         [self.view addSubview:pickerView];
         [pickerView show];
+        [self.view endEditing:YES];
+    }else if (section == 3) {
+        NSURL *testUrl = [NSURL URLWithString:@"http://lofi.e-hentai.org/"];
+        ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:testUrl];
+        if ([GSGlobals isProxyOn]) {
+            request.proxyHost = @"127.0.0.1";
+            request.proxyPort = [[GSGlobals currentPort] intValue];
+            request.proxyType = (__bridge NSString *)(kCFProxyTypeSOCKS);
+        }
+        __weak ASIHTTPRequest *_request = request;
+        [request setCompletionBlock:^{
+            _testCell.status = GSLoadingCellStatusSuccess;
+            NSLog(@"Request complete : %@", _request.responseString);
+        }];
+        [request setFailedBlock:^{
+            _testCell.status = GSLoadingCellStatusFailed;
+            NSLog(@"Request failed. %@", _request.error);
+        }];
+        [request startAsynchronous];
+        _testCell.status = GSLoadingCellStatusLoading;
     }
 }
 

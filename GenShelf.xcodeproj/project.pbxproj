@@ -35,6 +35,12 @@
 		B250EE3C1C73054D00198CDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B250EE3B1C73054D00198CDE /* Assets.xcassets */; };
 		B250EE4A1C73054D00198CDE /* GenShelfTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE491C73054D00198CDE /* GenShelfTests.m */; };
 		B250EE551C73054D00198CDE /* GenShelfUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE541C73054D00198CDE /* GenShelfUITests.m */; };
+		B2BDCBBD1C76DF5600DC3031 /* GSLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDCBBC1C76DF5600DC3031 /* GSLoadingCell.m */; };
+		B2BDCBC11C76F83000DC3031 /* GSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDCBC01C76F83000DC3031 /* GSideMenuController.m */; };
+		B2BDCBC41C7706AA00DC3031 /* GSideCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDCBC31C7706AA00DC3031 /* GSideCoverView.m */; };
+		B2BDCBCB1C7719C000DC3031 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = B2BDCBCA1C7719C000DC3031 /* menu.png */; };
+		B2BDCBCD1C771A8500DC3031 /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2BDCBCC1C771A8500DC3031 /* menu@2x.png */; };
+		B2BDCBD01C771F6100DC3031 /* GSShelfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDCBCF1C771F6100DC3031 /* GSShelfViewController.m */; };
 		B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CE81301C74B6DA00980186 /* GSSelectCell.m */; };
 		B2F02F151C75637700D93119 /* GSGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F141C75637700D93119 /* GSGlobals.m */; };
 		B2F02F181C75B24600D93119 /* GSSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F171C75B24600D93119 /* GSSwitchCell.m */; };
@@ -132,6 +138,16 @@
 		B250EE501C73054D00198CDE /* GenShelfUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenShelfUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B250EE541C73054D00198CDE /* GenShelfUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenShelfUITests.m; sourceTree = "<group>"; };
 		B250EE561C73054D00198CDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2BDCBBB1C76DF5600DC3031 /* GSLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLoadingCell.h; sourceTree = "<group>"; };
+		B2BDCBBC1C76DF5600DC3031 /* GSLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLoadingCell.m; sourceTree = "<group>"; };
+		B2BDCBBF1C76F83000DC3031 /* GSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSideMenuController.h; sourceTree = "<group>"; };
+		B2BDCBC01C76F83000DC3031 /* GSideMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSideMenuController.m; sourceTree = "<group>"; };
+		B2BDCBC21C7706AA00DC3031 /* GSideCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSideCoverView.h; sourceTree = "<group>"; };
+		B2BDCBC31C7706AA00DC3031 /* GSideCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSideCoverView.m; sourceTree = "<group>"; };
+		B2BDCBCA1C7719C000DC3031 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = menu.png; sourceTree = "<group>"; };
+		B2BDCBCC1C771A8500DC3031 /* menu@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "menu@2x.png"; sourceTree = "<group>"; };
+		B2BDCBCE1C771F6100DC3031 /* GSShelfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSShelfViewController.h; sourceTree = "<group>"; };
+		B2BDCBCF1C771F6100DC3031 /* GSShelfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSShelfViewController.m; sourceTree = "<group>"; };
 		B2CE812F1C74B6DA00980186 /* GSSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSelectCell.h; sourceTree = "<group>"; };
 		B2CE81301C74B6DA00980186 /* GSSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSelectCell.m; sourceTree = "<group>"; };
 		B2F02F131C75637700D93119 /* GSGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGlobals.h; sourceTree = "<group>"; };
@@ -251,6 +267,8 @@
 			children = (
 				B20A34711C746BBB000CCFA3 /* GSSSSettingViewController.h */,
 				B20A34721C746BBB000CCFA3 /* GSSSSettingViewController.m */,
+				B2BDCBCE1C771F6100DC3031 /* GSShelfViewController.h */,
+				B2BDCBCF1C771F6100DC3031 /* GSShelfViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -273,6 +291,8 @@
 				B2CE81301C74B6DA00980186 /* GSSelectCell.m */,
 				B2F02F161C75B24600D93119 /* GSSwitchCell.h */,
 				B2F02F171C75B24600D93119 /* GSSwitchCell.m */,
+				B2BDCBBB1C76DF5600DC3031 /* GSLoadingCell.h */,
+				B2BDCBBC1C76DF5600DC3031 /* GSLoadingCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -302,6 +322,7 @@
 		B250EE2B1C73054D00198CDE /* GenShelf */ = {
 			isa = PBXGroup;
 			children = (
+				B2BDCBC51C77122C00DC3031 /* Resources */,
 				B2F02F191C75BE0D00D93119 /* Utils */,
 				B2F02F121C75635200D93119 /* Globals */,
 				B20A348A1C7481DF000CCFA3 /* Views */,
@@ -346,6 +367,26 @@
 			path = GenShelfUITests;
 			sourceTree = "<group>";
 		};
+		B2BDCBBE1C76F6AD00DC3031 /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				B2BDCBBF1C76F83000DC3031 /* GSideMenuController.h */,
+				B2BDCBC01C76F83000DC3031 /* GSideMenuController.m */,
+				B2BDCBC21C7706AA00DC3031 /* GSideCoverView.h */,
+				B2BDCBC31C7706AA00DC3031 /* GSideCoverView.m */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		B2BDCBC51C77122C00DC3031 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B2BDCBCC1C771A8500DC3031 /* menu@2x.png */,
+				B2BDCBCA1C7719C000DC3031 /* menu.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		B2F02F121C75635200D93119 /* Globals */ = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +399,7 @@
 		B2F02F191C75BE0D00D93119 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B2BDCBBE1C76F6AD00DC3031 /* SideMenu */,
 				B2F02F1A1C75BE0D00D93119 /* Tween */,
 			);
 			path = Utils;
@@ -513,6 +555,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2BDCBCB1C7719C000DC3031 /* menu.png in Resources */,
+				B2BDCBCD1C771A8500DC3031 /* menu@2x.png in Resources */,
 				B250EE3C1C73054D00198CDE /* Assets.xcassets in Resources */,
 				B20A34891C747FB7000CCFA3 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -556,6 +600,8 @@
 				B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */,
 				B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */,
 				B20A346C1C746AA3000CCFA3 /* ASIInputStream.m in Sources */,
+				B2BDCBC11C76F83000DC3031 /* GSideMenuController.m in Sources */,
+				B2BDCBC41C7706AA00DC3031 /* GSideCoverView.m in Sources */,
 				B2F02F291C75BE0D00D93119 /* GValue.m in Sources */,
 				B250EE311C73054D00198CDE /* AppDelegate.m in Sources */,
 				B20A34671C746AA3000CCFA3 /* ASIDataDecompressor.m in Sources */,
@@ -569,11 +615,13 @@
 				B20A34681C746AA3000CCFA3 /* ASIDownloadCache.m in Sources */,
 				B2F02F271C75BE0D00D93119 /* GTween.m in Sources */,
 				B20A346D1C746AA3000CCFA3 /* ASINetworkQueue.m in Sources */,
+				B2BDCBD01C771F6100DC3031 /* GSShelfViewController.m in Sources */,
 				B20A346F1C746AA3000CCFA3 /* Reachability.m in Sources */,
 				B20A348E1C7482A8000CCFA3 /* GSInputCell.m in Sources */,
 				B2F02F181C75B24600D93119 /* GSSwitchCell.m in Sources */,
 				B2F02F151C75637700D93119 /* GSGlobals.m in Sources */,
 				B20A34231C746541000CCFA3 /* ShadowsocksRunner.m in Sources */,
+				B2BDCBBD1C76DF5600DC3031 /* GSLoadingCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
