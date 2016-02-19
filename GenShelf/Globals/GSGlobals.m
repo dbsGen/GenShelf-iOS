@@ -152,4 +152,14 @@ static BOOL shadowsocks_running = NO;
     [ShadowsocksRunner reloadConfig];
 }
 
++ (ASIHTTPRequest *)requestForURL:(NSURL *)url {
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:url];
+    if ([self isProxyOn]) {
+        request.proxyHost = @"127.0.0.1";
+        request.proxyPort = [[self currentPort] intValue];
+        request.proxyType = (__bridge NSString *)(kCFProxyTypeSOCKS);
+    }
+    return request;
+}
+
 @end

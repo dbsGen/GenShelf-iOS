@@ -8,10 +8,25 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^GSideMenuItemBlock)();
+
+@interface GSideMenuItem : NSObject
+
+@property (nonatomic, strong) UIViewController *controller;
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) UIImage *image;
+@property (nonatomic, copy) GSideMenuItemBlock block;
+
++ (id)itemWithController:(UIViewController *)controller;
++ (id)itemWithController:(UIViewController *)controller image:(UIImage *)image;
++ (id)itemWithTitle:(NSString *)title block:(GSideMenuItemBlock)block;
++ (id)itemWithTitle:(NSString *)title image:(UIImage *)image block:(GSideMenuItemBlock)block;
+
+@end
+
 @interface GSideMenuController : UIViewController
 
-@property (nonatomic, strong) NSArray *controllers;
-@property (nonatomic, strong) NSArray *images;
+@property (nonatomic, strong) NSArray<GSideMenuItem*> *items;
 
 @property (nonatomic) NSUInteger selectedIndex;
 

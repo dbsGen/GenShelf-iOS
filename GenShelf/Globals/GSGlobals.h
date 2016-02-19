@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "ASIHTTPRequest.h"
 
 @interface GSGlobals : NSObject
 
@@ -31,5 +31,7 @@
 + (void)runShadowsocksThread;
 + (void)resetShadowsocks;
 + (void)reloadShadowsocksConfig;
+
++ (ASIHTTPRequest *)requestForURL:(NSURL *)url;
 
 @end

@@ -10,13 +10,53 @@
 #import "GSideCoverView.h"
 #import "GTween.h"
 
+
+#define MENU_WIDTH  220
+#define MENU_SHADOW_RADIUS 12
+#define MENU_SHADOW_OPACITY 0.3
+
 static NSMutableArray<GSideMenuController*> *_menuControllers;
+
+@implementation GSideMenuItem
+
++ (id)itemWithController:(UIViewController *)controller {
+    GSideMenuItem *item = [[GSideMenuItem alloc] init];
+    item.controller = controller;
+    item.title = controller.title;
+    return item;
+}
+
++ (id)itemWithController:(UIViewController *)controller image:(UIImage *)image {
+    GSideMenuItem *item = [[GSideMenuItem alloc] init];
+    item.controller = controller;
+    item.title = controller.title;
+    item.image = image;
+    return item;
+}
+
++ (id)itemWithTitle:(NSString *)title block:(GSideMenuItemBlock)block {
+    GSideMenuItem *item = [[GSideMenuItem alloc] init];
+    item.title = title;
+    item.block = block;
+    return item;
+}
+
++ (id)itemWithTitle:(NSString *)title image:(UIImage *)image block:(GSideMenuItemBlock)block {
+    GSideMenuItem *item = [[GSideMenuItem alloc] init];
+    item.title = title;
+    item.image = image;
+    item.block = block;
+    return item;
+}
+
+@end
 
 @interface GSideMenuController ()<UITableViewDelegate, UITableViewDataSource> {
     UITableView *_tableView;
     UIView *_currentView;
     UIView *_contentView;
     GSideCoverView  *_coverView;
+    BOOL _isOpen;
 }
 
 - (void)updateView;
@@ -30,6 +70,7 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
     if (self) {
         _selectedIndex = 0;
         _currentView = NULL;
+        _isOpen = NO;
         
         if (!_menuControllers) {
             _menuControllers = [[NSMutableArray alloc] init];
@@ -47,7 +88,9 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor blackColor];
     
-    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds
+    CGRect bounds = self.view.bounds;
+    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MENU_WIDTH,
+                                                               bounds.size.height)
                                               style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -80,9 +123,9 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
     _coverView = NULL;
 }
 
-- (void)setControllers:(NSArray *)controllers {
-    if (_controllers != controllers) {
-        _controllers = controllers;
+- (void)setItems:(NSArray<GSideMenuItem *> *)items {
+    if (_items != items) {
+        _items = items;
         if ([self isViewLoaded]) {
             [self updateView];
             [_tableView reloadData];
@@ -92,14 +135,25 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
     if (_selectedIndex != selectedIndex) {
-        _selectedIndex = selectedIndex;
-        [self updateView];
+        GSideMenuItem *item = [_items objectAtIndex:selectedIndex];
+        if (item.controller) {
+            NSUInteger uidx = _selectedIndex;
+            _selectedIndex = selectedIndex;
+            [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:uidx
+                                                                    inSection:0],
+                                                 [NSIndexPath indexPathForRow:_selectedIndex
+                                                                    inSection:0]]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self updateView];
+        }else if (item.block){
+            item.block();
+        }
     }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (_controllers) {
-        return _controllers.count;
+    if (_items) {
+        return _items.count;
     }
     return 0;
 }
@@ -112,38 +166,46 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
                                       reuseIdentifier:cellIdentifier];
     }
     NSInteger row = indexPath.row;
-    cell.textLabel.text = [[_controllers objectAtIndex:row] title];
-    do {
-        if (_images && row < _images.count) {
-            if ([[_images objectAtIndex:row] isKindOfClass:[UIImage class]]) {
-                cell.imageView.image = [_images objectAtIndex:row];
-                break;
-            }
-        }
-        cell.imageView.image = NULL;
-    } while (false);
+    GSideMenuItem *item = [_items objectAtIndex:row];
+    cell.textLabel.text = item.title;
+    cell.imageView.image = item.image;
+    if (row == _selectedIndex) {
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.selectionStyle = UITableViewCellSelectionStyleGray;
+    }else {
+        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    self.selectedIndex = indexPath.row;
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    if (cell)
+        [cell setSelected:NO animated:YES];
+}
+
 - (void)updateView {
-    if (_selectedIndex >= _controllers.count) _selectedIndex = _controllers.count - 1;
+    if (_selectedIndex >= _items.count) _selectedIndex = _items.count - 1;
     if (_currentView) {
-        if (_controllers && _currentView != [[_controllers objectAtIndex:_selectedIndex] view]) {
-            [_currentView removeFromSuperview];
-            _currentView = [[_controllers objectAtIndex:_selectedIndex] view];
+        [_currentView removeFromSuperview];
+        GSideMenuItem *item = [_items objectAtIndex:_selectedIndex];
+        if (item.controller) {
+            _currentView = [item.controller view];
             [_contentView addSubview:_currentView];
         }
     }else {
-        _currentView = [[_controllers objectAtIndex:_selectedIndex] view];
-        [_contentView addSubview:_currentView];
+        GSideMenuItem *item = [_items objectAtIndex:_selectedIndex];
+        if (item.controller) {
+            _currentView = [item.controller view];
+            [_contentView addSubview:_currentView];
+        }
     }
 }
 
-#define MENU_WIDTH  220
-#define MENU_SHADOW_RADIUS 12
-#define MENU_SHADOW_OPACITY 0.3
-
 - (void)openMenu {
+    _isOpen = YES;
     [_coverView setHidden:NO];
     [_contentView bringSubviewToFront:_coverView];
     
@@ -164,6 +226,7 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
 }
 
 - (void)closeMenu {
+    _isOpen = NO;
     [_coverView setHidden:YES];
     
     [GTween cancel:_contentView];
@@ -181,20 +244,38 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
         _contentView.layer.shadowRadius = 0;
         _contentView.layer.shadowOpacity = 0;
     }];
+    [tween.onUpdate addBlock:^{
+        [self updateTableScale];
+    }];
 }
 
 - (void)touchMove:(CGFloat)offset {
     CGRect frame = _contentView.frame;
     frame.origin.x = MIN(MAX(0, frame.origin.x + offset), MENU_WIDTH);
+    [self updateTableScale];
     _contentView.frame = frame;
+}
+
+- (void)updateTableScale {
+    float p = _contentView.frame.origin.x / MENU_WIDTH;
+    p = p * 0.3 + 0.7;
+    _tableView.layer.transform = CATransform3DMakeScale(p, p, p);
 }
 
 - (void)touchEnd {
     CGRect frame = _contentView.frame;
-    if (frame.origin.x > MENU_WIDTH/2) {
-        [self openMenu];
+    if (_isOpen) {
+        if (frame.origin.x < MENU_WIDTH*3.0/4.0) {
+            [self closeMenu];
+        }else {
+            [self openMenu];
+        }
     }else {
-        [self closeMenu];
+        if (frame.origin.x > MENU_WIDTH/4) {
+            [self openMenu];
+        }else {
+            [self closeMenu];
+        }
     }
 }
 
@@ -204,8 +285,9 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
 
 - (GSideMenuController *)sideMenuController {
     if (_menuControllers) {
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"controller == %@", self];
         for (GSideMenuController *ctr in _menuControllers) {
-            if ([ctr.controllers containsObject:self]) {
+            if ([ctr.items filteredArrayUsingPredicate:predicate].count > 0) {
                 return ctr;
             }
         }

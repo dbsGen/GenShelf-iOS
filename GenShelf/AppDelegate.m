@@ -24,7 +24,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     GSideMenuController *menu = [[GSideMenuController alloc] init];
-    menu.controllers = @[[[UINavigationController alloc] initWithRootViewController:[[GSShelfViewController alloc] init]]];
+    menu.items = @[[[UINavigationController alloc] initWithRootViewController:[GSideMenuItem itemWithController:[[GSShelfViewController alloc] init]]]];
     UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:menu];
     nav.navigationBarHidden = YES;
     self.window.rootViewController = nav;
