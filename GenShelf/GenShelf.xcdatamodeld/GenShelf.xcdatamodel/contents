@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
-    <entity name="Book" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F1509" minimumToolsVersion="Automatic">
+    <entity name="Book" representedClassName="Book" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" indexed="YES" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="loaded" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -10,7 +10,7 @@
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Page" inverseName="book" inverseEntity="Page" syncable="YES"/>
     </entity>
-    <entity name="Page" syncable="YES">
+    <entity name="Page" representedClassName="Page" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="loaded" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>

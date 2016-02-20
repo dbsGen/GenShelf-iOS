@@ -20,6 +20,19 @@
 		B20A34871C747306000CCFA3 /* libshadowsocks.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B20A347A1C747283000CCFA3 /* libshadowsocks.a */; };
 		B20A34891C747FB7000CCFA3 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B20A34881C747FB7000CCFA3 /* LaunchScreen.storyboard */; };
 		B20A348E1C7482A8000CCFA3 /* GSInputCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A348D1C7482A8000CCFA3 /* GSInputCell.m */; };
+		B22305AC1C78057B001B18F5 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305A81C78057B001B18F5 /* FXBlurView.m */; };
+		B22305AD1C78057B001B18F5 /* HexColors.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305AB1C78057B001B18F5 /* HexColors.m */; };
+		B22305B01C780CC2001B18F5 /* GShadowView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305AF1C780CC2001B18F5 /* GShadowView.m */; };
+		B22305B31C781AB4001B18F5 /* GSHomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305B21C781AB4001B18F5 /* GSHomeController.m */; };
+		B22305BD1C782032001B18F5 /* Book+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305B61C782032001B18F5 /* Book+CoreDataProperties.m */; };
+		B22305BE1C782032001B18F5 /* Book.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305B81C782032001B18F5 /* Book.m */; };
+		B22305BF1C782032001B18F5 /* Page+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305BA1C782032001B18F5 /* Page+CoreDataProperties.m */; };
+		B22305C01C782032001B18F5 /* Page.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305BC1C782032001B18F5 /* Page.m */; };
+		B22305C41C78250E001B18F5 /* GCoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305C31C78250E001B18F5 /* GCoreDataManager.m */; };
+		B22305CD1C783632001B18F5 /* sr_refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = B22305C61C783631001B18F5 /* sr_refresh.png */; };
+		B22305CE1C783632001B18F5 /* sr_refresh@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = B22305C71C783631001B18F5 /* sr_refresh@2X.png */; };
+		B22305CF1C783632001B18F5 /* SRRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305CA1C783632001B18F5 /* SRRefreshView.m */; };
+		B22305D01C783632001B18F5 /* SRSlimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305CC1C783632001B18F5 /* SRSlimeView.m */; };
 		B250EE2E1C73054D00198CDE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE2D1C73054D00198CDE /* main.m */; };
 		B250EE311C73054D00198CDE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE301C73054D00198CDE /* AppDelegate.m */; };
 		B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B250EE381C73054D00198CDE /* GenShelf.xcdatamodeld */; };
@@ -139,6 +152,31 @@
 		B20A34881C747FB7000CCFA3 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B20A348C1C7482A8000CCFA3 /* GSInputCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSInputCell.h; sourceTree = "<group>"; };
 		B20A348D1C7482A8000CCFA3 /* GSInputCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSInputCell.m; sourceTree = "<group>"; };
+		B22305A71C78057B001B18F5 /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		B22305A81C78057B001B18F5 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		B22305AA1C78057B001B18F5 /* HexColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HexColors.h; sourceTree = "<group>"; };
+		B22305AB1C78057B001B18F5 /* HexColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HexColors.m; sourceTree = "<group>"; };
+		B22305AE1C780CC2001B18F5 /* GShadowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GShadowView.h; sourceTree = "<group>"; };
+		B22305AF1C780CC2001B18F5 /* GShadowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GShadowView.m; sourceTree = "<group>"; };
+		B22305B11C781AB4001B18F5 /* GSHomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSHomeController.h; sourceTree = "<group>"; };
+		B22305B21C781AB4001B18F5 /* GSHomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSHomeController.m; sourceTree = "<group>"; };
+		B22305B51C782032001B18F5 /* Book+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Book+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B22305B61C782032001B18F5 /* Book+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Book+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B22305B71C782032001B18F5 /* Book.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Book.h; sourceTree = "<group>"; };
+		B22305B81C782032001B18F5 /* Book.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Book.m; sourceTree = "<group>"; };
+		B22305B91C782032001B18F5 /* Page+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Page+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B22305BA1C782032001B18F5 /* Page+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Page+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B22305BB1C782032001B18F5 /* Page.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Page.h; sourceTree = "<group>"; };
+		B22305BC1C782032001B18F5 /* Page.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Page.m; sourceTree = "<group>"; };
+		B22305C21C78250E001B18F5 /* GCoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCoreDataManager.h; sourceTree = "<group>"; };
+		B22305C31C78250E001B18F5 /* GCoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCoreDataManager.m; sourceTree = "<group>"; };
+		B22305C61C783631001B18F5 /* sr_refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = sr_refresh.png; sourceTree = "<group>"; };
+		B22305C71C783631001B18F5 /* sr_refresh@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "sr_refresh@2X.png"; sourceTree = "<group>"; };
+		B22305C81C783631001B18F5 /* SRDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRDefine.h; sourceTree = "<group>"; };
+		B22305C91C783632001B18F5 /* SRRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRRefreshView.h; sourceTree = "<group>"; };
+		B22305CA1C783632001B18F5 /* SRRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRRefreshView.m; sourceTree = "<group>"; };
+		B22305CB1C783632001B18F5 /* SRSlimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSlimeView.h; sourceTree = "<group>"; };
+		B22305CC1C783632001B18F5 /* SRSlimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSlimeView.m; sourceTree = "<group>"; };
 		B250EE291C73054D00198CDE /* GenShelf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenShelf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B250EE2D1C73054D00198CDE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B250EE2F1C73054D00198CDE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -327,6 +365,8 @@
 				B268EC981C7742FE001DD15F /* GSSearchViewController.m */,
 				B268ECC31C776FFE001DD15F /* GSSettingsViewController.h */,
 				B268ECC41C776FFE001DD15F /* GSSettingsViewController.m */,
+				B22305B11C781AB4001B18F5 /* GSHomeController.h */,
+				B22305B21C781AB4001B18F5 /* GSHomeController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -353,6 +393,62 @@
 				B2BDCBBC1C76DF5600DC3031 /* GSLoadingCell.m */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		B22305A61C78057B001B18F5 /* FXBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				B22305A71C78057B001B18F5 /* FXBlurView.h */,
+				B22305A81C78057B001B18F5 /* FXBlurView.m */,
+			);
+			path = FXBlurView;
+			sourceTree = "<group>";
+		};
+		B22305A91C78057B001B18F5 /* HexColors */ = {
+			isa = PBXGroup;
+			children = (
+				B22305AA1C78057B001B18F5 /* HexColors.h */,
+				B22305AB1C78057B001B18F5 /* HexColors.m */,
+			);
+			path = HexColors;
+			sourceTree = "<group>";
+		};
+		B22305B41C782011001B18F5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B22305B51C782032001B18F5 /* Book+CoreDataProperties.h */,
+				B22305B61C782032001B18F5 /* Book+CoreDataProperties.m */,
+				B22305B71C782032001B18F5 /* Book.h */,
+				B22305B81C782032001B18F5 /* Book.m */,
+				B22305B91C782032001B18F5 /* Page+CoreDataProperties.h */,
+				B22305BA1C782032001B18F5 /* Page+CoreDataProperties.m */,
+				B22305BB1C782032001B18F5 /* Page.h */,
+				B22305BC1C782032001B18F5 /* Page.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B22305C11C7824F4001B18F5 /* DataManager */ = {
+			isa = PBXGroup;
+			children = (
+				B22305C21C78250E001B18F5 /* GCoreDataManager.h */,
+				B22305C31C78250E001B18F5 /* GCoreDataManager.m */,
+			);
+			path = DataManager;
+			sourceTree = "<group>";
+		};
+		B22305C51C783631001B18F5 /* SlimeRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				B22305C61C783631001B18F5 /* sr_refresh.png */,
+				B22305C71C783631001B18F5 /* sr_refresh@2X.png */,
+				B22305C81C783631001B18F5 /* SRDefine.h */,
+				B22305C91C783632001B18F5 /* SRRefreshView.h */,
+				B22305CA1C783632001B18F5 /* SRRefreshView.m */,
+				B22305CB1C783632001B18F5 /* SRSlimeView.h */,
+				B22305CC1C783632001B18F5 /* SRSlimeView.m */,
+			);
+			path = SlimeRefresh;
 			sourceTree = "<group>";
 		};
 		B250EE201C73054D00198CDE = {
@@ -383,6 +479,7 @@
 				B2BDCBC51C77122C00DC3031 /* Resources */,
 				B2F02F191C75BE0D00D93119 /* Utils */,
 				B2F02F121C75635200D93119 /* Globals */,
+				B22305B41C782011001B18F5 /* Models */,
 				B20A348A1C7481DF000CCFA3 /* Views */,
 				B20A34701C746B80000CCFA3 /* Controllers */,
 				B20A34091C745E37000CCFA3 /* Shadowsocks */,
@@ -540,6 +637,8 @@
 				B2BDCBC01C76F83000DC3031 /* GSideMenuController.m */,
 				B2BDCBC21C7706AA00DC3031 /* GSideCoverView.h */,
 				B2BDCBC31C7706AA00DC3031 /* GSideCoverView.m */,
+				B22305AE1C780CC2001B18F5 /* GShadowView.h */,
+				B22305AF1C780CC2001B18F5 /* GShadowView.m */,
 			);
 			path = SideMenu;
 			sourceTree = "<group>";
@@ -575,6 +674,10 @@
 		B2F02F191C75BE0D00D93119 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B22305C51C783631001B18F5 /* SlimeRefresh */,
+				B22305C11C7824F4001B18F5 /* DataManager */,
+				B22305A61C78057B001B18F5 /* FXBlurView */,
+				B22305A91C78057B001B18F5 /* HexColors */,
 				B268ECDA1C7777E5001DD15F /* MessageBanner */,
 				B268EC9A1C7763BA001DD15F /* ASIHTTPRequest */,
 				B268ECB11C7763BA001DD15F /* HTMLParser */,
@@ -763,8 +866,10 @@
 				B20A34891C747FB7000CCFA3 /* LaunchScreen.storyboard in Resources */,
 				B268ECD21C77745D001DD15F /* progress.png in Resources */,
 				B268ED011C7777E5001DD15F /* SuccessBackgroundDefaultImage.png in Resources */,
+				B22305CE1C783632001B18F5 /* sr_refresh@2X.png in Resources */,
 				B268ECD81C77745D001DD15F /* squares.png in Resources */,
 				B268ECD51C77745D001DD15F /* search@2x.png in Resources */,
+				B22305CD1C783632001B18F5 /* sr_refresh.png in Resources */,
 				B268ECD11C77745D001DD15F /* home@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -806,10 +911,12 @@
 				B268ECBB1C7763BA001DD15F /* ASIHTTPRequest.m in Sources */,
 				B268EC961C7742E5001DD15F /* GSHomeViewController.m in Sources */,
 				B268ECBE1C7763BA001DD15F /* Reachability.m in Sources */,
+				B22305B31C781AB4001B18F5 /* GSHomeController.m in Sources */,
 				B268ED091C7777E5001DD15F /* MBLMessageBannerView.m in Sources */,
 				B268ECF61C7777E5001DD15F /* MBLMessageBanner.m in Sources */,
 				B268EC991C7742FE001DD15F /* GSSearchViewController.m in Sources */,
 				B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */,
+				B22305C41C78250E001B18F5 /* GCoreDataManager.m in Sources */,
 				B268ECB81C7763BA001DD15F /* ASIDataDecompressor.m in Sources */,
 				B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */,
 				B268ECC51C776FFE001DD15F /* GSSettingsViewController.m in Sources */,
@@ -818,20 +925,29 @@
 				B2BDCBC41C7706AA00DC3031 /* GSideCoverView.m in Sources */,
 				B2F02F291C75BE0D00D93119 /* GValue.m in Sources */,
 				B268ECBF1C7763BA001DD15F /* HTMLNode.m in Sources */,
+				B22305AC1C78057B001B18F5 /* FXBlurView.m in Sources */,
 				B250EE311C73054D00198CDE /* AppDelegate.m in Sources */,
 				B268ECBD1C7763BA001DD15F /* ASINetworkQueue.m in Sources */,
 				B2F02F251C75BE0D00D93119 /* GCallback.m in Sources */,
+				B22305CF1C783632001B18F5 /* SRRefreshView.m in Sources */,
 				B268ECB91C7763BA001DD15F /* ASIDownloadCache.m in Sources */,
 				B2F02F261C75BE0D00D93119 /* GEase.m in Sources */,
 				B2F02F2D1C75C1E200D93119 /* GSSelectView.m in Sources */,
 				B268ECBA1C7763BA001DD15F /* ASIFormDataRequest.m in Sources */,
 				B250EE2E1C73054D00198CDE /* main.m in Sources */,
+				B22305B01C780CC2001B18F5 /* GShadowView.m in Sources */,
 				B2F02F271C75BE0D00D93119 /* GTween.m in Sources */,
 				B2BDCBD01C771F6100DC3031 /* GSShelfViewController.m in Sources */,
 				B268ECBC1C7763BA001DD15F /* ASIInputStream.m in Sources */,
 				B20A348E1C7482A8000CCFA3 /* GSInputCell.m in Sources */,
+				B22305BF1C782032001B18F5 /* Page+CoreDataProperties.m in Sources */,
 				B268ECB71C7763BA001DD15F /* ASIDataCompressor.m in Sources */,
 				B2F02F181C75B24600D93119 /* GSSwitchCell.m in Sources */,
+				B22305BD1C782032001B18F5 /* Book+CoreDataProperties.m in Sources */,
+				B22305AD1C78057B001B18F5 /* HexColors.m in Sources */,
+				B22305C01C782032001B18F5 /* Page.m in Sources */,
+				B22305D01C783632001B18F5 /* SRSlimeView.m in Sources */,
+				B22305BE1C782032001B18F5 /* Book.m in Sources */,
 				B2F02F151C75637700D93119 /* GSGlobals.m in Sources */,
 				B20A34231C746541000CCFA3 /* ShadowsocksRunner.m in Sources */,
 				B2BDCBBD1C76DF5600DC3031 /* GSLoadingCell.m in Sources */,

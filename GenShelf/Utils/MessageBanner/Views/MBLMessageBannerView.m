@@ -910,7 +910,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled {
 
 - (void)applyMessageStyleFromDictionnary:(NSDictionary *)messageStyle {
     
-    [self setBackgroundColor:[UIColor colorWithHexString:[messageStyle objectForKey:BACKGROUND_COLOR_KEY] alpha:[[messageStyle objectForKey:BACKGROUND_ALPHA_KEY] floatValue]]];
+    [self setBackgroundColor:[UIColor hx_colorWithHexString:[messageStyle objectForKey:BACKGROUND_COLOR_KEY] alpha:[[messageStyle objectForKey:BACKGROUND_ALPHA_KEY] floatValue]]];
     if ([messageStyle objectForKey:BACKGROUND_IMAGE_KEY] && [UIImage imageNamed:[messageStyle objectForKey:BACKGROUND_IMAGE_KEY]]) {
         [self setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:[messageStyle objectForKey:BACKGROUND_IMAGE_KEY]]]];
         [self setAlpha:[[messageStyle objectForKey:BACKGROUND_ALPHA_KEY] floatValue]];
@@ -918,27 +918,27 @@ canBeDismissedByUser:(BOOL)dismissingEnabled {
     
     
     [self.titleLabel setFont:[UIFont boldSystemFontOfSize:[[messageStyle valueForKey:TITLE_TEXT_SIZE_KEY] floatValue]]];
-    [self.titleLabel setTextColor:[UIColor colorWithHexString:[messageStyle objectForKey:TITLE_TEXT_COLOR_KEY]]];
-    [self.titleLabel setShadowColor:[UIColor colorWithHexString:[messageStyle objectForKey:TITLE_TEXT_SHADOW_COLOR_KEY] alpha:[[messageStyle objectForKey:TITLE_TEXT_SHADOW_ALPHA_KEY] floatValue]]];
+    [self.titleLabel setTextColor:[UIColor hx_colorWithHexString:[messageStyle objectForKey:TITLE_TEXT_COLOR_KEY]]];
+    [self.titleLabel setShadowColor:[UIColor hx_colorWithHexString:[messageStyle objectForKey:TITLE_TEXT_SHADOW_COLOR_KEY] alpha:[[messageStyle objectForKey:TITLE_TEXT_SHADOW_ALPHA_KEY] floatValue]]];
     [self.titleLabel setShadowOffset:CGSizeMake([[messageStyle objectForKey:TITLE_TEXT_SHADOW_OFFSET_X_KEY] floatValue],
                                                  [[messageStyle objectForKey: TITLE_TEXT_SHADOW_OFFSET_Y_KEY] floatValue])];
 
     
     [self.subtitleLabel setFont:[UIFont systemFontOfSize:[[messageStyle valueForKey:SUBTITLE_TEXT_SIZE_KEY] floatValue]]];
-    [self.subtitleLabel setTextColor:[UIColor colorWithHexString:[messageStyle objectForKey:SUBTITLE_TEXT_COLOR_KEY]]];
-    [self.subtitleLabel setShadowColor:[UIColor colorWithHexString:[messageStyle objectForKey:SUBTITLE_TEXT_SHADOW_COLOR_KEY] alpha:[[messageStyle objectForKey:SUBTITLE_TEXT_SHADOW_ALPHA_KEY] floatValue]]];
+    [self.subtitleLabel setTextColor:[UIColor hx_colorWithHexString:[messageStyle objectForKey:SUBTITLE_TEXT_COLOR_KEY]]];
+    [self.subtitleLabel setShadowColor:[UIColor hx_colorWithHexString:[messageStyle objectForKey:SUBTITLE_TEXT_SHADOW_COLOR_KEY] alpha:[[messageStyle objectForKey:SUBTITLE_TEXT_SHADOW_ALPHA_KEY] floatValue]]];
     [self.subtitleLabel setShadowOffset:CGSizeMake([[messageStyle objectForKey:SUBTITLE_TEXT_SHADOW_OFFSET_X_KEY] floatValue],
                                                 [[messageStyle objectForKey:SUBTITLE_TEXT_SHADOW_OFFSET_Y_KEY] floatValue])];
     
     
 
-    [self.button setTitleColor:[UIColor colorWithHexString:[messageStyle objectForKey:BUTTON_TEXT_COLOR_KEY]] forState:UIControlStateNormal];
-    [self.button setTitleShadowColor:[UIColor colorWithHexString:[messageStyle objectForKey:BUTTON_TEXT_SHADOW_COLOR_KEY] alpha:[[messageStyle objectForKey:BUTTON_TEXT_SHADOW_ALPHA_KEY] floatValue]] forState:UIControlStateNormal];
+    [self.button setTitleColor:[UIColor hx_colorWithHexString:[messageStyle objectForKey:BUTTON_TEXT_COLOR_KEY]] forState:UIControlStateNormal];
+    [self.button setTitleShadowColor:[UIColor hx_colorWithHexString:[messageStyle objectForKey:BUTTON_TEXT_SHADOW_COLOR_KEY] alpha:[[messageStyle objectForKey:BUTTON_TEXT_SHADOW_ALPHA_KEY] floatValue]] forState:UIControlStateNormal];
     [self.button.titleLabel setShadowOffset:CGSizeMake([[messageStyle objectForKey:BUTTON_TEXT_SHADOW_OFFSET_X_KEY] floatValue],
                                                       [[messageStyle objectForKey:BUTTON_TEXT_SHADOW_OFFSET_Y_KEY] floatValue])];
     
     
-    [self.button setBackgroundColor:[UIColor colorWithHexString:[messageStyle objectForKey:BUTTON_BACKGROUND_COLOR_KEY] alpha:[[messageStyle objectForKey:BUTTON_BACKGROUND_ALPHA_KEY] floatValue]]];
+    [self.button setBackgroundColor:[UIColor hx_colorWithHexString:[messageStyle objectForKey:BUTTON_BACKGROUND_COLOR_KEY] alpha:[[messageStyle objectForKey:BUTTON_BACKGROUND_ALPHA_KEY] floatValue]]];
     
     if ([messageStyle objectForKey:BUTTON_BACKGROUND_IMAGE_KEY] != nil &&
         [UIImage imageNamed:[messageStyle objectForKey:BUTTON_BACKGROUND_IMAGE_KEY]] != nil) {
@@ -953,7 +953,7 @@ canBeDismissedByUser:(BOOL)dismissingEnabled {
     [self.button.layer setCornerRadius:[[messageStyle objectForKey:BUTTON_CORNER_RADIUS_KEY] floatValue]];
     [self.button.layer setMasksToBounds:YES];
     
-    [self.button.layer setBorderColor:[[UIColor colorWithHexString:[messageStyle objectForKey:BUTTON_BORDER_COLOR_KEY] alpha:[[messageStyle objectForKey:BUTTON_BORDER_ALPHA_KEY] floatValue]] CGColor]];
+    [self.button.layer setBorderColor:[[UIColor hx_colorWithHexString:[messageStyle objectForKey:BUTTON_BORDER_COLOR_KEY] alpha:[[messageStyle objectForKey:BUTTON_BORDER_ALPHA_KEY] floatValue]] CGColor]];
     [self.button.layer setBorderWidth:[[messageStyle objectForKey:BUTTON_BORDER_SIZE_KEY] floatValue]];
     
 }

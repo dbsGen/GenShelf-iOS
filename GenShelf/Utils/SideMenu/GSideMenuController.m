@@ -9,11 +9,10 @@
 #import "GSideMenuController.h"
 #import "GSideCoverView.h"
 #import "GTween.h"
+#import "GShadowView.h"
 
 
 #define MENU_WIDTH  220
-#define MENU_SHADOW_RADIUS 12
-#define MENU_SHADOW_OPACITY 0.3
 
 static NSMutableArray<GSideMenuController*> *_menuControllers;
 
@@ -56,6 +55,7 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
     UIView *_currentView;
     UIView *_contentView;
     GSideCoverView  *_coverView;
+    GShadowView *_shadowView;
     BOOL _isOpen;
 }
 
@@ -91,15 +91,22 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
     CGRect bounds = self.view.bounds;
     _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, MENU_WIDTH,
                                                                bounds.size.height)
-                                              style:UITableViewStylePlain];
+                                              style:UITableViewStyleGrouped];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
     [self.view addSubview:_tableView];
     
-    _contentView = [[UIView alloc] initWithFrame:self.view.bounds];
+    _contentView = [[UIView alloc] initWithFrame:bounds];
     _contentView.backgroundColor = [UIColor whiteColor];
     _contentView.layer.shadowColor = [[UIColor blackColor] CGColor];
-    _coverView = [[GSideCoverView alloc] initWithFrame:self.view.bounds];
+    _contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    
+    _shadowView = [[GShadowView alloc] initWithFrame:CGRectMake(-12, 0, 12, bounds.size.height)];
+    _shadowView.autoresizingMask = UIViewAutoresizingFlexibleHeight;
+    [_contentView addSubview:_shadowView];
+    
+    _coverView = [[GSideCoverView alloc] initWithFrame:bounds];
     _coverView.userInteractionEnabled = YES;
     __weak GSideMenuController *that = self;
     _coverView.moveBlock = ^(CGPoint point) {
@@ -121,6 +128,7 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
     _contentView = NULL;
     _currentView = NULL;
     _coverView = NULL;
+    _shadowView = NULL;
 }
 
 - (void)setItems:(NSArray<GSideMenuItem *> *)items {
@@ -170,10 +178,10 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
     cell.textLabel.text = item.title;
     cell.imageView.image = item.image;
     if (row == _selectedIndex) {
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+        cell.accessoryType = UITableViewCellAccessoryNone;
         cell.selectionStyle = UITableViewCellSelectionStyleGray;
     }else {
-        cell.accessoryType = UITableViewCellAccessoryNone;
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return cell;
@@ -182,8 +190,15 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     self.selectedIndex = indexPath.row;
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-    if (cell)
-        [cell setSelected:NO animated:YES];
+    if (cell) {
+        [self performSelector:@selector(unselect:)
+                   withObject:cell
+                   afterDelay:0];
+    }
+}
+
+- (void)unselect:(UITableViewCell *)cell {
+    [cell setSelected:NO animated:YES];
 }
 
 - (void)updateView {
@@ -193,13 +208,15 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
         GSideMenuItem *item = [_items objectAtIndex:_selectedIndex];
         if (item.controller) {
             _currentView = [item.controller view];
-            [_contentView addSubview:_currentView];
+            [_contentView insertSubview:_currentView
+                           belowSubview:_coverView];
         }
     }else {
         GSideMenuItem *item = [_items objectAtIndex:_selectedIndex];
         if (item.controller) {
             _currentView = [item.controller view];
-            [_contentView addSubview:_currentView];
+            [_contentView insertSubview:_currentView
+                           belowSubview:_coverView];
         }
     }
 }
@@ -219,10 +236,10 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
                                                    to:CGRectMake(MENU_WIDTH, 0,
                                                                  bounds.size.width,
                                                                  bounds.size.height)]];
+    [tween.onUpdate addTarget:self
+                       action:@selector(updateTableScale)
+                         with:NULL];
     [tween start];
-    
-    _contentView.layer.shadowRadius = MENU_SHADOW_RADIUS;
-    _contentView.layer.shadowOpacity = MENU_SHADOW_OPACITY;
 }
 
 - (void)closeMenu {
@@ -239,11 +256,10 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
                                                    to:CGRectMake(0, 0,
                                                                  bounds.size.width,
                                                                  bounds.size.height)]];
+    [tween.onUpdate addTarget:self
+                       action:@selector(updateTableScale)
+                         with:NULL];
     [tween start];
-    [tween.onComplete addBlock:^{
-        _contentView.layer.shadowRadius = 0;
-        _contentView.layer.shadowOpacity = 0;
-    }];
     [tween.onUpdate addBlock:^{
         [self updateTableScale];
     }];
@@ -285,7 +301,7 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
 
 - (GSideMenuController *)sideMenuController {
     if (_menuControllers) {
-        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"controller == %@", self];
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"controller == %@ OR controller == %@ OR controller == %@", self, self.navigationController, self.tabBarController];
         for (GSideMenuController *ctr in _menuControllers) {
             if ([ctr.items filteredArrayUsingPredicate:predicate].count > 0) {
                 return ctr;

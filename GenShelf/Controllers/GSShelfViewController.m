@@ -19,6 +19,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"书架";
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"]
+                                                                                 style:UIBarButtonItemStylePlain
+                                                                                target:self
+                                                                                action:@selector(openMenu)];
     }
     return self;
 }
@@ -42,7 +46,7 @@
 }
 
 - (void)openMenu {
-    [self.navigationController.sideMenuController openMenu];
+    [self.sideMenuController openMenu];
 }
 
 @end

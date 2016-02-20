@@ -18,7 +18,9 @@ const float frameRace = 60;
 
 @end
 
-@interface GTweenManager : NSObject
+@interface GTweenManager : NSObject {
+    BOOL _running;
+}
 
 @property (nonatomic, readonly) NSArray *tweens;
 + (id)instance;
@@ -28,7 +30,6 @@ const float frameRace = 60;
 @end
 
 @implementation GTweenManager {
-    NSTimer         *_timer;
     NSMutableArray  *_tweens;
     NSTimeInterval  _oldTime;
 }
@@ -52,19 +53,21 @@ static id _defaultManager;
     if (self) {
         _tweens = [NSMutableArray new];
         _oldTime = 0;
+        _running = NO;
     }
     return self;
 }
 
 - (void)checkTimer
 {
-    if (!_timer || !_timer.isValid) {
+    if (!_running) {
         _oldTime = [NSDate date].timeIntervalSince1970;
-        _timer = [NSTimer scheduledTimerWithTimeInterval:1/frameRace
-                                                  target:self
-                                                selector:@selector(update)
-                                                userInfo:nil
-                                                 repeats:YES];
+        if (_tweens.count > 0) {
+            _running = YES;
+            [self performSelector:@selector(update)
+                       withObject:NULL
+                       afterDelay:0];
+        }
     }
 }
 
@@ -75,18 +78,20 @@ static id _defaultManager;
 
 - (void)addTween:(GTween *)tween
 {
-    [self checkTimer];
     [_tweens addObject:tween];
+    [self checkTimer];
 }
 - (void)removeTween:(GTween *)tween
 {
     [_tweens removeObject:tween];
     if (_tweens.count == 0)
-        [_timer invalidate];
+        _running = NO;
 }
 
 - (void)update
 {
+    if (!_running)
+        return;
     NSDate *date = [NSDate date];
     NSTimeInterval time = date.timeIntervalSince1970;
     NSArray *array = [_tweens copy];
@@ -96,10 +101,14 @@ static id _defaultManager;
             [_tweens removeObject:tween];
         }
     }];
-    if (_tweens.count == 0) {
-        [_timer invalidate];
-    }
     _oldTime = time;
+    if (_tweens.count == 0) {
+        _running = NO;
+    }else {
+        [self performSelector:@selector(update)
+                   withObject:NULL
+                   afterDelay:0];
+    }
 }
 
 @end
