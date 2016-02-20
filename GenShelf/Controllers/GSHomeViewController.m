@@ -15,10 +15,14 @@
 
 @property (nonatomic, strong) SRRefreshView *refreshView;
 @property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) NSOperationQueue *queue;
 
 @end
 
-@implementation GSHomeViewController
+@implementation GSHomeViewController {
+    BOOL _loaded;
+    BOOL _loading;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -28,6 +32,8 @@
                                                                                  style:UIBarButtonItemStylePlain
                                                                                 target:self
                                                                                 action:@selector(openMenu)];
+        _queue = [[NSOperationQueue alloc] init];
+        _loaded = false;
     }
     return self;
 }
@@ -51,6 +57,9 @@
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     [self.view addSubview:_tableView];
     
+    if (!_loaded) {
+        [self requestDatas];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -107,6 +116,18 @@
     [_refreshView performSelector:@selector(endRefresh)
                        withObject:nil afterDelay:3
                           inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+}
+
+#pragma mark - io
+
+- (void)requestDatas {
+    if (_loading) return;
+    ASIHTTPRequest *request = [[GSGlobals dataControl] mainRequest];
+    __weak ASIHTTPRequest *_request = request;
+    [request setCompletionBlock:^{
+        NSLog(@"%@", _request.responseString);
+    }];
+    [_queue addOperation:request];
 }
 
 @end

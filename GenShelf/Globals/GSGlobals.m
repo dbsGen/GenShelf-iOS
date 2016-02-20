@@ -8,9 +8,12 @@
 
 #import "GSGlobals.h"
 #import "ShadowsocksRunner.h"
+#import "GSLofiDataControl.h"
 
 #define kTurnProxy      @"GSGTurnProxy"
 #define kCurrentPort    @"GSGCurrentPort"
+
+#define kDataControl    @"GSDataControl"
 
 #define kDefaultCurrentPort @"41080"
 #define kDefaultServerIP    @"192.168.1.10"
@@ -150,6 +153,24 @@ static BOOL shadowsocks_running = NO;
 
 + (void)reloadShadowsocksConfig {
     [ShadowsocksRunner reloadConfig];
+}
+
+static NSArray<GSDataControl *> * _dataControls;
++ (NSArray<GSDataControl *> *)dataControls {
+    if (!_dataControls) {
+        _dataControls = @[[[GSLofiDataControl alloc] init]];
+    }
+    return _dataControls;
+}
++ (NSUInteger)selectedDataControl {
+    return [[NSUserDefaults standardUserDefaults] integerForKey:kDataControl];
+}
++ (void)setSelectedDataControl:(NSUInteger)selectedNumber {
+    [[NSUserDefaults standardUserDefaults] setInteger:selectedNumber
+                                               forKey:kDataControl];
+}
++ (GSDataControl *)dataControl {
+    return [[self dataControls] objectAtIndex:[self selectedDataControl]];
 }
 
 + (ASIHTTPRequest *)requestForURL:(NSURL *)url {

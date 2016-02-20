@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
+#import "GSDataControl.h"
 
 @interface GSGlobals : NSObject
 
@@ -31,6 +32,11 @@
 + (void)runShadowsocksThread;
 + (void)resetShadowsocks;
 + (void)reloadShadowsocksConfig;
+
++ (NSArray<GSDataControl *> *)dataControls;
++ (NSUInteger)selectedDataControl;
++ (void)setSelectedDataControl:(NSUInteger)selectedNumber;
++ (GSDataControl *)dataControl;
 
 + (ASIHTTPRequest *)requestForURL:(NSURL *)url;
 

@@ -50,8 +50,6 @@
 		B268ECBC1C7763BA001DD15F /* ASIInputStream.m in Sources */ = {isa = PBXBuildFile; fileRef = B268ECAB1C7763BA001DD15F /* ASIInputStream.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B268ECBD1C7763BA001DD15F /* ASINetworkQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = B268ECAD1C7763BA001DD15F /* ASINetworkQueue.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B268ECBE1C7763BA001DD15F /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = B268ECB01C7763BA001DD15F /* Reachability.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		B268ECBF1C7763BA001DD15F /* HTMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B268ECB31C7763BA001DD15F /* HTMLNode.m */; };
-		B268ECC01C7763BA001DD15F /* HTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B268ECB51C7763BA001DD15F /* HTMLParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B268ECC21C7764A7001DD15F /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B268ECC11C7764A7001DD15F /* libxml2.tbd */; };
 		B268ECC51C776FFE001DD15F /* GSSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B268ECC41C776FFE001DD15F /* GSSettingsViewController.m */; };
 		B268ECD01C77745D001DD15F /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = B268ECC61C77745D001DD15F /* home.png */; };
@@ -99,6 +97,11 @@
 		B2F02F281C75BE0D00D93119 /* GTweenProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F221C75BE0D00D93119 /* GTweenProperty.m */; };
 		B2F02F291C75BE0D00D93119 /* GValue.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F241C75BE0D00D93119 /* GValue.m */; };
 		B2F02F2D1C75C1E200D93119 /* GSSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F2C1C75C1E200D93119 /* GSSelectView.m */; };
+		B2F44C221C78A1D900639756 /* GSDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C211C78A1D900639756 /* GSDataControl.m */; };
+		B2F44C261C78AA3700639756 /* NSURL+QueryDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C251C78AA3700639756 /* NSURL+QueryDictionary.m */; };
+		B2F44C291C78ADA500639756 /* GSLofiDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C281C78ADA500639756 /* GSLofiDataControl.m */; };
+		B2F44C2F1C78BD5C00639756 /* GSBookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C2E1C78BD5C00639756 /* GSBookItem.m */; };
+		B2F44C331C78C3FE00639756 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C321C78C3FE00639756 /* GDataXMLNode.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -216,10 +219,6 @@
 		B268ECAE1C7763BA001DD15F /* ASIProgressDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASIProgressDelegate.h; sourceTree = "<group>"; };
 		B268ECAF1C7763BA001DD15F /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
 		B268ECB01C7763BA001DD15F /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
-		B268ECB21C7763BA001DD15F /* HTMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLNode.h; sourceTree = "<group>"; };
-		B268ECB31C7763BA001DD15F /* HTMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLNode.m; sourceTree = "<group>"; };
-		B268ECB41C7763BA001DD15F /* HTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HTMLParser.h; sourceTree = "<group>"; };
-		B268ECB51C7763BA001DD15F /* HTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTMLParser.m; sourceTree = "<group>"; };
 		B268ECC11C7764A7001DD15F /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		B268ECC31C776FFE001DD15F /* GSSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSettingsViewController.h; sourceTree = "<group>"; };
 		B268ECC41C776FFE001DD15F /* GSSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSettingsViewController.m; sourceTree = "<group>"; };
@@ -283,6 +282,16 @@
 		B2F02F241C75BE0D00D93119 /* GValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GValue.m; sourceTree = "<group>"; };
 		B2F02F2B1C75C1E200D93119 /* GSSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSelectView.h; sourceTree = "<group>"; };
 		B2F02F2C1C75C1E200D93119 /* GSSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSelectView.m; sourceTree = "<group>"; };
+		B2F44C201C78A1D900639756 /* GSDataControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSDataControl.h; sourceTree = "<group>"; };
+		B2F44C211C78A1D900639756 /* GSDataControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSDataControl.m; sourceTree = "<group>"; };
+		B2F44C241C78AA3700639756 /* NSURL+QueryDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+QueryDictionary.h"; sourceTree = "<group>"; };
+		B2F44C251C78AA3700639756 /* NSURL+QueryDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+QueryDictionary.m"; sourceTree = "<group>"; };
+		B2F44C271C78ADA500639756 /* GSLofiDataControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiDataControl.h; sourceTree = "<group>"; };
+		B2F44C281C78ADA500639756 /* GSLofiDataControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLofiDataControl.m; sourceTree = "<group>"; };
+		B2F44C2D1C78BD5C00639756 /* GSBookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSBookItem.h; sourceTree = "<group>"; };
+		B2F44C2E1C78BD5C00639756 /* GSBookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSBookItem.m; sourceTree = "<group>"; };
+		B2F44C311C78C3FE00639756 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
+		B2F44C321C78C3FE00639756 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -476,6 +485,7 @@
 		B250EE2B1C73054D00198CDE /* GenShelf */ = {
 			isa = PBXGroup;
 			children = (
+				B2F44C1F1C78A1C600639756 /* DataController */,
 				B2BDCBC51C77122C00DC3031 /* Resources */,
 				B2F02F191C75BE0D00D93119 /* Utils */,
 				B2F02F121C75635200D93119 /* Globals */,
@@ -548,17 +558,6 @@
 				B268ECB01C7763BA001DD15F /* Reachability.m */,
 			);
 			path = ASIHTTPRequest;
-			sourceTree = "<group>";
-		};
-		B268ECB11C7763BA001DD15F /* HTMLParser */ = {
-			isa = PBXGroup;
-			children = (
-				B268ECB21C7763BA001DD15F /* HTMLNode.h */,
-				B268ECB31C7763BA001DD15F /* HTMLNode.m */,
-				B268ECB41C7763BA001DD15F /* HTMLParser.h */,
-				B268ECB51C7763BA001DD15F /* HTMLParser.m */,
-			);
-			path = HTMLParser;
 			sourceTree = "<group>";
 		};
 		B268ECDA1C7777E5001DD15F /* MessageBanner */ = {
@@ -674,13 +673,14 @@
 		B2F02F191C75BE0D00D93119 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B2F44C301C78C3FE00639756 /* GDDataXML */,
+				B2F44C231C78AA3700639756 /* NSURL+QueryDictionary */,
 				B22305C51C783631001B18F5 /* SlimeRefresh */,
 				B22305C11C7824F4001B18F5 /* DataManager */,
 				B22305A61C78057B001B18F5 /* FXBlurView */,
 				B22305A91C78057B001B18F5 /* HexColors */,
 				B268ECDA1C7777E5001DD15F /* MessageBanner */,
 				B268EC9A1C7763BA001DD15F /* ASIHTTPRequest */,
-				B268ECB11C7763BA001DD15F /* HTMLParser */,
 				B2BDCBBE1C76F6AD00DC3031 /* SideMenu */,
 				B2F02F1A1C75BE0D00D93119 /* Tween */,
 			);
@@ -711,6 +711,37 @@
 				B2F02F2C1C75C1E200D93119 /* GSSelectView.m */,
 			);
 			path = Widgets;
+			sourceTree = "<group>";
+		};
+		B2F44C1F1C78A1C600639756 /* DataController */ = {
+			isa = PBXGroup;
+			children = (
+				B2F44C2D1C78BD5C00639756 /* GSBookItem.h */,
+				B2F44C2E1C78BD5C00639756 /* GSBookItem.m */,
+				B2F44C201C78A1D900639756 /* GSDataControl.h */,
+				B2F44C211C78A1D900639756 /* GSDataControl.m */,
+				B2F44C271C78ADA500639756 /* GSLofiDataControl.h */,
+				B2F44C281C78ADA500639756 /* GSLofiDataControl.m */,
+			);
+			path = DataController;
+			sourceTree = "<group>";
+		};
+		B2F44C231C78AA3700639756 /* NSURL+QueryDictionary */ = {
+			isa = PBXGroup;
+			children = (
+				B2F44C241C78AA3700639756 /* NSURL+QueryDictionary.h */,
+				B2F44C251C78AA3700639756 /* NSURL+QueryDictionary.m */,
+			);
+			path = "NSURL+QueryDictionary";
+			sourceTree = "<group>";
+		};
+		B2F44C301C78C3FE00639756 /* GDDataXML */ = {
+			isa = PBXGroup;
+			children = (
+				B2F44C311C78C3FE00639756 /* GDataXMLNode.h */,
+				B2F44C321C78C3FE00639756 /* GDataXMLNode.m */,
+			);
+			path = GDDataXML;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -908,6 +939,7 @@
 			files = (
 				B2F02F281C75BE0D00D93119 /* GTweenProperty.m in Sources */,
 				B20A34731C746BBB000CCFA3 /* GSSSSettingViewController.m in Sources */,
+				B2F44C2F1C78BD5C00639756 /* GSBookItem.m in Sources */,
 				B268ECBB1C7763BA001DD15F /* ASIHTTPRequest.m in Sources */,
 				B268EC961C7742E5001DD15F /* GSHomeViewController.m in Sources */,
 				B268ECBE1C7763BA001DD15F /* Reachability.m in Sources */,
@@ -920,26 +952,28 @@
 				B268ECB81C7763BA001DD15F /* ASIDataDecompressor.m in Sources */,
 				B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */,
 				B268ECC51C776FFE001DD15F /* GSSettingsViewController.m in Sources */,
-				B268ECC01C7763BA001DD15F /* HTMLParser.m in Sources */,
+				B2F44C221C78A1D900639756 /* GSDataControl.m in Sources */,
 				B2BDCBC11C76F83000DC3031 /* GSideMenuController.m in Sources */,
 				B2BDCBC41C7706AA00DC3031 /* GSideCoverView.m in Sources */,
 				B2F02F291C75BE0D00D93119 /* GValue.m in Sources */,
-				B268ECBF1C7763BA001DD15F /* HTMLNode.m in Sources */,
 				B22305AC1C78057B001B18F5 /* FXBlurView.m in Sources */,
 				B250EE311C73054D00198CDE /* AppDelegate.m in Sources */,
 				B268ECBD1C7763BA001DD15F /* ASINetworkQueue.m in Sources */,
 				B2F02F251C75BE0D00D93119 /* GCallback.m in Sources */,
 				B22305CF1C783632001B18F5 /* SRRefreshView.m in Sources */,
+				B2F44C291C78ADA500639756 /* GSLofiDataControl.m in Sources */,
 				B268ECB91C7763BA001DD15F /* ASIDownloadCache.m in Sources */,
 				B2F02F261C75BE0D00D93119 /* GEase.m in Sources */,
 				B2F02F2D1C75C1E200D93119 /* GSSelectView.m in Sources */,
 				B268ECBA1C7763BA001DD15F /* ASIFormDataRequest.m in Sources */,
+				B2F44C261C78AA3700639756 /* NSURL+QueryDictionary.m in Sources */,
 				B250EE2E1C73054D00198CDE /* main.m in Sources */,
 				B22305B01C780CC2001B18F5 /* GShadowView.m in Sources */,
 				B2F02F271C75BE0D00D93119 /* GTween.m in Sources */,
 				B2BDCBD01C771F6100DC3031 /* GSShelfViewController.m in Sources */,
 				B268ECBC1C7763BA001DD15F /* ASIInputStream.m in Sources */,
 				B20A348E1C7482A8000CCFA3 /* GSInputCell.m in Sources */,
+				B2F44C331C78C3FE00639756 /* GDataXMLNode.m in Sources */,
 				B22305BF1C782032001B18F5 /* Page+CoreDataProperties.m in Sources */,
 				B268ECB71C7763BA001DD15F /* ASIDataCompressor.m in Sources */,
 				B2F02F181C75B24600D93119 /* GSSwitchCell.m in Sources */,
