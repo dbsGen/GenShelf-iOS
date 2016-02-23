@@ -36,6 +36,8 @@ typedef void(^GSideMenuItemBlock)();
 - (void)touchMove:(CGFloat)offset;
 - (void)touchEnd;
 
+- (void)sideMenuSelect:(NSUInteger)index;
+
 @end
 
 

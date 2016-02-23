@@ -25,9 +25,13 @@
         self.items = @[[GSideMenuItem itemWithController:[[UINavigationController alloc] initWithRootViewController:[[GSShelfViewController alloc] init]] image:[UIImage imageNamed:@"squares"]],
                        [GSideMenuItem itemWithController:[[UINavigationController alloc] initWithRootViewController:[[GSHomeViewController alloc] init]] image:[UIImage imageNamed:@"home"]],
                        [GSideMenuItem itemWithController:[[GSSearchViewController alloc] init] image:[UIImage imageNamed:@"search"]],
-                       [GSideMenuItem itemWithController:[[GSSettingsViewController alloc] init] image:[UIImage imageNamed:@"setting"]]];
+                       [GSideMenuItem itemWithController:[[UINavigationController alloc] initWithRootViewController:[[GSSettingsViewController alloc] init]] image:[UIImage imageNamed:@"setting"]]];
     }
     return self;
+}
+
+- (void)sideMenuSelect:(NSUInteger)index {
+    [self closeMenu];
 }
 
 @end

@@ -143,6 +143,7 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
 
 - (void)setSelectedIndex:(NSUInteger)selectedIndex {
     if (_selectedIndex != selectedIndex) {
+        [self sideMenuSelect:selectedIndex];
         GSideMenuItem *item = [_items objectAtIndex:selectedIndex];
         if (item.controller) {
             NSUInteger uidx = _selectedIndex;
@@ -294,6 +295,8 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
         }
     }
 }
+
+- (void)sideMenuSelect:(NSUInteger)index {}
 
 @end
 

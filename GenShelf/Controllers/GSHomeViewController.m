@@ -10,6 +10,8 @@
 #import "GSideMenuController.h"
 #import "GSGlobals.h"
 #import "SRRefreshView.h"
+#import "GSBookCell.h"
+#import "MBLMessageBanner.h"
 
 @interface GSHomeViewController () <UITableViewDelegate, UITableViewDataSource, SRRefreshDelegate>
 
@@ -22,6 +24,7 @@
 @implementation GSHomeViewController {
     BOOL _loaded;
     BOOL _loading;
+    NSMutableArray<GSBookItem *> *_datas;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -59,6 +62,8 @@
     
     if (!_loaded) {
         [self requestDatas];
+        _refreshView.loading = YES;
+        _tableView.contentInset = UIEdgeInsetsMake(_refreshView.upInset, 0, 0, 0);
     }
 }
 
@@ -78,17 +83,24 @@
     [self.sideMenuController openMenu];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 180;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 0;
+    return _datas.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"NormalCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    GSBookCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:identifier];
+        cell = [[GSBookCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                 reuseIdentifier:identifier];
     }
+    GSBookItem *item = [_datas objectAtIndex:indexPath.row];
+    cell.imageUrl = item.imageUrl;
+    cell.titleLabel.text = item.title;
     return cell;
 }
 
@@ -113,9 +125,7 @@
 
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
 {
-    [_refreshView performSelector:@selector(endRefresh)
-                       withObject:nil afterDelay:3
-                          inModes:[NSArray arrayWithObject:NSRunLoopCommonModes]];
+    [self requestDatas];
 }
 
 #pragma mark - io
@@ -125,7 +135,19 @@
     ASIHTTPRequest *request = [[GSGlobals dataControl] mainRequest];
     __weak ASIHTTPRequest *_request = request;
     [request setCompletionBlock:^{
-        NSLog(@"%@", _request.responseString);
+        NSArray<GSBookItem *> *arr = [[GSGlobals dataControl] parseMain:_request.responseString];
+        _datas = [NSMutableArray<GSBookItem *> arrayWithArray:arr];
+        [_tableView reloadData];
+        _loaded = YES;
+        [_refreshView endRefresh];
+    }];
+    [request setFailedBlock:^{
+        [_refreshView endRefresh];
+        [MBLMessageBanner showMessageBannerInViewController:self
+                                                      title:@"Error"
+                                                   subtitle:@"不能获得"
+                                                       type:MBLMessageBannerTypeError
+                                                 atPosition:MBLMessageBannerPositionTop];
     }];
     [_queue addOperation:request];
 }

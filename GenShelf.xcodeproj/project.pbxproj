@@ -33,6 +33,9 @@
 		B22305CE1C783632001B18F5 /* sr_refresh@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = B22305C71C783631001B18F5 /* sr_refresh@2X.png */; };
 		B22305CF1C783632001B18F5 /* SRRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305CA1C783632001B18F5 /* SRRefreshView.m */; };
 		B22305D01C783632001B18F5 /* SRSlimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305CC1C783632001B18F5 /* SRSlimeView.m */; };
+		B22675EB1C7C355600B5D5CC /* no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = B22675E91C7C355600B5D5CC /* no_image.png */; };
+		B22675EC1C7C355600B5D5CC /* no_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B22675EA1C7C355600B5D5CC /* no_image@2x.png */; };
+		B22675EF1C7C44DC00B5D5CC /* GSPageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B22675EE1C7C44DC00B5D5CC /* GSPageItem.m */; };
 		B250EE2E1C73054D00198CDE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE2D1C73054D00198CDE /* main.m */; };
 		B250EE311C73054D00198CDE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE301C73054D00198CDE /* AppDelegate.m */; };
 		B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B250EE381C73054D00198CDE /* GenShelf.xcdatamodeld */; };
@@ -97,6 +100,14 @@
 		B2F02F281C75BE0D00D93119 /* GTweenProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F221C75BE0D00D93119 /* GTweenProperty.m */; };
 		B2F02F291C75BE0D00D93119 /* GValue.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F241C75BE0D00D93119 /* GValue.m */; };
 		B2F02F2D1C75C1E200D93119 /* GSSelectView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F2C1C75C1E200D93119 /* GSSelectView.m */; };
+		B2F1812E1C7C062500DA5BF3 /* MTLocationCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F181221C7C062500DA5BF3 /* MTLocationCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B2F1812F1C7C062500DA5BF3 /* MTMenoryCache.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F181241C7C062500DA5BF3 /* MTMenoryCache.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B2F181301C7C062500DA5BF3 /* MTNetCacheElement.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F181261C7C062500DA5BF3 /* MTNetCacheElement.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B2F181311C7C062500DA5BF3 /* MTNetCacheManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F181281C7C062500DA5BF3 /* MTNetCacheManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B2F181321C7C062500DA5BF3 /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = B2F1812A1C7C062500DA5BF3 /* md5.c */; };
+		B2F181331C7C062500DA5BF3 /* MTMd5.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F1812D1C7C062500DA5BF3 /* MTMd5.m */; };
+		B2F181361C7C12C400DA5BF3 /* GSBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F181351C7C12C400DA5BF3 /* GSBookCell.m */; };
+		B2F181391C7C13F200DA5BF3 /* GSRadisImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F181381C7C13F200DA5BF3 /* GSRadisImageView.m */; };
 		B2F44C221C78A1D900639756 /* GSDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C211C78A1D900639756 /* GSDataControl.m */; };
 		B2F44C261C78AA3700639756 /* NSURL+QueryDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C251C78AA3700639756 /* NSURL+QueryDictionary.m */; };
 		B2F44C291C78ADA500639756 /* GSLofiDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C281C78ADA500639756 /* GSLofiDataControl.m */; };
@@ -180,6 +191,10 @@
 		B22305CA1C783632001B18F5 /* SRRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRRefreshView.m; sourceTree = "<group>"; };
 		B22305CB1C783632001B18F5 /* SRSlimeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRSlimeView.h; sourceTree = "<group>"; };
 		B22305CC1C783632001B18F5 /* SRSlimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSlimeView.m; sourceTree = "<group>"; };
+		B22675E91C7C355600B5D5CC /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image.png; sourceTree = "<group>"; };
+		B22675EA1C7C355600B5D5CC /* no_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_image@2x.png"; sourceTree = "<group>"; };
+		B22675ED1C7C44DC00B5D5CC /* GSPageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPageItem.h; sourceTree = "<group>"; };
+		B22675EE1C7C44DC00B5D5CC /* GSPageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPageItem.m; sourceTree = "<group>"; };
 		B250EE291C73054D00198CDE /* GenShelf.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenShelf.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B250EE2D1C73054D00198CDE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B250EE2F1C73054D00198CDE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -282,6 +297,22 @@
 		B2F02F241C75BE0D00D93119 /* GValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GValue.m; sourceTree = "<group>"; };
 		B2F02F2B1C75C1E200D93119 /* GSSelectView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSelectView.h; sourceTree = "<group>"; };
 		B2F02F2C1C75C1E200D93119 /* GSSelectView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSelectView.m; sourceTree = "<group>"; };
+		B2F181211C7C062500DA5BF3 /* MTLocationCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTLocationCache.h; sourceTree = "<group>"; };
+		B2F181221C7C062500DA5BF3 /* MTLocationCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTLocationCache.m; sourceTree = "<group>"; };
+		B2F181231C7C062500DA5BF3 /* MTMenoryCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMenoryCache.h; sourceTree = "<group>"; };
+		B2F181241C7C062500DA5BF3 /* MTMenoryCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMenoryCache.m; sourceTree = "<group>"; };
+		B2F181251C7C062500DA5BF3 /* MTNetCacheElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTNetCacheElement.h; sourceTree = "<group>"; };
+		B2F181261C7C062500DA5BF3 /* MTNetCacheElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTNetCacheElement.m; sourceTree = "<group>"; };
+		B2F181271C7C062500DA5BF3 /* MTNetCacheManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTNetCacheManager.h; sourceTree = "<group>"; };
+		B2F181281C7C062500DA5BF3 /* MTNetCacheManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTNetCacheManager.m; sourceTree = "<group>"; };
+		B2F1812A1C7C062500DA5BF3 /* md5.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = md5.c; sourceTree = "<group>"; };
+		B2F1812B1C7C062500DA5BF3 /* md5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = md5.h; sourceTree = "<group>"; };
+		B2F1812C1C7C062500DA5BF3 /* MTMd5.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMd5.h; sourceTree = "<group>"; };
+		B2F1812D1C7C062500DA5BF3 /* MTMd5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMd5.m; sourceTree = "<group>"; };
+		B2F181341C7C12C400DA5BF3 /* GSBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSBookCell.h; sourceTree = "<group>"; };
+		B2F181351C7C12C400DA5BF3 /* GSBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSBookCell.m; sourceTree = "<group>"; };
+		B2F181371C7C13F200DA5BF3 /* GSRadisImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRadisImageView.h; sourceTree = "<group>"; };
+		B2F181381C7C13F200DA5BF3 /* GSRadisImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRadisImageView.m; sourceTree = "<group>"; };
 		B2F44C201C78A1D900639756 /* GSDataControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSDataControl.h; sourceTree = "<group>"; };
 		B2F44C211C78A1D900639756 /* GSDataControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSDataControl.m; sourceTree = "<group>"; };
 		B2F44C241C78AA3700639756 /* NSURL+QueryDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+QueryDictionary.h"; sourceTree = "<group>"; };
@@ -400,6 +431,8 @@
 				B2F02F171C75B24600D93119 /* GSSwitchCell.m */,
 				B2BDCBBB1C76DF5600DC3031 /* GSLoadingCell.h */,
 				B2BDCBBC1C76DF5600DC3031 /* GSLoadingCell.m */,
+				B2F181341C7C12C400DA5BF3 /* GSBookCell.h */,
+				B2F181351C7C12C400DA5BF3 /* GSBookCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -645,6 +678,8 @@
 		B2BDCBC51C77122C00DC3031 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B22675E91C7C355600B5D5CC /* no_image.png */,
+				B22675EA1C7C355600B5D5CC /* no_image@2x.png */,
 				B268ECC61C77745D001DD15F /* home.png */,
 				B268ECC71C77745D001DD15F /* home@2x.png */,
 				B268ECC81C77745D001DD15F /* progress.png */,
@@ -673,6 +708,8 @@
 		B2F02F191C75BE0D00D93119 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B2F181201C7C062500DA5BF3 /* CacheManager */,
+				B2F181291C7C062500DA5BF3 /* MD5 */,
 				B2F44C301C78C3FE00639756 /* GDDataXML */,
 				B2F44C231C78AA3700639756 /* NSURL+QueryDictionary */,
 				B22305C51C783631001B18F5 /* SlimeRefresh */,
@@ -709,8 +746,36 @@
 			children = (
 				B2F02F2B1C75C1E200D93119 /* GSSelectView.h */,
 				B2F02F2C1C75C1E200D93119 /* GSSelectView.m */,
+				B2F181371C7C13F200DA5BF3 /* GSRadisImageView.h */,
+				B2F181381C7C13F200DA5BF3 /* GSRadisImageView.m */,
 			);
 			path = Widgets;
+			sourceTree = "<group>";
+		};
+		B2F181201C7C062500DA5BF3 /* CacheManager */ = {
+			isa = PBXGroup;
+			children = (
+				B2F181211C7C062500DA5BF3 /* MTLocationCache.h */,
+				B2F181221C7C062500DA5BF3 /* MTLocationCache.m */,
+				B2F181231C7C062500DA5BF3 /* MTMenoryCache.h */,
+				B2F181241C7C062500DA5BF3 /* MTMenoryCache.m */,
+				B2F181251C7C062500DA5BF3 /* MTNetCacheElement.h */,
+				B2F181261C7C062500DA5BF3 /* MTNetCacheElement.m */,
+				B2F181271C7C062500DA5BF3 /* MTNetCacheManager.h */,
+				B2F181281C7C062500DA5BF3 /* MTNetCacheManager.m */,
+			);
+			path = CacheManager;
+			sourceTree = "<group>";
+		};
+		B2F181291C7C062500DA5BF3 /* MD5 */ = {
+			isa = PBXGroup;
+			children = (
+				B2F1812A1C7C062500DA5BF3 /* md5.c */,
+				B2F1812B1C7C062500DA5BF3 /* md5.h */,
+				B2F1812C1C7C062500DA5BF3 /* MTMd5.h */,
+				B2F1812D1C7C062500DA5BF3 /* MTMd5.m */,
+			);
+			path = MD5;
 			sourceTree = "<group>";
 		};
 		B2F44C1F1C78A1C600639756 /* DataController */ = {
@@ -718,6 +783,8 @@
 			children = (
 				B2F44C2D1C78BD5C00639756 /* GSBookItem.h */,
 				B2F44C2E1C78BD5C00639756 /* GSBookItem.m */,
+				B22675ED1C7C44DC00B5D5CC /* GSPageItem.h */,
+				B22675EE1C7C44DC00B5D5CC /* GSPageItem.m */,
 				B2F44C201C78A1D900639756 /* GSDataControl.h */,
 				B2F44C211C78A1D900639756 /* GSDataControl.m */,
 				B2F44C271C78ADA500639756 /* GSLofiDataControl.h */,
@@ -887,6 +954,7 @@
 				B268ED021C7777E5001DD15F /* SuccessBackgroundDefaultImage@2x.png in Resources */,
 				B268ECD91C77745D001DD15F /* squares@2x.png in Resources */,
 				B268ECFB1C7777E5001DD15F /* ErrorDefaultLeftImage.png in Resources */,
+				B22675EC1C7C355600B5D5CC /* no_image@2x.png in Resources */,
 				B268ECFA1C7777E5001DD15F /* ErrorBackgroundDefaultImage@2x.png in Resources */,
 				B268ECD71C77745D001DD15F /* setting@2x.png in Resources */,
 				B268ECFF1C7777E5001DD15F /* MessageDefaultLeftImage.png in Resources */,
@@ -902,6 +970,7 @@
 				B268ECD51C77745D001DD15F /* search@2x.png in Resources */,
 				B22305CD1C783632001B18F5 /* sr_refresh.png in Resources */,
 				B268ECD11C77745D001DD15F /* home@2x.png in Resources */,
+				B22675EB1C7C355600B5D5CC /* no_image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -943,19 +1012,25 @@
 				B268ECBB1C7763BA001DD15F /* ASIHTTPRequest.m in Sources */,
 				B268EC961C7742E5001DD15F /* GSHomeViewController.m in Sources */,
 				B268ECBE1C7763BA001DD15F /* Reachability.m in Sources */,
+				B2F181321C7C062500DA5BF3 /* md5.c in Sources */,
 				B22305B31C781AB4001B18F5 /* GSHomeController.m in Sources */,
 				B268ED091C7777E5001DD15F /* MBLMessageBannerView.m in Sources */,
+				B2F181391C7C13F200DA5BF3 /* GSRadisImageView.m in Sources */,
 				B268ECF61C7777E5001DD15F /* MBLMessageBanner.m in Sources */,
 				B268EC991C7742FE001DD15F /* GSSearchViewController.m in Sources */,
 				B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */,
+				B22675EF1C7C44DC00B5D5CC /* GSPageItem.m in Sources */,
 				B22305C41C78250E001B18F5 /* GCoreDataManager.m in Sources */,
+				B2F181301C7C062500DA5BF3 /* MTNetCacheElement.m in Sources */,
 				B268ECB81C7763BA001DD15F /* ASIDataDecompressor.m in Sources */,
 				B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */,
 				B268ECC51C776FFE001DD15F /* GSSettingsViewController.m in Sources */,
 				B2F44C221C78A1D900639756 /* GSDataControl.m in Sources */,
 				B2BDCBC11C76F83000DC3031 /* GSideMenuController.m in Sources */,
 				B2BDCBC41C7706AA00DC3031 /* GSideCoverView.m in Sources */,
+				B2F181361C7C12C400DA5BF3 /* GSBookCell.m in Sources */,
 				B2F02F291C75BE0D00D93119 /* GValue.m in Sources */,
+				B2F181311C7C062500DA5BF3 /* MTNetCacheManager.m in Sources */,
 				B22305AC1C78057B001B18F5 /* FXBlurView.m in Sources */,
 				B250EE311C73054D00198CDE /* AppDelegate.m in Sources */,
 				B268ECBD1C7763BA001DD15F /* ASINetworkQueue.m in Sources */,
@@ -963,6 +1038,8 @@
 				B22305CF1C783632001B18F5 /* SRRefreshView.m in Sources */,
 				B2F44C291C78ADA500639756 /* GSLofiDataControl.m in Sources */,
 				B268ECB91C7763BA001DD15F /* ASIDownloadCache.m in Sources */,
+				B2F181331C7C062500DA5BF3 /* MTMd5.m in Sources */,
+				B2F1812F1C7C062500DA5BF3 /* MTMenoryCache.m in Sources */,
 				B2F02F261C75BE0D00D93119 /* GEase.m in Sources */,
 				B2F02F2D1C75C1E200D93119 /* GSSelectView.m in Sources */,
 				B268ECBA1C7763BA001DD15F /* ASIFormDataRequest.m in Sources */,
@@ -979,6 +1056,7 @@
 				B2F02F181C75B24600D93119 /* GSSwitchCell.m in Sources */,
 				B22305BD1C782032001B18F5 /* Book+CoreDataProperties.m in Sources */,
 				B22305AD1C78057B001B18F5 /* HexColors.m in Sources */,
+				B2F1812E1C7C062500DA5BF3 /* MTLocationCache.m in Sources */,
 				B22305C01C782032001B18F5 /* Page.m in Sources */,
 				B22305D01C783632001B18F5 /* SRSlimeView.m in Sources */,
 				B22305BE1C782032001B18F5 /* Book.m in Sources */,
@@ -1157,6 +1235,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3e855474-2573-4357-b029-3726d56e0bd8";
 			};
 			name = Debug;
 		};
@@ -1178,6 +1257,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "3e855474-2573-4357-b029-3726d56e0bd8";
 			};
 			name = Release;
 		};

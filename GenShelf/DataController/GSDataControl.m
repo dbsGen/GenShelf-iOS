@@ -8,7 +8,6 @@
 
 #import "GSDataControl.h"
 #import "GSGlobals.h"
-#import "GDataXMLNode.h"
 
 @implementation GSDataControl
 
@@ -33,14 +32,6 @@
 }
 
 - (NSArray<GSBookItem *> *)parseMain:(NSString *)html {
-    NSError *error = nil;
-    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithHTMLString:html
-                                                                   error:&error];
-    if (error) {
-        NSLog(@"Parse html error : %@", error);
-        return [NSArray array];
-    }
-    [doc.rootElement nodesForXPath:<#(NSString *)#> error:<#(NSError *__autoreleasing *)#>]
     return [NSArray array];
 }
 

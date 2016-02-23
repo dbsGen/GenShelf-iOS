@@ -7,11 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GSPageItem.h"
+
+#define BOOK_ITEM_UPDATE    @"book_item_update"
+
+typedef enum : NSUInteger {
+    GSBookItemStatusNotStart,
+    GSBookItemStatusProgressing,
+    GSBookItemStatusComplete,
+} GSBookItemStatus;
 
 @interface GSBookItem : NSObject
 
-@property (nonatomic, retain) NSString *name;
-@property (nonatomic, retain) NSString *path;
-@property (nonatomic, retain) NSString *url;
+@property (nonatomic, retain) NSString *title;
+@property (nonatomic, retain) NSString *pageUrl;
+@property (nonatomic, retain) NSString *imageUrl;
+
+@property (nonatomic, assign) GSBookItemStatus status;
+@property (nonatomic, readonly) NSArray<GSPageItem *> *pages;
+
+- (void)loadPages:(NSArray<GSPageItem *> *)pages;
 
 @end
