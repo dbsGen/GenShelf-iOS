@@ -10,7 +10,9 @@
 
 @interface GSPageItem : NSObject
 
-@property (nonatomic, strong) NSString *pageUrl;
 @property (nonatomic, assign) NSUInteger index;
+@property (nonatomic, strong) NSString *pageUrl;
+@property (nonatomic, strong) NSString *thumUrl;
+@property (nonatomic, strong) NSString *imageUrl;
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface GSRadisImageView : UIView
+@interface GSRadiusImageView : UIView
 
 @property (nonatomic, readonly) UIImageView *imageView;
 @property (nonatomic, strong) UIImage *image;

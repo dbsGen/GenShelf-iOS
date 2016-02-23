@@ -107,12 +107,18 @@
 		B2F181321C7C062500DA5BF3 /* md5.c in Sources */ = {isa = PBXBuildFile; fileRef = B2F1812A1C7C062500DA5BF3 /* md5.c */; };
 		B2F181331C7C062500DA5BF3 /* MTMd5.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F1812D1C7C062500DA5BF3 /* MTMd5.m */; };
 		B2F181361C7C12C400DA5BF3 /* GSBookCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F181351C7C12C400DA5BF3 /* GSBookCell.m */; };
-		B2F181391C7C13F200DA5BF3 /* GSRadisImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F181381C7C13F200DA5BF3 /* GSRadisImageView.m */; };
+		B2F181391C7C13F200DA5BF3 /* GSRadiusImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F181381C7C13F200DA5BF3 /* GSRadiusImageView.m */; };
 		B2F44C221C78A1D900639756 /* GSDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C211C78A1D900639756 /* GSDataControl.m */; };
 		B2F44C261C78AA3700639756 /* NSURL+QueryDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C251C78AA3700639756 /* NSURL+QueryDictionary.m */; };
 		B2F44C291C78ADA500639756 /* GSLofiDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C281C78ADA500639756 /* GSLofiDataControl.m */; };
 		B2F44C2F1C78BD5C00639756 /* GSBookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C2E1C78BD5C00639756 /* GSBookItem.m */; };
 		B2F44C331C78C3FE00639756 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C321C78C3FE00639756 /* GDataXMLNode.m */; };
+		B2F44C3D1C7CA12D00639756 /* MTMatrixListView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C361C7CA12D00639756 /* MTMatrixListView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B2F44C3E1C7CA12D00639756 /* MTMatrixSection.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C381C7CA12D00639756 /* MTMatrixSection.m */; };
+		B2F44C3F1C7CA12D00639756 /* MTMatrixTools.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C3A1C7CA12D00639756 /* MTMatrixTools.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B2F44C401C7CA12D00639756 /* MTMatrixViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C3C1C7CA12D00639756 /* MTMatrixViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B2F44C431C7CA2C300639756 /* GSPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C421C7CA2C300639756 /* GSPreviewViewController.m */; };
+		B2F44C461C7CB3D000639756 /* GSThumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C451C7CB3D000639756 /* GSThumCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -311,8 +317,8 @@
 		B2F1812D1C7C062500DA5BF3 /* MTMd5.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMd5.m; sourceTree = "<group>"; };
 		B2F181341C7C12C400DA5BF3 /* GSBookCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSBookCell.h; sourceTree = "<group>"; };
 		B2F181351C7C12C400DA5BF3 /* GSBookCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSBookCell.m; sourceTree = "<group>"; };
-		B2F181371C7C13F200DA5BF3 /* GSRadisImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRadisImageView.h; sourceTree = "<group>"; };
-		B2F181381C7C13F200DA5BF3 /* GSRadisImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRadisImageView.m; sourceTree = "<group>"; };
+		B2F181371C7C13F200DA5BF3 /* GSRadiusImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSRadiusImageView.h; sourceTree = "<group>"; };
+		B2F181381C7C13F200DA5BF3 /* GSRadiusImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSRadiusImageView.m; sourceTree = "<group>"; };
 		B2F44C201C78A1D900639756 /* GSDataControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSDataControl.h; sourceTree = "<group>"; };
 		B2F44C211C78A1D900639756 /* GSDataControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSDataControl.m; sourceTree = "<group>"; };
 		B2F44C241C78AA3700639756 /* NSURL+QueryDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+QueryDictionary.h"; sourceTree = "<group>"; };
@@ -323,6 +329,18 @@
 		B2F44C2E1C78BD5C00639756 /* GSBookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSBookItem.m; sourceTree = "<group>"; };
 		B2F44C311C78C3FE00639756 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		B2F44C321C78C3FE00639756 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
+		B2F44C351C7CA12D00639756 /* MTMatrixListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMatrixListView.h; sourceTree = "<group>"; };
+		B2F44C361C7CA12D00639756 /* MTMatrixListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMatrixListView.m; sourceTree = "<group>"; };
+		B2F44C371C7CA12D00639756 /* MTMatrixSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMatrixSection.h; sourceTree = "<group>"; };
+		B2F44C381C7CA12D00639756 /* MTMatrixSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMatrixSection.m; sourceTree = "<group>"; };
+		B2F44C391C7CA12D00639756 /* MTMatrixTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMatrixTools.h; sourceTree = "<group>"; };
+		B2F44C3A1C7CA12D00639756 /* MTMatrixTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMatrixTools.m; sourceTree = "<group>"; };
+		B2F44C3B1C7CA12D00639756 /* MTMatrixViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMatrixViewCell.h; sourceTree = "<group>"; };
+		B2F44C3C1C7CA12D00639756 /* MTMatrixViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMatrixViewCell.m; sourceTree = "<group>"; };
+		B2F44C411C7CA2C300639756 /* GSPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPreviewViewController.h; sourceTree = "<group>"; };
+		B2F44C421C7CA2C300639756 /* GSPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPreviewViewController.m; sourceTree = "<group>"; };
+		B2F44C441C7CB3D000639756 /* GSThumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSThumCell.h; sourceTree = "<group>"; };
+		B2F44C451C7CB3D000639756 /* GSThumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSThumCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -407,6 +425,8 @@
 				B268ECC41C776FFE001DD15F /* GSSettingsViewController.m */,
 				B22305B11C781AB4001B18F5 /* GSHomeController.h */,
 				B22305B21C781AB4001B18F5 /* GSHomeController.m */,
+				B2F44C411C7CA2C300639756 /* GSPreviewViewController.h */,
+				B2F44C421C7CA2C300639756 /* GSPreviewViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -433,6 +453,8 @@
 				B2BDCBBC1C76DF5600DC3031 /* GSLoadingCell.m */,
 				B2F181341C7C12C400DA5BF3 /* GSBookCell.h */,
 				B2F181351C7C12C400DA5BF3 /* GSBookCell.m */,
+				B2F44C441C7CB3D000639756 /* GSThumCell.h */,
+				B2F44C451C7CB3D000639756 /* GSThumCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -708,6 +730,7 @@
 		B2F02F191C75BE0D00D93119 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B2F44C341C7CA12D00639756 /* MatrixView */,
 				B2F181201C7C062500DA5BF3 /* CacheManager */,
 				B2F181291C7C062500DA5BF3 /* MD5 */,
 				B2F44C301C78C3FE00639756 /* GDDataXML */,
@@ -746,8 +769,8 @@
 			children = (
 				B2F02F2B1C75C1E200D93119 /* GSSelectView.h */,
 				B2F02F2C1C75C1E200D93119 /* GSSelectView.m */,
-				B2F181371C7C13F200DA5BF3 /* GSRadisImageView.h */,
-				B2F181381C7C13F200DA5BF3 /* GSRadisImageView.m */,
+				B2F181371C7C13F200DA5BF3 /* GSRadiusImageView.h */,
+				B2F181381C7C13F200DA5BF3 /* GSRadiusImageView.m */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -809,6 +832,21 @@
 				B2F44C321C78C3FE00639756 /* GDataXMLNode.m */,
 			);
 			path = GDDataXML;
+			sourceTree = "<group>";
+		};
+		B2F44C341C7CA12D00639756 /* MatrixView */ = {
+			isa = PBXGroup;
+			children = (
+				B2F44C351C7CA12D00639756 /* MTMatrixListView.h */,
+				B2F44C361C7CA12D00639756 /* MTMatrixListView.m */,
+				B2F44C371C7CA12D00639756 /* MTMatrixSection.h */,
+				B2F44C381C7CA12D00639756 /* MTMatrixSection.m */,
+				B2F44C391C7CA12D00639756 /* MTMatrixTools.h */,
+				B2F44C3A1C7CA12D00639756 /* MTMatrixTools.m */,
+				B2F44C3B1C7CA12D00639756 /* MTMatrixViewCell.h */,
+				B2F44C3C1C7CA12D00639756 /* MTMatrixViewCell.m */,
+			);
+			path = MatrixView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1009,14 +1047,16 @@
 				B2F02F281C75BE0D00D93119 /* GTweenProperty.m in Sources */,
 				B20A34731C746BBB000CCFA3 /* GSSSSettingViewController.m in Sources */,
 				B2F44C2F1C78BD5C00639756 /* GSBookItem.m in Sources */,
+				B2F44C3E1C7CA12D00639756 /* MTMatrixSection.m in Sources */,
 				B268ECBB1C7763BA001DD15F /* ASIHTTPRequest.m in Sources */,
 				B268EC961C7742E5001DD15F /* GSHomeViewController.m in Sources */,
 				B268ECBE1C7763BA001DD15F /* Reachability.m in Sources */,
 				B2F181321C7C062500DA5BF3 /* md5.c in Sources */,
 				B22305B31C781AB4001B18F5 /* GSHomeController.m in Sources */,
 				B268ED091C7777E5001DD15F /* MBLMessageBannerView.m in Sources */,
-				B2F181391C7C13F200DA5BF3 /* GSRadisImageView.m in Sources */,
+				B2F181391C7C13F200DA5BF3 /* GSRadiusImageView.m in Sources */,
 				B268ECF61C7777E5001DD15F /* MBLMessageBanner.m in Sources */,
+				B2F44C3F1C7CA12D00639756 /* MTMatrixTools.m in Sources */,
 				B268EC991C7742FE001DD15F /* GSSearchViewController.m in Sources */,
 				B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */,
 				B22675EF1C7C44DC00B5D5CC /* GSPageItem.m in Sources */,
@@ -1035,11 +1075,13 @@
 				B250EE311C73054D00198CDE /* AppDelegate.m in Sources */,
 				B268ECBD1C7763BA001DD15F /* ASINetworkQueue.m in Sources */,
 				B2F02F251C75BE0D00D93119 /* GCallback.m in Sources */,
+				B2F44C461C7CB3D000639756 /* GSThumCell.m in Sources */,
 				B22305CF1C783632001B18F5 /* SRRefreshView.m in Sources */,
 				B2F44C291C78ADA500639756 /* GSLofiDataControl.m in Sources */,
 				B268ECB91C7763BA001DD15F /* ASIDownloadCache.m in Sources */,
 				B2F181331C7C062500DA5BF3 /* MTMd5.m in Sources */,
 				B2F1812F1C7C062500DA5BF3 /* MTMenoryCache.m in Sources */,
+				B2F44C401C7CA12D00639756 /* MTMatrixViewCell.m in Sources */,
 				B2F02F261C75BE0D00D93119 /* GEase.m in Sources */,
 				B2F02F2D1C75C1E200D93119 /* GSSelectView.m in Sources */,
 				B268ECBA1C7763BA001DD15F /* ASIFormDataRequest.m in Sources */,
@@ -1051,12 +1093,14 @@
 				B268ECBC1C7763BA001DD15F /* ASIInputStream.m in Sources */,
 				B20A348E1C7482A8000CCFA3 /* GSInputCell.m in Sources */,
 				B2F44C331C78C3FE00639756 /* GDataXMLNode.m in Sources */,
+				B2F44C431C7CA2C300639756 /* GSPreviewViewController.m in Sources */,
 				B22305BF1C782032001B18F5 /* Page+CoreDataProperties.m in Sources */,
 				B268ECB71C7763BA001DD15F /* ASIDataCompressor.m in Sources */,
 				B2F02F181C75B24600D93119 /* GSSwitchCell.m in Sources */,
 				B22305BD1C782032001B18F5 /* Book+CoreDataProperties.m in Sources */,
 				B22305AD1C78057B001B18F5 /* HexColors.m in Sources */,
 				B2F1812E1C7C062500DA5BF3 /* MTLocationCache.m in Sources */,
+				B2F44C3D1C7CA12D00639756 /* MTMatrixListView.m in Sources */,
 				B22305C01C782032001B18F5 /* Page.m in Sources */,
 				B22305D01C783632001B18F5 /* SRSlimeView.m in Sources */,
 				B22305BE1C782032001B18F5 /* Book.m in Sources */,
@@ -1221,6 +1265,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: bo yu (39W5WTNDBE)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "GenShelf/GenShelf-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1235,7 +1280,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3e855474-2573-4357-b029-3726d56e0bd8";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1243,6 +1288,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer: bo yu (39W5WTNDBE)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "GenShelf/GenShelf-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -1257,7 +1303,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3e855474-2573-4357-b029-3726d56e0bd8";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

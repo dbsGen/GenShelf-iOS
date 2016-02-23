@@ -16,6 +16,7 @@
     self = [super init];
     if (self) {
         _status = GSBookItemStatusNotStart;
+        _page_items = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -26,10 +27,12 @@
 
 - (void)loadPages:(NSArray<GSPageItem *> *)pages {
     for (GSPageItem *item in pages) {
+        item.index = _page_items.count;
         [_page_items addObject:item];
     }
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_UPDATE
-                                                        object:self];
+                                                        object:self
+                                                      userInfo:@{@"add": pages}];
 }
 
 @end

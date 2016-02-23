@@ -6,9 +6,9 @@
 //  Copyright © 2016年 AirRaidClub. All rights reserved.
 //
 
-#import "GSRadisImageView.h"
+#import "GSRadiusImageView.h"
 
-@implementation GSRadisImageView
+@implementation GSRadiusImageView
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
