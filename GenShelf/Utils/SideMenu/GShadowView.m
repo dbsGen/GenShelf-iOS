@@ -16,8 +16,16 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         _colors = [NSArray arrayWithObjects:[UIColor colorWithWhite:0 alpha:0], [UIColor colorWithWhite:0 alpha:0.1], [UIColor colorWithWhite:0 alpha:0.3], nil];
+        _status = GShadowViewRL;
     }
     return self;
+}
+
+- (void)setStatus:(GShadowViewStatus)status {
+    if (_status != status) {
+        _status = status;
+        [self setNeedsDisplay];
+    }
 }
 
 - (void)drawRect:(CGRect)rect {
@@ -36,7 +44,31 @@
     CFArrayRef colorArray = CFArrayCreate(kCFAllocatorDefault, (const void **)cgColors, count, nil);
     
     CGGradientRef gradientRef = CGGradientCreateWithColors(colorSpaceRef, colorArray, positions);
-    CGContextDrawLinearGradient(context, gradientRef, CGPointMake(0, 0), CGPointMake(self.bounds.size.width, 0), kCGGradientDrawsBeforeStartLocation);
+    
+    CGPoint startp,endp;
+    switch (_status) {
+        case GShadowViewLR:
+            startp = CGPointMake(0, 0);
+            endp = CGPointMake(self.bounds.size.width, 0);
+            break;
+        case GShadowViewRL:
+            startp = CGPointMake(self.bounds.size.width, 0);
+            endp = CGPointMake(0, 0);
+            break;
+        case GShadowViewTB:
+            startp = CGPointMake(0, 0);
+            endp = CGPointMake(0, self.bounds.size.height);
+            break;
+        case GShadowViewBT:
+            startp = CGPointMake(0, self.bounds.size.height);
+            endp = CGPointMake(0, 0);
+            break;
+            
+        default:
+            break;
+    }
+    
+    CGContextDrawLinearGradient(context, gradientRef, endp, startp, kCGGradientDrawsBeforeStartLocation);
     CGGradientRelease(gradientRef);
     CGColorSpaceRelease(colorSpaceRef);
     free(cgColors);

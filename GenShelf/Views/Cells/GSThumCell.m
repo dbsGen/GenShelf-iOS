@@ -15,11 +15,12 @@
     ASIHTTPRequest *_currentRequest;
 }
 
-- (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
-    self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier];
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
     if (self) {
         _imageView = [[GSRadiusImageView alloc] initWithFrame:self.bounds];
         _imageView.image = [UIImage imageNamed:@"no_image"];
+        [self addSubview:_imageView];
     }
     return self;
 }
@@ -57,6 +58,10 @@
                                         withUrl:_imageUrl];
     _currentRequest = NULL;
     _imageView.image = [UIImage imageWithData:request.responseData];
+}
+
+- (void)requestFailed:(ASIHTTPRequest *)request {
+    NSLog(@"Load failed, %@", request.error);
 }
 
 @end

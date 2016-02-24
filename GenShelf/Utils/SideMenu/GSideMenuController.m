@@ -202,6 +202,18 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
     [cell setSelected:NO animated:YES];
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+    _tableView.frame = CGRectMake(0, 0, MENU_WIDTH,
+                                  self.view.bounds.size.height);
+}
+
+- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [coordinator notifyWhenInteractionEndsUsingBlock:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+        _tableView.frame = CGRectMake(0, 0, MENU_WIDTH,
+                                      self.view.bounds.size.height);
+    }];
+}
+
 - (void)updateView {
     if (_selectedIndex >= _items.count) _selectedIndex = _items.count - 1;
     if (_currentView) {

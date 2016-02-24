@@ -10,6 +10,24 @@
         <attribute name="url" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Page" inverseName="book" inverseEntity="Page" syncable="YES"/>
     </entity>
+    <entity name="HomeData" representedClassName="HomeData" syncable="YES">
+        <attribute name="hasNext" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="page" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" syncable="YES"/>
+    </entity>
+    <entity name="NetBook" representedClassName="NetBook" syncable="YES">
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="pageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="NetPage" representedClassName="NetPage" syncable="YES">
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="pageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="thumUrl" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Page" representedClassName="Page" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="loaded" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -21,5 +39,8 @@
     <elements>
         <element name="Book" positionX="243" positionY="-0" width="128" height="165"/>
         <element name="Page" positionX="-54" positionY="-9" width="128" height="135"/>
+        <element name="NetBook" positionX="99" positionY="63" width="128" height="120"/>
+        <element name="NetPage" positionX="108" positionY="72" width="128" height="105"/>
+        <element name="HomeData" positionX="117" positionY="81" width="128" height="90"/>
     </elements>
 </model>

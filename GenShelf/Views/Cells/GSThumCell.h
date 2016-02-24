@@ -6,10 +6,9 @@
 //  Copyright © 2016年 AirRaidClub. All rights reserved.
 //
 
-#import "MTMatrixViewCell.h"
 #import "GSRadiusImageView.h"
 
-@interface GSThumCell : MTMatrixViewCell
+@interface GSThumCell : UICollectionViewCell
 
 @property (nonatomic, readonly) GSRadiusImageView *imageView;
 @property (nonatomic, strong) NSString *imageUrl;

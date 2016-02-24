@@ -12,7 +12,7 @@
 #define BOOK_ITEM_UPDATE    @"book_item_update"
 
 typedef enum : NSUInteger {
-    GSBookItemStatusNotStart,
+    GSBookItemStatusNotStart    = 0,
     GSBookItemStatusProgressing,
     GSBookItemStatusComplete,
 } GSBookItemStatus;

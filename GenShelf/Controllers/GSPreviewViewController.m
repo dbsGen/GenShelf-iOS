@@ -8,13 +8,18 @@
 
 #import "GSPreviewViewController.h"
 #import "GSThumCell.h"
-#import "LxGridView.h"
+#import "GShadowView.h"
+#import "MTNetCacheManager.h"
+#import "GSGlobals.h"
+#import "GSRadiusImageView.h"
 
-@interface GSPreviewViewController () <LxGridViewDataSource, LxGridViewDataSource>
+static NSString *identifier = @"CellIdentifier";
+
+@interface GSPreviewViewController () <UICollectionViewDataSource, UICollectionViewDelegate, ASIHTTPRequestDelegate>
 
 @property (nonatomic, strong) UIView *headerView;
-@property (nonatomic, strong) UIImageView *coverImageView;
-@property (nonatomic, strong) LxGridView *collectionView;
+@property (nonatomic, strong) GSRadiusImageView *coverImageView;
+@property (nonatomic, strong) UICollectionView *collectionView;
 
 @end
 
@@ -45,20 +50,39 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     CGRect bounds = self.view.bounds;
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, 360)];
-    _coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, 360)];
+    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, 280)];
+    _coverImageView = [[GSRadiusImageView alloc] initWithFrame:CGRectMake(40, 60, 160, 160)];
+    _coverImageView.image = [UIImage imageNamed:@"no_image"];
+    [[MTNetCacheManager defaultManager] getImageWithUrl:_item.imageUrl
+                                                  block:^(id result) {
+                                                      if (result) {
+                                                          _coverImageView.image = result;
+                                                      }else {
+                                                          ASIHTTPRequest *request = [GSGlobals requestForURL:[NSURL URLWithString:_item.imageUrl]];
+                                                          request.userInfo = @{@"url": _item.imageUrl};
+                                                          request.delegate = self;
+                                                          [request startAsynchronous];
+                                                      }
+                                                  }];
+    GShadowView *shadowView = [[GShadowView alloc] initWithFrame:CGRectMake(0, 280, bounds.size.width, 12)];
+    shadowView.status = GShadowViewTB;
+    shadowView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    [_headerView addSubview:shadowView];
     [_headerView addSubview:_coverImageView];
     
-    LxGridViewFlowLayout *layout = [[LxGridViewFlowLayout alloc] init];
-    layout.sectionInset = UIEdgeInsetsMake(18, 18, 18, 18);
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.sectionInset = UIEdgeInsetsMake(298, 18, 18, 18);
     layout.minimumLineSpacing = 9;
-    layout.itemSize = CGSizeMake(58, 78);
+    layout.itemSize = CGSizeMake(160, 160);
     
-    _collectionView = [[LxGridView alloc] initWithFrame:bounds collectionViewLayout:layout];
+    _collectionView = [[UICollectionView alloc] initWithFrame:bounds collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     _collectionView.backgroundColor = [UIColor whiteColor];
     _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [_collectionView registerClass:[GSThumCell class]
+        forCellWithReuseIdentifier:identifier];
+    [_collectionView addSubview:_headerView];
     [self.view addSubview:_collectionView];
 }
 
@@ -66,33 +90,7 @@
     [super didReceiveMemoryWarning];
     _headerView = nil;
     _coverImageView = nil;
-    _matrixView = nil;
-}
-
-
-- (NSInteger)numberOfSectionsInMatrixView:(MTMatrixListView*)matrixView {
-    return 1;
-}
-
-- (MTMatrixViewCell*)matrixView:(MTMatrixListView*)matrixView
-                cellOfIndexPath:(NSIndexPath*)indexPath {
-    static NSString *identifier = @"NormalCell";
-    GSThumCell *cell = [matrixView dequeueReusableCellWithIdentifier:identifier];
-    if (!cell) {
-        cell = [[GSThumCell alloc] initWithFrame:CGRectMake(0, 0, 160, 160)
-                                 reuseIdentifier:identifier];
-    }
-    cell.imageUrl = [_item.pages objectAtIndex:indexPath.row].thumUrl;
-    return cell;
-}
-
-- (NSInteger)matrixView:(MTMatrixListView*)matrixView
-        numberOfSection:(NSInteger)section {
-    return self.item.pages.count;
-}
-
-- (UIView *)matrixView:(MTMatrixListView *)matrixView headerOfSection:(NSInteger)section {
-    return _headerView;
+    _collectionView = nil;
 }
 
 - (void)onBookUpdate:(NSNotification*)data {
@@ -101,10 +99,35 @@
         NSUInteger count = _item.pages.count, total = [[data.userInfo objectForKey:@"add"] count];
         
         for (int n = 0; n < total; n++) {
-            [arr addObject:[NSIndexPath indexPathForRow:n + count inSection:0]];
+            [arr addObject:[NSIndexPath indexPathForRow:count-n-1 inSection:0]];
         }
-        [_matrixView insertCells:arr withAnimation:YES];
+        [_collectionView insertItemsAtIndexPaths:arr];
     }
+}
+
+#pragma mark - request
+
+- (void)requestFinished:(ASIHTTPRequest *)request {
+    NSData *data = request.responseData;
+    [[MTNetCacheManager defaultManager] setData:data
+                                        withUrl:[request.userInfo objectForKey:@"url"]];
+    _coverImageView.image = [UIImage imageWithData:request.responseData];
+}
+
+#pragma mark - collection view
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return _item.pages.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+    GSThumCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:identifier forIndexPath:indexPath];
+    cell.imageUrl = [_item.pages objectAtIndex:indexPath.row].thumUrl;
+    return cell;
 }
 
 @end

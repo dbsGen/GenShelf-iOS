@@ -85,9 +85,6 @@
 		B268ED081C7777E5001DD15F /* WarningDefaultLeftImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B268ECF21C7777E5001DD15F /* WarningDefaultLeftImage@2x.png */; };
 		B268ED091C7777E5001DD15F /* MBLMessageBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B268ECF51C7777E5001DD15F /* MBLMessageBannerView.m */; };
 		B2AD57831C7D4D2400280667 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2AD57821C7D4D0800280667 /* libsodium.a */; };
-		B2AD578B1C7DC19E00280667 /* LxGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AD57861C7DC19E00280667 /* LxGridView.m */; };
-		B2AD578C1C7DC19E00280667 /* LxGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AD57881C7DC19E00280667 /* LxGridViewCell.m */; };
-		B2AD578D1C7DC19E00280667 /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AD578A1C7DC19E00280667 /* LxGridViewFlowLayout.m */; };
 		B2BDCBBD1C76DF5600DC3031 /* GSLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDCBBC1C76DF5600DC3031 /* GSLoadingCell.m */; };
 		B2BDCBC11C76F83000DC3031 /* GSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDCBC01C76F83000DC3031 /* GSideMenuController.m */; };
 		B2BDCBC41C7706AA00DC3031 /* GSideCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDCBC31C7706AA00DC3031 /* GSideCoverView.m */; };
@@ -118,6 +115,12 @@
 		B2F44C331C78C3FE00639756 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C321C78C3FE00639756 /* GDataXMLNode.m */; };
 		B2F44C431C7CA2C300639756 /* GSPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C421C7CA2C300639756 /* GSPreviewViewController.m */; };
 		B2F44C461C7CB3D000639756 /* GSThumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C451C7CB3D000639756 /* GSThumCell.m */; };
+		B2F44C551C7DEF6F00639756 /* NetPage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C4A1C7DEF6F00639756 /* NetPage+CoreDataProperties.m */; };
+		B2F44C561C7DEF6F00639756 /* NetPage.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C4C1C7DEF6F00639756 /* NetPage.m */; };
+		B2F44C571C7DEF6F00639756 /* HomeData+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C4E1C7DEF6F00639756 /* HomeData+CoreDataProperties.m */; };
+		B2F44C581C7DEF6F00639756 /* HomeData.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C501C7DEF6F00639756 /* HomeData.m */; };
+		B2F44C591C7DEF6F00639756 /* NetBook+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C521C7DEF6F00639756 /* NetBook+CoreDataProperties.m */; };
+		B2F44C5A1C7DEF6F00639756 /* NetBook.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C541C7DEF6F00639756 /* NetBook.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -282,12 +285,6 @@
 		B268ECF41C7777E5001DD15F /* MBLMessageBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBLMessageBannerView.h; sourceTree = "<group>"; };
 		B268ECF51C7777E5001DD15F /* MBLMessageBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLMessageBannerView.m; sourceTree = "<group>"; };
 		B2AD55861C7D4D0600280667 /* sodium.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = sodium.xcodeproj; sourceTree = "<group>"; };
-		B2AD57851C7DC19E00280667 /* LxGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridView.h; sourceTree = "<group>"; };
-		B2AD57861C7DC19E00280667 /* LxGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridView.m; sourceTree = "<group>"; };
-		B2AD57871C7DC19E00280667 /* LxGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewCell.h; sourceTree = "<group>"; };
-		B2AD57881C7DC19E00280667 /* LxGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewCell.m; sourceTree = "<group>"; };
-		B2AD57891C7DC19E00280667 /* LxGridViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewFlowLayout.h; sourceTree = "<group>"; };
-		B2AD578A1C7DC19E00280667 /* LxGridViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewFlowLayout.m; sourceTree = "<group>"; };
 		B2BDCBBB1C76DF5600DC3031 /* GSLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLoadingCell.h; sourceTree = "<group>"; };
 		B2BDCBBC1C76DF5600DC3031 /* GSLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLoadingCell.m; sourceTree = "<group>"; };
 		B2BDCBBF1C76F83000DC3031 /* GSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSideMenuController.h; sourceTree = "<group>"; };
@@ -346,6 +343,18 @@
 		B2F44C421C7CA2C300639756 /* GSPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPreviewViewController.m; sourceTree = "<group>"; };
 		B2F44C441C7CB3D000639756 /* GSThumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSThumCell.h; sourceTree = "<group>"; };
 		B2F44C451C7CB3D000639756 /* GSThumCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSThumCell.m; sourceTree = "<group>"; };
+		B2F44C491C7DEF6F00639756 /* NetPage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NetPage+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B2F44C4A1C7DEF6F00639756 /* NetPage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NetPage+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B2F44C4B1C7DEF6F00639756 /* NetPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetPage.h; sourceTree = "<group>"; };
+		B2F44C4C1C7DEF6F00639756 /* NetPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetPage.m; sourceTree = "<group>"; };
+		B2F44C4D1C7DEF6F00639756 /* HomeData+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "HomeData+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B2F44C4E1C7DEF6F00639756 /* HomeData+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "HomeData+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B2F44C4F1C7DEF6F00639756 /* HomeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeData.h; sourceTree = "<group>"; };
+		B2F44C501C7DEF6F00639756 /* HomeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeData.m; sourceTree = "<group>"; };
+		B2F44C511C7DEF6F00639756 /* NetBook+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NetBook+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B2F44C521C7DEF6F00639756 /* NetBook+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NetBook+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B2F44C531C7DEF6F00639756 /* NetBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetBook.h; sourceTree = "<group>"; };
+		B2F44C541C7DEF6F00639756 /* NetBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetBook.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -493,6 +502,18 @@
 				B22305BA1C782032001B18F5 /* Page+CoreDataProperties.m */,
 				B22305BB1C782032001B18F5 /* Page.h */,
 				B22305BC1C782032001B18F5 /* Page.m */,
+				B2F44C491C7DEF6F00639756 /* NetPage+CoreDataProperties.h */,
+				B2F44C4A1C7DEF6F00639756 /* NetPage+CoreDataProperties.m */,
+				B2F44C4B1C7DEF6F00639756 /* NetPage.h */,
+				B2F44C4C1C7DEF6F00639756 /* NetPage.m */,
+				B2F44C4D1C7DEF6F00639756 /* HomeData+CoreDataProperties.h */,
+				B2F44C4E1C7DEF6F00639756 /* HomeData+CoreDataProperties.m */,
+				B2F44C4F1C7DEF6F00639756 /* HomeData.h */,
+				B2F44C501C7DEF6F00639756 /* HomeData.m */,
+				B2F44C511C7DEF6F00639756 /* NetBook+CoreDataProperties.h */,
+				B2F44C521C7DEF6F00639756 /* NetBook+CoreDataProperties.m */,
+				B2F44C531C7DEF6F00639756 /* NetBook.h */,
+				B2F44C541C7DEF6F00639756 /* NetBook.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -706,19 +727,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B2AD57841C7DC19D00280667 /* LxGridView */ = {
-			isa = PBXGroup;
-			children = (
-				B2AD57851C7DC19E00280667 /* LxGridView.h */,
-				B2AD57861C7DC19E00280667 /* LxGridView.m */,
-				B2AD57871C7DC19E00280667 /* LxGridViewCell.h */,
-				B2AD57881C7DC19E00280667 /* LxGridViewCell.m */,
-				B2AD57891C7DC19E00280667 /* LxGridViewFlowLayout.h */,
-				B2AD578A1C7DC19E00280667 /* LxGridViewFlowLayout.m */,
-			);
-			path = LxGridView;
-			sourceTree = "<group>";
-		};
 		B2BDCBBE1C76F6AD00DC3031 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,7 +773,6 @@
 		B2F02F191C75BE0D00D93119 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				B2AD57841C7DC19D00280667 /* LxGridView */,
 				B2F181201C7C062500DA5BF3 /* CacheManager */,
 				B2F181291C7C062500DA5BF3 /* MD5 */,
 				B2F44C301C78C3FE00639756 /* GDDataXML */,
@@ -1084,6 +1091,7 @@
 				B20A34731C746BBB000CCFA3 /* GSSSSettingViewController.m in Sources */,
 				B2F44C2F1C78BD5C00639756 /* GSBookItem.m in Sources */,
 				B268ECBB1C7763BA001DD15F /* ASIHTTPRequest.m in Sources */,
+				B2F44C561C7DEF6F00639756 /* NetPage.m in Sources */,
 				B268EC961C7742E5001DD15F /* GSHomeViewController.m in Sources */,
 				B268ECBE1C7763BA001DD15F /* Reachability.m in Sources */,
 				B2F181321C7C062500DA5BF3 /* md5.c in Sources */,
@@ -1098,11 +1106,10 @@
 				B2F181301C7C062500DA5BF3 /* MTNetCacheElement.m in Sources */,
 				B268ECB81C7763BA001DD15F /* ASIDataDecompressor.m in Sources */,
 				B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */,
-				B2AD578C1C7DC19E00280667 /* LxGridViewCell.m in Sources */,
 				B268ECC51C776FFE001DD15F /* GSSettingsViewController.m in Sources */,
-				B2AD578D1C7DC19E00280667 /* LxGridViewFlowLayout.m in Sources */,
 				B2F44C221C78A1D900639756 /* GSDataControl.m in Sources */,
 				B2BDCBC11C76F83000DC3031 /* GSideMenuController.m in Sources */,
+				B2F44C5A1C7DEF6F00639756 /* NetBook.m in Sources */,
 				B2BDCBC41C7706AA00DC3031 /* GSideCoverView.m in Sources */,
 				B2F181361C7C12C400DA5BF3 /* GSBookCell.m in Sources */,
 				B2F02F291C75BE0D00D93119 /* GValue.m in Sources */,
@@ -1120,8 +1127,8 @@
 				B2F02F261C75BE0D00D93119 /* GEase.m in Sources */,
 				B2F02F2D1C75C1E200D93119 /* GSSelectView.m in Sources */,
 				B268ECBA1C7763BA001DD15F /* ASIFormDataRequest.m in Sources */,
-				B2AD578B1C7DC19E00280667 /* LxGridView.m in Sources */,
 				B2F44C261C78AA3700639756 /* NSURL+QueryDictionary.m in Sources */,
+				B2F44C581C7DEF6F00639756 /* HomeData.m in Sources */,
 				B250EE2E1C73054D00198CDE /* main.m in Sources */,
 				B22305B01C780CC2001B18F5 /* GShadowView.m in Sources */,
 				B2F02F271C75BE0D00D93119 /* GTween.m in Sources */,
@@ -1130,6 +1137,7 @@
 				B20A348E1C7482A8000CCFA3 /* GSInputCell.m in Sources */,
 				B2F44C331C78C3FE00639756 /* GDataXMLNode.m in Sources */,
 				B2F44C431C7CA2C300639756 /* GSPreviewViewController.m in Sources */,
+				B2F44C571C7DEF6F00639756 /* HomeData+CoreDataProperties.m in Sources */,
 				B22305BF1C782032001B18F5 /* Page+CoreDataProperties.m in Sources */,
 				B268ECB71C7763BA001DD15F /* ASIDataCompressor.m in Sources */,
 				B2F02F181C75B24600D93119 /* GSSwitchCell.m in Sources */,
@@ -1139,9 +1147,11 @@
 				B22305C01C782032001B18F5 /* Page.m in Sources */,
 				B22305D01C783632001B18F5 /* SRSlimeView.m in Sources */,
 				B22305BE1C782032001B18F5 /* Book.m in Sources */,
+				B2F44C591C7DEF6F00639756 /* NetBook+CoreDataProperties.m in Sources */,
 				B2F02F151C75637700D93119 /* GSGlobals.m in Sources */,
 				B20A34231C746541000CCFA3 /* ShadowsocksRunner.m in Sources */,
 				B2BDCBBD1C76DF5600DC3031 /* GSLoadingCell.m in Sources */,
+				B2F44C551C7DEF6F00639756 /* NetPage+CoreDataProperties.m in Sources */,
 				B268ECB61C7763BA001DD15F /* ASIAuthenticationDialog.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
