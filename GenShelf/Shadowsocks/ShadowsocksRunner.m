@@ -5,7 +5,7 @@
 
 #import "ShadowsocksRunner.h"
 #import "local.h"
-#include "libev/ev.h"
+#import "libev/ev.h"
 
 static struct ev_loop *current_loop = NULL;
 static NSString *shadowsocksStatus = SHADOWSOCKS_SUCCESS;

@@ -7,14 +7,14 @@
 //
 
 #import "GSPreviewViewController.h"
-#import "MTMatrixListView.h"
 #import "GSThumCell.h"
+#import "LxGridView.h"
 
-@interface GSPreviewViewController () <MTMatrixListDelegate>
+@interface GSPreviewViewController () <LxGridViewDataSource, LxGridViewDataSource>
 
 @property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) UIImageView *coverImageView;
-@property (nonatomic, strong) MTMatrixListView *matrixView;
+@property (nonatomic, strong) LxGridView *collectionView;
 
 @end
 
@@ -49,12 +49,17 @@
     _coverImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, 360)];
     [_headerView addSubview:_coverImageView];
     
-    _matrixView = [[MTMatrixListView alloc] initWithFrame:bounds];
-    _matrixView.matrixDelegate = self;
-    _matrixView.spaceWidth = 180;
-    _matrixView.spaceHeight = 180;
-    _matrixView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    [self.view addSubview:_matrixView];
+    LxGridViewFlowLayout *layout = [[LxGridViewFlowLayout alloc] init];
+    layout.sectionInset = UIEdgeInsetsMake(18, 18, 18, 18);
+    layout.minimumLineSpacing = 9;
+    layout.itemSize = CGSizeMake(58, 78);
+    
+    _collectionView = [[LxGridView alloc] initWithFrame:bounds collectionViewLayout:layout];
+    _collectionView.delegate = self;
+    _collectionView.dataSource = self;
+    _collectionView.backgroundColor = [UIColor whiteColor];
+    _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [self.view addSubview:_collectionView];
 }
 
 - (void)didReceiveMemoryWarning {

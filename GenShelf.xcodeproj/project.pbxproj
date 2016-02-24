@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		B20A341A1C745F2F000CCFA3 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B20A34171C745F2F000CCFA3 /* libsodium.a */; };
 		B20A341B1C745F2F000CCFA3 /* libcrypto.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B20A34181C745F2F000CCFA3 /* libcrypto.a */; };
 		B20A341C1C745F2F000CCFA3 /* libssl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B20A34191C745F2F000CCFA3 /* libssl.a */; };
 		B20A34231C746541000CCFA3 /* ShadowsocksRunner.m in Sources */ = {isa = PBXBuildFile; fileRef = B20A34221C746541000CCFA3 /* ShadowsocksRunner.m */; };
@@ -85,6 +84,10 @@
 		B268ED071C7777E5001DD15F /* WarningDefaultLeftImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B268ECF11C7777E5001DD15F /* WarningDefaultLeftImage.png */; };
 		B268ED081C7777E5001DD15F /* WarningDefaultLeftImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B268ECF21C7777E5001DD15F /* WarningDefaultLeftImage@2x.png */; };
 		B268ED091C7777E5001DD15F /* MBLMessageBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B268ECF51C7777E5001DD15F /* MBLMessageBannerView.m */; };
+		B2AD57831C7D4D2400280667 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2AD57821C7D4D0800280667 /* libsodium.a */; };
+		B2AD578B1C7DC19E00280667 /* LxGridView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AD57861C7DC19E00280667 /* LxGridView.m */; };
+		B2AD578C1C7DC19E00280667 /* LxGridViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AD57881C7DC19E00280667 /* LxGridViewCell.m */; };
+		B2AD578D1C7DC19E00280667 /* LxGridViewFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = B2AD578A1C7DC19E00280667 /* LxGridViewFlowLayout.m */; };
 		B2BDCBBD1C76DF5600DC3031 /* GSLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDCBBC1C76DF5600DC3031 /* GSLoadingCell.m */; };
 		B2BDCBC11C76F83000DC3031 /* GSideMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDCBC01C76F83000DC3031 /* GSideMenuController.m */; };
 		B2BDCBC41C7706AA00DC3031 /* GSideCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDCBC31C7706AA00DC3031 /* GSideCoverView.m */; };
@@ -113,10 +116,6 @@
 		B2F44C291C78ADA500639756 /* GSLofiDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C281C78ADA500639756 /* GSLofiDataControl.m */; };
 		B2F44C2F1C78BD5C00639756 /* GSBookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C2E1C78BD5C00639756 /* GSBookItem.m */; };
 		B2F44C331C78C3FE00639756 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C321C78C3FE00639756 /* GDataXMLNode.m */; };
-		B2F44C3D1C7CA12D00639756 /* MTMatrixListView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C361C7CA12D00639756 /* MTMatrixListView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		B2F44C3E1C7CA12D00639756 /* MTMatrixSection.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C381C7CA12D00639756 /* MTMatrixSection.m */; };
-		B2F44C3F1C7CA12D00639756 /* MTMatrixTools.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C3A1C7CA12D00639756 /* MTMatrixTools.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
-		B2F44C401C7CA12D00639756 /* MTMatrixViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C3C1C7CA12D00639756 /* MTMatrixViewCell.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B2F44C431C7CA2C300639756 /* GSPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C421C7CA2C300639756 /* GSPreviewViewController.m */; };
 		B2F44C461C7CB3D000639756 /* GSThumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C451C7CB3D000639756 /* GSThumCell.m */; };
 /* End PBXBuildFile section */
@@ -135,6 +134,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = B250EE281C73054D00198CDE;
 			remoteInfo = GenShelf;
+		};
+		B2AD57811C7D4D0800280667 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B2AD55861C7D4D0600280667 /* sodium.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B2AD51641C7D4BB100280667;
+			remoteInfo = sodium;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -275,6 +281,13 @@
 		B268ECF21C7777E5001DD15F /* WarningDefaultLeftImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WarningDefaultLeftImage@2x.png"; sourceTree = "<group>"; };
 		B268ECF41C7777E5001DD15F /* MBLMessageBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBLMessageBannerView.h; sourceTree = "<group>"; };
 		B268ECF51C7777E5001DD15F /* MBLMessageBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLMessageBannerView.m; sourceTree = "<group>"; };
+		B2AD55861C7D4D0600280667 /* sodium.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = sodium.xcodeproj; sourceTree = "<group>"; };
+		B2AD57851C7DC19E00280667 /* LxGridView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridView.h; sourceTree = "<group>"; };
+		B2AD57861C7DC19E00280667 /* LxGridView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridView.m; sourceTree = "<group>"; };
+		B2AD57871C7DC19E00280667 /* LxGridViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewCell.h; sourceTree = "<group>"; };
+		B2AD57881C7DC19E00280667 /* LxGridViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewCell.m; sourceTree = "<group>"; };
+		B2AD57891C7DC19E00280667 /* LxGridViewFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LxGridViewFlowLayout.h; sourceTree = "<group>"; };
+		B2AD578A1C7DC19E00280667 /* LxGridViewFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LxGridViewFlowLayout.m; sourceTree = "<group>"; };
 		B2BDCBBB1C76DF5600DC3031 /* GSLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLoadingCell.h; sourceTree = "<group>"; };
 		B2BDCBBC1C76DF5600DC3031 /* GSLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLoadingCell.m; sourceTree = "<group>"; };
 		B2BDCBBF1C76F83000DC3031 /* GSideMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSideMenuController.h; sourceTree = "<group>"; };
@@ -329,14 +342,6 @@
 		B2F44C2E1C78BD5C00639756 /* GSBookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSBookItem.m; sourceTree = "<group>"; };
 		B2F44C311C78C3FE00639756 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		B2F44C321C78C3FE00639756 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
-		B2F44C351C7CA12D00639756 /* MTMatrixListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMatrixListView.h; sourceTree = "<group>"; };
-		B2F44C361C7CA12D00639756 /* MTMatrixListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMatrixListView.m; sourceTree = "<group>"; };
-		B2F44C371C7CA12D00639756 /* MTMatrixSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMatrixSection.h; sourceTree = "<group>"; };
-		B2F44C381C7CA12D00639756 /* MTMatrixSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMatrixSection.m; sourceTree = "<group>"; };
-		B2F44C391C7CA12D00639756 /* MTMatrixTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMatrixTools.h; sourceTree = "<group>"; };
-		B2F44C3A1C7CA12D00639756 /* MTMatrixTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMatrixTools.m; sourceTree = "<group>"; };
-		B2F44C3B1C7CA12D00639756 /* MTMatrixViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTMatrixViewCell.h; sourceTree = "<group>"; };
-		B2F44C3C1C7CA12D00639756 /* MTMatrixViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTMatrixViewCell.m; sourceTree = "<group>"; };
 		B2F44C411C7CA2C300639756 /* GSPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPreviewViewController.h; sourceTree = "<group>"; };
 		B2F44C421C7CA2C300639756 /* GSPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPreviewViewController.m; sourceTree = "<group>"; };
 		B2F44C441C7CB3D000639756 /* GSThumCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSThumCell.h; sourceTree = "<group>"; };
@@ -355,11 +360,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2AD57831C7D4D2400280667 /* libsodium.a in Frameworks */,
 				B268ECC21C7764A7001DD15F /* libxml2.tbd in Frameworks */,
 				B20A34871C747306000CCFA3 /* libshadowsocks.a in Frameworks */,
 				B20A34751C746D24000CCFA3 /* libz.1.2.5.tbd in Frameworks */,
 				B20A341B1C745F2F000CCFA3 /* libcrypto.a in Frameworks */,
-				B20A341A1C745F2F000CCFA3 /* libsodium.a in Frameworks */,
 				B20A341C1C745F2F000CCFA3 /* libssl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -540,6 +545,7 @@
 		B250EE2B1C73054D00198CDE /* GenShelf */ = {
 			isa = PBXGroup;
 			children = (
+				B2AD55851C7D4D0600280667 /* sodium */,
 				B2F44C1F1C78A1C600639756 /* DataController */,
 				B2BDCBC51C77122C00DC3031 /* Resources */,
 				B2F02F191C75BE0D00D93119 /* Utils */,
@@ -684,6 +690,35 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		B2AD55851C7D4D0600280667 /* sodium */ = {
+			isa = PBXGroup;
+			children = (
+				B2AD55861C7D4D0600280667 /* sodium.xcodeproj */,
+			);
+			path = sodium;
+			sourceTree = "<group>";
+		};
+		B2AD55871C7D4D0600280667 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B2AD57821C7D4D0800280667 /* libsodium.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B2AD57841C7DC19D00280667 /* LxGridView */ = {
+			isa = PBXGroup;
+			children = (
+				B2AD57851C7DC19E00280667 /* LxGridView.h */,
+				B2AD57861C7DC19E00280667 /* LxGridView.m */,
+				B2AD57871C7DC19E00280667 /* LxGridViewCell.h */,
+				B2AD57881C7DC19E00280667 /* LxGridViewCell.m */,
+				B2AD57891C7DC19E00280667 /* LxGridViewFlowLayout.h */,
+				B2AD578A1C7DC19E00280667 /* LxGridViewFlowLayout.m */,
+			);
+			path = LxGridView;
+			sourceTree = "<group>";
+		};
 		B2BDCBBE1C76F6AD00DC3031 /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
@@ -730,7 +765,7 @@
 		B2F02F191C75BE0D00D93119 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				B2F44C341C7CA12D00639756 /* MatrixView */,
+				B2AD57841C7DC19D00280667 /* LxGridView */,
 				B2F181201C7C062500DA5BF3 /* CacheManager */,
 				B2F181291C7C062500DA5BF3 /* MD5 */,
 				B2F44C301C78C3FE00639756 /* GDDataXML */,
@@ -832,21 +867,6 @@
 				B2F44C321C78C3FE00639756 /* GDataXMLNode.m */,
 			);
 			path = GDDataXML;
-			sourceTree = "<group>";
-		};
-		B2F44C341C7CA12D00639756 /* MatrixView */ = {
-			isa = PBXGroup;
-			children = (
-				B2F44C351C7CA12D00639756 /* MTMatrixListView.h */,
-				B2F44C361C7CA12D00639756 /* MTMatrixListView.m */,
-				B2F44C371C7CA12D00639756 /* MTMatrixSection.h */,
-				B2F44C381C7CA12D00639756 /* MTMatrixSection.m */,
-				B2F44C391C7CA12D00639756 /* MTMatrixTools.h */,
-				B2F44C3A1C7CA12D00639756 /* MTMatrixTools.m */,
-				B2F44C3B1C7CA12D00639756 /* MTMatrixViewCell.h */,
-				B2F44C3C1C7CA12D00639756 /* MTMatrixViewCell.m */,
-			);
-			path = MatrixView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -958,6 +978,12 @@
 			mainGroup = B250EE201C73054D00198CDE;
 			productRefGroup = B250EE2A1C73054D00198CDE /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B2AD55871C7D4D0600280667 /* Products */;
+					ProjectRef = B2AD55861C7D4D0600280667 /* sodium.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B250EE281C73054D00198CDE /* GenShelf */,
@@ -967,6 +993,16 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B2AD57821C7D4D0800280667 /* libsodium.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsodium.a;
+			remoteRef = B2AD57811C7D4D0800280667 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		B250EE271C73054D00198CDE /* Resources */ = {
@@ -1047,7 +1083,6 @@
 				B2F02F281C75BE0D00D93119 /* GTweenProperty.m in Sources */,
 				B20A34731C746BBB000CCFA3 /* GSSSSettingViewController.m in Sources */,
 				B2F44C2F1C78BD5C00639756 /* GSBookItem.m in Sources */,
-				B2F44C3E1C7CA12D00639756 /* MTMatrixSection.m in Sources */,
 				B268ECBB1C7763BA001DD15F /* ASIHTTPRequest.m in Sources */,
 				B268EC961C7742E5001DD15F /* GSHomeViewController.m in Sources */,
 				B268ECBE1C7763BA001DD15F /* Reachability.m in Sources */,
@@ -1056,7 +1091,6 @@
 				B268ED091C7777E5001DD15F /* MBLMessageBannerView.m in Sources */,
 				B2F181391C7C13F200DA5BF3 /* GSRadiusImageView.m in Sources */,
 				B268ECF61C7777E5001DD15F /* MBLMessageBanner.m in Sources */,
-				B2F44C3F1C7CA12D00639756 /* MTMatrixTools.m in Sources */,
 				B268EC991C7742FE001DD15F /* GSSearchViewController.m in Sources */,
 				B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */,
 				B22675EF1C7C44DC00B5D5CC /* GSPageItem.m in Sources */,
@@ -1064,7 +1098,9 @@
 				B2F181301C7C062500DA5BF3 /* MTNetCacheElement.m in Sources */,
 				B268ECB81C7763BA001DD15F /* ASIDataDecompressor.m in Sources */,
 				B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */,
+				B2AD578C1C7DC19E00280667 /* LxGridViewCell.m in Sources */,
 				B268ECC51C776FFE001DD15F /* GSSettingsViewController.m in Sources */,
+				B2AD578D1C7DC19E00280667 /* LxGridViewFlowLayout.m in Sources */,
 				B2F44C221C78A1D900639756 /* GSDataControl.m in Sources */,
 				B2BDCBC11C76F83000DC3031 /* GSideMenuController.m in Sources */,
 				B2BDCBC41C7706AA00DC3031 /* GSideCoverView.m in Sources */,
@@ -1081,10 +1117,10 @@
 				B268ECB91C7763BA001DD15F /* ASIDownloadCache.m in Sources */,
 				B2F181331C7C062500DA5BF3 /* MTMd5.m in Sources */,
 				B2F1812F1C7C062500DA5BF3 /* MTMenoryCache.m in Sources */,
-				B2F44C401C7CA12D00639756 /* MTMatrixViewCell.m in Sources */,
 				B2F02F261C75BE0D00D93119 /* GEase.m in Sources */,
 				B2F02F2D1C75C1E200D93119 /* GSSelectView.m in Sources */,
 				B268ECBA1C7763BA001DD15F /* ASIFormDataRequest.m in Sources */,
+				B2AD578B1C7DC19E00280667 /* LxGridView.m in Sources */,
 				B2F44C261C78AA3700639756 /* NSURL+QueryDictionary.m in Sources */,
 				B250EE2E1C73054D00198CDE /* main.m in Sources */,
 				B22305B01C780CC2001B18F5 /* GShadowView.m in Sources */,
@@ -1100,7 +1136,6 @@
 				B22305BD1C782032001B18F5 /* Book+CoreDataProperties.m in Sources */,
 				B22305AD1C78057B001B18F5 /* HexColors.m in Sources */,
 				B2F1812E1C7C062500DA5BF3 /* MTLocationCache.m in Sources */,
-				B2F44C3D1C7CA12D00639756 /* MTMatrixListView.m in Sources */,
 				B22305C01C782032001B18F5 /* Page.m in Sources */,
 				B22305D01C783632001B18F5 /* SRSlimeView.m in Sources */,
 				B22305BE1C782032001B18F5 /* Book.m in Sources */,
@@ -1155,7 +1190,6 @@
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/GenShelf/OpenSSL-for-iPhone/lib";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos9.1;
 				SKIP_INSTALL = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
@@ -1173,7 +1207,6 @@
 				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/GenShelf/OpenSSL-for-iPhone/lib";
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos9.1;
 				SKIP_INSTALL = YES;
 				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};

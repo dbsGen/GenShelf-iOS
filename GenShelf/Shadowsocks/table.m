@@ -3,6 +3,10 @@
 #import <openssl/evp.h>
 #include "table.h"
 
+unsigned char encrypt_table[256];
+unsigned char decrypt_table[256];
+unsigned int _i;
+unsigned long long _a;
 
 static int random_compare(const void *_x, const void *_y) {
     uint32_t i = _i;
