@@ -7,12 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "GSModelNetPage.h"
+
+typedef enum : NSUInteger {
+    GSPageItemStatusNotStart    = 0,
+    GSPageItemStatusProgressing,
+    GSPageItemStatusComplete,
+} GSPageItemStatus;
 
 @interface GSPageItem : NSObject
 
+@property (nonatomic, assign) GSPageItemStatus status;
 @property (nonatomic, assign) NSUInteger index;
 @property (nonatomic, strong) NSString *pageUrl;
 @property (nonatomic, strong) NSString *thumUrl;
 @property (nonatomic, strong) NSString *imageUrl;
+
+- (id)initWithModel:(GSModelNetPage*)page;
+- (GSModelNetPage *)model;
 
 @end

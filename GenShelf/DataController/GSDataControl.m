@@ -11,7 +11,7 @@
 
 @implementation GSDataControl
 
-@synthesize name = _name;
+@synthesize name = _name, requestDelay = _requestDelay;
 
 - (ASIHTTPRequest *)mainRequest {
     ASIHTTPRequest *request = [GSGlobals requestForURL:[[self class] mainUrl]];
@@ -34,5 +34,6 @@
 - (NSArray<GSBookItem *> *)parseMain:(NSString *)html {
     return [NSArray array];
 }
+- (void)processBook:(GSBookItem *)book {}
 
 @end

@@ -55,13 +55,16 @@
     _refreshView.slimeMissWhenGoingBack = YES;
     _refreshView.delegate = self;
     [_tableView addSubview:_refreshView];
+    BOOL expire = NO;
+    _datas = [NSMutableArray arrayWithArray:[GSBookItem cachedItems:nil hasNext:nil
+                                                             expire:&expire]];
     [_refreshView update:20 + self.navigationController.navigationBar.bounds.size.height];
     
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight;
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     [self.view addSubview:_tableView];
     
-    if (!_loaded) {
+    if (_datas.count == 0 || expire) {
         [self requestDatas];
         _refreshView.loading = YES;
         _tableView.contentInset = UIEdgeInsetsMake(_refreshView.upInset, 0, 0, 0);
@@ -150,6 +153,7 @@
         [_tableView reloadData];
         _loaded = YES;
         [_refreshView endRefresh];
+        [GSBookItem cacheItems:_datas page:0 hasNext:YES];
     }];
     [request setFailedBlock:^{
         [_refreshView endRefresh];

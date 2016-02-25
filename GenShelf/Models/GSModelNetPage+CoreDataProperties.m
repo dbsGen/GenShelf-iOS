@@ -1,25 +1,22 @@
 //
-//  Book+CoreDataProperties.m
+//  GSModelNetPage+CoreDataProperties.m
 //  GenShelf
 //
-//  Created by Gen on 16/2/20.
+//  Created by Gen on 16/2/25.
 //  Copyright © 2016年 AirRaidClub. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "Book+CoreDataProperties.h"
+#import "GSModelNetPage+CoreDataProperties.h"
 
-@implementation Book (CoreDataProperties)
+@implementation GSModelNetPage (CoreDataProperties)
 
-@dynamic date;
+@dynamic imageUrl;
 @dynamic index;
-@dynamic loaded;
-@dynamic name;
-@dynamic page_count;
-@dynamic path;
-@dynamic url;
-@dynamic pages;
+@dynamic pageUrl;
+@dynamic status;
+@dynamic thumUrl;
 
 @end

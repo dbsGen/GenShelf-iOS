@@ -1,14 +1,14 @@
 //
-//  Book.m
+//  GSModelNetPage.m
 //  GenShelf
 //
-//  Created by Gen on 16/2/20.
+//  Created by Gen on 16/2/25.
 //  Copyright © 2016年 AirRaidClub. All rights reserved.
 //
 
-#import "Book.h"
+#import "GSModelNetPage.h"
 
-@implementation Book
+@implementation GSModelNetPage
 
 // Insert code here to add functionality to your managed object subclass
 

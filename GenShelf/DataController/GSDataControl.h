@@ -17,9 +17,11 @@ typedef void *(^GSRequestUpdateBlock)(NSUInteger count);
 @interface GSDataControl : NSObject {
     @protected
     NSString *_name;
+    CGFloat _requestDelay;
 }
 
 @property (nonatomic, readonly) NSString *name;
+@property (nonatomic, assign) CGFloat   requestDelay;
 
 - (ASIHTTPRequest *)mainRequest;
 - (ASIHTTPRequest *)searchRequest:(NSString *)keyword;

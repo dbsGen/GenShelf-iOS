@@ -11,6 +11,8 @@
 #import "GSHomeViewController.h"
 #import "GSSearchViewController.h"
 #import "GSSettingsViewController.h"
+#import "GSBookItem.h"
+#import "MBLMessageBanner.h"
 
 @interface GSHomeController ()
 
@@ -22,16 +24,32 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         
-        self.items = @[[GSideMenuItem itemWithController:[[UINavigationController alloc] initWithRootViewController:[[GSShelfViewController alloc] init]] image:[UIImage imageNamed:@"squares"]],
-                       [GSideMenuItem itemWithController:[[UINavigationController alloc] initWithRootViewController:[[GSHomeViewController alloc] init]] image:[UIImage imageNamed:@"home"]],
+        self.items = @[[GSideMenuItem itemWithController:[[GSShelfViewController alloc] init] image:[UIImage imageNamed:@"squares"]],
+                       [GSideMenuItem itemWithController:[[GSHomeViewController alloc] init] image:[UIImage imageNamed:@"home"]],
                        [GSideMenuItem itemWithController:[[GSSearchViewController alloc] init] image:[UIImage imageNamed:@"search"]],
-                       [GSideMenuItem itemWithController:[[UINavigationController alloc] initWithRootViewController:[[GSSettingsViewController alloc] init]] image:[UIImage imageNamed:@"setting"]]];
+                       [GSideMenuItem itemWithController:[[GSSettingsViewController alloc] init] image:[UIImage imageNamed:@"setting"]]];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onFailed:)
+                                                     name:BOOK_ITEM_FAILED
+                                                   object:nil];
     }
     return self;
 }
 
 - (void)sideMenuSelect:(NSUInteger)index {
     [self closeMenu];
+}
+
+- (void)onFailed:(NSNotification *)notification {
+    if ([notification.object isKindOfClass:[GSBookItem class]]) {
+        GSBookItem *item = notification.object;
+        [MBLMessageBanner showMessageBannerInViewController:self
+                                                      title:@"Error"
+                                                   subtitle:[NSString stringWithFormat:@"%@ 失败!", item.title]
+                                                       type:MBLMessageBannerTypeError
+                                                 atPosition:MBLMessageBannerPositionBottom];
+    }
 }
 
 @end

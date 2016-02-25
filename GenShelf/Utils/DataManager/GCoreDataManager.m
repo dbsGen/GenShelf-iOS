@@ -43,29 +43,41 @@ static GCoreDataManager *_defaultManager = NULL;
 }
 
 - (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    // The persistent store coordinator for the application. This implementation creates and returns a coordinator, having added the store for the application to it.
-    if (_persistentStoreCoordinator != nil) {
-        return _persistentStoreCoordinator;
-    }
-    
-    // Create the coordinator and store
-    
-    _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"GenShelf.sqlite"];
-    NSError *error = nil;
-    NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        // Report any error we got.
-        NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-        dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
-        dict[NSLocalizedFailureReasonErrorKey] = failureReason;
-        dict[NSUnderlyingErrorKey] = error;
-        error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
-        // Replace this with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
+    BOOL first = YES;
+    do {
+        if (_persistentStoreCoordinator != nil) {
+            return _persistentStoreCoordinator;
+        }
+        
+        // Create the coordinator and store
+        
+        _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
+        NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"GenShelf.sqlite"];
+//        [[NSFileManager defaultManager] removeItemAtURL:storeURL
+//                                                  error:nil];
+        NSError *error = nil;
+        NSString *failureReason = @"There was an error creating or loading the application's saved data.";
+        if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+            // Report any error we got.
+            NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+            dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
+            dict[NSLocalizedFailureReasonErrorKey] = failureReason;
+            dict[NSUnderlyingErrorKey] = error;
+            error = [NSError errorWithDomain:@"YOUR_ERROR_DOMAIN" code:9999 userInfo:dict];
+            // Replace this with code to handle the error appropriately.
+            // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+            error = nil;
+            if (first) {
+                [[NSFileManager defaultManager] removeItemAtURL:storeURL
+                                                          error:&error];
+                _persistentStoreCoordinator = nil;
+                continue;
+            }else {
+                abort();
+            }
+        }
+    } while (false);
     
     return _persistentStoreCoordinator;
 }
@@ -89,7 +101,6 @@ static GCoreDataManager *_defaultManager = NULL;
                                    selector:@selector(save)
                                    userInfo:NULL
                                     repeats:YES];
-    
     return _managedObjectContext;
 }
 
@@ -145,6 +156,30 @@ static GCoreDataManager *_defaultManager = NULL;
 + (NSArray *)fetch:(NSPredicate *)predicate {
     return [[GCoreDataManager shareManager] fetch:NSStringFromClass([self class])
                                         predicate:predicate];
+}
+
++ (instancetype)fetchOrCreate:(NSPredicate *)predicate constructor:(GConstuctorBlock)block {
+    NSArray *arr = [self fetch:predicate];
+    if (arr.count) {
+        return arr.firstObject;
+    }else {
+        id co = [self create];
+        if (block) {
+            block(co);
+        }
+        return co;
+    }
+}
+
++ (instancetype)create {
+    id context = [GCoreDataManager shareManager].managedObjectContext;
+    return [[self alloc] initWithEntity:[NSEntityDescription entityForName:NSStringFromClass([self class])
+                                                    inManagedObjectContext:context]
+         insertIntoManagedObjectContext:context];
+}
+
+- (void)remove {
+    [[GCoreDataManager shareManager].managedObjectContext deleteObject:self];
 }
 
 @end

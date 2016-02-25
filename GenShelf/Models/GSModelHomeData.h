@@ -1,19 +1,19 @@
 //
-//  HomeData.h
+//  GSModelHomeData.h
 //  GenShelf
 //
-//  Created by Gen on 16/2/24.
+//  Created by Gen on 16/2/25.
 //  Copyright © 2016年 AirRaidClub. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Book;
+@class GSModelNetBook;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HomeData : NSManagedObject
+@interface GSModelHomeData : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "HomeData+CoreDataProperties.h"
+#import "GSModelHomeData+CoreDataProperties.h"

@@ -1,25 +1,25 @@
 //
-//  NetBook+CoreDataProperties.h
+//  GSModelNetPage+CoreDataProperties.h
 //  GenShelf
 //
-//  Created by Gen on 16/2/24.
+//  Created by Gen on 16/2/25.
 //  Copyright © 2016年 AirRaidClub. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
 //  to delete and recreate this implementation file for your updated model.
 //
 
-#import "NetBook.h"
+#import "GSModelNetPage.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface NetBook (CoreDataProperties)
+@interface GSModelNetPage (CoreDataProperties)
 
-@property (nullable, nonatomic, retain) NSString *title;
-@property (nullable, nonatomic, retain) NSString *pageUrl;
 @property (nullable, nonatomic, retain) NSString *imageUrl;
-@property (nullable, nonatomic, retain) NSNumber *status;
 @property (nullable, nonatomic, retain) NSNumber *index;
+@property (nullable, nonatomic, retain) NSString *pageUrl;
+@property (nullable, nonatomic, retain) NSNumber *status;
+@property (nullable, nonatomic, retain) NSString *thumUrl;
 
 @end
 

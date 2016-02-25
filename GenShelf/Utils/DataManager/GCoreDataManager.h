@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+
 @interface GCoreDataManager : NSObject
 
 + (GCoreDataManager*)shareManager;
@@ -27,7 +28,11 @@
 
 @interface NSManagedObject (GCoreDataManager)
 
+typedef void(^GConstuctorBlock)(id object);
 + (NSArray *)all;
 + (NSArray *)fetch:(NSPredicate *)predicate;
++ (instancetype)create;
++ (instancetype)fetchOrCreate:(NSPredicate *)predicate constructor:(GConstuctorBlock)block;
+- (void)remove;
 
 @end

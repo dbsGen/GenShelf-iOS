@@ -12,16 +12,20 @@
 #import "MTNetCacheManager.h"
 #import "GSGlobals.h"
 #import "GSRadiusImageView.h"
+#import "SRRefreshView.h"
 
 static NSString *identifier = @"CellIdentifier";
 
-@interface GSPreviewViewController () <UICollectionViewDataSource, UICollectionViewDelegate, ASIHTTPRequestDelegate>
+@interface GSPreviewViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SRRefreshDelegate> {
+    SRRefreshView *_refreshView;
+}
 
-@property (nonatomic, strong) UIView *headerView;
 @property (nonatomic, strong) GSRadiusImageView *coverImageView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 @end
+
+#define kBORDER_WIDTH 18
 
 @implementation GSPreviewViewController
 
@@ -32,6 +36,9 @@ static NSString *identifier = @"CellIdentifier";
                                                  selector:@selector(onBookUpdate:)
                                                      name:BOOK_ITEM_UPDATE
                                                    object:nil];
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"下载"
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self action:@selector(onDownload)];
     }
     return self;
 }
@@ -50,45 +57,34 @@ static NSString *identifier = @"CellIdentifier";
 - (void)viewDidLoad {
     [super viewDidLoad];
     CGRect bounds = self.view.bounds;
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, 280)];
-    _coverImageView = [[GSRadiusImageView alloc] initWithFrame:CGRectMake(40, 60, 160, 160)];
-    _coverImageView.image = [UIImage imageNamed:@"no_image"];
-    [[MTNetCacheManager defaultManager] getImageWithUrl:_item.imageUrl
-                                                  block:^(id result) {
-                                                      if (result) {
-                                                          _coverImageView.image = result;
-                                                      }else {
-                                                          ASIHTTPRequest *request = [GSGlobals requestForURL:[NSURL URLWithString:_item.imageUrl]];
-                                                          request.userInfo = @{@"url": _item.imageUrl};
-                                                          request.delegate = self;
-                                                          [request startAsynchronous];
-                                                      }
-                                                  }];
-    GShadowView *shadowView = [[GShadowView alloc] initWithFrame:CGRectMake(0, 280, bounds.size.width, 12)];
-    shadowView.status = GShadowViewTB;
-    shadowView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    [_headerView addSubview:shadowView];
-    [_headerView addSubview:_coverImageView];
     
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
-    layout.sectionInset = UIEdgeInsetsMake(298, 18, 18, 18);
+    layout.sectionInset = UIEdgeInsetsMake(kBORDER_WIDTH, kBORDER_WIDTH,
+                                           kBORDER_WIDTH, kBORDER_WIDTH);
     layout.minimumLineSpacing = 9;
     layout.itemSize = CGSizeMake(160, 160);
+    
+    _refreshView = [[SRRefreshView alloc] init];
+    _refreshView.slimeMissWhenGoingBack = YES;
+    _refreshView.delegate = self;
     
     _collectionView = [[UICollectionView alloc] initWithFrame:bounds collectionViewLayout:layout];
     _collectionView.delegate = self;
     _collectionView.dataSource = self;
     _collectionView.backgroundColor = [UIColor whiteColor];
     _collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    _collectionView.alwaysBounceVertical = YES;
     [_collectionView registerClass:[GSThumCell class]
         forCellWithReuseIdentifier:identifier];
-    [_collectionView addSubview:_headerView];
+    [_collectionView addSubview:_refreshView];
     [self.view addSubview:_collectionView];
+    
+    _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
+    [_refreshView update:20 + self.navigationController.navigationBar.bounds.size.height];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    _headerView = nil;
     _coverImageView = nil;
     _collectionView = nil;
 }
@@ -105,13 +101,30 @@ static NSString *identifier = @"CellIdentifier";
     }
 }
 
-#pragma mark - request
+- (void)onDownload {
+    
+}
 
-- (void)requestFinished:(ASIHTTPRequest *)request {
-    NSData *data = request.responseData;
-    [[MTNetCacheManager defaultManager] setData:data
-                                        withUrl:[request.userInfo objectForKey:@"url"]];
-    _coverImageView.image = [UIImage imageWithData:request.responseData];
+#pragma mark - scrollView delegate
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [_refreshView scrollViewDidScroll];
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    [_refreshView scrollViewDidEndDraging];
+}
+
+#pragma mark - slimeRefresh delegate
+
+- (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
+{
+    [_refreshView performSelector:@selector(endRefresh)
+                       withObject:nil
+                       afterDelay:1];
+//    [self requestDatas];
 }
 
 #pragma mark - collection view

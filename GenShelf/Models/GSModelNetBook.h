@@ -1,19 +1,19 @@
 //
-//  Page.h
+//  GSModelNetBook.h
 //  GenShelf
 //
-//  Created by Gen on 16/2/20.
+//  Created by Gen on 16/2/25.
 //  Copyright © 2016年 AirRaidClub. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Book;
+@class GSModelNetPage;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Page : NSManagedObject
+@interface GSModelNetBook : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass
 
@@ -21,4 +21,4 @@ NS_ASSUME_NONNULL_BEGIN
 
 NS_ASSUME_NONNULL_END
 
-#import "Page+CoreDataProperties.h"
+#import "GSModelNetBook+CoreDataProperties.h"

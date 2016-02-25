@@ -76,6 +76,8 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
             _menuControllers = [[NSMutableArray alloc] init];
         }
         [_menuControllers addObject:self];
+        
+        _navigationController = [[UINavigationController alloc] init];
     }
     return self;
 }
@@ -115,6 +117,7 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
     _coverView.endBlock = ^(CGPoint p) {
         [that touchEnd];
     };
+    [_contentView addSubview:_navigationController.view];
     [_contentView addSubview:_coverView];
     [_coverView setHidden:YES];
     [self.view addSubview:_contentView];
@@ -220,16 +223,14 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
         [_currentView removeFromSuperview];
         GSideMenuItem *item = [_items objectAtIndex:_selectedIndex];
         if (item.controller) {
-            _currentView = [item.controller view];
-            [_contentView insertSubview:_currentView
-                           belowSubview:_coverView];
+            [_navigationController setViewControllers:@[item.controller]
+                                             animated:YES];
         }
     }else {
         GSideMenuItem *item = [_items objectAtIndex:_selectedIndex];
         if (item.controller) {
-            _currentView = [item.controller view];
-            [_contentView insertSubview:_currentView
-                           belowSubview:_coverView];
+            [_navigationController setViewControllers:@[item.controller]
+                                             animated:YES];
         }
     }
 }

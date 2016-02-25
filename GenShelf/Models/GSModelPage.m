@@ -1,15 +1,15 @@
 //
-//  Page.m
+//  GSModelPage.m
 //  GenShelf
 //
-//  Created by Gen on 16/2/20.
+//  Created by Gen on 16/2/25.
 //  Copyright © 2016年 AirRaidClub. All rights reserved.
 //
 
-#import "Page.h"
-#import "Book.h"
+#import "GSModelPage.h"
+#import "GSModelBook.h"
 
-@implementation Page
+@implementation GSModelPage
 
 // Insert code here to add functionality to your managed object subclass
 

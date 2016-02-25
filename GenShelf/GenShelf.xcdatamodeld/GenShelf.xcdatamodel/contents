@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9525" systemVersion="15D21" minimumToolsVersion="Automatic">
-    <entity name="Book" representedClassName="Book" syncable="YES">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="14F1509" minimumToolsVersion="Automatic">
+    <entity name="GSModelBook" representedClassName="GSModelBook" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" indexed="YES" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="loaded" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
@@ -8,39 +8,43 @@
         <attribute name="page_count" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
-        <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Page" inverseName="book" inverseEntity="Page" syncable="YES"/>
+        <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="GSModelPage" inverseName="book" inverseEntity="GSModelPage" syncable="YES"/>
     </entity>
-    <entity name="HomeData" representedClassName="HomeData" syncable="YES">
+    <entity name="GSModelHomeData" representedClassName="GSModelHomeData" syncable="YES">
+        <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="hasNext" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="page" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Book" syncable="YES"/>
+        <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="GSModelNetBook" syncable="YES"/>
     </entity>
-    <entity name="NetBook" representedClassName="NetBook" syncable="YES">
+    <entity name="GSModelNetBook" representedClassName="GSModelNetBook" syncable="YES">
         <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="otherData" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="GSModelNetPage" syncable="YES"/>
     </entity>
-    <entity name="NetPage" representedClassName="NetPage" syncable="YES">
+    <entity name="GSModelNetPage" representedClassName="GSModelNetPage" syncable="YES">
         <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="pageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="thumUrl" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Page" representedClassName="Page" syncable="YES">
+    <entity name="GSModelPage" representedClassName="GSModelPage" syncable="YES">
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" spotlightIndexingEnabled="YES" syncable="YES"/>
         <attribute name="loaded" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="thum" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Book" inverseName="pages" inverseEntity="Book" syncable="YES"/>
+        <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GSModelBook" inverseName="pages" inverseEntity="GSModelBook" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Book" positionX="243" positionY="-0" width="128" height="165"/>
-        <element name="Page" positionX="-54" positionY="-9" width="128" height="135"/>
-        <element name="NetBook" positionX="99" positionY="63" width="128" height="120"/>
-        <element name="NetPage" positionX="108" positionY="72" width="128" height="105"/>
-        <element name="HomeData" positionX="117" positionY="81" width="128" height="90"/>
+        <element name="GSModelBook" positionX="243" positionY="-0" width="128" height="165"/>
+        <element name="GSModelHomeData" positionX="117" positionY="81" width="128" height="105"/>
+        <element name="GSModelNetBook" positionX="99" positionY="63" width="128" height="150"/>
+        <element name="GSModelNetPage" positionX="108" positionY="72" width="128" height="120"/>
+        <element name="GSModelPage" positionX="-54" positionY="-9" width="128" height="135"/>
     </elements>
 </model>
