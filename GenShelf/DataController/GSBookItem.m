@@ -109,6 +109,10 @@ const NSTimeInterval GSTimeADay = 3600*24;
                                                       userInfo:nil];
 }
 
+- (void)cancel {
+    _loading = false;
+}
+
 + (NSArray *)cachedItems:(NSInteger *)page hasNext:(BOOL *)hasNext expire:(BOOL *)expire {
     NSArray *all = [GSModelHomeData all];
     if (all.count > 0) {

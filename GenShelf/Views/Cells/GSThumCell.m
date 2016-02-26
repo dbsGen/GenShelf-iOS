@@ -64,4 +64,10 @@
     NSLog(@"Load failed, %@", request.error);
 }
 
+- (void)dealloc {
+    if (_currentRequest) {
+        _currentRequest.delegate = nil;
+    }
+}
+
 @end

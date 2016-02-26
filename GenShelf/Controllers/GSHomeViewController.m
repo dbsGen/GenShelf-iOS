@@ -110,7 +110,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     GSBookItem *item = [_datas objectAtIndex:indexPath.row];
-    [[GSGlobals dataControl] processBook:item];
     GSPreviewViewController *preview = [[GSPreviewViewController alloc] init];
     preview.item = item;
     [self.navigationController pushViewController:preview

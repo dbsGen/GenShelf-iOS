@@ -7,6 +7,74 @@
 //
 
 #import "GSTask.h"
+#import "NSObject+GTools.h"
+
+
+@interface GSTask () {
+    NSMutableArray<GSTask *> *_subtasks;
+}
+
+@property (nonatomic, weak) id parent;
+
+@end
+
+@interface GSTaskQueue () <GSTaskDelegate>
+
+@end
+
+@implementation GSTaskQueue {
+    NSMutableArray<GSTask*> *_tasks;
+    BOOL _running;
+}
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        _running = NO;
+        _tasks = [[NSMutableArray<GSTask*> alloc] init];
+    }
+    return self;
+}
+
+- (void)_checkQueue {
+    if (_tasks.count == 0) {
+        _running = NO;
+        return;
+    }
+    if (_running) {
+        return;
+    }
+    _running = YES;
+    GSTask *task = [_tasks objectAtIndex:0];
+    [task start];
+}
+
+- (NSArray<GSTask*>*)tasks {
+    return _tasks;
+}
+
+- (void)addTask:(GSTask *)task {
+    task.parent = self;
+    [_tasks addObject:task];
+    [self _checkQueue];
+}
+
+- (void)onTaskComplete:(GSTask *)task {
+    [_tasks removeObject:task];
+    [self _checkQueue];
+}
+
+- (void)onTaskFailed:(GSTask *)task error:(NSError *)error {
+    [_tasks removeObject:task];
+    [self _checkQueue];
+}
+
+- (void)onTaskCancel:(GSTask *)task {
+    [_tasks removeObject:task];
+    [self _checkQueue];
+}
+
+@end
 
 @implementation GSTask {
     NSInteger _tryCount;
@@ -18,6 +86,8 @@
         _running = NO;
         _tryCount = 0;
         _retryCount = 0;
+        _subtasks = [[NSMutableArray<GSTask *> alloc] init];
+        _offset = 0;
     }
     return self;
 }
@@ -36,7 +106,8 @@
 }
 
 - (void)restart {
-    [self cancel];
+    [self reset];
+    _offset = 0;
     _running = YES;
     if ([self.delegate respondsToSelector:@selector(onTaskStart:)]) {
         [self.delegate onTaskStart:self];
@@ -48,22 +119,23 @@
 }
 
 - (void)cancel {
-    _running = NO;
-    if ([self.delegate respondsToSelector:@selector(onTaskCancel:)]) {
-        [self.delegate onTaskCancel:self];
-    }
-    if ([_parent respondsToSelector:@selector(onTaskCancel:)]) {
-        [_parent onTaskCancel:self];
+    if (_running) {
+        if (_offset < _subtasks.count) {
+            [[_subtasks objectAtIndex:_offset] cancel];
+        }
+        _running = NO;
+        if ([self.delegate respondsToSelector:@selector(onTaskCancel:)]) {
+            [self.delegate onTaskCancel:self];
+        }
+        if ([_parent respondsToSelector:@selector(onTaskCancel:)]) {
+            [_parent onTaskCancel:self];
+        }
     }
 }
 
 - (void)complete {
-    _running = NO;
-    if ([self.delegate respondsToSelector:@selector(onTaskComplete:)]) {
-        [self.delegate onTaskComplete:self];
-    }
-    if ([_parent respondsToSelector:@selector(onTaskComplete:)]) {
-        [_parent onTaskComplete:self];
+    if (![self progressSubtask]) {
+        [self _delayComplete];
     }
 }
 
@@ -73,74 +145,87 @@
         _tryCount ++;
         [self restart];
     }else {
+        [self finalFailed:error];
         if ([self.delegate respondsToSelector:@selector(onTaskFailed:error:)]) {
             [self.delegate onTaskFailed:self error:error];
         }
         if ([_parent respondsToSelector:@selector(onTaskFailed:error:)]) {
             [_parent onTaskFailed:self error:error];
         }
+        _tryCount = 0;
     }
 }
 
+- (void)fatalError:(NSError *)error {
+    _running = NO;
+    [self finalFailed:error];
+    if ([self.delegate respondsToSelector:@selector(onTaskFailed:error:)]) {
+        [self.delegate onTaskFailed:self error:error];
+    }
+    if ([_parent respondsToSelector:@selector(onTaskFailed:error:)]) {
+        [_parent onTaskFailed:self error:error];
+    }
+    _tryCount = 0;
+}
+
+- (BOOL)progressSubtask {
+    if (_subtasks.count) {
+        [self _checkSubtasks];
+        return YES;
+    }
+    return NO;
+}
+
+- (void)reset {}
 - (void)run {}
+- (void)finalFailed:(NSError *)error {}
 
-@end
-
-@interface GSTaskGroup () <GSTaskDelegate>
-
-@end
-
-@implementation GSTaskGroup {
-    NSMutableArray *_tasks;
+- (void)_delayComplete {
+    [self performBlock:^{
+        _running = NO;
+        if ([self.delegate respondsToSelector:@selector(onTaskComplete:)]) {
+            [self.delegate onTaskComplete:self];
+        }
+        if ([_parent respondsToSelector:@selector(onTaskComplete:)]) {
+            [_parent onTaskComplete:self];
+        }
+        _tryCount = 0;
+    } afterDelay:_timeDelay];
 }
 
-- (id)init {
-    self = [super init];
-    if (self) {
-        _tasks = [[NSMutableArray alloc] init];
-        _offset = 0;
-    }
-    return self;
-}
-
-- (NSArray *)tasks {
-    return [_tasks copy];
-}
-
-- (void)_checkGroup {
-    if (_offset < _tasks.count) {
-        GSTask *task = [_tasks objectAtIndex:_offset];
+- (void)_checkSubtasks {
+    if (_offset < _subtasks.count) {
+        GSTask *task = [_subtasks objectAtIndex:_offset];
         if (task.running) {
-            [self failed:[NSError errorWithDomain:@"Sub task is already running."
+            [self failed:[NSError errorWithDomain:@"Subtask is already progressing."
                                              code:100
                                          userInfo:nil]];
         }else {
-            task.delegate = self;
             [task start];
         }
     }else {
-        [self complete];
+        [self _delayComplete];
     }
 }
 
-- (void)run {
-    [self _checkGroup];
+- (NSArray<GSTask*> *)subtasks {
+    return _subtasks;
 }
 
-- (void)addTask:(GSTask *)task {
-    task->_parent = self;
-    [_tasks addObject:task];
+- (void)addSubtask:(GSTask *)task {
+    task.parent = self;
+    [_subtasks addObject:task];
 }
 
 - (void)onTaskComplete:(GSTask *)task {
-    if (task == [_tasks objectAtIndex:_offset]) {
+    if (_offset < _subtasks.count && [_subtasks objectAtIndex:_offset] == task) {
         _offset ++;
-        [self _checkGroup];
+        [self _checkSubtasks];
     }
 }
 
 - (void)onTaskFailed:(GSTask *)task error:(NSError *)error {
-    if (task == [_tasks objectAtIndex:_offset]) {
+    if (_offset < _subtasks.count && [_subtasks objectAtIndex:_offset] == task) {
         [self failed:error];
     }
 }

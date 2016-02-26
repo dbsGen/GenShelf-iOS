@@ -39,6 +39,7 @@ typedef enum : NSUInteger {
 - (void)startLoading;
 - (void)complete;
 - (void)failed;
+- (void)cancel;
 - (void)reset;
 
 + (NSArray *)cachedItems:(NSInteger*)page hasNext:(BOOL*)hasNext expire:(BOOL *)expire;

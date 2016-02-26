@@ -91,6 +91,8 @@
 		B268ED081C7777E5001DD15F /* WarningDefaultLeftImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B268ECF21C7777E5001DD15F /* WarningDefaultLeftImage@2x.png */; };
 		B268ED091C7777E5001DD15F /* MBLMessageBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B268ECF51C7777E5001DD15F /* MBLMessageBannerView.m */; };
 		B296F6E81C7F26E30031AA62 /* GSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6E71C7F26E30031AA62 /* GSTask.m */; };
+		B2ABBA2E1C8019B900C02B7D /* GSLofiDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABBA2D1C8019B900C02B7D /* GSLofiDataControl.m */; };
+		B2ABBA321C8019DA00C02B7D /* GSLofiBookTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABBA311C8019DA00C02B7D /* GSLofiBookTask.m */; };
 		B2AD57831C7D4D2400280667 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2AD57821C7D4D0800280667 /* libsodium.a */; };
 		B2B1E04B1C7EB185004DCDF7 /* NSObject+GTools.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B1E04A1C7EB185004DCDF7 /* NSObject+GTools.m */; };
 		B2BDCBBD1C76DF5600DC3031 /* GSLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDCBBC1C76DF5600DC3031 /* GSLoadingCell.m */; };
@@ -118,7 +120,6 @@
 		B2F181391C7C13F200DA5BF3 /* GSRadiusImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F181381C7C13F200DA5BF3 /* GSRadiusImageView.m */; };
 		B2F44C221C78A1D900639756 /* GSDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C211C78A1D900639756 /* GSDataControl.m */; };
 		B2F44C261C78AA3700639756 /* NSURL+QueryDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C251C78AA3700639756 /* NSURL+QueryDictionary.m */; };
-		B2F44C291C78ADA500639756 /* GSLofiDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C281C78ADA500639756 /* GSLofiDataControl.m */; };
 		B2F44C2F1C78BD5C00639756 /* GSBookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C2E1C78BD5C00639756 /* GSBookItem.m */; };
 		B2F44C331C78C3FE00639756 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C321C78C3FE00639756 /* GDataXMLNode.m */; };
 		B2F44C431C7CA2C300639756 /* GSPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C421C7CA2C300639756 /* GSPreviewViewController.m */; };
@@ -300,6 +301,11 @@
 		B268ECF51C7777E5001DD15F /* MBLMessageBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLMessageBannerView.m; sourceTree = "<group>"; };
 		B296F6E61C7F26E30031AA62 /* GSTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSTask.h; sourceTree = "<group>"; };
 		B296F6E71C7F26E30031AA62 /* GSTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTask.m; sourceTree = "<group>"; };
+		B2ABBA2C1C8019B900C02B7D /* GSLofiDataControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiDataControl.h; sourceTree = "<group>"; };
+		B2ABBA2D1C8019B900C02B7D /* GSLofiDataControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLofiDataControl.m; sourceTree = "<group>"; };
+		B2ABBA301C8019DA00C02B7D /* GSLofiBookTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiBookTask.h; sourceTree = "<group>"; };
+		B2ABBA311C8019DA00C02B7D /* GSLofiBookTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLofiBookTask.m; sourceTree = "<group>"; };
+		B2ABBA331C80278900C02B7D /* GSDataDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSDataDefines.h; sourceTree = "<group>"; };
 		B2AD55861C7D4D0600280667 /* sodium.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = sodium.xcodeproj; sourceTree = "<group>"; };
 		B2B1E0491C7EB185004DCDF7 /* NSObject+GTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+GTools.h"; sourceTree = "<group>"; };
 		B2B1E04A1C7EB185004DCDF7 /* NSObject+GTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+GTools.m"; sourceTree = "<group>"; };
@@ -351,8 +357,6 @@
 		B2F44C211C78A1D900639756 /* GSDataControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSDataControl.m; sourceTree = "<group>"; };
 		B2F44C241C78AA3700639756 /* NSURL+QueryDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+QueryDictionary.h"; sourceTree = "<group>"; };
 		B2F44C251C78AA3700639756 /* NSURL+QueryDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+QueryDictionary.m"; sourceTree = "<group>"; };
-		B2F44C271C78ADA500639756 /* GSLofiDataControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiDataControl.h; sourceTree = "<group>"; };
-		B2F44C281C78ADA500639756 /* GSLofiDataControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLofiDataControl.m; sourceTree = "<group>"; };
 		B2F44C2D1C78BD5C00639756 /* GSBookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSBookItem.h; sourceTree = "<group>"; };
 		B2F44C2E1C78BD5C00639756 /* GSBookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSBookItem.m; sourceTree = "<group>"; };
 		B2F44C311C78C3FE00639756 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
@@ -726,6 +730,17 @@
 			path = TaskQueue;
 			sourceTree = "<group>";
 		};
+		B2ABBA2B1C8019B900C02B7D /* Lofi */ = {
+			isa = PBXGroup;
+			children = (
+				B2ABBA2C1C8019B900C02B7D /* GSLofiDataControl.h */,
+				B2ABBA2D1C8019B900C02B7D /* GSLofiDataControl.m */,
+				B2ABBA301C8019DA00C02B7D /* GSLofiBookTask.h */,
+				B2ABBA311C8019DA00C02B7D /* GSLofiBookTask.m */,
+			);
+			path = Lofi;
+			sourceTree = "<group>";
+		};
 		B2AD55851C7D4D0600280667 /* sodium */ = {
 			isa = PBXGroup;
 			children = (
@@ -872,6 +887,7 @@
 		B2F44C1F1C78A1C600639756 /* DataController */ = {
 			isa = PBXGroup;
 			children = (
+				B2ABBA2B1C8019B900C02B7D /* Lofi */,
 				B296F6E21C7F26D30031AA62 /* TaskQueue */,
 				B2F44C2D1C78BD5C00639756 /* GSBookItem.h */,
 				B2F44C2E1C78BD5C00639756 /* GSBookItem.m */,
@@ -879,8 +895,7 @@
 				B22675EE1C7C44DC00B5D5CC /* GSPageItem.m */,
 				B2F44C201C78A1D900639756 /* GSDataControl.h */,
 				B2F44C211C78A1D900639756 /* GSDataControl.m */,
-				B2F44C271C78ADA500639756 /* GSLofiDataControl.h */,
-				B2F44C281C78ADA500639756 /* GSLofiDataControl.m */,
+				B2ABBA331C80278900C02B7D /* GSDataDefines.h */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -1124,6 +1139,8 @@
 				B22305B31C781AB4001B18F5 /* GSHomeController.m in Sources */,
 				B268ED091C7777E5001DD15F /* MBLMessageBannerView.m in Sources */,
 				B2F181391C7C13F200DA5BF3 /* GSRadiusImageView.m in Sources */,
+				B2ABBA2E1C8019B900C02B7D /* GSLofiDataControl.m in Sources */,
+				B2ABBA321C8019DA00C02B7D /* GSLofiBookTask.m in Sources */,
 				B296F6E81C7F26E30031AA62 /* GSTask.m in Sources */,
 				B268ECF61C7777E5001DD15F /* MBLMessageBanner.m in Sources */,
 				B268EC991C7742FE001DD15F /* GSSearchViewController.m in Sources */,
@@ -1152,7 +1169,6 @@
 				B2F44C461C7CB3D000639756 /* GSThumCell.m in Sources */,
 				B22305CF1C783632001B18F5 /* SRRefreshView.m in Sources */,
 				B23366BC1C7EEDE8003EA467 /* GSModelPage.m in Sources */,
-				B2F44C291C78ADA500639756 /* GSLofiDataControl.m in Sources */,
 				B268ECB91C7763BA001DD15F /* ASIDownloadCache.m in Sources */,
 				B2F181331C7C062500DA5BF3 /* MTMd5.m in Sources */,
 				B2F1812F1C7C062500DA5BF3 /* MTMenoryCache.m in Sources */,

@@ -8,7 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "GSDataControl.h"
+#import "GSTask.h"
 
 @interface GSLofiDataControl : GSDataControl
+
+@property (nonatomic, strong) GSTaskQueue *taskQueue;
 
 @end

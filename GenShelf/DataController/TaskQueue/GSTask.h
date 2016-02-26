@@ -8,39 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol GSTaskDelegate;
-
-
-@interface GSTask : NSObject {
-    @protected
-    GSTask<GSTaskDelegate> *_parent;
-}
-
-@property (nonatomic, assign) BOOL running;
-@property (nonatomic, weak) id delegate;
-@property (nonatomic, assign) NSInteger retryCount;
-
-- (void)start;
-- (void)restart;
-- (void)cancel;
-
-- (void)complete;
-- (void)failed:(NSError *)error;
-
-// Need override
-- (void)run;
-
-@end
-
-@interface GSTaskGroup : GSTask
-
-@property (nonatomic, readonly) NSArray *tasks;
-@property (nonatomic, assign) NSInteger offset;
-
-- (void)addTask:(GSTask*)task;
-
-@end
-
+@class GSTask;
 
 @protocol GSTaskDelegate
 
@@ -50,5 +18,41 @@
 - (void)onTaskFailed:(GSTask *)task error:(NSError*)error;
 - (void)onTaskCancel:(GSTask *)task;
 - (void)onTask:(GSTask *)task progress:(CGFloat)progress;
+
+@end
+
+@interface GSTaskQueue : NSObject
+
+@property (nonatomic, readonly) NSArray<GSTask *> *tasks;
+
+- (void)addTask:(GSTask *)task;
+
+@end
+
+@interface GSTask : NSObject <GSTaskDelegate> 
+
+@property (nonatomic, readonly) NSArray<GSTask *> *subtasks;
+@property (nonatomic, assign) BOOL running;
+@property (nonatomic, weak) id delegate;
+@property (nonatomic, assign) NSInteger retryCount;
+@property (nonatomic, assign) NSInteger offset;
+
+@property (nonatomic, assign) NSTimeInterval timeDelay;
+
+- (void)addSubtask:(GSTask*)task;
+
+- (void)start;
+- (void)restart;
+- (void)cancel;
+
+- (void)complete;
+- (void)failed:(NSError *)error;
+- (void)fatalError:(NSError *)error;
+- (BOOL)progressSubtask;
+
+// Need override
+- (void)reset;
+- (void)run;
+- (void)finalFailed:(NSError *)error;
 
 @end
