@@ -242,6 +242,7 @@
 - (void)reset {}
 - (void)run {}
 - (void)finalFailed:(NSError *)error {}
+- (void)finalComplete {}
 
 - (void)_delayComplete {
     [self performBlock:^{
@@ -253,6 +254,7 @@
             [_parent onTaskComplete:self];
         }
         _tryCount = 0;
+        [self finalComplete];
     } afterDelay:_timeDelay];
 }
 
