@@ -15,6 +15,8 @@
 }
 
 @property (nonatomic, weak) id parent;
+@property (nonatomic, strong) NSString *identifier;
+@property (nonatomic, assign) NSInteger refCount;
 
 @end
 
@@ -51,6 +53,67 @@
 
 - (NSArray<GSTask*>*)tasks {
     return _tasks;
+}
+
+- (GSTask *)task:(NSString *)identifier {
+    for (NSUInteger n = 0, t = _tasks.count; n < t; n ++) {
+        GSTask *task = [_tasks objectAtIndex:n];
+        if ([task.identifier isEqualToString:identifier]) {
+            return task;
+        }
+    }
+    return nil;
+}
+
+- (id)createTask:(NSString *)identifier creator:(GSTaskCreator)creator {
+    GSTask *task = [self task:identifier];
+    if (!task && creator) {
+        task = creator();
+        task.parent = self;
+        task.refCount = 0;
+        [_tasks addObject:task];
+    }
+    return task;
+}
+
+- (BOOL)hasTask:(GSTask *)task {
+    return [_tasks containsObject:task];
+}
+
+- (BOOL)hasTaskI:(NSString *)identifier {
+    return [self task:identifier] != nil;
+}
+
+- (void)retainTask:(GSTask *)task {
+    if ([self hasTask:task]) {
+        task.refCount ++;
+    }
+}
+
+- (void)retainTaskI:(NSString *)identifier {
+    GSTask *task = [self task:identifier];
+    if (task) {
+        task.refCount ++;
+    }
+}
+
+- (void)releaseTask:(GSTask *)task {
+    if ([self hasTask:task]) {
+        task.refCount --;
+        if (task.refCount <= 0) {
+            [task cancel];
+        }
+    }
+}
+
+- (void)releaseTaskI:(NSString *)identifier {
+    GSTask *task = [self task:identifier];
+    if (task) {
+        task.refCount --;
+        if (task.refCount <= 0) {
+            [task cancel];
+        }
+    }
 }
 
 - (void)addTask:(GSTask *)task {
@@ -215,6 +278,13 @@
 - (void)addSubtask:(GSTask *)task {
     task.parent = self;
     [_subtasks addObject:task];
+}
+
+- (void)onTaskCancel:(GSTask *)task {
+    if (_offset < _subtasks.count && [_subtasks objectAtIndex:_offset] == task) {
+        _offset ++;
+        [self _checkSubtasks];
+    }
 }
 
 - (void)onTaskComplete:(GSTask *)task {

@@ -9,6 +9,9 @@
 #import <Foundation/Foundation.h>
 #import "GSModelNetPage.h"
 
+#define PAGE_ITEM_SET_IMAGE     @"page_item_set_image"
+#define PAGE_ITEM_REQUEST_IMAGE @"page_item_request_image"
+
 typedef enum : NSUInteger {
     GSPageItemStatusNotStart    = 0,
     GSPageItemStatusProgressing,
@@ -25,5 +28,11 @@ typedef enum : NSUInteger {
 
 - (id)initWithModel:(GSModelNetPage*)page;
 - (GSModelNetPage *)model;
+
+- (void)updateData;
+
+- (void)requestImage;
+- (void)complete;
+- (void)reset;
 
 @end

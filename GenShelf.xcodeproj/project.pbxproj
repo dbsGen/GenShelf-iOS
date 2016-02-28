@@ -91,6 +91,8 @@
 		B268ED081C7777E5001DD15F /* WarningDefaultLeftImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B268ECF21C7777E5001DD15F /* WarningDefaultLeftImage@2x.png */; };
 		B268ED091C7777E5001DD15F /* MBLMessageBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B268ECF51C7777E5001DD15F /* MBLMessageBannerView.m */; };
 		B296F6E81C7F26E30031AA62 /* GSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6E71C7F26E30031AA62 /* GSTask.m */; };
+		B296F6EC1C8326870031AA62 /* GSLofiDownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6EB1C8326870031AA62 /* GSLofiDownloadTask.m */; };
+		B296F6F01C8335170031AA62 /* GSPictureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6EF1C8335170031AA62 /* GSPictureManager.m */; };
 		B2ABBA2E1C8019B900C02B7D /* GSLofiDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABBA2D1C8019B900C02B7D /* GSLofiDataControl.m */; };
 		B2ABBA321C8019DA00C02B7D /* GSLofiBookTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABBA311C8019DA00C02B7D /* GSLofiBookTask.m */; };
 		B2AD57831C7D4D2400280667 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2AD57821C7D4D0800280667 /* libsodium.a */; };
@@ -301,6 +303,10 @@
 		B268ECF51C7777E5001DD15F /* MBLMessageBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLMessageBannerView.m; sourceTree = "<group>"; };
 		B296F6E61C7F26E30031AA62 /* GSTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSTask.h; sourceTree = "<group>"; };
 		B296F6E71C7F26E30031AA62 /* GSTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTask.m; sourceTree = "<group>"; };
+		B296F6EA1C8326870031AA62 /* GSLofiDownloadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiDownloadTask.h; sourceTree = "<group>"; };
+		B296F6EB1C8326870031AA62 /* GSLofiDownloadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLofiDownloadTask.m; sourceTree = "<group>"; };
+		B296F6EE1C8335170031AA62 /* GSPictureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPictureManager.h; sourceTree = "<group>"; };
+		B296F6EF1C8335170031AA62 /* GSPictureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPictureManager.m; sourceTree = "<group>"; };
 		B2ABBA2C1C8019B900C02B7D /* GSLofiDataControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiDataControl.h; sourceTree = "<group>"; };
 		B2ABBA2D1C8019B900C02B7D /* GSLofiDataControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLofiDataControl.m; sourceTree = "<group>"; };
 		B2ABBA301C8019DA00C02B7D /* GSLofiBookTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiBookTask.h; sourceTree = "<group>"; };
@@ -737,6 +743,8 @@
 				B2ABBA2D1C8019B900C02B7D /* GSLofiDataControl.m */,
 				B2ABBA301C8019DA00C02B7D /* GSLofiBookTask.h */,
 				B2ABBA311C8019DA00C02B7D /* GSLofiBookTask.m */,
+				B296F6EA1C8326870031AA62 /* GSLofiDownloadTask.h */,
+				B296F6EB1C8326870031AA62 /* GSLofiDownloadTask.m */,
 			);
 			path = Lofi;
 			sourceTree = "<group>";
@@ -896,6 +904,8 @@
 				B2F44C201C78A1D900639756 /* GSDataControl.h */,
 				B2F44C211C78A1D900639756 /* GSDataControl.m */,
 				B2ABBA331C80278900C02B7D /* GSDataDefines.h */,
+				B296F6EE1C8335170031AA62 /* GSPictureManager.h */,
+				B296F6EF1C8335170031AA62 /* GSPictureManager.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -1151,6 +1161,7 @@
 				B2F181301C7C062500DA5BF3 /* MTNetCacheElement.m in Sources */,
 				B268ECB81C7763BA001DD15F /* ASIDataDecompressor.m in Sources */,
 				B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */,
+				B296F6F01C8335170031AA62 /* GSPictureManager.m in Sources */,
 				B268ECC51C776FFE001DD15F /* GSSettingsViewController.m in Sources */,
 				B2F44C221C78A1D900639756 /* GSDataControl.m in Sources */,
 				B23366BF1C7EEDE8003EA467 /* GSModelBook+CoreDataProperties.m in Sources */,
@@ -1163,6 +1174,7 @@
 				B2F181311C7C062500DA5BF3 /* MTNetCacheManager.m in Sources */,
 				B22305AC1C78057B001B18F5 /* FXBlurView.m in Sources */,
 				B250EE311C73054D00198CDE /* AppDelegate.m in Sources */,
+				B296F6EC1C8326870031AA62 /* GSLofiDownloadTask.m in Sources */,
 				B23366C71C7EEF45003EA467 /* GSModelHomeData+CoreDataProperties.m in Sources */,
 				B268ECBD1C7763BA001DD15F /* ASINetworkQueue.m in Sources */,
 				B2F02F251C75BE0D00D93119 /* GCallback.m in Sources */,

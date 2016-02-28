@@ -12,6 +12,4 @@
 
 @interface GSLofiDataControl : GSDataControl
 
-@property (nonatomic, strong) GSTaskQueue *taskQueue;
-
 @end

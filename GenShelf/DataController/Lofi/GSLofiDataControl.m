@@ -23,7 +23,6 @@
     if (self) {
         _name = @"Lofi";
         _requestDelay = 2;
-        _taskQueue = [[GSTaskQueue alloc] init];
     }
     return self;
 }
@@ -64,9 +63,15 @@
 typedef void(^GSPageOver)(NSArray *pages, NSString *nextUrl);
 
 - (GSTask *)processBook:(GSBookItem *)book {
-    GSLofiBookTask *task = [[GSLofiBookTask alloc] initWithItem:book queue:self.operationQueue];
-    [_taskQueue addTask:task];
+    GSLofiBookTask *task = [self.taskQueue createTask:book.pageUrl
+                                              creator:^GSTask *{
+                                                  return [[GSLofiBookTask alloc] initWithItem:book queue:self.operationQueue];
+                                              }];
     return task;
+}
+
+- (GSTask *)downloadBook:(GSBookItem *)book {
+    return nil;
 }
 
 #undef URL_HOST

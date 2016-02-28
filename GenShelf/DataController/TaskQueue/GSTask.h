@@ -21,15 +21,27 @@
 
 @end
 
+typedef GSTask*(^GSTaskCreator)();
+
 @interface GSTaskQueue : NSObject
 
 @property (nonatomic, readonly) NSArray<GSTask *> *tasks;
 
-- (void)addTask:(GSTask *)task;
+- (GSTask *)task:(NSString *)identifier;
+- (id)createTask:(NSString *)identifier creator:(GSTaskCreator)creator;
+
+- (void)retainTask:(GSTask *)task;
+- (void)retainTaskI:(NSString *)identifier;
+
+- (void)releaseTask:(GSTask *)task;
+- (void)releaseTaskI:(NSString *)identifier;
+
+- (BOOL)hasTask:(GSTask *)task;
+- (BOOL)hasTaskI:(NSString *)identifier;
 
 @end
 
-@interface GSTask : NSObject <GSTaskDelegate> 
+@interface GSTask : NSObject <GSTaskDelegate>
 
 @property (nonatomic, readonly) NSArray<GSTask *> *subtasks;
 @property (nonatomic, assign) BOOL running;

@@ -38,7 +38,7 @@
     if (self) {
         _url = url;
         _queue = queue;
-        self.timeDelay = 2;
+        self.timeDelay = 1;
     }
     return self;
 }

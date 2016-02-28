@@ -18,6 +18,7 @@
     if (self) {
         _operationQueue = [[NSOperationQueue alloc] init];
         _operationQueue.maxConcurrentOperationCount = 1;
+        _taskQueue = [[GSTaskQueue alloc] init];
     }
     return self;
 }
@@ -43,6 +44,7 @@
 - (NSArray<GSBookItem *> *)parseMain:(NSString *)html {
     return [NSArray array];
 }
-- (void)processBook:(GSBookItem *)book {}
+- (GSTask *)processBook:(GSBookItem *)book {return nil;}
+- (GSTask *)downloadBook:(GSBookItem *)book {return nil;}
 
 @end

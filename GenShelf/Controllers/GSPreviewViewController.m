@@ -48,14 +48,20 @@ static NSString *identifier = @"CellIdentifier";
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:BOOK_ITEM_UPDATE
                                                   object:nil];
-    if (_currentTask && _currentTask.running) {
-        [_currentTask cancel];
-    }
+    [[GSGlobals dataControl].taskQueue releaseTask:_currentTask];
 }
 
 - (void)setItem:(GSBookItem *)item {
-    _item = item;
-    self.title = item.title;
+    if (_item != item) {
+        _item = item;
+        self.title = item.title;
+        GSTask *task = [[GSGlobals dataControl] processBook:_item];
+        [[GSGlobals dataControl].taskQueue retainTask:task];
+        if (_currentTask) {
+            [[GSGlobals dataControl].taskQueue releaseTask:_currentTask];
+        }
+        _currentTask = task;
+    }
 }
 
 - (void)viewDidLoad {
@@ -85,9 +91,6 @@ static NSString *identifier = @"CellIdentifier";
     
     _collectionView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     [_refreshView update:20 + self.navigationController.navigationBar.bounds.size.height];
-    if (!_item.loading) {
-        _currentTask = [[GSGlobals dataControl] processBook:_item];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
