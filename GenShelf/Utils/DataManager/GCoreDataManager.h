@@ -23,6 +23,7 @@
 
 - (NSArray*)fetch:(NSString*)cls;
 - (NSArray*)fetch:(NSString*)cls predicate:(NSPredicate *)predicate;
+- (NSArray*)fetch:(NSString*)cls predicate:(NSPredicate *)predicate sorts:(NSArray<NSSortDescriptor*> *)sorts;
 
 @end
 
@@ -31,6 +32,7 @@
 typedef void(^GConstuctorBlock)(id object);
 + (NSArray *)all;
 + (NSArray *)fetch:(NSPredicate *)predicate;
++ (NSArray *)fetch:(NSPredicate *)predicate sorts:(NSArray<NSSortDescriptor*> *)sorts;
 + (instancetype)create;
 + (instancetype)fetchOrCreate:(NSPredicate *)predicate constructor:(GConstuctorBlock)block;
 - (void)remove;

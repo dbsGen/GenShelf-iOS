@@ -34,7 +34,6 @@ static GSPictureManager *__defaultManager = nil;
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         NSString *path = [paths lastObject];
         _tempPath = [path stringByAppendingPathComponent:DIR_PATH];
-        NSLog(@"%@", _tempPath);
     }
     return _tempPath;
 }
@@ -43,7 +42,7 @@ static GSPictureManager *__defaultManager = nil;
     NSString *path = [self path:book page:page];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:path]) {
-        [fileManager delete:path];
+        [fileManager removeItemAtPath:path error:nil];
     }
     [data writeToFile:path atomically:YES];
 }

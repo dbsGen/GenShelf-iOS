@@ -7,6 +7,7 @@
 //
 
 #import "GSSearchViewController.h"
+#import "GSideMenuController.h"
 
 @interface GSSearchViewController ()
 
@@ -18,6 +19,10 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"搜索";
+        self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"]
+                                                                                 style:UIBarButtonItemStylePlain
+                                                                                target:self.sideMenuController
+                                                                                action:@selector(openMenu)];
     }
     return self;
 }

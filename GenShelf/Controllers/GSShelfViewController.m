@@ -8,8 +8,16 @@
 
 #import "GSShelfViewController.h"
 #import "GSideMenuController.h"
+#import "GSBookItem.h"
+#import "GSBookCell.h"
+#import "GCoreDataManager.h"
+#import "GSModelNetBook.h"
 
-@interface GSShelfViewController ()
+@interface GSShelfViewController ()<UITableViewDelegate, UITableViewDataSource> {
+    NSArray<GSBookItem *> * _datas;
+}
+
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -27,26 +35,52 @@
     return self;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    NSArray *arr = [GSModelNetBook fetch:[NSPredicate predicateWithFormat:@"mark==YES"]
+                                   sorts:@[[NSSortDescriptor sortDescriptorWithKey:@"downloadDate"
+                                                                         ascending:NO]]];
+    _datas = [GSBookItem items:arr];
+    [_tableView reloadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(100, 100, 100, 30)];
-    [button setTitle:@"OpenMenu"
-            forState:UIControlStateNormal];
-    [button addTarget:self
-               action:@selector(openMenu)
-     forControlEvents:UIControlEventTouchUpInside];
-    button.backgroundColor = [UIColor redColor];
-    [self.view addSubview:button];
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds
+                                              style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    [self.view addSubview:_tableView];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)openMenu {
     [self.sideMenuController openMenu];
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 180;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _datas.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *identifier = @"NormalCell";
+    GSBookCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[GSBookCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                 reuseIdentifier:identifier];
+    }
+    GSBookItem *item = [_datas objectAtIndex:indexPath.row];
+    cell.imageUrl = item.imageUrl;
+    cell.titleLabel.text = item.title;
+    return cell;
 }
 
 @end

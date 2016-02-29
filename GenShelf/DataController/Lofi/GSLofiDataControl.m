@@ -42,11 +42,12 @@
     
     NSMutableArray<GSBookItem *> *res = [NSMutableArray<GSBookItem*> array];
     for (GDataXMLNode *node in divs) {
-        GSBookItem *item = [[GSBookItem alloc] init];
         GDataXMLElement *imageNode = (GDataXMLElement*)[node firstNodeForXPath:@"node()//td[@class='ii']/a"
                                                                          error:&error];
         CheckErrorC
-        item.pageUrl = [imageNode attributeForName:@"href"].stringValue;
+        NSString *pageUrl = [imageNode attributeForName:@"href"].stringValue;
+        GSBookItem *item = [GSBookItem itemWithUrl:pageUrl];
+        
         GDataXMLElement *sImageNode = (GDataXMLElement*)[imageNode firstNodeForXPath:@"img"
                                                                                error:&error];
         CheckErrorC
@@ -60,8 +61,6 @@
     }
     return res;
 }
-
-typedef void(^GSPageOver)(NSArray *pages, NSString *nextUrl);
 
 - (GSTask *)processBook:(GSBookItem *)book {
     if (book.status != GSBookItemStatusComplete) {

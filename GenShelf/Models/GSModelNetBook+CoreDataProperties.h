@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GSModelNetBook (CoreDataProperties)
 
+@property (nullable, nonatomic, retain) NSDate *downloadDate;
 @property (nullable, nonatomic, retain) NSNumber *mark;
 @property (nullable, nonatomic, retain) NSString *imageUrl;
 @property (nullable, nonatomic, retain) NSNumber *index;

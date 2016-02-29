@@ -12,9 +12,20 @@
 
 const NSTimeInterval GSTimeADay = 3600*24;
 
+static NSMutableArray<GSBookItem*> *__allBooks = nil;
+
 @implementation GSBookItem {
     NSMutableArray<GSPageItem *> *_page_items;
     GSModelNetBook *_model;
+}
+
++ (NSMutableArray<GSBookItem*> *)allBooks {
+    @synchronized(self) {
+        if (!__allBooks) {
+            __allBooks = [[NSMutableArray<GSBookItem*> alloc] init];
+        }
+    }
+    return __allBooks;
 }
 
 - (id)init {
@@ -27,24 +38,51 @@ const NSTimeInterval GSTimeADay = 3600*24;
     return self;
 }
 
-- (id)initWithModel:(GSModelNetBook *)book {
-    self = [self init];
-    if (self) {
-        _model = book;
-        _status = book.status.integerValue;
-        _title = book.title;
-        _pageUrl = book.pageUrl;
-        _imageUrl = book.imageUrl;
-        _otherData = book.otherData;
-        _mark = NO;
-        _loading = false;
-        for (GSModelNetPage *model in book.pages) {
-            GSPageItem *item = [[GSPageItem alloc] initWithModel:model];
-            item.book = self;
-            [_page_items addObject:item];
++ (NSArray<GSBookItem *> *)items:(NSArray<GSModelNetBook *> *)books {
+    if (books) {
+        NSMutableArray *arr = [NSMutableArray array];
+        for (GSModelNetBook *b in books) {
+            [arr addObject:[self itemWithModel:b]];
+        }
+        return arr;
+    }
+    return nil;
+}
+
++ (GSBookItem *)itemWithUrl:(NSString *)pageUrl {
+    NSMutableArray<GSBookItem*> *all = [self allBooks];
+    for (GSBookItem *item in all) {
+        if ([item.pageUrl isEqualToString:pageUrl]) {
+            return item;
         }
     }
-    return self;
+    GSBookItem *ret = [[GSBookItem alloc] init];
+    ret.pageUrl = pageUrl;
+    [all addObject:ret];
+    while (all.count > 100) {
+        [all removeObjectAtIndex:0];
+    }
+    return ret;
+}
+
++ (GSBookItem *)itemWithModel:(GSModelNetBook*)book {
+    GSBookItem *ret = [self itemWithUrl:book.pageUrl];
+    ret->_model = book;
+    ret.status = book.status.integerValue;
+    ret.title = book.title;
+    ret.pageUrl = book.pageUrl;
+    ret.imageUrl = book.imageUrl;
+    ret.otherData = book.otherData;
+    ret.downloadDate = book.downloadDate;
+    ret.mark = NO;
+    ret.loading = NO;
+    [ret->_page_items removeAllObjects];
+    for (GSModelNetPage *model in book.pages) {
+        GSPageItem *item = [[GSPageItem alloc] initWithModel:model];
+        item.book = ret;
+        [ret->_page_items addObject:item];
+    }
+    return ret;
 }
 
 - (GSModelNetBook *)model {
@@ -56,6 +94,7 @@ const NSTimeInterval GSTimeADay = 3600*24;
                                        book.pageUrl = _pageUrl;
                                        book.imageUrl = _imageUrl;
                                        book.otherData = _otherData;
+                                       book.downloadDate = _downloadDate;
                                        book.mark = [NSNumber numberWithBool:_mark];
                                        book.status = [NSNumber numberWithInteger:_status];
                                    }];
@@ -68,6 +107,7 @@ const NSTimeInterval GSTimeADay = 3600*24;
     b.status = [NSNumber numberWithInteger:_status];
     b.otherData = _otherData;
     b.mark = [NSNumber numberWithBool:_mark];
+    b.downloadDate = _downloadDate;
     NSMutableArray *arr = [NSMutableArray array];
     for (GSPageItem *pitem in self.pages) {
         [arr addObject:pitem.model];
@@ -141,6 +181,7 @@ const NSTimeInterval GSTimeADay = 3600*24;
 
 - (void)download {
     _mark = YES;
+    _downloadDate = [NSDate date];
     [self updateData];
     [[GCoreDataManager shareManager] save];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_DOWNLOAD
@@ -154,7 +195,7 @@ const NSTimeInterval GSTimeADay = 3600*24;
         NSMutableArray *res = [NSMutableArray array];
         GSModelHomeData *data = all.firstObject;
         for (GSModelNetBook *book in data.books) {
-            [res addObject:[[GSBookItem alloc] initWithModel:book]];
+            [res addObject:[GSBookItem itemWithModel:book]];
         }
         if (page)
             *page = data.page.integerValue;

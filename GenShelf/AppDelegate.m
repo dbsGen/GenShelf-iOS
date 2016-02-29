@@ -20,7 +20,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-//    [ASIHTTPRequest sharedQueue].maxConcurrentOperationCount = 1;
+    [ASIHTTPRequest sharedQueue].maxConcurrentOperationCount = 3;
     
     [GSGlobals runShadowsocksThread];
     

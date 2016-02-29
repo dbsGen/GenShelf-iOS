@@ -78,7 +78,7 @@ int count;
         _bottomLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.bounds.size.height - 30, self.bounds.size.width, 15)];
         _bottomLabel.backgroundColor = [UIColor clearColor];
         _bottomLabel.textColor = [UIColor whiteColor];
-        _bottomLabel.textAlignment = UITextAlignmentCenter;
+        _bottomLabel.textAlignment = NSTextAlignmentCenter;
         _bottomLabel.text = @"";
         _bottomLabel.font = [UIFont boldSystemFontOfSize:15];
         _bottomLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.6];
@@ -89,7 +89,7 @@ int count;
         _topLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 15, self.bounds.size.width, 15)];
         _topLabel.backgroundColor = [UIColor clearColor];
         _topLabel.textColor = [UIColor whiteColor];
-        _topLabel.textAlignment = UITextAlignmentCenter;
+        _topLabel.textAlignment = NSTextAlignmentCenter;
         _topLabel.text = @"";
         _topLabel.font = [UIFont boldSystemFontOfSize:15];
         _topLabel.shadowColor = [UIColor colorWithWhite:0 alpha:0.6];
@@ -232,7 +232,7 @@ int count;
     }
     _animationCount = 0;
     _count = [_delegate numberOfFlipViewPage:self];
-    int page = _pageIndex;
+    NSInteger page = _pageIndex;
     if (page >= _count) {
         page = _count - 1;
     }
@@ -262,8 +262,8 @@ int count;
                belowSubview:_backContentView];
     }
     
-    int totle = [_cachedImageViews count];
-    for (int n = _cacheRange.location; n < totle; n++) {
+    NSInteger totle = [_cachedImageViews count];
+    for (NSInteger n = _cacheRange.location; n < totle; n++) {
         if (n < page) {
             MTFlipAnimationView *view = [self imageViewWithIndex:n];
             [view removeFromSuperview];
@@ -343,7 +343,7 @@ int count;
     if (aniamted) {
         self.userInteractionEnabled = NO;
         //清除旧的
-        for (int n = _pageIndex + 1 ; n < _cacheRange.location + _cacheRange.length ; n++) {
+        for (NSInteger n = _pageIndex + 1 ; n < _cacheRange.location + _cacheRange.length ; n++) {
             MTFlipAnimationView *view = [_cachedImageViews lastObject];
             if ([view isKindOfClass:[UIView class]]) {
                 [self pushViewToCache:view];
@@ -353,15 +353,15 @@ int count;
         }
         
         NSMutableArray *aniamtionArr = [NSMutableArray array];
-        int toIndex = _cacheRange.location;
-        int nowCount = _pageIndex - _cacheRange.location;
+        NSInteger toIndex = _cacheRange.location;
+        NSInteger nowCount = _pageIndex - _cacheRange.location;
         if (nowCount < 25) {
-            int to = 25 - nowCount;
+            NSInteger to = 25 - nowCount;
             toIndex = _cacheRange.location - to;
             if (toIndex < 0) {
                 toIndex = 0;
             }
-            for (int n = _cacheRange.location - 1 ; n >= toIndex; n--) {
+            for (NSInteger n = _cacheRange.location - 1 ; n >= toIndex; n--) {
                 MTFlipAnimationView *view = [_delegate flipView:self dragingView:n];
                 [view setAnimationPercent:-1];
                 [aniamtionArr addObject:view];
@@ -374,13 +374,13 @@ int count;
             [_transationView addSubview:view];
         }
         
-        for (int n = _cacheRange.location ; n <= _pageIndex ; n++) {
+        for (NSInteger n = _cacheRange.location ; n <= _pageIndex ; n++) {
             MTFlipAnimationView *view = [_cachedImageViews objectAtIndex:n];
             [view setAnimationPercent:-1];
             [aniamtionArr insertObject:view atIndex:0];
         }
         
-        for (int n = 0, t = [aniamtionArr count]; n < t ; n ++) {
+        for (NSInteger n = 0, t = [aniamtionArr count]; n < t ; n ++) {
             MTFlipAnimationView *view = [aniamtionArr objectAtIndex:n];
             [_transationView addSubview:view];
             if (0 == n) {
@@ -408,7 +408,7 @@ int count;
 {
     [UIView animateWithDuration:kBaseDurationK
                           delay:0
-                        options:UIViewAnimationCurveEaseOut
+                        options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
                          [view setAnimationPercent:0];
                      } completion:^(BOOL finished) {
@@ -521,7 +521,7 @@ int count;
 {
     [UIView transitionWithView:view
                       duration:0.4
-                       options:UIViewAnimationCurveLinear
+                       options:UIViewAnimationOptionCurveLinear
                     animations:^{
                         [view setAnimationPercent:-1];
                     } completion:^(BOOL finished) {
@@ -535,7 +535,7 @@ int count;
 {
     [UIView transitionWithView:view
                       duration:0.4
-                       options:UIViewAnimationCurveLinear
+                       options:UIViewAnimationOptionCurveLinear
                     animations:^{
                         [view setAnimationPercent:0];
                     } completion:^(BOOL finished) {
@@ -556,7 +556,7 @@ int count;
     CGFloat sect = - hOffset / 3;
     [UIView animateWithDuration:0.25
                           delay:0 
-                        options:UIViewAnimationCurveEaseOut
+                        options:UIViewAnimationOptionCurveEaseOut
                      animations:^
      {
          [view setAnimationPercent:(sect / rect.size.height)];
@@ -565,7 +565,7 @@ int count;
          if (finished) {
              [UIView animateWithDuration:0.13
                                    delay:0
-                                 options:UIViewAnimationCurveEaseInOut
+                                 options:UIViewAnimationOptionCurveEaseIn
                               animations:^
               {
                   [view setAnimationPercent:0];
@@ -592,7 +592,7 @@ int count;
     }
     [UIView transitionWithView:view
                       duration:0.4
-                       options:UIViewAnimationCurveEaseOut
+                       options:UIViewAnimationOptionCurveEaseOut
                     animations:^{
                         view.center = p;
                     } completion:^(BOOL finished) {
@@ -608,7 +608,7 @@ int count;
         -rect.size.height / 2 + rect.origin.y - 40};
     [UIView transitionWithView:view
                       duration:0.4
-                       options:UIViewAnimationCurveEaseOut
+                       options:UIViewAnimationOptionCurveEaseOut
                     animations:^{
                         view.center = p;
                     } completion:^(BOOL finished) {
@@ -622,7 +622,7 @@ int count;
     _animation = YES;
     [UIView transitionWithView:view
                       duration:0.23
-                       options:UIViewAnimationCurveEaseOut
+                       options:UIViewAnimationOptionCurveEaseOut
                     animations:^{
                         view.center = (CGPoint){20 - rect2.size.width / 2 + rect2.origin.x,
                             rect2.size.height / 2 + rect2.origin.y};
@@ -642,7 +642,7 @@ int count;
     _animation = YES;
     [UIView transitionWithView:view
                       duration:0.23
-                       options:UIViewAnimationCurveEaseOut
+                       options:UIViewAnimationOptionCurveEaseOut
                     animations:^{
                         view.center = (CGPoint){rect2.size.width / 2 + rect2.size.width - 90,
                             rect2.size.height / 2 + rect2.origin.y};
@@ -662,7 +662,7 @@ int count;
     rect2 = self.frame;
     [UIView transitionWithView:self
                       duration:0.4
-                       options:UIViewAnimationCurveEaseOut
+                       options:UIViewAnimationOptionCurveEaseOut
                     animations:^{
                         self.center = (CGPoint){20 - rect.size.width / 2 + rect.origin.x,
                             rect2.size.height / 2 + rect2.origin.y};
@@ -677,7 +677,7 @@ int count;
     CGRect rect2 = self.bounds;
     [UIView transitionWithView:self
                       duration:0.23
-                       options:UIViewAnimationCurveEaseOut
+                       options:UIViewAnimationOptionCurveEaseOut
                     animations:^{
                         view.center = (CGPoint){rect2.size.width / 2 + rect2.origin.x,
                             rect2.size.height / 2 + rect2.origin.y};
@@ -1106,7 +1106,7 @@ static NSTimeInterval __start;
 
 - (void)clean
 {
-    int totle = [_cachedImageViews count];
+    NSInteger totle = [_cachedImageViews count];
     _cacheRange.location = _pageIndex;
     _cacheRange.length = 1;
     for (int n = 0; n < totle; n++) {
@@ -1270,7 +1270,7 @@ static NSTimeInterval __start;
     if (![_delegate respondsToSelector:@selector(flipViewPrePushDragingView:)]) {
         return;
     }
-    int other = count - _cacheRange.length;
+    NSInteger other = count - _cacheRange.length;
     while (1) {
         int tcount = 0;
         NSEnumerator *enums = [_unuseViews keyEnumerator];
@@ -1289,7 +1289,7 @@ static NSTimeInterval __start;
 
 - (BOOL)open
 {
-    return fabsf(_transationView.center.x - (self.bounds.size.width / 2)) > 2;
+    return fabs(_transationView.center.x - (self.bounds.size.width / 2)) > 2;
 }
 
 @end

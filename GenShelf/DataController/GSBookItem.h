@@ -25,13 +25,16 @@ typedef enum : NSUInteger {
 
 @interface GSBookItem : NSObject
 
-- (id)initWithModel:(GSModelNetBook*)book;
++ (NSArray<GSBookItem *> *)items:(NSArray<GSModelNetBook *> *)books;
++ (GSBookItem *)itemWithUrl:(NSString *)pageUrl;
++ (GSBookItem *)itemWithModel:(GSModelNetBook*)book;
 - (GSModelNetBook *)model;
 
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *pageUrl;
 @property (nonatomic, retain) NSString *imageUrl;
 @property (nonatomic, retain) NSString *otherData;
+@property (nonatomic, retain) NSDate *downloadDate;
 @property (nonatomic, assign) BOOL mark;
 
 @property (nonatomic, assign) GSBookItemStatus status;

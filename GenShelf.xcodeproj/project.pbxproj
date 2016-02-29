@@ -88,6 +88,11 @@
 		B268ED091C7777E5001DD15F /* MBLMessageBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B268ECF51C7777E5001DD15F /* MBLMessageBannerView.m */; };
 		B26936E51C840A4A00D2D35E /* GSModelNetPage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B26936E41C840A4A00D2D35E /* GSModelNetPage+CoreDataProperties.m */; };
 		B26936EB1C8424FA00D2D35E /* GenShelf.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B26936E91C8424FA00D2D35E /* GenShelf.xcdatamodeld */; };
+		B26936F51C844D2100D2D35E /* bg_detail_panelshadow.png in Resources */ = {isa = PBXBuildFile; fileRef = B26936ED1C844D2100D2D35E /* bg_detail_panelshadow.png */; };
+		B26936F61C844D2100D2D35E /* bg_detail_panelshadow@2X.png in Resources */ = {isa = PBXBuildFile; fileRef = B26936EE1C844D2100D2D35E /* bg_detail_panelshadow@2X.png */; };
+		B26936F71C844D2100D2D35E /* MTBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B26936F01C844D2100D2D35E /* MTBlockOperation.m */; };
+		B26936F81C844D2100D2D35E /* MTDragFlipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B26936F21C844D2100D2D35E /* MTDragFlipView.m */; };
+		B26936F91C844D2100D2D35E /* MTFlipAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B26936F41C844D2100D2D35E /* MTFlipAnimationView.m */; };
 		B296F6E81C7F26E30031AA62 /* GSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6E71C7F26E30031AA62 /* GSTask.m */; };
 		B296F6EC1C8326870031AA62 /* GSLofiDownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6EB1C8326870031AA62 /* GSLofiDownloadTask.m */; };
 		B296F6F01C8335170031AA62 /* GSPictureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6EF1C8335170031AA62 /* GSPictureManager.m */; };
@@ -295,6 +300,14 @@
 		B26936E31C840A4A00D2D35E /* GSModelNetPage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSModelNetPage+CoreDataProperties.h"; sourceTree = "<group>"; };
 		B26936E41C840A4A00D2D35E /* GSModelNetPage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GSModelNetPage+CoreDataProperties.m"; sourceTree = "<group>"; };
 		B26936EA1C8424FA00D2D35E /* GenShelf.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GenShelf.xcdatamodel; sourceTree = "<group>"; };
+		B26936ED1C844D2100D2D35E /* bg_detail_panelshadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_detail_panelshadow.png; sourceTree = "<group>"; };
+		B26936EE1C844D2100D2D35E /* bg_detail_panelshadow@2X.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg_detail_panelshadow@2X.png"; sourceTree = "<group>"; };
+		B26936EF1C844D2100D2D35E /* MTBlockOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTBlockOperation.h; sourceTree = "<group>"; };
+		B26936F01C844D2100D2D35E /* MTBlockOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTBlockOperation.m; sourceTree = "<group>"; };
+		B26936F11C844D2100D2D35E /* MTDragFlipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTDragFlipView.h; sourceTree = "<group>"; };
+		B26936F21C844D2100D2D35E /* MTDragFlipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDragFlipView.m; sourceTree = "<group>"; };
+		B26936F31C844D2100D2D35E /* MTFlipAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTFlipAnimationView.h; sourceTree = "<group>"; };
+		B26936F41C844D2100D2D35E /* MTFlipAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTFlipAnimationView.m; sourceTree = "<group>"; };
 		B296F6E61C7F26E30031AA62 /* GSTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSTask.h; sourceTree = "<group>"; };
 		B296F6E71C7F26E30031AA62 /* GSTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTask.m; sourceTree = "<group>"; };
 		B296F6EA1C8326870031AA62 /* GSLofiDownloadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiDownloadTask.h; sourceTree = "<group>"; };
@@ -717,6 +730,21 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		B26936EC1C844D2100D2D35E /* FlipView */ = {
+			isa = PBXGroup;
+			children = (
+				B26936ED1C844D2100D2D35E /* bg_detail_panelshadow.png */,
+				B26936EE1C844D2100D2D35E /* bg_detail_panelshadow@2X.png */,
+				B26936EF1C844D2100D2D35E /* MTBlockOperation.h */,
+				B26936F01C844D2100D2D35E /* MTBlockOperation.m */,
+				B26936F11C844D2100D2D35E /* MTDragFlipView.h */,
+				B26936F21C844D2100D2D35E /* MTDragFlipView.m */,
+				B26936F31C844D2100D2D35E /* MTFlipAnimationView.h */,
+				B26936F41C844D2100D2D35E /* MTFlipAnimationView.m */,
+			);
+			path = FlipView;
+			sourceTree = "<group>";
+		};
 		B296F6E21C7F26D30031AA62 /* TaskQueue */ = {
 			isa = PBXGroup;
 			children = (
@@ -811,6 +839,7 @@
 		B2F02F191C75BE0D00D93119 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B26936EC1C844D2100D2D35E /* FlipView */,
 				B2B1E0481C7EB12C004DCDF7 /* Object */,
 				B2F181201C7C062500DA5BF3 /* CacheManager */,
 				B2F181291C7C062500DA5BF3 /* MD5 */,
@@ -1085,6 +1114,7 @@
 				B250EE3C1C73054D00198CDE /* Assets.xcassets in Resources */,
 				B268ECF91C7777E5001DD15F /* ErrorBackgroundDefaultImage.png in Resources */,
 				B268ECF71C7777E5001DD15F /* LICENSE in Resources */,
+				B26936F51C844D2100D2D35E /* bg_detail_panelshadow.png in Resources */,
 				B20A34891C747FB7000CCFA3 /* LaunchScreen.storyboard in Resources */,
 				B268ECD21C77745D001DD15F /* progress.png in Resources */,
 				B268ED011C7777E5001DD15F /* SuccessBackgroundDefaultImage.png in Resources */,
@@ -1092,6 +1122,7 @@
 				B268ECD81C77745D001DD15F /* squares.png in Resources */,
 				B268ECD51C77745D001DD15F /* search@2x.png in Resources */,
 				B22305CD1C783632001B18F5 /* sr_refresh.png in Resources */,
+				B26936F61C844D2100D2D35E /* bg_detail_panelshadow@2X.png in Resources */,
 				B268ECD11C77745D001DD15F /* home@2x.png in Resources */,
 				B22675EB1C7C355600B5D5CC /* no_image.png in Resources */,
 			);
@@ -1145,6 +1176,7 @@
 				B268ECF61C7777E5001DD15F /* MBLMessageBanner.m in Sources */,
 				B268EC991C7742FE001DD15F /* GSSearchViewController.m in Sources */,
 				B23366C21C7EEDE8003EA467 /* GSModelHomeData.m in Sources */,
+				B26936F71C844D2100D2D35E /* MTBlockOperation.m in Sources */,
 				B22675EF1C7C44DC00B5D5CC /* GSPageItem.m in Sources */,
 				B22305C41C78250E001B18F5 /* GCoreDataManager.m in Sources */,
 				B2F181301C7C062500DA5BF3 /* MTNetCacheElement.m in Sources */,
@@ -1174,6 +1206,7 @@
 				B2F181331C7C062500DA5BF3 /* MTMd5.m in Sources */,
 				B2F1812F1C7C062500DA5BF3 /* MTMenoryCache.m in Sources */,
 				B2F02F261C75BE0D00D93119 /* GEase.m in Sources */,
+				B26936F81C844D2100D2D35E /* MTDragFlipView.m in Sources */,
 				B23366BD1C7EEDE8003EA467 /* GSModelNetBook+CoreDataProperties.m in Sources */,
 				B2F02F2D1C75C1E200D93119 /* GSSelectView.m in Sources */,
 				B268ECBA1C7763BA001DD15F /* ASIFormDataRequest.m in Sources */,
@@ -1190,6 +1223,7 @@
 				B268ECB71C7763BA001DD15F /* ASIDataCompressor.m in Sources */,
 				B2F02F181C75B24600D93119 /* GSSwitchCell.m in Sources */,
 				B22305AD1C78057B001B18F5 /* HexColors.m in Sources */,
+				B26936F91C844D2100D2D35E /* MTFlipAnimationView.m in Sources */,
 				B26936EB1C8424FA00D2D35E /* GenShelf.xcdatamodeld in Sources */,
 				B2F1812E1C7C062500DA5BF3 /* MTLocationCache.m in Sources */,
 				B22305D01C783632001B18F5 /* SRSlimeView.m in Sources */,

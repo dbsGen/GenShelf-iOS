@@ -53,8 +53,6 @@ static GCoreDataManager *_defaultManager = NULL;
         
         _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
         NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"GenShelf.sqlite"];
-//        [[NSFileManager defaultManager] removeItemAtURL:storeURL
-//                                                  error:nil];
         NSError *error = nil;
         NSString *failureReason = @"There was an error creating or loading the application's saved data.";
         if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
@@ -127,11 +125,18 @@ static GCoreDataManager *_defaultManager = NULL;
 }
 
 - (NSArray*)fetch:(NSString*)cls predicate:(NSPredicate *)predicate {
+    return [self fetch:cls predicate:predicate sorts:nil];
+}
+
+- (NSArray*)fetch:(NSString*)cls predicate:(NSPredicate *)predicate sorts:(NSArray<NSSortDescriptor *> *)sorts {
     NSManagedObjectContext *moc = self.managedObjectContext;
     if (moc) {
         NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:cls];
         if (predicate) {
             [request setPredicate:predicate];
+        }
+        if (sorts) {
+            [request setSortDescriptors:sorts];
         }
         NSError *error = nil;
         NSArray *results = [moc executeFetchRequest:request error:&error];
@@ -156,6 +161,12 @@ static GCoreDataManager *_defaultManager = NULL;
 + (NSArray *)fetch:(NSPredicate *)predicate {
     return [[GCoreDataManager shareManager] fetch:NSStringFromClass([self class])
                                         predicate:predicate];
+}
+
++ (NSArray *)fetch:(NSPredicate *)predicate sorts:(NSArray<NSSortDescriptor *> *)sorts {
+    return [[GCoreDataManager shareManager] fetch:NSStringFromClass([self class])
+                                        predicate:predicate
+                                            sorts:sorts];
 }
 
 + (instancetype)fetchOrCreate:(NSPredicate *)predicate constructor:(GConstuctorBlock)block {
