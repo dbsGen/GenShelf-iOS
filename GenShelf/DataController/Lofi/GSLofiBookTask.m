@@ -182,7 +182,7 @@
 
 - (void)reset {
     [super reset];
-    [_item failed];
+    [_item reset];
 }
 
 @end

@@ -8,6 +8,7 @@
 
 #import "GSPageItem.h"
 #import "GCoreDataManager.h"
+#import "GSPictureManager.h"
 
 @implementation GSPageItem {
     GSModelNetPage *_model;
@@ -38,6 +39,14 @@
                                    }];
     }
     return _model;
+}
+
+- (NSString *)imagePath {
+    if (_status == GSPageItemStatusComplete) {
+        return [[GSPictureManager defaultManager] path:self.book
+                                                  page:self];
+    }
+    return nil;
 }
 
 - (void)updateData {

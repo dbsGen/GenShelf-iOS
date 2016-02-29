@@ -11,6 +11,8 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@class GSModelNetBook;
+
 @interface GSModelNetPage : NSManagedObject
 
 // Insert code here to declare functionality of your managed object subclass

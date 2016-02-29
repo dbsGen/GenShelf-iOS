@@ -35,15 +35,11 @@
 		B23366BC1C7EEDE8003EA467 /* GSModelPage.m in Sources */ = {isa = PBXBuildFile; fileRef = B23366AA1C7EEDE8003EA467 /* GSModelPage.m */; };
 		B23366BD1C7EEDE8003EA467 /* GSModelNetBook+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B23366AC1C7EEDE8003EA467 /* GSModelNetBook+CoreDataProperties.m */; };
 		B23366BE1C7EEDE8003EA467 /* GSModelNetBook.m in Sources */ = {isa = PBXBuildFile; fileRef = B23366AE1C7EEDE8003EA467 /* GSModelNetBook.m */; };
-		B23366BF1C7EEDE8003EA467 /* GSModelBook+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B23366B01C7EEDE8003EA467 /* GSModelBook+CoreDataProperties.m */; };
-		B23366C01C7EEDE8003EA467 /* GSModelBook.m in Sources */ = {isa = PBXBuildFile; fileRef = B23366B21C7EEDE8003EA467 /* GSModelBook.m */; };
 		B23366C21C7EEDE8003EA467 /* GSModelHomeData.m in Sources */ = {isa = PBXBuildFile; fileRef = B23366B61C7EEDE8003EA467 /* GSModelHomeData.m */; };
-		B23366C31C7EEDE8003EA467 /* GSModelNetPage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B23366B81C7EEDE8003EA467 /* GSModelNetPage+CoreDataProperties.m */; };
 		B23366C41C7EEDE8003EA467 /* GSModelNetPage.m in Sources */ = {isa = PBXBuildFile; fileRef = B23366BA1C7EEDE8003EA467 /* GSModelNetPage.m */; };
 		B23366C71C7EEF45003EA467 /* GSModelHomeData+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B23366C61C7EEF45003EA467 /* GSModelHomeData+CoreDataProperties.m */; };
 		B250EE2E1C73054D00198CDE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE2D1C73054D00198CDE /* main.m */; };
 		B250EE311C73054D00198CDE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE301C73054D00198CDE /* AppDelegate.m */; };
-		B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B250EE381C73054D00198CDE /* GenShelf.xcdatamodeld */; };
 		B250EE3C1C73054D00198CDE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B250EE3B1C73054D00198CDE /* Assets.xcassets */; };
 		B250EE4A1C73054D00198CDE /* GenShelfTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE491C73054D00198CDE /* GenShelfTests.m */; };
 		B250EE551C73054D00198CDE /* GenShelfUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B250EE541C73054D00198CDE /* GenShelfUITests.m */; };
@@ -90,6 +86,8 @@
 		B268ED071C7777E5001DD15F /* WarningDefaultLeftImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B268ECF11C7777E5001DD15F /* WarningDefaultLeftImage.png */; };
 		B268ED081C7777E5001DD15F /* WarningDefaultLeftImage@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B268ECF21C7777E5001DD15F /* WarningDefaultLeftImage@2x.png */; };
 		B268ED091C7777E5001DD15F /* MBLMessageBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B268ECF51C7777E5001DD15F /* MBLMessageBannerView.m */; };
+		B26936E51C840A4A00D2D35E /* GSModelNetPage+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B26936E41C840A4A00D2D35E /* GSModelNetPage+CoreDataProperties.m */; };
+		B26936EB1C8424FA00D2D35E /* GenShelf.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B26936E91C8424FA00D2D35E /* GenShelf.xcdatamodeld */; };
 		B296F6E81C7F26E30031AA62 /* GSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6E71C7F26E30031AA62 /* GSTask.m */; };
 		B296F6EC1C8326870031AA62 /* GSLofiDownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6EB1C8326870031AA62 /* GSLofiDownloadTask.m */; };
 		B296F6F01C8335170031AA62 /* GSPictureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6EF1C8335170031AA62 /* GSPictureManager.m */; };
@@ -215,14 +213,8 @@
 		B23366AC1C7EEDE8003EA467 /* GSModelNetBook+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GSModelNetBook+CoreDataProperties.m"; sourceTree = "<group>"; };
 		B23366AD1C7EEDE8003EA467 /* GSModelNetBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSModelNetBook.h; sourceTree = "<group>"; };
 		B23366AE1C7EEDE8003EA467 /* GSModelNetBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSModelNetBook.m; sourceTree = "<group>"; };
-		B23366AF1C7EEDE8003EA467 /* GSModelBook+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSModelBook+CoreDataProperties.h"; sourceTree = "<group>"; };
-		B23366B01C7EEDE8003EA467 /* GSModelBook+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GSModelBook+CoreDataProperties.m"; sourceTree = "<group>"; };
-		B23366B11C7EEDE8003EA467 /* GSModelBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSModelBook.h; sourceTree = "<group>"; };
-		B23366B21C7EEDE8003EA467 /* GSModelBook.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSModelBook.m; sourceTree = "<group>"; };
 		B23366B51C7EEDE8003EA467 /* GSModelHomeData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSModelHomeData.h; sourceTree = "<group>"; };
 		B23366B61C7EEDE8003EA467 /* GSModelHomeData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSModelHomeData.m; sourceTree = "<group>"; };
-		B23366B71C7EEDE8003EA467 /* GSModelNetPage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSModelNetPage+CoreDataProperties.h"; sourceTree = "<group>"; };
-		B23366B81C7EEDE8003EA467 /* GSModelNetPage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GSModelNetPage+CoreDataProperties.m"; sourceTree = "<group>"; };
 		B23366B91C7EEDE8003EA467 /* GSModelNetPage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSModelNetPage.h; sourceTree = "<group>"; };
 		B23366BA1C7EEDE8003EA467 /* GSModelNetPage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSModelNetPage.m; sourceTree = "<group>"; };
 		B23366C51C7EEF45003EA467 /* GSModelHomeData+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSModelHomeData+CoreDataProperties.h"; sourceTree = "<group>"; };
@@ -231,7 +223,6 @@
 		B250EE2D1C73054D00198CDE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		B250EE2F1C73054D00198CDE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B250EE301C73054D00198CDE /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		B250EE391C73054D00198CDE /* GenShelf.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GenShelf.xcdatamodel; sourceTree = "<group>"; };
 		B250EE3B1C73054D00198CDE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B250EE401C73054D00198CDE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B250EE451C73054D00198CDE /* GenShelfTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenShelfTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -301,6 +292,9 @@
 		B268ECF21C7777E5001DD15F /* WarningDefaultLeftImage@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "WarningDefaultLeftImage@2x.png"; sourceTree = "<group>"; };
 		B268ECF41C7777E5001DD15F /* MBLMessageBannerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBLMessageBannerView.h; sourceTree = "<group>"; };
 		B268ECF51C7777E5001DD15F /* MBLMessageBannerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBLMessageBannerView.m; sourceTree = "<group>"; };
+		B26936E31C840A4A00D2D35E /* GSModelNetPage+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSModelNetPage+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B26936E41C840A4A00D2D35E /* GSModelNetPage+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GSModelNetPage+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B26936EA1C8424FA00D2D35E /* GenShelf.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = GenShelf.xcdatamodel; sourceTree = "<group>"; };
 		B296F6E61C7F26E30031AA62 /* GSTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSTask.h; sourceTree = "<group>"; };
 		B296F6E71C7F26E30031AA62 /* GSTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTask.m; sourceTree = "<group>"; };
 		B296F6EA1C8326870031AA62 /* GSLofiDownloadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiDownloadTask.h; sourceTree = "<group>"; };
@@ -519,14 +513,10 @@
 				B23366AC1C7EEDE8003EA467 /* GSModelNetBook+CoreDataProperties.m */,
 				B23366AD1C7EEDE8003EA467 /* GSModelNetBook.h */,
 				B23366AE1C7EEDE8003EA467 /* GSModelNetBook.m */,
-				B23366AF1C7EEDE8003EA467 /* GSModelBook+CoreDataProperties.h */,
-				B23366B01C7EEDE8003EA467 /* GSModelBook+CoreDataProperties.m */,
-				B23366B11C7EEDE8003EA467 /* GSModelBook.h */,
-				B23366B21C7EEDE8003EA467 /* GSModelBook.m */,
+				B26936E31C840A4A00D2D35E /* GSModelNetPage+CoreDataProperties.h */,
+				B26936E41C840A4A00D2D35E /* GSModelNetPage+CoreDataProperties.m */,
 				B23366B51C7EEDE8003EA467 /* GSModelHomeData.h */,
 				B23366B61C7EEDE8003EA467 /* GSModelHomeData.m */,
-				B23366B71C7EEDE8003EA467 /* GSModelNetPage+CoreDataProperties.h */,
-				B23366B81C7EEDE8003EA467 /* GSModelNetPage+CoreDataProperties.m */,
 				B23366B91C7EEDE8003EA467 /* GSModelNetPage.h */,
 				B23366BA1C7EEDE8003EA467 /* GSModelNetPage.m */,
 				B23366C51C7EEF45003EA467 /* GSModelHomeData+CoreDataProperties.h */,
@@ -595,9 +585,9 @@
 				B250EE301C73054D00198CDE /* AppDelegate.m */,
 				B250EE3B1C73054D00198CDE /* Assets.xcassets */,
 				B250EE401C73054D00198CDE /* Info.plist */,
-				B250EE381C73054D00198CDE /* GenShelf.xcdatamodeld */,
 				B250EE2C1C73054D00198CDE /* Supporting Files */,
 				B20A34201C746497000CCFA3 /* GenShelf-Prefix.pch */,
+				B26936E91C8424FA00D2D35E /* GenShelf.xcdatamodeld */,
 				B20A34881C747FB7000CCFA3 /* LaunchScreen.storyboard */,
 			);
 			path = GenShelf;
@@ -1155,7 +1145,6 @@
 				B268ECF61C7777E5001DD15F /* MBLMessageBanner.m in Sources */,
 				B268EC991C7742FE001DD15F /* GSSearchViewController.m in Sources */,
 				B23366C21C7EEDE8003EA467 /* GSModelHomeData.m in Sources */,
-				B250EE3A1C73054D00198CDE /* GenShelf.xcdatamodeld in Sources */,
 				B22675EF1C7C44DC00B5D5CC /* GSPageItem.m in Sources */,
 				B22305C41C78250E001B18F5 /* GCoreDataManager.m in Sources */,
 				B2F181301C7C062500DA5BF3 /* MTNetCacheElement.m in Sources */,
@@ -1164,10 +1153,10 @@
 				B296F6F01C8335170031AA62 /* GSPictureManager.m in Sources */,
 				B268ECC51C776FFE001DD15F /* GSSettingsViewController.m in Sources */,
 				B2F44C221C78A1D900639756 /* GSDataControl.m in Sources */,
-				B23366BF1C7EEDE8003EA467 /* GSModelBook+CoreDataProperties.m in Sources */,
 				B2BDCBC11C76F83000DC3031 /* GSideMenuController.m in Sources */,
 				B2B1E04B1C7EB185004DCDF7 /* NSObject+GTools.m in Sources */,
 				B2BDCBC41C7706AA00DC3031 /* GSideCoverView.m in Sources */,
+				B26936E51C840A4A00D2D35E /* GSModelNetPage+CoreDataProperties.m in Sources */,
 				B2F181361C7C12C400DA5BF3 /* GSBookCell.m in Sources */,
 				B23366BE1C7EEDE8003EA467 /* GSModelNetBook.m in Sources */,
 				B2F02F291C75BE0D00D93119 /* GValue.m in Sources */,
@@ -1195,14 +1184,13 @@
 				B2BDCBD01C771F6100DC3031 /* GSShelfViewController.m in Sources */,
 				B268ECBC1C7763BA001DD15F /* ASIInputStream.m in Sources */,
 				B20A348E1C7482A8000CCFA3 /* GSInputCell.m in Sources */,
-				B23366C01C7EEDE8003EA467 /* GSModelBook.m in Sources */,
 				B2F44C331C78C3FE00639756 /* GDataXMLNode.m in Sources */,
-				B23366C31C7EEDE8003EA467 /* GSModelNetPage+CoreDataProperties.m in Sources */,
 				B2F44C431C7CA2C300639756 /* GSPreviewViewController.m in Sources */,
 				B23366BB1C7EEDE8003EA467 /* GSModelPage+CoreDataProperties.m in Sources */,
 				B268ECB71C7763BA001DD15F /* ASIDataCompressor.m in Sources */,
 				B2F02F181C75B24600D93119 /* GSSwitchCell.m in Sources */,
 				B22305AD1C78057B001B18F5 /* HexColors.m in Sources */,
+				B26936EB1C8424FA00D2D35E /* GenShelf.xcdatamodeld in Sources */,
 				B2F1812E1C7C062500DA5BF3 /* MTLocationCache.m in Sources */,
 				B22305D01C783632001B18F5 /* SRSlimeView.m in Sources */,
 				B2F02F151C75637700D93119 /* GSGlobals.m in Sources */,
@@ -1506,12 +1494,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		B250EE381C73054D00198CDE /* GenShelf.xcdatamodeld */ = {
+		B26936E91C8424FA00D2D35E /* GenShelf.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				B250EE391C73054D00198CDE /* GenShelf.xcdatamodel */,
+				B26936EA1C8424FA00D2D35E /* GenShelf.xcdatamodel */,
 			);
-			currentVersion = B250EE391C73054D00198CDE /* GenShelf.xcdatamodel */;
+			currentVersion = B26936EA1C8424FA00D2D35E /* GenShelf.xcdatamodel */;
 			path = GenShelf.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

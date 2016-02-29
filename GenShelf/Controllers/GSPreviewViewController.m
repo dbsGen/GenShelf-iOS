@@ -112,7 +112,7 @@ static NSString *identifier = @"CellIdentifier";
 }
 
 - (void)onDownload {
-    
+    [[GSGlobals dataControl] downloadBook:_item];
 }
 
 #pragma mark - scrollView delegate
@@ -131,9 +131,13 @@ static NSString *identifier = @"CellIdentifier";
 
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
 {
+    [_currentTask restart];
+    [_item reset];
+    [_collectionView reloadData];
+    
     [_refreshView performSelector:@selector(endRefresh)
                        withObject:nil
-                       afterDelay:1];
+                       afterDelay:2];
 //    [self requestDatas];
 }
 

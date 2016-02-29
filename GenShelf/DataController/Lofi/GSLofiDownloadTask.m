@@ -10,6 +10,7 @@
 #import "GSGlobals.h"
 #import "GDataXMLNode.h"
 #import "GSDataDefines.h"
+#import "GSPictureManager.h"
 
 @interface GSLofiPageTask : GSTask <ASIHTTPRequestDelegate> {
     GSPageItem *_item;
@@ -62,12 +63,17 @@
             NSString *src = [node attributeForName:@"src"].stringValue;
             
             _item.imageUrl = src;
+            [_item requestImage];
             _request = [GSGlobals requestForURL:[NSURL URLWithString:src]];
             _request.delegate = self;
             _request.tag = 2;
             [_queue addOperation:_request];
-        }else if (request.tag == 1) {
-            
+        }else if (request.tag == 2) {
+            [[GSPictureManager defaultManager] insertPicture:_request.responseData
+                                                        book:_bookItem
+                                                        page:_item];
+            [_item complete];
+            [self complete];
         }
     }
 }

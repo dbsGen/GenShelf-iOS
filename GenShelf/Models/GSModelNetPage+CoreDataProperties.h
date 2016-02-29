@@ -2,7 +2,7 @@
 //  GSModelNetPage+CoreDataProperties.h
 //  GenShelf
 //
-//  Created by Gen on 16/2/25.
+//  Created by Gen on 16/2/29.
 //  Copyright © 2016年 AirRaidClub. All rights reserved.
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *pageUrl;
 @property (nullable, nonatomic, retain) NSNumber *status;
 @property (nullable, nonatomic, retain) NSString *thumUrl;
+@property (nullable, nonatomic, retain) GSModelNetBook *book;
 
 @end
 

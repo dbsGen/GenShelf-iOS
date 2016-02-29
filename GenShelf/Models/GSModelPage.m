@@ -7,7 +7,6 @@
 //
 
 #import "GSModelPage.h"
-#import "GSModelBook.h"
 
 @implementation GSModelPage
 

@@ -10,6 +10,7 @@
 #import "GSHomeController.h"
 #import "GSGlobals.h"
 #import "GCoreDataManager.h"
+#import "ASIHTTPRequest.h"
 
 @interface AppDelegate ()
 
@@ -18,6 +19,8 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+//    [ASIHTTPRequest sharedQueue].maxConcurrentOperationCount = 1;
     
     [GSGlobals runShadowsocksThread];
     

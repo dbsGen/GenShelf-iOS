@@ -71,7 +71,9 @@
         task = creator();
         task.parent = self;
         task.refCount = 0;
+        task.identifier = identifier;
         [_tasks addObject:task];
+        [self _checkQueue];
     }
     return task;
 }
@@ -124,16 +126,19 @@
 
 - (void)onTaskComplete:(GSTask *)task {
     [_tasks removeObject:task];
+    _running = NO;
     [self _checkQueue];
 }
 
 - (void)onTaskFailed:(GSTask *)task error:(NSError *)error {
     [_tasks removeObject:task];
+    _running = NO;
     [self _checkQueue];
 }
 
 - (void)onTaskCancel:(GSTask *)task {
     [_tasks removeObject:task];
+    _running = NO;
     [self _checkQueue];
 }
 

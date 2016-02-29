@@ -10,8 +10,9 @@
 #import "GDataXMLNode.h"
 #import "GSGlobals.h"
 #import "NSObject+GTools.h"
-#import "../GSDataDefines.h"
+#import "GSDataDefines.h"
 #import "GSLofiBookTask.h"
+#import "GSLofiDownloadTask.h"
 
 #define URL_HOST @"http://lofi.e-hentai.org/"
 #define FILTER_STR @"?f_doujinshi=0&f_manga=0&f_artistcg=0&f_gamecg=0&f_western=0&f_non-h=1&f_imageset=0&f_cosplay=0&f_asianporn=0&f_misc=0&f_apply=Apply+Filter"
@@ -63,15 +64,39 @@
 typedef void(^GSPageOver)(NSArray *pages, NSString *nextUrl);
 
 - (GSTask *)processBook:(GSBookItem *)book {
-    GSLofiBookTask *task = [self.taskQueue createTask:book.pageUrl
-                                              creator:^GSTask *{
-                                                  return [[GSLofiBookTask alloc] initWithItem:book queue:self.operationQueue];
-                                              }];
-    return task;
+    if (book.status != GSBookItemStatusComplete) {
+        GSLofiBookTask *task = [self.taskQueue createTask:BookProcessIdentifier(book)
+                                                  creator:^GSTask *{
+                                                      return [[GSLofiBookTask alloc] initWithItem:book
+                                                                                            queue:self.operationQueue];
+                                                  }];
+        return task;
+    }
+    return nil;
 }
 
 - (GSTask *)downloadBook:(GSBookItem *)book {
-    return nil;
+    NSString *identifier = BookDownloadIdentifier(book);
+    if (book.status == GSBookItemStatusPagesComplete) {
+        return nil;
+    }else {
+        if (book.status != GSBookItemStatusComplete) {
+            GSTask *processTask = nil;
+            if (![self.taskQueue hasTaskI:book.pageUrl]) {
+                processTask = [self processBook:book];
+            }else {
+                processTask = [self.taskQueue task:book.pageUrl];
+            }
+            [self.taskQueue retainTask:processTask];
+        }
+        GSLofiDownloadTask *task = [self.taskQueue createTask:identifier
+                                                      creator:^GSTask *{
+                                                          return [[GSLofiDownloadTask alloc] initWithItem:book
+                                                                                                    queue:self.operationQueue];
+                                                      }];
+        [book download];
+        return task;
+    }
 }
 
 #undef URL_HOST

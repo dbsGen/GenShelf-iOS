@@ -12,6 +12,8 @@
 
 @interface GSPictureManager : NSObject
 
++ (GSPictureManager *)defaultManager;
+
 - (void)insertPicture:(NSData *)data book:(GSBookItem *)book page:(GSPageItem *)page;
 - (NSString *)path:(GSBookItem *)book page:(GSPageItem *)page;
 

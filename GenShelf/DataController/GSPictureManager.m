@@ -17,12 +17,24 @@ static NSString *_tempPath = nil;
 
 @implementation GSPictureManager
 
+static GSPictureManager *__defaultManager = nil;
+
++ (GSPictureManager *)defaultManager {
+    @synchronized(self) {
+        if (!__defaultManager) {
+            __defaultManager = [[GSPictureManager alloc] init];
+        }
+    }
+    return __defaultManager;
+}
+
 - (NSString*)folderPath
 {
     if (!_tempPath) {
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
         NSString *path = [paths lastObject];
         _tempPath = [path stringByAppendingPathComponent:DIR_PATH];
+        NSLog(@"%@", _tempPath);
     }
     return _tempPath;
 }
@@ -48,7 +60,7 @@ static NSString *_tempPath = nil;
                                      error:&error];
         CheckErrorR(nil);
     }
-    NSString *fileName = [NSString stringWithFormat:@"%4lu.%@", (unsigned long)page.index, [page.imageUrl pathExtension]];
+    NSString *fileName = [NSString stringWithFormat:@"%04d.%@", (int)page.index, [page.imageUrl pathExtension]];
     return [bookFolder stringByAppendingPathComponent:fileName];
 }
 

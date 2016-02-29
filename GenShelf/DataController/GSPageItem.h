@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "GSModelNetPage.h"
 
+@class GSBookItem;
+
 #define PAGE_ITEM_SET_IMAGE     @"page_item_set_image"
 #define PAGE_ITEM_REQUEST_IMAGE @"page_item_request_image"
 
@@ -20,11 +22,14 @@ typedef enum : NSUInteger {
 
 @interface GSPageItem : NSObject
 
+@property (nonatomic, weak) GSBookItem *book;
 @property (nonatomic, assign) GSPageItemStatus status;
 @property (nonatomic, assign) NSUInteger index;
 @property (nonatomic, strong) NSString *pageUrl;
 @property (nonatomic, strong) NSString *thumUrl;
 @property (nonatomic, strong) NSString *imageUrl;
+
+- (NSString *)imagePath;
 
 - (id)initWithModel:(GSModelNetPage*)page;
 - (GSModelNetPage *)model;

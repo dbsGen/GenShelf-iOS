@@ -36,9 +36,12 @@ const NSTimeInterval GSTimeADay = 3600*24;
         _pageUrl = book.pageUrl;
         _imageUrl = book.imageUrl;
         _otherData = book.otherData;
+        _mark = NO;
         _loading = false;
         for (GSModelNetPage *model in book.pages) {
-            [_page_items addObject:[[GSPageItem alloc] initWithModel:model]];
+            GSPageItem *item = [[GSPageItem alloc] initWithModel:model];
+            item.book = self;
+            [_page_items addObject:item];
         }
     }
     return self;
@@ -53,6 +56,7 @@ const NSTimeInterval GSTimeADay = 3600*24;
                                        book.pageUrl = _pageUrl;
                                        book.imageUrl = _imageUrl;
                                        book.otherData = _otherData;
+                                       book.mark = [NSNumber numberWithBool:_mark];
                                        book.status = [NSNumber numberWithInteger:_status];
                                    }];
     }
@@ -63,6 +67,7 @@ const NSTimeInterval GSTimeADay = 3600*24;
     GSModelNetBook *b = [self model];
     b.status = [NSNumber numberWithInteger:_status];
     b.otherData = _otherData;
+    b.mark = [NSNumber numberWithBool:_mark];
     NSMutableArray *arr = [NSMutableArray array];
     for (GSPageItem *pitem in self.pages) {
         [arr addObject:pitem.model];
@@ -77,6 +82,7 @@ const NSTimeInterval GSTimeADay = 3600*24;
 - (void)loadPages:(NSArray<GSPageItem *> *)pages {
     for (GSPageItem *item in pages) {
         item.index = _page_items.count;
+        item.book = self;
         [_page_items addObject:item];
     }
     [self updateData];
@@ -113,6 +119,35 @@ const NSTimeInterval GSTimeADay = 3600*24;
     _loading = false;
 }
 
+- (void)reset {
+    [_page_items removeAllObjects];
+    _status = GSBookItemStatusProgressing;
+    [self updateData];
+    [[GCoreDataManager shareManager] save];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_UPDATE
+                                                        object:self
+                                                      userInfo:nil];
+}
+
+- (void)pagesComplete {
+    _status = GSBookItemStatusPagesComplete;
+    _loading = false;
+    [self updateData];
+    [[GCoreDataManager shareManager] save];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_PAGES
+                                                        object:self
+                                                      userInfo:nil];
+}
+
+- (void)download {
+    _mark = YES;
+    [self updateData];
+    [[GCoreDataManager shareManager] save];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_DOWNLOAD
+                                                        object:self
+                                                      userInfo:nil];
+}
+
 + (NSArray *)cachedItems:(NSInteger *)page hasNext:(BOOL *)hasNext expire:(BOOL *)expire {
     NSArray *all = [GSModelHomeData all];
     if (all.count > 0) {
@@ -147,6 +182,15 @@ const NSTimeInterval GSTimeADay = 3600*24;
         [hd addBooksObject:bi.model];
     }
     [[GCoreDataManager shareManager] save];
+}
+
+- (void)pageComplete:(GSPageItem *)page {
+    for (GSPageItem *pt in _page_items) {
+        if (pt.status != GSPageItemStatusComplete) {
+            return;
+        }
+    }
+    [self pagesComplete];
 }
 
 @end

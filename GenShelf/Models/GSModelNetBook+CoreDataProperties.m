@@ -13,6 +13,7 @@
 
 @implementation GSModelNetBook (CoreDataProperties)
 
+@dynamic mark;
 @dynamic imageUrl;
 @dynamic index;
 @dynamic pageUrl;

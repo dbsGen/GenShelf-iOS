@@ -24,4 +24,7 @@ NSLog(@"Parse html error : %@", error);\
 return RET;\
 }
 
+#define BookProcessIdentifier(BOOK) BOOK.pageUrl
+#define BookDownloadIdentifier(BOOK) [NSString stringWithFormat:@"Download %@", BOOK.pageUrl]
+
 #endif /* GSDataDefines_h */
