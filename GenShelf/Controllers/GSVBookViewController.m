@@ -12,10 +12,11 @@
 #import "GSPictureManager.h"
 #import "GSPageFlipView.h"
 
-@interface GSVBookViewController () <MTDragFlipViewDelegate>
+@interface GSVBookViewController () <MTDragFlipViewDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) MTDragFlipView *flipView;
 @property (nonatomic, strong) GSPageViewerView *pageViewer;
+@property (nonatomic, strong) UITableView *tableView;
 
 @end
 
@@ -45,6 +46,12 @@
     _flipView.topLabel.text = @"到顶了";
     [_flipView reloadData];
     [self.view addSubview:_flipView];
+    
+    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds
+                                              style:UITableViewStylePlain];
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -57,6 +64,9 @@
 }
 
 - (UIView *)flipView:(MTDragFlipView *)flipView backgroudView:(NSInteger)index left:(BOOL)isLeft {
+    if (isLeft) {
+        return _tableView;
+    }
     return nil;
 }
 
@@ -78,6 +88,27 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+}
+
+#pragma mark - tableView
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return _item.pages.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *identifier = @"RowCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                      reuseIdentifier:identifier];
+    }
+    cell.textLabel.text = [NSString stringWithFormat:@"第%d页", (int)indexPath.row];
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [_flipView scrollToPage:indexPath.row animated:YES];
 }
 
 @end
