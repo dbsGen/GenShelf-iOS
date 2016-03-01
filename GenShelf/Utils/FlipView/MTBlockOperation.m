@@ -24,8 +24,8 @@
                                                  colorSpace,
                                                  kCGImageAlphaPremultipliedLast |
                                                  kCGBitmapByteOrder32Big);
-    CGContextTranslateCTM(context, 0.0f, _size.height);
-    CGContextScaleCTM(context, 1.0f, -1.0f);
+    CGContextTranslateCTM(context, 0.0f, 0.0f);
+    CGContextScaleCTM(context, 1.0f, 1.0f);
     if ([self isCancelled]) {
         CGContextRelease(context);
         CGColorSpaceRelease(colorSpace);

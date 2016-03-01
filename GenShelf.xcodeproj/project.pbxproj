@@ -107,6 +107,9 @@
 		B2BDCBCD1C771A8500DC3031 /* menu@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2BDCBCC1C771A8500DC3031 /* menu@2x.png */; };
 		B2BDCBD01C771F6100DC3031 /* GSShelfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDCBCF1C771F6100DC3031 /* GSShelfViewController.m */; };
 		B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CE81301C74B6DA00980186 /* GSSelectCell.m */; };
+		B2CF6A301C85520F00DC0CCC /* GSVBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF6A2F1C85520F00DC0CCC /* GSVBookViewController.m */; };
+		B2CF6A341C8569E900DC0CCC /* GSPageViewerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF6A331C8569E900DC0CCC /* GSPageViewerView.m */; };
+		B2CF6A371C8576FD00DC0CCC /* GSPageFlipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF6A361C8576FD00DC0CCC /* GSPageFlipView.m */; };
 		B2F02F151C75637700D93119 /* GSGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F141C75637700D93119 /* GSGlobals.m */; };
 		B2F02F181C75B24600D93119 /* GSSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F171C75B24600D93119 /* GSSwitchCell.m */; };
 		B2F02F251C75BE0D00D93119 /* GCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F1C1C75BE0D00D93119 /* GCallback.m */; };
@@ -334,6 +337,12 @@
 		B2BDCBCF1C771F6100DC3031 /* GSShelfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSShelfViewController.m; sourceTree = "<group>"; };
 		B2CE812F1C74B6DA00980186 /* GSSelectCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSelectCell.h; sourceTree = "<group>"; };
 		B2CE81301C74B6DA00980186 /* GSSelectCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSSelectCell.m; sourceTree = "<group>"; };
+		B2CF6A2E1C85520F00DC0CCC /* GSVBookViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSVBookViewController.h; sourceTree = "<group>"; };
+		B2CF6A2F1C85520F00DC0CCC /* GSVBookViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSVBookViewController.m; sourceTree = "<group>"; };
+		B2CF6A321C8569E900DC0CCC /* GSPageViewerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPageViewerView.h; sourceTree = "<group>"; };
+		B2CF6A331C8569E900DC0CCC /* GSPageViewerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPageViewerView.m; sourceTree = "<group>"; };
+		B2CF6A351C8576FD00DC0CCC /* GSPageFlipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPageFlipView.h; sourceTree = "<group>"; };
+		B2CF6A361C8576FD00DC0CCC /* GSPageFlipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPageFlipView.m; sourceTree = "<group>"; };
 		B2F02F131C75637700D93119 /* GSGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGlobals.h; sourceTree = "<group>"; };
 		B2F02F141C75637700D93119 /* GSGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSGlobals.m; sourceTree = "<group>"; };
 		B2F02F161C75B24600D93119 /* GSSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSwitchCell.h; sourceTree = "<group>"; };
@@ -465,6 +474,8 @@
 				B22305B21C781AB4001B18F5 /* GSHomeController.m */,
 				B2F44C411C7CA2C300639756 /* GSPreviewViewController.h */,
 				B2F44C421C7CA2C300639756 /* GSPreviewViewController.m */,
+				B2CF6A2E1C85520F00DC0CCC /* GSVBookViewController.h */,
+				B2CF6A2F1C85520F00DC0CCC /* GSVBookViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -881,6 +892,10 @@
 				B2F02F2C1C75C1E200D93119 /* GSSelectView.m */,
 				B2F181371C7C13F200DA5BF3 /* GSRadiusImageView.h */,
 				B2F181381C7C13F200DA5BF3 /* GSRadiusImageView.m */,
+				B2CF6A321C8569E900DC0CCC /* GSPageViewerView.h */,
+				B2CF6A331C8569E900DC0CCC /* GSPageViewerView.m */,
+				B2CF6A351C8576FD00DC0CCC /* GSPageFlipView.h */,
+				B2CF6A361C8576FD00DC0CCC /* GSPageFlipView.m */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -1161,6 +1176,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2F02F281C75BE0D00D93119 /* GTweenProperty.m in Sources */,
+				B2CF6A341C8569E900DC0CCC /* GSPageViewerView.m in Sources */,
 				B20A34731C746BBB000CCFA3 /* GSSSSettingViewController.m in Sources */,
 				B2F44C2F1C78BD5C00639756 /* GSBookItem.m in Sources */,
 				B268ECBB1C7763BA001DD15F /* ASIHTTPRequest.m in Sources */,
@@ -1195,10 +1211,12 @@
 				B2F181311C7C062500DA5BF3 /* MTNetCacheManager.m in Sources */,
 				B22305AC1C78057B001B18F5 /* FXBlurView.m in Sources */,
 				B250EE311C73054D00198CDE /* AppDelegate.m in Sources */,
+				B2CF6A371C8576FD00DC0CCC /* GSPageFlipView.m in Sources */,
 				B296F6EC1C8326870031AA62 /* GSLofiDownloadTask.m in Sources */,
 				B23366C71C7EEF45003EA467 /* GSModelHomeData+CoreDataProperties.m in Sources */,
 				B268ECBD1C7763BA001DD15F /* ASINetworkQueue.m in Sources */,
 				B2F02F251C75BE0D00D93119 /* GCallback.m in Sources */,
+				B2CF6A301C85520F00DC0CCC /* GSVBookViewController.m in Sources */,
 				B2F44C461C7CB3D000639756 /* GSThumCell.m in Sources */,
 				B22305CF1C783632001B18F5 /* SRRefreshView.m in Sources */,
 				B23366BC1C7EEDE8003EA467 /* GSModelPage.m in Sources */,
@@ -1402,7 +1420,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3e855474-2573-4357-b029-3726d56e0bd8";
 			};
 			name = Debug;
 		};
@@ -1425,7 +1443,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "3e855474-2573-4357-b029-3726d56e0bd8";
 			};
 			name = Release;
 		};

@@ -12,6 +12,7 @@
 #import "GSBookCell.h"
 #import "GCoreDataManager.h"
 #import "GSModelNetBook.h"
+#import "GSVBookViewController.h"
 
 @interface GSShelfViewController ()<UITableViewDelegate, UITableViewDataSource> {
     NSArray<GSBookItem *> * _datas;
@@ -81,6 +82,13 @@
     cell.imageUrl = item.imageUrl;
     cell.titleLabel.text = item.title;
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    GSBookItem *item = [_datas objectAtIndex:indexPath.row];
+    GSVBookViewController *book = [[GSVBookViewController alloc] init];
+    book.item = item;
+    [self.navigationController pushViewController:book animated:YES];
 }
 
 @end

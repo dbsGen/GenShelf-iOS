@@ -97,7 +97,6 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleRightMargin;
-    [self.view addSubview:_tableView];
     
     _contentView = [[UIView alloc] initWithFrame:bounds];
     _contentView.backgroundColor = [UIColor whiteColor];
@@ -237,6 +236,8 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
 
 - (void)openMenu {
     _isOpen = YES;
+    [self.view insertSubview:_tableView atIndex:0];
+    
     [_coverView setHidden:NO];
     [_contentView bringSubviewToFront:_coverView];
     
@@ -276,6 +277,9 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
     [tween start];
     [tween.onUpdate addBlock:^{
         [self updateTableScale];
+    }];
+    [tween.onComplete addBlock:^{
+        [_tableView removeFromSuperview];
     }];
 }
 

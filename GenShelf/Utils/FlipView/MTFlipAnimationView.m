@@ -23,6 +23,8 @@ static NSOperationQueue *__queue;
     if (self) {
         _indentify = @"defaulte";
         _imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        _imageSize = frame.size;
+        self.userInteractionEnabled = NO;
         [self addSubview:_imageView];
     }
     return self;
@@ -36,7 +38,9 @@ static NSOperationQueue *__queue;
     _operation = nil;
 }
 
-- (void)setAnimationPercent:(CGFloat)percent{}
+- (void)setAnimationPercent:(CGFloat)percent{
+    _percent = percent;
+}
 
 - (NSOperationQueue*)mainQueue
 {
@@ -55,7 +59,7 @@ static NSOperationQueue *__queue;
     [operation setCompleteBlock:^(UIImage *image) {
         [self renderedImage:image];
     }];
-    operation.size = _imageView.bounds.size;
+    operation.size = _imageSize;
     [self.mainQueue addOperation:operation];
     _operation = operation;
 }
