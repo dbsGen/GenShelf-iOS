@@ -31,7 +31,6 @@
 - (void)cleanDirectoryWithOut:(NSString*)fileName;
 
 - (void)addFile:(MTNetCacheElement *)file;
-- (void)addFile:(MTNetCacheElement *)file withData:(NSData*)data;
 - (void)deleteFileForUrl:(NSString*)url;
 - (void)save;
 - (void)deleteAll;

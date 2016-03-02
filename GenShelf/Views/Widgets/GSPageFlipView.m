@@ -61,7 +61,13 @@
         CGAffineTransform t = CGAffineTransformConcat(CGAffineTransformMakeScale(scale, scale),
                                                       CGAffineTransformMakeTranslation(trans.x, trans.y));
         UIImage *image = [UIImage imageWithContentsOfFile:path];
-        CGContextDrawImage(context, CGRectApplyAffineTransform(bounds, t), image.CGImage);
+        CGSize originalSize = image.size;
+        CGRect frame;
+        frame.size.height = bounds.size.height;
+        frame.size.width = originalSize.width * frame.size.height / originalSize.height;
+        frame.origin.y = 0;
+        frame.origin.x = (bounds.size.width - frame.size.width)/2;
+        CGContextDrawImage(context, CGRectApplyAffineTransform(frame, t), image.CGImage);
     };
     [self startRender:block];
 }
@@ -72,7 +78,13 @@
     void (^block)(CGContextRef context) = ^(CGContextRef context){
         CGAffineTransform t = CGAffineTransformConcat(CGAffineTransformMakeScale(scale, scale),
                                                       CGAffineTransformMakeTranslation(trans.x, trans.y));
-        CGContextDrawImage(context, CGRectApplyAffineTransform(bounds, t), image.CGImage);
+        CGSize originalSize = image.size;
+        CGRect frame;
+        frame.size.height = bounds.size.height;
+        frame.size.width = originalSize.width * frame.size.height / originalSize.height;
+        frame.origin.y = 0;
+        frame.origin.x = (bounds.size.width - frame.size.width)/2;
+        CGContextDrawImage(context, CGRectApplyAffineTransform(frame, t), image.CGImage);
     };
     [self startRender:block];
 }

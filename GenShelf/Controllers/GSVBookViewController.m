@@ -47,7 +47,8 @@
     [_flipView reloadData];
     [self.view addSubview:_flipView];
     
-    _tableView = [[UITableView alloc] initWithFrame:self.view.bounds
+    CGRect bounds = self.view.bounds;
+    _tableView = [[UITableView alloc] initWithFrame:bounds
                                               style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -76,7 +77,7 @@
 
 - (MTFlipAnimationView*)flipView:(MTDragFlipView*)flipView dragingView:(NSInteger)index {
     static NSString *identifier = @"DefaultIdentifier";
-    GSPageFlipView *view = (GSPageFlipView*)[flipView viewByIndentify:identifier];
+    GSPageFlipView *view = (GSPageFlipView*)[flipView viewByIndentify:identifier atIndex:index];
     if (!view) {
         view = [[GSPageFlipView alloc] initWithFrame:self.view.bounds];
     }

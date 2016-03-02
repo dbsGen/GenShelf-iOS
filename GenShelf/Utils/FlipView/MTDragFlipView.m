@@ -8,6 +8,7 @@
 
 #import "MTDragFlipView.h"
 #import <QuartzCore/QuartzCore.h>
+#import "GTween.h"
 
 #define StateBarRect   (CGRect){0,0,320,20}
 #define kAngle          (M_PI / 4)
@@ -74,6 +75,7 @@ int count;
         
         _mainPanGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self
                                                                   action:@selector(panndOn:)];
+        _mainPanGesture.maximumNumberOfTouches = 1;
         [self addGestureRecognizer:_mainPanGesture];
         
         
@@ -128,7 +130,7 @@ int count;
         _transationView = [[UIView alloc] initWithFrame:self.bounds];
         [self addSubview:_transationView];
         _transationView.hidden = YES;
-        _transationView.userInteractionEnabled = NO;
+        _transationView.userInteractionEnabled = YES;
         _transationView.backgroundColor = [UIColor clearColor];
         
         _unuseViews = [[NSMutableDictionary alloc] init];
@@ -163,15 +165,6 @@ int count;
     }
 }
 
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- */
-
 - (void)setFrame:(CGRect)frame
 {
     [super setFrame:frame];
@@ -183,46 +176,6 @@ int count;
 {
     [NSObject cancelPreviousPerformRequestsWithTarget:self];
     [_backContentView removeFromSuperview];
-}
-
-- (void)nextPage:(BOOL)animation
-{
-    if (_pageIndex + 1 >= _count) {
-        return;
-    }
-    CGRect rect = self.bounds;
-    
-    MTFlipAnimationView *nowView = [self getDragingView:_pageIndex];
-    MTFlipAnimationView *upView = [self getDragingView:_pageIndex - 1];
-    MTFlipAnimationView *downView = [self getDragingView:_pageIndex + 1];
-    
-    
-    nowView.center = CGPointMake(rect.size.width / 2,
-                                 rect.size.height / 2);
-    upView.center = CGPointMake(rect.size.width / 2,
-                                -rect.size.height / 2 - 40);
-    downView.center = CGPointMake(rect.size.width / 2,
-                                  rect.size.height / 2);
-    if (!nowView) {
-        return;
-    }
-    _pageIndex ++;
-    if (animation) {
-        _transationView.hidden = NO;
-        [self retainAnimation];
-        [self moveUpOut:nowView];
-    }else {
-        NSArray *array = self.subviews;
-        for (UIView *view in array) {
-            if (view != _scrollView &&
-                view != _transationView) {
-                [view removeFromSuperview];
-            }
-        }
-        UIView *subView = [self getViewAtIndex:_pageIndex];
-        [self insertSubview:subView
-               belowSubview:_transationView];
-    }
 }
 
 - (void)reloadData
@@ -242,29 +195,21 @@ int count;
         page = _count - 1;
     }
     if (!self.open) {
-        NSArray *array = self.subviews;
-        for (UIView *view in array) {
-            if (view != _scrollView &&
-                view != _transationView) {
-                [view removeFromSuperview];
-            }
-        }
         UIView *subView = [self getViewAtIndex:_pageIndex];
-        [self insertSubview:subView
-               belowSubview:_transationView];
+        if (subView != _subview) {
+            [_subview removeFromSuperview];
+            [self insertSubview:subView
+                   belowSubview:_transationView];
+            _subview = subView;
+        }
     }else {
-        NSArray *array = self.subviews;
-        for (UIView *view in array) {
-            if (view != _scrollView &&
-                view != _transationView &&
-                view != _backContentView &&
-                view != _leftView) {
-                [view removeFromSuperview];
-            }
-        }
         UIView *subView = [self getViewAtIndex:_pageIndex];
-        [self insertSubview:subView
-               belowSubview:_backContentView];
+        if (subView != _subview) {
+            [_subview removeFromSuperview];
+            [self insertSubview:subView
+                   belowSubview:_backContentView];
+            _subview = subView;
+        }
     }
     
     NSInteger totle = [_cachedImageViews count];
@@ -336,14 +281,16 @@ int count;
 }
 
 - (void)scrollToPage:(NSInteger)page animated:(BOOL)animated {
-    if (self.open || _pageIndex == page) {
+    if (_pageIndex == page) {
         return;
     }
+    if (self.open) [self closeBackView];
     BOOL isUp = _pageIndex > page;
     if (animated) {
         int count = 0;
         _animation = YES;
         self.userInteractionEnabled = NO;
+        [self retainAnimation];
         if (isUp) {
             for (NSInteger n = _pageIndex + 1 ; n < _cacheRange.location + _cacheRange.length ; n++) {
                 MTFlipAnimationView *view = [_cachedImageViews lastObject];
@@ -353,6 +300,7 @@ int count;
                 }
                 [_cachedImageViews removeObject:view];
             }
+            _cacheRange.length = _pageIndex - _cacheRange.location;
             
             NSMutableArray *aniamtionArr = [NSMutableArray array];
             
@@ -382,17 +330,77 @@ int count;
                     [view setAnimationPercent:0];
                 }else {
                     CGFloat timeAdd = kTimeAdd * count;
-                    [self performSelector:@selector(animationHandle:)
-                               withObject:view
-                               afterDelay:timeAdd];
+                    GTween *tween = [GTween tween:view
+                                         duration:kBaseDurationK
+                                             ease:[GEaseCubicOut class]];
+                    [tween addProperty:[GTweenFloatProperty property:@"animationPercent"
+                                                                from:-1 to:0]];
+                    tween.delay = timeAdd;
+                    if (n == t - 1) {
+                        [tween.onComplete addBlock:^{
+                            [self setTAnimation:aniamtionArr];
+                        }];
+                    }
+                    [tween start];
                     count ++;
                 }
             }
+        }else {
+            for (NSInteger n = _pageIndex - 1 ; n >= _cacheRange.location; n--) {
+                MTFlipAnimationView *view = [_cachedImageViews lastObject];
+                if ([view isKindOfClass:[UIView class]]) {
+                    [self pushViewToCache:view];
+                    [view removeFromSuperview];
+                }
+                [_cachedImageViews replaceObjectAtIndex:n
+                                             withObject:[NSNull null]];
+            }
+            _cacheRange.length = _cacheRange.location + _cacheRange.length - _pageIndex;
+            _cacheRange.location = _pageIndex;
             
-            [self performSelector:@selector(setTAnimation:)
-                       withObject:aniamtionArr
-                       afterDelay:kBaseDurationK + count  * kTimeAdd];
-            _transationView.hidden = NO;
+            NSMutableArray *aniamtionArr = [NSMutableArray array];
+            
+            NSInteger fromIndex = _pageIndex;
+            NSInteger toIndex = MIN(page, _pageIndex + kLengthLimite) - 1;
+            for (NSInteger n = fromIndex; n <= toIndex; n++) {
+                if (n >= _cacheRange.location + _cacheRange.length) {
+                    MTFlipAnimationView *view = [self loadFlipView:n];
+                    [view setAnimationPercent:1];
+                    [aniamtionArr addObject:view];
+                    [_transationView addSubview:view];
+                }else {
+                    MTFlipAnimationView *view = [self imageViewWithIndex:n];
+                    [aniamtionArr addObject:view];
+                    [_transationView addSubview:view];
+                }
+            }
+            MTFlipAnimationView *view = [self loadFlipView:page];
+            [view setAnimationPercent:1];
+            [aniamtionArr addObject:view];
+            [_transationView addSubview:view];
+            
+            for (NSInteger n = 0, t = [aniamtionArr count]; n < t ; n ++) {
+                MTFlipAnimationView *view = [aniamtionArr objectAtIndex:n];
+                [_transationView addSubview:view];
+                if (0 == n) {
+                    [view setAnimationPercent:0];
+                }else {
+                    CGFloat timeAdd = kTimeAdd * count;
+                    GTween *tween = [GTween tween:view
+                                         duration:kBaseDurationK
+                                             ease:[GEaseCubicOut class]];
+                    [tween addProperty:[GTweenFloatProperty property:@"animationPercent"
+                                                                from:1 to:0]];
+                    tween.delay = timeAdd;
+                    if (n == t - 1) {
+                        [tween.onComplete addBlock:^{
+                            [self setTAnimation:aniamtionArr];
+                        }];
+                    }
+                    [tween start];
+                    count ++;
+                }
+            }
         }
         _pageIndex = page;
     }else {
@@ -411,24 +419,27 @@ int count;
 
 - (void)backToTop:(BOOL)aniamted
 {
-    [self scrollToPage:0 animated:YES];
+    if (!self.open) {
+        [self scrollToPage:0 animated:YES];
+    }
 }
                  
-- (void)animationHandle:(MTFlipAnimationView*)view
-{
-    [self sortSubviews];
-    [UIView animateWithDuration:kBaseDurationK
-                          delay:0
-                        options:UIViewAnimationOptionCurveEaseOut
-                     animations:^{
-                         [view setAnimationPercent:0];
-                     } completion:^(BOOL finished) {
-                         
-                     }];
-}
+//- (void)animationHandle:(MTFlipAnimationView*)view
+//{
+//    [self sortSubviews];
+//    [UIView animateWithDuration:kBaseDurationK
+//                          delay:0
+//                        options:UIViewAnimationOptionCurveEaseOut
+//                     animations:^{
+//                         [view setAnimationPercent:0];
+//                     } completion:^(BOOL finished) {
+//                         
+//                     }];
+//}
 
 - (void)setTAnimation:(NSMutableArray*)array
 {
+    [self releaseAnimation];
     self.userInteractionEnabled = YES;
     if (array) {
         for (MTFlipAnimationView *view in array) {
@@ -436,14 +447,25 @@ int count;
             [view removeFromSuperview];
         }
     }
-    NSRange range;
-    if (range.length > _cachedImageViews.count - (_pageIndex + 1)) {
-        range.location = _pageIndex + 1;
-        range.length = _cachedImageViews.count - (_pageIndex + 1);
-        [_cachedImageViews removeObjectsInRange:range];
+    
+    NSNull *null = [NSNull null];
+    for (NSInteger n = 0; n < _pageIndex; n++) {
+        if (n < _cachedImageViews.count) {
+                if (![[_cachedImageViews objectAtIndex:n] isEqual:null]) {
+                    [_cachedImageViews replaceObjectAtIndex:n
+                                                 withObject:null];
+                }
+        }else {
+            [_cachedImageViews addObject:null];
+        }
+    }
+    for (NSInteger n = _pageIndex, t = _cachedImageViews.count; n < t; n++) {
+        [_cachedImageViews removeObjectAtIndex:n];
+        n --;
+        t --;
     }
     _cacheRange.location = _pageIndex;
-    _cacheRange.length = 1;
+    _cacheRange.length=0;
     _animation = NO;
     _transationView.hidden = YES;
     [self reloadData];
@@ -697,26 +719,28 @@ int count;
 
 - (void)closeBackView:(UIView*)view
 {
+    [self retainAnimation];
     CGRect rect2 = self.bounds;
-    [UIView transitionWithView:self
-                      duration:0.23
-                       options:UIViewAnimationOptionCurveEaseOut
-                    animations:^{
-                        view.center = (CGPoint){rect2.size.width / 2 + rect2.origin.x,
-                            rect2.size.height / 2 + rect2.origin.y};
-                    } completion:^(BOOL finished) {
-                        [self releaseAnimation];
-                        if (!_animationCount) {
-                            [_backContentView removeFromSuperview];
-                            _backContentView = nil;
-                            [_leftView removeFromSuperview];
-                            _leftView = nil;
-                            if ([_delegate respondsToSelector:@selector(flipView:backgroudClosed:)]) {
-                                [_delegate flipView:self backgroudClosed:_pageIndex];
-                            }
-                            [self releaseAnimation];
-                        }
-                    }];
+    GTween *tween = [GTween tween:view
+                         duration:0.23
+                             ease:[GEaseCubicOut class]];
+    [tween addProperty:[GTweenCGPointProperty property:@"center"
+                                                  from:view.center
+                                                    to:(CGPoint){rect2.size.width / 2 + rect2.origin.x,
+                                                        rect2.size.height / 2 + rect2.origin.y}]];
+    [tween.onComplete addBlock:^{
+        [self releaseAnimation];
+        if (!_animationCount) {
+            [_backContentView removeFromSuperview];
+            _backContentView = nil;
+            [_leftView removeFromSuperview];
+            _leftView = nil;
+            if ([_delegate respondsToSelector:@selector(flipView:backgroudClosed:)]) {
+                [_delegate flipView:self backgroudClosed:_pageIndex];
+            }
+        }
+    }];
+    [tween start];
     [self addGestureRecognizer:_mainPanGesture];
     [_transationView removeGestureRecognizer:_leftPanGesture];
     [_transationView removeGestureRecognizer:_leftTapGesture];
@@ -799,19 +823,22 @@ static NSTimeInterval __start;
                             [self openBackView:_transationView];
                         }else {
                             [self closeBackView:_transationView];
+                            [self releaseAnimation];
                         }
                 }else if (_state2 == 1) {
                     NSTimeInterval t2 = [[NSDate date] timeIntervalSince1970];
                     p = [pan locationInView:self.animationView];
-                    if (_transationView.center.x > 250 ||
+                    if (_transationView.center.x > self.bounds.size.width*5/8 ||
                         (p.x - _tempPoint.x > 20 && 
                          t2 - __start < 0.5)) {
                             [self openLeftBackView:_transationView];
                         }else {
                             [self closeBackView:_transationView];
+                            [self releaseAnimation];
                         }
                 }else {
                     [self closeBackView:_transationView];
+                    [self releaseAnimation];
                 }
             }
             _state = 0;
@@ -1037,7 +1064,6 @@ static NSTimeInterval __start;
     if (!_dragEnable) {
         return;
     }
-    [self retainAnimation];
     [self closeBackView:_transationView];
 }
 
@@ -1095,6 +1121,7 @@ static NSTimeInterval __start;
                     }
             }
             _state2 = 0;
+            [self releaseAnimation];
             break;
         }
         default:{
@@ -1233,6 +1260,7 @@ static NSTimeInterval __start;
 - (void)retainAnimation
 {
     _animationCount ++;
+    _transationView.hidden = NO;
 }
 
 - (void)releaseAnimation
@@ -1297,6 +1325,21 @@ static NSTimeInterval __start;
 {
     NSMutableArray *arr = [_unuseViews objectForKey:indentify];
     MTFlipAnimationView *view = [arr lastObject];
+    if (view) {
+        [arr removeObject:view];
+    }
+    return view;
+}
+
+- (MTFlipAnimationView*)viewByIndentify:(NSString *)indentify atIndex:(NSInteger)index {
+    NSMutableArray *arr = [_unuseViews objectForKey:indentify];
+    NSArray *ret = [arr filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"index == %d", index]];
+    MTFlipAnimationView *view;
+    if (ret.count) {
+        view = [ret objectAtIndex:0];
+    }else {
+        view = [arr lastObject];
+    }
     if (view) {
         [arr removeObject:view];
     }

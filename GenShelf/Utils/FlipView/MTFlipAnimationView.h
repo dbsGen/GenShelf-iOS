@@ -15,7 +15,7 @@
 @property (nonatomic, readonly) UIImageView *imageView;
 @property (nonatomic, strong)   NSString    *indentify;
 @property (nonatomic, assign)   NSInteger   index;
-@property (nonatomic, readonly, assign) CGFloat percent;
+@property (nonatomic, readonly, assign) CGFloat animationPercent;
 @property (nonatomic, assign)   CGSize      imageSize;
 
 //this method will be called when this view be sent to cache.

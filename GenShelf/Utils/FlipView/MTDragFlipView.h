@@ -33,6 +33,7 @@ typedef NSComparisonResult(^MTFlipViewComparator)(MTDragFlipView *flipView,
     int             _state;         //0any ,1updown,2leftright
     UIView          *_backContentView;
     UIView          *_leftView;
+    UIView          *_subview;
     UIImageView     *_backgroundView;    //背景层
     UIView          *_transationView;
     NSMutableArray  *_cachedImageViews;
@@ -83,6 +84,7 @@ typedef NSComparisonResult(^MTFlipViewComparator)(MTDragFlipView *flipView,
 //缓存的UIImageView
 - (MTFlipAnimationView*)imageViewWithIndex:(NSInteger)index;
 - (MTFlipAnimationView*)viewByIndentify:(NSString*)indentify;
+- (MTFlipAnimationView*)viewByIndentify:(NSString*)indentify atIndex:(NSInteger)index;
 //把页面缓存的imageView
 - (void)viewToImage:(UIView*)view atIndex:(NSInteger)index;
 
@@ -97,8 +99,6 @@ typedef NSComparisonResult(^MTFlipViewComparator)(MTDragFlipView *flipView,
 - (void)load:(NSInteger)page;
 //if use this methord you must implementation - (MTFlipAnimationView*)flipViewPrePushDragingView:(FZDragFlipView *)flipView
 - (void)preload:(NSInteger)count;
-
-- (void)nextPage:(BOOL)animation;
 
 @end
 
