@@ -8,9 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
+@class GSPageViewerView;
+
+typedef void(^GSPageViewerBlock)(GSPageViewerView *sender);
+
 @interface GSPageViewerView : UIView
 
+@property (nonatomic, strong) NSString *imagePath;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, readonly) UIImageView *imageView;
+
+@property (nonatomic, assign) CGPoint translation;
+@property (nonatomic, assign) CGFloat scale;
+@property (nonatomic, copy) GSPageViewerBlock onUpdate;
 
 @end
