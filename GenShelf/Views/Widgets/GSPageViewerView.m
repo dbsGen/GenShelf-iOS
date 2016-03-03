@@ -48,6 +48,7 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
 @interface GSPageViewerView ()
 
 @property (nonatomic, assign) CGPoint translation;
+@property (nonatomic, assign) CGFloat scale;
 
 @end
 
@@ -55,8 +56,6 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
     NSInteger   _touchCount;
     CGPoint     _oldTouchPosition;
     CGFloat     _beginScale;
-    CGPoint     _translation;
-    CGFloat     _scale;
     BOOL _bordLeft, _bordRight, _bordTop, _bordBottom;
 }
 
@@ -152,11 +151,6 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
     _bordBottom = frame.origin.y + frame.size.height > self.bounds.size.height;
 }
 
-- (void)setTranslation:(CGPoint)translation {
-    _translation = translation;
-    [self updateTransform];
-}
-
 - (void)revert {
     CGRect frame = _imageView.frame, bounds = self.bounds;
     BOOL willRevert = NO;
@@ -181,6 +175,15 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
         willRevert = YES;
         trans.y += bounds.size.height - (frame.origin.y + frame.size.height);
     }
+    
+    float toScale = _scale;
+    if (_scale < 0.3) {
+        willRevert = YES;
+        toScale = 0.3;
+    }else if (_scale > 3) {
+        willRevert = YES;
+        toScale = 3;
+    }
     if (willRevert) {
         GTween *tween = [[GTween alloc] initWithTarget:self
                                               duration:0.2
@@ -188,6 +191,12 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
         [tween addProperty:[GTweenCGPointProperty property:@"translation"
                                                       from:_translation
                                                         to:trans]];
+        [tween addProperty:[GTweenFloatProperty property:@"scale"
+                                                    from:_scale
+                                                      to:toScale]];
+        [tween.onUpdate addBlock:^{
+            [self updateTransform];
+        }];
         [tween start];
     }
 }
