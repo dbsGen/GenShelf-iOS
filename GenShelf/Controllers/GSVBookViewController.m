@@ -38,6 +38,27 @@
     [super viewDidLoad];
     
     _pageViewer = [[GSPageViewerView alloc] initWithFrame:self.view.bounds];
+    __weak GSVBookViewController *this = self;
+    _pageViewer.onUpdate = ^(GSPageViewerView *view) {
+        if (this.flipView) {
+            GSPageFlipView *v = (GSPageFlipView*)[this.flipView getDragingView:this.flipView.pageIndex];
+            if (v) {
+                [v clean];
+                CGRect frame = view.imageView.frame;
+                frame.size.width/=2;
+                frame.size.height/=2;
+                frame.origin.x/=2;
+                frame.origin.y/=2;
+                frame.origin.y = -((frame.size.height - v.imageSize.height)+frame.origin.y);
+                
+//                [v renderImage:view.image
+//                         frame:frame];
+                [v renderImage:view.image
+                         scale:view.scale
+                   translation:view.translation];
+            }
+        }
+    };
     
     _flipView = [[MTDragFlipView alloc] initWithFrame:self.view.bounds];
     _flipView.delegate = self;
@@ -60,7 +81,10 @@
 }
 
 - (UIView*)flipView:(MTDragFlipView*)flipView subViewAtIndex:(NSInteger)index {
-    _pageViewer.image = [UIImage imageWithContentsOfFile:[_item.pages objectAtIndex:index].imagePath];
+    GSPageFlipView *view = (GSPageFlipView*)[flipView getDragingView:index];
+    _pageViewer.scale = view ? view.scale : 1;
+    _pageViewer.translation = view ? view.translation : CGPointMake(0, 0);
+    _pageViewer.imagePath = [_item.pages objectAtIndex:index].imagePath;
     return _pageViewer;
 }
 

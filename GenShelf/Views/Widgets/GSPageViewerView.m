@@ -47,9 +47,6 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
 
 @interface GSPageViewerView ()
 
-@property (nonatomic, assign) CGPoint translation;
-@property (nonatomic, assign) CGFloat scale;
-
 @end
 
 @implementation GSPageViewerView {
@@ -78,6 +75,13 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
     return self;
 }
 
+- (void)setImagePath:(NSString *)imagePath {
+    if (![_imagePath isEqualToString:imagePath]) {
+        _imagePath = imagePath;
+        self.image = [UIImage imageWithContentsOfFile:_imagePath];
+    }
+}
+
 - (void)setImage:(UIImage *)image {
     if (_image != image) {
         _image = image;
@@ -87,8 +91,10 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
         frame.size.width = originalSize.width * frame.size.height / originalSize.height;
         frame.origin.y = 0;
         frame.origin.x = (self.bounds.size.width - frame.size.width)/2;
-        _imageView.image = image;
+        _imageView.transform = CGAffineTransformIdentity;
         _imageView.frame = frame;
+        _imageView.image = image;
+        [self updateTransformWithoutCallback];
     }
 }
 
@@ -143,6 +149,13 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
 }
 
 - (void)updateTransform {
+    [self updateTransformWithoutCallback];
+    if (_onUpdate) {
+        _onUpdate(self);
+    }
+}
+
+- (void)updateTransformWithoutCallback {
     _imageView.transform = CGAffineTransformTranslate(CGAffineTransformMakeScale(_scale, _scale), _translation.x, _translation.y);
     CGRect frame = _imageView.frame;
     _bordLeft = frame.origin.x > 0;

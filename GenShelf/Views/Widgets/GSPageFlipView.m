@@ -31,6 +31,8 @@
         
         self.backgroundColor = [UIColor whiteColor];
         self.imageSize = CGSizeMake(frame.size.width/2, frame.size.height/2);
+        
+        _scale = 1;
     }
     return self;
 }
@@ -55,11 +57,13 @@
 }
 
 - (void)renderPath:(NSString *)path scale:(CGFloat)scale translation:(CGPoint)trans {
+    _scale = scale;
+    _translation = trans;
     CGRect bounds = self.bounds;
     bounds.size = self.imageSize;
     void (^block)(CGContextRef context) = ^(CGContextRef context){
-        CGAffineTransform t = CGAffineTransformConcat(CGAffineTransformMakeScale(scale, scale),
-                                                      CGAffineTransformMakeTranslation(trans.x, trans.y));
+        CGContextTranslateCTM(context, 0.0f, bounds.size.height);
+        CGContextScaleCTM(context, 1.0f, -1.0f);
         UIImage *image = [UIImage imageWithContentsOfFile:path];
         CGSize originalSize = image.size;
         CGRect frame;
@@ -67,24 +71,45 @@
         frame.size.width = originalSize.width * frame.size.height / originalSize.height;
         frame.origin.y = 0;
         frame.origin.x = (bounds.size.width - frame.size.width)/2;
-        CGContextDrawImage(context, CGRectApplyAffineTransform(frame, t), image.CGImage);
+        CGSize translation = bounds.size;
+        frame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeTranslation(trans.x/2-translation.width/2, -trans.y/2-translation.height/2));
+        frame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeScale(scale, scale));
+        frame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeTranslation(translation.width/2, translation.height/2));
+        CGContextDrawImage(context, frame, image.CGImage);
     };
     [self startRender:block];
 }
 
 - (void)renderImage:(UIImage *)image scale:(CGFloat)scale translation:(CGPoint)trans {
+    _scale = scale;
+    _translation = trans;
     CGRect bounds = self.bounds;
     bounds.size = self.imageSize;
     void (^block)(CGContextRef context) = ^(CGContextRef context){
-        CGAffineTransform t = CGAffineTransformConcat(CGAffineTransformMakeScale(scale, scale),
-                                                      CGAffineTransformMakeTranslation(trans.x, trans.y));
+        CGContextTranslateCTM(context, 0.0f, bounds.size.height);
+        CGContextScaleCTM(context, 1.0f, -1.0f);
         CGSize originalSize = image.size;
         CGRect frame;
         frame.size.height = bounds.size.height;
         frame.size.width = originalSize.width * frame.size.height / originalSize.height;
         frame.origin.y = 0;
         frame.origin.x = (bounds.size.width - frame.size.width)/2;
-        CGContextDrawImage(context, CGRectApplyAffineTransform(frame, t), image.CGImage);
+        CGSize translation = bounds.size;
+        frame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeTranslation(trans.x/2-translation.width/2, -trans.y/2-translation.height/2));
+        frame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeScale(scale, scale));
+        frame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeTranslation(translation.width/2, translation.height/2));
+        CGContextDrawImage(context, frame, image.CGImage);
+    };
+    [self startRender:block];
+}
+
+- (void)renderImage:(UIImage *)image frame:(CGRect)frame {
+    CGRect bounds = self.bounds;
+    bounds.size = self.imageSize;
+    void (^block)(CGContextRef context) = ^(CGContextRef context){
+        CGContextTranslateCTM(context, 0.0f, bounds.size.height);
+        CGContextScaleCTM(context, 1.0f, -1.0f);
+        CGContextDrawImage(context, frame, image.CGImage);
     };
     [self startRender:block];
 }

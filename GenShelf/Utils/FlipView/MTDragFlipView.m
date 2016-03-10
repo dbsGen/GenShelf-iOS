@@ -442,7 +442,8 @@ int count;
     [self releaseAnimation];
     self.userInteractionEnabled = YES;
     if (array) {
-        for (MTFlipAnimationView *view in array) {
+        for (NSInteger n = 0, t = array.count; n < t; n++) {
+            MTFlipAnimationView *view = [array objectAtIndex:n];
             [self pushViewToCache:view];
             [view removeFromSuperview];
         }
