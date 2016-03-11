@@ -96,6 +96,8 @@
 		B296F6E81C7F26E30031AA62 /* GSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6E71C7F26E30031AA62 /* GSTask.m */; };
 		B296F6EC1C8326870031AA62 /* GSLofiDownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6EB1C8326870031AA62 /* GSLofiDownloadTask.m */; };
 		B296F6F01C8335170031AA62 /* GSPictureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6EF1C8335170031AA62 /* GSPictureManager.m */; };
+		B2A8C5621C929D4000306D0D /* GCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A8C5611C929D4000306D0D /* GCoverView.m */; };
+		B2A8C5681C92B62600306D0D /* GSProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A8C5671C92B62600306D0D /* GSProgressViewController.m */; };
 		B2ABBA2E1C8019B900C02B7D /* GSLofiDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABBA2D1C8019B900C02B7D /* GSLofiDataControl.m */; };
 		B2ABBA321C8019DA00C02B7D /* GSLofiBookTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABBA311C8019DA00C02B7D /* GSLofiBookTask.m */; };
 		B2AD57831C7D4D2400280667 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2AD57821C7D4D0800280667 /* libsodium.a */; };
@@ -317,6 +319,10 @@
 		B296F6EB1C8326870031AA62 /* GSLofiDownloadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLofiDownloadTask.m; sourceTree = "<group>"; };
 		B296F6EE1C8335170031AA62 /* GSPictureManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPictureManager.h; sourceTree = "<group>"; };
 		B296F6EF1C8335170031AA62 /* GSPictureManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPictureManager.m; sourceTree = "<group>"; };
+		B2A8C5601C929D4000306D0D /* GCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCoverView.h; sourceTree = "<group>"; };
+		B2A8C5611C929D4000306D0D /* GCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCoverView.m; sourceTree = "<group>"; };
+		B2A8C5661C92B62600306D0D /* GSProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSProgressViewController.h; sourceTree = "<group>"; };
+		B2A8C5671C92B62600306D0D /* GSProgressViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSProgressViewController.m; sourceTree = "<group>"; };
 		B2ABBA2C1C8019B900C02B7D /* GSLofiDataControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiDataControl.h; sourceTree = "<group>"; };
 		B2ABBA2D1C8019B900C02B7D /* GSLofiDataControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLofiDataControl.m; sourceTree = "<group>"; };
 		B2ABBA301C8019DA00C02B7D /* GSLofiBookTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiBookTask.h; sourceTree = "<group>"; };
@@ -476,6 +482,8 @@
 				B2F44C421C7CA2C300639756 /* GSPreviewViewController.m */,
 				B2CF6A2E1C85520F00DC0CCC /* GSVBookViewController.h */,
 				B2CF6A2F1C85520F00DC0CCC /* GSVBookViewController.m */,
+				B2A8C5661C92B62600306D0D /* GSProgressViewController.h */,
+				B2A8C5671C92B62600306D0D /* GSProgressViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -765,6 +773,15 @@
 			path = TaskQueue;
 			sourceTree = "<group>";
 		};
+		B2A8C55E1C929D2700306D0D /* CoverView */ = {
+			isa = PBXGroup;
+			children = (
+				B2A8C5601C929D4000306D0D /* GCoverView.h */,
+				B2A8C5611C929D4000306D0D /* GCoverView.m */,
+			);
+			path = CoverView;
+			sourceTree = "<group>";
+		};
 		B2ABBA2B1C8019B900C02B7D /* Lofi */ = {
 			isa = PBXGroup;
 			children = (
@@ -850,6 +867,7 @@
 		B2F02F191C75BE0D00D93119 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B2A8C55E1C929D2700306D0D /* CoverView */,
 				B26936EC1C844D2100D2D35E /* FlipView */,
 				B2B1E0481C7EB12C004DCDF7 /* Object */,
 				B2F181201C7C062500DA5BF3 /* CacheManager */,
@@ -1229,12 +1247,14 @@
 				B2F02F2D1C75C1E200D93119 /* GSSelectView.m in Sources */,
 				B268ECBA1C7763BA001DD15F /* ASIFormDataRequest.m in Sources */,
 				B2F44C261C78AA3700639756 /* NSURL+QueryDictionary.m in Sources */,
+				B2A8C5681C92B62600306D0D /* GSProgressViewController.m in Sources */,
 				B250EE2E1C73054D00198CDE /* main.m in Sources */,
 				B22305B01C780CC2001B18F5 /* GShadowView.m in Sources */,
 				B2F02F271C75BE0D00D93119 /* GTween.m in Sources */,
 				B2BDCBD01C771F6100DC3031 /* GSShelfViewController.m in Sources */,
 				B268ECBC1C7763BA001DD15F /* ASIInputStream.m in Sources */,
 				B20A348E1C7482A8000CCFA3 /* GSInputCell.m in Sources */,
+				B2A8C5621C929D4000306D0D /* GCoverView.m in Sources */,
 				B2F44C331C78C3FE00639756 /* GDataXMLNode.m in Sources */,
 				B2F44C431C7CA2C300639756 /* GSPreviewViewController.m in Sources */,
 				B23366BB1C7EEDE8003EA467 /* GSModelPage+CoreDataProperties.m in Sources */,
@@ -1420,7 +1440,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3e855474-2573-4357-b029-3726d56e0bd8";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1443,7 +1463,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "3e855474-2573-4357-b029-3726d56e0bd8";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

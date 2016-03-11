@@ -20,6 +20,8 @@
 - (id)initWithTarget:(id)target property:(NSString *)property dynamic:(BOOL)dynamic;
 - (id)initWithTarget:(id)target property:(NSString *)property;
 
+- (CGFloat)CGFloatValue;
+- (double)doubleValue;
 - (float)floatValue;
 - (CGRect)CGRectValue;
 - (CGSize)CGSizeValue;

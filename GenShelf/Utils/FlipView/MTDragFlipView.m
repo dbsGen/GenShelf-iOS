@@ -194,23 +194,7 @@ int count;
     if (page >= _count) {
         page = _count - 1;
     }
-    if (!self.open) {
-        UIView *subView = [self getViewAtIndex:_pageIndex];
-        if (subView != _subview) {
-            [_subview removeFromSuperview];
-            [self insertSubview:subView
-                   belowSubview:_transationView];
-            _subview = subView;
-        }
-    }else {
-        UIView *subView = [self getViewAtIndex:_pageIndex];
-        if (subView != _subview) {
-            [_subview removeFromSuperview];
-            [self insertSubview:subView
-                   belowSubview:_backContentView];
-            _subview = subView;
-        }
-    }
+    [self reloadCurrentView];
     
     NSInteger totle = [_cachedImageViews count];
     for (NSInteger n = _cacheRange.location; n < totle; n++) {
@@ -308,7 +292,7 @@ int count;
             NSInteger toIndex = MAX(page, _pageIndex - kLengthLimite) + 1;
             for (NSInteger n = fromIndex; n >= toIndex; n--) {
                 if (n < _cacheRange.location) {
-                    MTFlipAnimationView *view = [self loadFlipView:n];
+                    MTFlipAnimationView *view = [self getOrLoadFlipView:n];
                     [view setAnimationPercent:-1];
                     [aniamtionArr addObject:view];
                     [_transationView addSubview:view];
@@ -318,7 +302,7 @@ int count;
                     [_transationView addSubview:view];
                 }
             }
-            MTFlipAnimationView *view = [self loadFlipView:page];
+            MTFlipAnimationView *view = [self getOrLoadFlipView:page];
             [view setAnimationPercent:-1];
             [aniamtionArr addObject:view];
             [_transationView addSubview:view];
@@ -364,7 +348,7 @@ int count;
             NSInteger toIndex = MIN(page, _pageIndex + kLengthLimite) - 1;
             for (NSInteger n = fromIndex; n <= toIndex; n++) {
                 if (n >= _cacheRange.location + _cacheRange.length) {
-                    MTFlipAnimationView *view = [self loadFlipView:n];
+                    MTFlipAnimationView *view = [self getOrLoadFlipView:n];
                     [view setAnimationPercent:1];
                     [aniamtionArr addObject:view];
                     [_transationView addSubview:view];
@@ -374,7 +358,7 @@ int count;
                     [_transationView addSubview:view];
                 }
             }
-            MTFlipAnimationView *view = [self loadFlipView:page];
+            MTFlipAnimationView *view = [self getOrLoadFlipView:page];
             [view setAnimationPercent:1];
             [aniamtionArr addObject:view];
             [_transationView addSubview:view];
@@ -423,6 +407,26 @@ int count;
         [self scrollToPage:0 animated:YES];
     }
 }
+
+- (void)reloadCurrentView {
+    if (!self.open) {
+        UIView *subView = [self getViewAtIndex:_pageIndex];
+        if (subView != _subview) {
+            [_subview removeFromSuperview];
+            [self insertSubview:subView
+                   belowSubview:_transationView];
+            _subview = subView;
+        }
+    }else {
+        UIView *subView = [self getViewAtIndex:_pageIndex];
+        if (subView != _subview) {
+            [_subview removeFromSuperview];
+            [self insertSubview:subView
+                   belowSubview:_backContentView];
+            _subview = subView;
+        }
+    }
+}
                  
 //- (void)animationHandle:(MTFlipAnimationView*)view
 //{
@@ -443,9 +447,11 @@ int count;
     self.userInteractionEnabled = YES;
     if (array) {
         for (NSInteger n = 0, t = array.count; n < t; n++) {
-            MTFlipAnimationView *view = [array objectAtIndex:n];
-            [self pushViewToCache:view];
-            [view removeFromSuperview];
+            if (n != t - 1) {
+                MTFlipAnimationView *view = [array objectAtIndex:n];
+                [self pushViewToCache:view];
+                [view removeFromSuperview];
+            }
         }
     }
     
@@ -460,16 +466,18 @@ int count;
             [_cachedImageViews addObject:null];
         }
     }
-    for (NSInteger n = _pageIndex, t = _cachedImageViews.count; n < t; n++) {
+    for (NSInteger n = _pageIndex+1, t = _cachedImageViews.count; n < t; n++) {
         [_cachedImageViews removeObjectAtIndex:n];
         n --;
         t --;
     }
+    [_cachedImageViews replaceObjectAtIndex:_pageIndex
+                                 withObject:[array lastObject]];
     _cacheRange.location = _pageIndex;
-    _cacheRange.length=0;
+    _cacheRange.length=1;
     _animation = NO;
     _transationView.hidden = YES;
-    [self reloadData];
+    [self reloadCurrentView];
 }
 
 - (MTFlipAnimationView*)getDragingView:(NSInteger)index
@@ -547,6 +555,14 @@ int count;
 - (MTFlipAnimationView *)loadFlipView:(NSInteger)index {
     MTFlipAnimationView *view = [_delegate flipView:self dragingView:index];
     view.index = index;
+    return view;
+}
+
+- (MTFlipAnimationView *)getOrLoadFlipView:(NSInteger)index {
+    MTFlipAnimationView *view = [self getDragingView:index];
+    if (!view) {
+        view = [self loadFlipView:index];
+    }
     return view;
 }
 

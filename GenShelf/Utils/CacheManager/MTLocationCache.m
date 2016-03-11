@@ -74,8 +74,6 @@ static NSMutableArray   *__cache;
                                    withObject:nil];
         }
         [__cache addObject:self];
-        
-        _lock = [[NSCondition alloc] init];
     }
     return self;
 }
@@ -89,73 +87,90 @@ static NSMutableArray   *__cache;
 
 - (void)addFile:(MTNetCacheElement *)file
 {
-    [_datas setObject:file
-               forKey:file.urlString];
-    _saveKey = YES;
+    @synchronized(self) {
+        [_datas setObject:file
+                   forKey:file.urlString];
+        _saveKey = YES;
+    }
 }
 
 - (void)setDirPath:(NSString *)path
 {
-    _tempPath = [path copy];
-    _filePath = [[path stringByAppendingPathComponent:kFileName] copy];
-    _datas = [[NSMutableDictionary alloc] initWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithFile:_filePath]];
-    if (!_datas) {
-        _datas = [[NSMutableDictionary alloc] init];
+    @synchronized(self) {
+        _tempPath = [path copy];
+        _filePath = [[path stringByAppendingPathComponent:kFileName] copy];
+        _datas = [[NSMutableDictionary alloc] initWithDictionary:[NSKeyedUnarchiver unarchiveObjectWithFile:_filePath]];
+        if (!_datas) {
+            _datas = [[NSMutableDictionary alloc] init];
+        }
     }
     
 }
 
 - (void)doPerFile:(void (^)(id, id, BOOL *))block
 {
-    [_datas enumerateKeysAndObjectsUsingBlock:block];
+    @synchronized(self) {
+        [_datas enumerateKeysAndObjectsUsingBlock:block];
+    }
 }
 
 - (void)deleteFileForUrl:(NSString*)url
 {
-    [_datas removeObjectForKey:url];
+    @synchronized(self) {
+        [_datas removeObjectForKey:url];
+    }
 }
 
 - (MTNetCacheElement*)fileForName:(NSString *)name
 {
-    NSEnumerator *enumerator = [_datas objectEnumerator];
-    MTNetCacheElement *obj;
-    while ((obj = [enumerator nextObject])) {
-        if ([obj.path isEqualToString:name]) {
-            obj.date = [NSDate date];
-            return obj;
+    MTNetCacheElement *ret = nil;
+    @synchronized(self) {
+        NSEnumerator *enumerator = [_datas objectEnumerator];
+        MTNetCacheElement *obj;
+        while ((obj = [enumerator nextObject])) {
+            if ([obj.path isEqualToString:name]) {
+                obj.date = [NSDate date];
+                ret = obj;
+                break;
+            }
         }
     }
-    return nil;
+    return ret;
 }
 
 - (MTNetCacheElement*)fileForUrl:(NSString*)url
 {
-    MTNetCacheElement *obj = [_datas objectForKey:url];
-    obj.date = [NSDate date];
+    MTNetCacheElement *obj = nil;
+    @synchronized(self) {
+        obj = [_datas objectForKey:url];
+        obj.date = [NSDate date];
+    }
     return obj;
 }
 
 - (void)deleteAll
 {
-    [_datas removeAllObjects];
-    _saveKey = YES;
+    @synchronized(self) {
+        [_datas removeAllObjects];
+        _saveKey = YES;
+    }
 }
 
 - (void)deleteBeforeDate:(NSDate*)date
 {
-    [_lock lock];
-    NSArray *keys = [_datas allKeys];
-    for (NSString *key in keys) {
-        MTNetCacheElement *element = [_datas objectForKey:key];
-        if (element && [element.date compare:date] == NSOrderedAscending) {
-            NSFileManager *fileManager = [NSFileManager defaultManager];
-            [fileManager removeItemAtPath:[_tempPath stringByAppendingPathComponent:element.path] 
-                                    error:nil];
-            [_datas removeObjectForKey:key];
+    @synchronized(self) {
+        NSArray *keys = [_datas allKeys];
+        for (NSString *key in keys) {
+            MTNetCacheElement *element = [_datas objectForKey:key];
+            if (element && [element.date compare:date] == NSOrderedAscending) {
+                NSFileManager *fileManager = [NSFileManager defaultManager];
+                [fileManager removeItemAtPath:[_tempPath stringByAppendingPathComponent:element.path]
+                                        error:nil];
+                [_datas removeObjectForKey:key];
+            }
         }
+        _saveKey = YES;
     }
-    _saveKey = YES;
-    [_lock unlock];
 }
 
 - (UInt64)size

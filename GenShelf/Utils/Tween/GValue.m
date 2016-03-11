@@ -65,6 +65,16 @@
     return [_data FUNCTION];\
 }
 
+- (CGFloat)CGFloatValue {
+    
+#if defined(__LP64__) && __LP64__
+    return [self floatValue];
+#else
+    return [self doubleValue];
+#endif
+}
+
+VALUE(double, doubleValue, NSNumber numberWithDouble)
 VALUE(float, floatValue, NSNumber numberWithFloat)
 VALUE(CGRect, CGRectValue, NSValue valueWithCGRect)
 VALUE(CGSize, CGSizeValue, NSValue valueWithCGSize)

@@ -86,7 +86,7 @@ typedef NSComparisonResult(^MTFlipViewComparator)(MTDragFlipView *flipView,
 - (MTFlipAnimationView*)viewByIndentify:(NSString*)indentify;
 - (MTFlipAnimationView*)viewByIndentify:(NSString*)indentify atIndex:(NSInteger)index;
 //把页面缓存的imageView
-- (void)viewToImage:(UIView*)view atIndex:(NSInteger)index;
+//- (void)viewToImage:(UIView*)view atIndex:(NSInteger)index;
 
 //重载所有页面
 - (void)reloadData;

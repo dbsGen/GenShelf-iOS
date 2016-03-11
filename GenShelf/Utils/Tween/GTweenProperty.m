@@ -94,15 +94,26 @@
 
 + (id)property:(NSString*)name from:(CGFloat)from to:(CGFloat)to
 {
+#if defined(__LP64__) && __LP64__
+    return [[self alloc] initWithName:name
+                                 from:[NSNumber numberWithDouble:from]
+                                   to:[NSNumber numberWithDouble:to]];
+#else
     return [[self alloc] initWithName:name
                                  from:[NSNumber numberWithFloat:from]
                                    to:[NSNumber numberWithFloat:to]];
+#endif
 }
 
 - (void)progress:(float)p target:(id)target imp:(IMP)imp selector:(SEL)sel
 {
+#if defined(__LP64__) && __LP64__
+    CGFloat res = lerp([self.fromValue doubleValue], [self.toValue doubleValue], p);
+    GTSetter(CGFloat, target, imp, sel, res);
+#else
     float res = lerp([self.fromValue floatValue], [self.toValue floatValue], p);
     GTSetter(CGFloat, target, imp, sel, res);
+#endif
 }
 
 @end

@@ -13,7 +13,6 @@
     NSMutableDictionary *_datas;
     NSString            *_filePath,
                         *_tempPath;
-    NSCondition         *_lock;
     BOOL                _saveKey;
     dispatch_queue_t    _cacheQueue;
 }
