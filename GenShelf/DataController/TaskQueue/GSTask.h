@@ -45,6 +45,7 @@ typedef GSTask*(^GSTaskCreator)();
 
 @property (nonatomic, readonly) NSArray<GSTask *> *subtasks;
 @property (nonatomic, assign) BOOL running;
+@property (nonatomic, readonly) BOOL isCancel;
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, assign) NSInteger retryCount;
 @property (nonatomic, assign) NSInteger offset;
@@ -52,6 +53,7 @@ typedef GSTask*(^GSTaskCreator)();
 @property (nonatomic, assign) NSTimeInterval timeDelay;
 
 - (void)addSubtask:(GSTask*)task;
+- (void)cleatSubtasks;
 
 - (void)start;
 - (void)restart;

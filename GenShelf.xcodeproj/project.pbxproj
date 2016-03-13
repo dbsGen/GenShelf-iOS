@@ -92,6 +92,8 @@
 		B26936F71C844D2100D2D35E /* MTBlockOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = B26936F01C844D2100D2D35E /* MTBlockOperation.m */; };
 		B26936F81C844D2100D2D35E /* MTDragFlipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B26936F21C844D2100D2D35E /* MTDragFlipView.m */; };
 		B26936F91C844D2100D2D35E /* MTFlipAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B26936F41C844D2100D2D35E /* MTFlipAnimationView.m */; };
+		B279C08B1C951C93009AB881 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = B279C0891C951C93009AB881 /* back.png */; };
+		B279C08C1C951C93009AB881 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B279C08A1C951C93009AB881 /* back@2x.png */; };
 		B296F6E81C7F26E30031AA62 /* GSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6E71C7F26E30031AA62 /* GSTask.m */; };
 		B296F6EC1C8326870031AA62 /* GSLofiDownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6EB1C8326870031AA62 /* GSLofiDownloadTask.m */; };
 		B296F6F01C8335170031AA62 /* GSPictureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6EF1C8335170031AA62 /* GSPictureManager.m */; };
@@ -322,6 +324,8 @@
 		B26936F21C844D2100D2D35E /* MTDragFlipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTDragFlipView.m; sourceTree = "<group>"; };
 		B26936F31C844D2100D2D35E /* MTFlipAnimationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MTFlipAnimationView.h; sourceTree = "<group>"; };
 		B26936F41C844D2100D2D35E /* MTFlipAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTFlipAnimationView.m; sourceTree = "<group>"; };
+		B279C0891C951C93009AB881 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
+		B279C08A1C951C93009AB881 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		B296F6E61C7F26E30031AA62 /* GSTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSTask.h; sourceTree = "<group>"; };
 		B296F6E71C7F26E30031AA62 /* GSTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTask.m; sourceTree = "<group>"; };
 		B296F6EA1C8326870031AA62 /* GSLofiDownloadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiDownloadTask.h; sourceTree = "<group>"; };
@@ -861,6 +865,8 @@
 		B2BDCBC51C77122C00DC3031 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B279C0891C951C93009AB881 /* back.png */,
+				B279C08A1C951C93009AB881 /* back@2x.png */,
 				B296F71D1C9467F60031AA62 /* pause.png */,
 				B296F71E1C9467F60031AA62 /* pause@2x.png */,
 				B296F7111C94583D0031AA62 /* delete.png */,
@@ -1175,6 +1181,7 @@
 				B268ED041C7777E5001DD15F /* SuccessDefaultLeftImage@2x.png in Resources */,
 				B268ED021C7777E5001DD15F /* SuccessBackgroundDefaultImage@2x.png in Resources */,
 				B268ECD91C77745D001DD15F /* squares@2x.png in Resources */,
+				B279C08B1C951C93009AB881 /* back.png in Resources */,
 				B268ECFB1C7777E5001DD15F /* ErrorDefaultLeftImage.png in Resources */,
 				B22675EC1C7C355600B5D5CC /* no_image@2x.png in Resources */,
 				B296F7181C94583D0031AA62 /* delete@2x.png in Resources */,
@@ -1194,6 +1201,7 @@
 				B268ED011C7777E5001DD15F /* SuccessBackgroundDefaultImage.png in Resources */,
 				B22305CE1C783632001B18F5 /* sr_refresh@2X.png in Resources */,
 				B268ECD81C77745D001DD15F /* squares.png in Resources */,
+				B279C08C1C951C93009AB881 /* back@2x.png in Resources */,
 				B268ECD51C77745D001DD15F /* search@2x.png in Resources */,
 				B22305CD1C783632001B18F5 /* sr_refresh.png in Resources */,
 				B296F7191C94583D0031AA62 /* play.png in Resources */,
@@ -1484,7 +1492,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f82b43e1-25fc-4d0f-9da5-ac3b28935152";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -1507,7 +1515,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f82b43e1-25fc-4d0f-9da5-ac3b28935152";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

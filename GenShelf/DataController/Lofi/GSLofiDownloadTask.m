@@ -44,6 +44,13 @@
     [_queue addOperation:_request];
 }
 
+- (void)cancel {
+    [super cancel];
+    _request.delegate = nil;
+    [_request cancel];
+    _request = nil;
+}
+
 - (void)requestFailed:(ASIHTTPRequest *)request {
     if (request == _request) {
         [self failed:request.error];
@@ -108,6 +115,11 @@
                                          code:102
                                      userInfo:nil]];
     }
+}
+
+- (void)cancel {
+    [super cancel];
+    [self cleatSubtasks];
 }
 
 @end

@@ -241,7 +241,7 @@ int count;
     self.userInteractionEnabled = YES;
 }
 
-#define kTimeAdd        0.1
+#define kTimeAdd        0.05
 #define kBaseDurationK  0.4
 #define kBaseDurationS  0.32
 #define kDistanceAdd    100
@@ -309,26 +309,34 @@ int count;
             
             for (NSInteger n = 0, t = [aniamtionArr count]; n < t ; n ++) {
                 MTFlipAnimationView *view = [aniamtionArr objectAtIndex:n];
-                [_transationView addSubview:view];
-                if (0 == n) {
-                    [view setAnimationPercent:0];
-                }else {
-                    CGFloat timeAdd = kTimeAdd * count;
+                CGFloat timeAdd = kTimeAdd * count;
+                GTweenChain *chain = [GTweenChain tweenChain];
+                if (n != 0) {
                     GTween *tween = [GTween tween:view
                                          duration:kBaseDurationK
-                                             ease:[GEaseCubicOut class]];
+                                             ease:[GEaseCubicInOut class]];
                     [tween addProperty:[GTweenFloatProperty property:@"animationPercent"
                                                                 from:-1 to:0]];
                     tween.delay = timeAdd;
-                    if (n == t - 1) {
-                        [tween.onComplete addBlock:^{
-                            [self setTAnimation:aniamtionArr];
-                        }];
-                    }
-                    [tween start];
+                    [chain addTween:tween];
                     count ++;
                 }
+                
+                if (n != t - 1) {
+                    GTween *tween = [GTween tween:view
+                                         duration:kBaseDurationK
+                                             ease:[GEaseCubicInOut class]];
+                    [tween addProperty:[GTweenFloatProperty property:@"animationPercent"
+                                                                from:0 to:1]];
+                    [chain addTween:tween];
+                    count ++;
+                }
+                [chain start];
             }
+            [self performSelector:@selector(setTAnimation:)
+                       withObject:aniamtionArr
+                       afterDelay:count * kTimeAdd + kBaseDurationK*2];
+            [self sortSubviews];
         }else {
             for (NSInteger n = _pageIndex - 1 ; n >= _cacheRange.location; n--) {
                 MTFlipAnimationView *view = [_cachedImageViews lastObject];
@@ -365,26 +373,38 @@ int count;
             
             for (NSInteger n = 0, t = [aniamtionArr count]; n < t ; n ++) {
                 MTFlipAnimationView *view = [aniamtionArr objectAtIndex:n];
-                [_transationView addSubview:view];
-                if (0 == n) {
-                    [view setAnimationPercent:0];
-                }else {
-                    CGFloat timeAdd = kTimeAdd * count;
+                CGFloat timeAdd = kTimeAdd * count;
+                GTweenChain *chain = [GTweenChain tweenChain];
+                if (n != 0) {
                     GTween *tween = [GTween tween:view
                                          duration:kBaseDurationK
-                                             ease:[GEaseCubicOut class]];
+                                             ease:[GEaseCubicInOut class]];
                     [tween addProperty:[GTweenFloatProperty property:@"animationPercent"
                                                                 from:1 to:0]];
                     tween.delay = timeAdd;
-                    if (n == t - 1) {
-                        [tween.onComplete addBlock:^{
-                            [self setTAnimation:aniamtionArr];
-                        }];
-                    }
-                    [tween start];
+                    [chain addTween:tween];
                     count ++;
                 }
+                
+                if (n != t - 1) {
+                    GTween *tween = [GTween tween:view
+                                         duration:kBaseDurationK
+                                             ease:[GEaseCubicInOut class]];
+                    [tween addProperty:[GTweenFloatProperty property:@"animationPercent"
+                                                                from:0 to:-1]];
+                    if (n == 0) {
+                        tween.delay = kBaseDurationK;
+                    }
+                    [chain addTween:tween];
+                    count ++;
+                }
+                [chain start];
             }
+            
+            [self performSelector:@selector(setTAnimation:)
+                       withObject:aniamtionArr
+                       afterDelay:count * kTimeAdd + kBaseDurationK*2];
+            [self sortSubviews];
         }
         _pageIndex = page;
     }else {
@@ -459,6 +479,9 @@ int count;
     for (NSInteger n = 0; n < _pageIndex; n++) {
         if (n < _cachedImageViews.count) {
                 if (![[_cachedImageViews objectAtIndex:n] isEqual:null]) {
+                    MTFlipAnimationView *view = [_cachedImageViews objectAtIndex:n];
+                    [self pushViewToCache:view];
+                    [view removeFromSuperview];
                     [_cachedImageViews replaceObjectAtIndex:n
                                                  withObject:null];
                 }
@@ -467,6 +490,11 @@ int count;
         }
     }
     for (NSInteger n = _pageIndex+1, t = _cachedImageViews.count; n < t; n++) {
+        if (![[_cachedImageViews objectAtIndex:n] isEqual:null]) {
+            MTFlipAnimationView *view = [_cachedImageViews objectAtIndex:n];
+            [self pushViewToCache:view];
+            [view removeFromSuperview];
+        }
         [_cachedImageViews removeObjectAtIndex:n];
         n --;
         t --;

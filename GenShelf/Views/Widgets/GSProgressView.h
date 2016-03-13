@@ -13,4 +13,6 @@
 @property (nonatomic, strong) UIColor *color;
 @property (nonatomic, assign) CGFloat percent;
 
+- (void)setPercent:(CGFloat)percent animated:(BOOL)animated;
+
 @end

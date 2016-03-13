@@ -133,7 +133,13 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
             count ++;
         }
     }
-    _percent = (float)count / self.pages.count;
+    CGFloat n_per = (float)count / self.pages.count;
+    if (n_per != _percent) {
+        _percent = n_per;
+        if ([_delegate respondsToSelector:@selector(bookItem:progress:)]) {
+            [_delegate bookItem:self progress:_percent];
+        }
+    }
 }
 
 - (NSArray<GSPageItem *>*)pages {
@@ -154,35 +160,67 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
 }
 
 - (void)startLoading {
-    _status = GSBookItemStatusProgressing;
-    _loading = TRUE;
+    [self setStatus:GSBookItemStatusProgressing loading:YES];
 }
 
 - (void)complete {
-    _status = GSBookItemStatusComplete;
+    [self setStatus:GSBookItemStatusComplete loading:NO];
     [self updateData];
     [[GCoreDataManager shareManager] save];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_OVER
                                                         object:self
                                                       userInfo:nil];
-    _loading = false;
 }
 
 - (void)failed {
-    _status = GSBookItemStatusProgressing;
-    _loading = false;
+    [self setStatus:GSBookItemStatusProgressing loading:NO];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_FAILED
                                                         object:self
                                                       userInfo:nil];
 }
 
 - (void)cancel {
-    _loading = false;
+    self.loading = false;
+}
+
+- (void)setStatus:(GSBookItemStatus)status loading:(BOOL)loading {
+    BOOL changed = NO;
+    if (_status != status) {
+        _status = status;
+        changed = YES;
+    }
+    if (_loading != loading) {
+        _loading = loading;
+        changed = YES;
+    }
+    if (changed) {
+        if ([_delegate respondsToSelector:@selector(bookItem:status:loading:)]) {
+            [_delegate bookItem:self status:_status loading:_loading];
+        }
+    }
+}
+
+- (void)setStatus:(GSBookItemStatus)status {
+    if (_status != status) {
+        _status = status;
+        if ([_delegate respondsToSelector:@selector(bookItem:status:loading:)]) {
+            [_delegate bookItem:self status:_status loading:_loading];
+        }
+    }
+}
+
+- (void)setLoading:(BOOL)loading {
+    if (_loading != loading) {
+        _loading = loading;
+        if ([_delegate respondsToSelector:@selector(bookItem:status:loading:)]) {
+            [_delegate bookItem:self status:_status loading:_loading];
+        }
+    }
 }
 
 - (void)reset {
     [_page_items removeAllObjects];
-    _status = GSBookItemStatusProgressing;
+    self.status = GSBookItemStatusProgressing;
     [self updateData];
     [[GCoreDataManager shareManager] save];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_UPDATE
@@ -191,8 +229,7 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
 }
 
 - (void)pagesComplete {
-    _status = GSBookItemStatusPagesComplete;
-    _loading = false;
+    [self setStatus:GSBookItemStatusPagesComplete loading:NO];
     [self updateData];
     [[GCoreDataManager shareManager] save];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_PAGES
@@ -201,6 +238,7 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
 }
 
 - (void)pageProgress {
+    [self updatePercent];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_PROGRESS
                                                         object:self
                                                       userInfo:nil];
@@ -208,7 +246,7 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
 
 - (void)remove {
     _mark = NO;
-    _loading = false;
+    self.loading = NO;
     [self updateData];
     [[GCoreDataManager shareManager] save];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_REMOVE
@@ -217,6 +255,7 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
 }
 
 - (void)download {
+    self.loading = YES;
     _mark = YES;
     _downloadDate = [NSDate date];
     [self updateData];

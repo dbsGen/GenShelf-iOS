@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^GSProgressViewBlock)();
+
 @interface GSProgressViewController : UIViewController
+
+@property (nonatomic, copy) GSProgressViewBlock onClose;
 
 @end

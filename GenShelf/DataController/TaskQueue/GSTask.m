@@ -146,6 +146,7 @@
 
 @implementation GSTask {
     NSInteger _tryCount;
+    BOOL _willChecked;
 }
 
 - (id)init {
@@ -156,12 +157,13 @@
         _retryCount = 0;
         _subtasks = [[NSMutableArray<GSTask *> alloc] init];
         _offset = 0;
+        _willChecked = false;
     }
     return self;
 }
 
 - (void)start {
-    if (_running) return;
+    if (_running || _isCancel) return;
     _running = YES;
     if ([self.delegate respondsToSelector:@selector(onTaskStart:)]) {
         [self.delegate onTaskStart:self];
@@ -175,6 +177,7 @@
 
 - (void)restart {
     [self reset];
+    _isCancel = NO;
     _offset = 0;
     _running = YES;
     if ([self.delegate respondsToSelector:@selector(onTaskStart:)]) {
@@ -187,6 +190,7 @@
 }
 
 - (void)cancel {
+    _isCancel = YES;
     if (_running) {
         if (_offset < _subtasks.count) {
             [[_subtasks objectAtIndex:_offset] cancel];
@@ -287,23 +291,41 @@
     [_subtasks addObject:task];
 }
 
+- (void)cleatSubtasks {
+    [_subtasks removeAllObjects];
+}
+
 - (void)onTaskCancel:(GSTask *)task {
     if (_offset < _subtasks.count && [_subtasks objectAtIndex:_offset] == task) {
         _offset ++;
-        [self _checkSubtasks];
+        [self checkNextFrame];
     }
 }
 
 - (void)onTaskComplete:(GSTask *)task {
     if (_offset < _subtasks.count && [_subtasks objectAtIndex:_offset] == task) {
         _offset ++;
-        [self _checkSubtasks];
+        [self checkNextFrame];
     }
 }
 
 - (void)onTaskFailed:(GSTask *)task error:(NSError *)error {
     if (_offset < _subtasks.count && [_subtasks objectAtIndex:_offset] == task) {
         [self failed:error];
+    }
+}
+
+- (void)checkNextFrame {
+    _willChecked = YES;
+    [self performSelector:@selector(checkFrameHandle)
+               withObject:nil
+               afterDelay:0];
+}
+
+- (void)checkFrameHandle {
+    if (_willChecked) {
+        _willChecked = NO;
+        [self _checkSubtasks];
     }
 }
 

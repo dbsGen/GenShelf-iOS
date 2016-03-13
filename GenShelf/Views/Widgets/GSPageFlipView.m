@@ -7,6 +7,7 @@
 //
 
 #import "GSPageFlipView.h"
+#import "GEase.h"
 
 @implementation GSPageFlipView {
     UIImageView     *_topShadow,
@@ -37,23 +38,21 @@
     return self;
 }
 
-/*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- */
-
 - (void)setAnimationPercent:(CGFloat)percent
 {
     [super setAnimationPercent:percent];
     CGRect bounds = self.bounds;
-    if (percent == -1) {
-        percent = -1.1;
+    if (percent > 0) {
+//        CGFloat scale = (1-percent)*0.3 + 0.7;
+//        self.layer.transform = CATransform3DMakeScale(scale, scale, 1);
+        percent = 0;
+    }else {
+        if (percent == -1) {
+            percent = -1.1;
+        }
+//        self.layer.transform = CATransform3DIdentity;
     }
-    self.frame = (CGRect){0, bounds.size.height * percent, bounds.size};
+    self.center = CGPointMake(bounds.size.width/2, bounds.size.height/2+ bounds.size.height * percent);
 }
 
 - (void)renderPath:(NSString *)path scale:(CGFloat)scale translation:(CGPoint)trans {
@@ -81,6 +80,9 @@
 }
 
 - (void)renderImage:(UIImage *)image scale:(CGFloat)scale translation:(CGPoint)trans {
+    if (!image) {
+        return;
+    }
     _scale = scale;
     _translation = trans;
     CGRect bounds = self.bounds;

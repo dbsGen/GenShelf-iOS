@@ -16,6 +16,7 @@
 
 @interface GSShelfViewController ()<UITableViewDelegate, UITableViewDataSource> {
     NSArray<GSBookItem *> * _datas;
+    UIBarButtonItem *_editItem;
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -32,6 +33,10 @@
                                                                                  style:UIBarButtonItemStylePlain
                                                                                 target:self
                                                                                 action:@selector(openMenu)];
+        _editItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
+                                                                  target:self
+                                                                  action:@selector(editBooks)];
+        self.navigationItem.rightBarButtonItem = _editItem;
     }
     return self;
 }
@@ -61,6 +66,10 @@
 
 - (void)openMenu {
     [self.sideMenuController openMenu];
+}
+
+- (void)editBooks {
+    [_tableView setEditing:YES animated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

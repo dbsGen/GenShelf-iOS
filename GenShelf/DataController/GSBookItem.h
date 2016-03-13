@@ -25,6 +25,14 @@ typedef enum : NSUInteger {
     GSBookItemStatusPagesComplete,
 } GSBookItemStatus;
 
+@protocol GSBookItemDelegate <NSObject>
+
+@optional
+- (void)bookItem:(GSBookItem *)item progress:(CGFloat)percent;
+- (void)bookItem:(GSBookItem *)item status:(GSBookItemStatus)status loading:(BOOL)loading;
+
+@end
+
 @interface GSBookItem : NSObject {
     CGFloat _percent;
 }
@@ -45,6 +53,8 @@ typedef enum : NSUInteger {
 @property (nonatomic, readonly) NSArray<GSPageItem *> *pages;
 @property (nonatomic, assign) BOOL loading;
 @property (nonatomic, readonly) CGFloat percent;
+
+@property (nonatomic, weak) id<GSBookItemDelegate> delegate;
 
 - (void)loadPages:(NSArray<GSPageItem *> *)pages;
 

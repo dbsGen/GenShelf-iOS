@@ -30,8 +30,13 @@
                        [GSideMenuItem itemWithController:[[GSHomeViewController alloc] init] image:[UIImage imageNamed:@"home"]],
                        [GSideMenuItem itemWithController:[[GSSearchViewController alloc] init] image:[UIImage imageNamed:@"search"]],
                        [GSideMenuItem itemWithTitle:@"进程" image:[UIImage imageNamed:@"progress"] block:^{
-                           UINavigationController *progress = [[UINavigationController alloc] initWithRootViewController:[[GSProgressViewController alloc] init]];
+                           GSProgressViewController *con = [[GSProgressViewController alloc] init];
+                           UINavigationController *progress = [[UINavigationController alloc] initWithRootViewController:con];
                            GCoverView *cover = [[GCoverView alloc] initWithController:progress];
+                           __weak GCoverView *_c = cover;
+                           con.onClose = ^ {
+                               [_c miss];
+                           };
                            [cover showInView:[[UIApplication sharedApplication].delegate window]];
                        }],
                        [GSideMenuItem itemWithController:[[GSSettingsViewController alloc] init] image:[UIImage imageNamed:@"setting"]]];

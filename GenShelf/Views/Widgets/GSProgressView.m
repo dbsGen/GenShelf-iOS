@@ -7,6 +7,7 @@
 //
 
 #import "GSProgressView.h"
+#import "GTween.h"
 
 @implementation GSProgressView
 
@@ -52,6 +53,21 @@
     if (_percent != percent) {
         _percent = percent;
         [self setNeedsDisplay];
+    }
+}
+
+- (void)setPercent:(CGFloat)percent animated:(BOOL)animated {
+    if (animated) {
+        [self stopAllTweens];
+        GTween *tween = [GTween tween:self
+                             duration:0.2
+                                 ease:[GEaseCubicInOut class]];
+        [tween floatPro:@"percent"
+                     to:percent];
+        [tween start];
+    }else {
+        [self stopAllTweens];
+        self.percent = percent;
     }
 }
 

@@ -70,16 +70,7 @@
     return nil;
 }
 
-- (void)pauseBook:(GSBookItem *)book {
-    GSTask *task = [_taskQueue task:BookDownloadIdentifier(book)];
-    if (task) {
-        [task cancel];
-    }
-    task = [_taskQueue task:BookProcessIdentifier(book)];
-    if (task) {
-        [task cancel];
-    }
-}
+- (void)pauseBook:(GSBookItem *)book {}
 
 - (NSInteger)deleteBook:(GSBookItem *)book {
     if ([_progressingBooks containsObject:book]) {

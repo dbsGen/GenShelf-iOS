@@ -8,6 +8,10 @@
 
 #import "GSProgressCell.h"
 
+@interface GSProgressCell () <GSBookItemDelegate>
+
+@end
+
 @implementation GSProgressCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
@@ -18,7 +22,7 @@
         _nameLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self addSubview:_nameLabel];
         
-        _resumeButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width - 150, 10, 40, 40)];
+        _resumeButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width - 100, 10, 40, 40)];
         [_resumeButton setImage:[UIImage imageNamed:@"play"]
                        forState:UIControlStateNormal];
         _resumeButton.hidden = YES;
@@ -28,7 +32,7 @@
                 forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_resumeButton];
         
-        _pauseButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width - 150, 10, 40, 40)];
+        _pauseButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width - 100, 10, 40, 40)];
         [_pauseButton setImage:[UIImage imageNamed:@"pause"]
                        forState:UIControlStateNormal];
         _pauseButton.hidden = YES;
@@ -38,7 +42,7 @@
                 forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_pauseButton];
         
-        _deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width - 100, 10, 40, 40)];
+        _deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width - 50, 10, 40, 40)];
         [_deleteButton setImage:[UIImage imageNamed:@"delete"]
                       forState:UIControlStateNormal];
         _deleteButton.hidden = YES;
@@ -49,23 +53,31 @@
         [self addSubview:_deleteButton];
         
         _progressView = [[GSProgressView alloc] initWithFrame:CGRectMake(10, bounds.size.height - 4, bounds.size.width - 20, 4)];
-        _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleTopMargin;
         [self addSubview:_progressView];
-        
-        [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(onPercentUpdate:)
-                                                     name:BOOK_ITEM_PROGRESS
-                                                   object:nil];
     }
     return self;
 }
 
+- (void)dealloc {
+    if (_data) {
+        _data.delegate = nil;
+    }
+}
+
 - (void)setData:(GSBookItem *)data {
     if (_data != data) {
+        if (_data) {
+            _data.delegate = nil;
+        }
         _data = data;
+        if (_data) {
+            _data.delegate = self;
+        }
         _nameLabel.text = _data.title;
         [self updatePercent];
         [self updateStatus];
+        
     }
 }
 
@@ -76,7 +88,7 @@
 }
 
 - (void)updatePercent {
-    _progressView.percent = _data.percent;
+    [_progressView setPercent:_data.percent animated:NO];
 }
 
 - (void)updateStatus {
@@ -115,6 +127,16 @@
     if ([_delegate respondsToSelector:@selector(progressCellDelete:)]) {
         [_delegate progressCellDelete:self];
     }
+}
+
+#pragma mark - item delegate
+
+- (void)bookItem:(GSBookItem *)item progress:(CGFloat)percent {
+    [_progressView setPercent:percent animated:YES];
+}
+
+- (void)bookItem:(GSBookItem *)item status:(GSBookItemStatus)status loading:(BOOL)loading {
+    [self updateStatus];
 }
 
 @end

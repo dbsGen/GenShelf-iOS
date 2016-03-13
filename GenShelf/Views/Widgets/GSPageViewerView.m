@@ -71,6 +71,8 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
         UIPinchGestureRecognizer *pinch = [[UIPinchGestureRecognizer alloc] initWithTarget:self
                                                                                     action:@selector(onPinch:)];
         [self addGestureRecognizer:pinch];
+        
+        self.clipsToBounds = YES;
     }
     return self;
 }

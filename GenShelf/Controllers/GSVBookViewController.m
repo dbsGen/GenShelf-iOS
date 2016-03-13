@@ -31,7 +31,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    [self.navigationController setNavigationBarHidden:YES animated:YES];
+    [self.navigationController setNavigationBarHidden:YES animated:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    [self.navigationController setNavigationBarHidden:NO animated:animated];
 }
 
 - (void)viewDidLoad {
@@ -65,6 +70,7 @@
     _flipView.backgroundColor = [UIColor grayColor];
     _flipView.bottomLabel.text = @"到底了";
     _flipView.topLabel.text = @"到顶了";
+    _flipView.backgroundColor = [UIColor blackColor];
     [_flipView reloadData];
     [self.view addSubview:_flipView];
     
@@ -74,6 +80,13 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(20, 30, 40, 40)];
+    [button setImage:[UIImage imageNamed:@"back"]
+            forState:UIControlStateNormal];
+    [button addTarget:self
+               action:@selector(backClicked)
+     forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -113,6 +126,10 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+}
+
+- (void)backClicked {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 #pragma mark - tableView

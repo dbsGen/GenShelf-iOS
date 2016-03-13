@@ -25,6 +25,11 @@
     if (self) {
         self.title = @"进程";
         _datas = [GSGlobals dataControl].progressingBooks;
+        
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭"
+                                                                                  style:UIBarButtonItemStylePlain
+                                                                                 target:self
+                                                                                 action:@selector(closeMenu)];
     }
     return self;
 }
@@ -41,6 +46,12 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)closeMenu {
+    if (_onClose) {
+        _onClose();
+    }
 }
 
 #pragma mark - tableview

@@ -10,11 +10,17 @@
 #import <objc/runtime.h>
 #import "GValue.h"
 
+typedef enum {
+    GTweenUpdateStatusDelay,
+    GTweenUpdateStatusRunning,
+    GTweenUpdateStatusComplete,
+} GTweenUpdateStatus;
+
 const float frameRace = 60;
 
 @interface GTween ()
 
-- (BOOL)update:(NSTimeInterval)delta;
+- (GTweenUpdateStatus)update:(NSTimeInterval)delta;
 
 @end
 
@@ -97,7 +103,7 @@ static id _defaultManager;
     NSArray *array = [_tweens copy];
     [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         GTween *tween = obj;
-        if (![tween update:time-_oldTime]) {
+        if ([tween update:time-_oldTime] == GTweenUpdateStatusComplete) {
             [_tweens removeObject:tween];
         }
     }];
@@ -253,7 +259,7 @@ static id _defaultManager;
     }];
 }
 
-- (BOOL)update:(NSTimeInterval)delta
+- (GTweenUpdateStatus)update:(NSTimeInterval)delta
 {
     BOOL check, isForword;
     if (_status == GTweenStatusPlayForword) {
@@ -276,11 +282,11 @@ static id _defaultManager;
         if (self.isLoop) {
             [self.onLoop invoke];
             [self initializeTween:isForword];
-            return YES;
+            return GTweenUpdateStatusRunning;
         }else {
             [self.onComplete invoke];
             _status = GTweenStatusStop;
-            return NO;
+            return GTweenUpdateStatusComplete;
         }
     }else {
         float p = [self.ease ease:MAX((_timeLeft-_delay)/_duration, 0)];
@@ -288,7 +294,7 @@ static id _defaultManager;
             [obj progress:p target:_target];
         }];
         [self.onUpdate invoke];
-        return YES;
+        return GTweenUpdateStatusDelay;
     }
 }
 
@@ -362,7 +368,7 @@ static id _defaultManager;
     [_tweens addObject:tween];
 }
 
-- (BOOL)update:(NSTimeInterval)delta
+- (GTweenUpdateStatus)update:(NSTimeInterval)delta
 {
     BOOL check, isForword;
     if (_status == GTweenStatusPlayForword) {
@@ -378,7 +384,7 @@ static id _defaultManager;
         return NO;
     }else {
         GTween *tween = [_tweens objectAtIndex:_tweenIndex];
-        if (![tween update:delta]) {
+        if ([tween update:delta] == GTweenUpdateStatusComplete) {
             _tweenIndex += isForword ? 1 : -1;
             if (_tweenIndex >= _tweens.count && self.isLoop) {
                 [self.onLoop invoke];

@@ -111,7 +111,7 @@
     CGFloat res = lerp([self.fromValue doubleValue], [self.toValue doubleValue], p);
     GTSetter(CGFloat, target, imp, sel, res);
 #else
-    float res = lerp([self.fromValue floatValue], [self.toValue floatValue], p);
+    CGFloat res = lerp([self.fromValue floatValue], [self.toValue floatValue], p);
     GTSetter(CGFloat, target, imp, sel, res);
 #endif
 }

@@ -47,6 +47,9 @@
             _contentView = [[UIView alloc] init];
             _contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
             _contentView.backgroundColor = [UIColor redColor];
+            _contentView.layer.cornerRadius = 10;
+            _contentView.clipsToBounds = YES;
+            
             [self addSubview:_contentView];
         }
         _contentSubview = contentSubview;
