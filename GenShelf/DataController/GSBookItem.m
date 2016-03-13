@@ -76,7 +76,7 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
     ret.imageUrl = book.imageUrl;
     ret.otherData = book.otherData;
     ret.downloadDate = book.downloadDate;
-    ret.mark = NO;
+    ret.mark = book.mark.boolValue;
     ret.loading = NO;
     [ret->_page_items removeAllObjects];
     int count = 0;
