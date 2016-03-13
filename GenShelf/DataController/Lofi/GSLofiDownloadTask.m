@@ -95,10 +95,12 @@
 - (void)run {
     if (_item.status == GSBookItemStatusComplete) {
         for (GSPageItem *page in _item.pages) {
-            GSLofiPageTask *task = [[GSLofiPageTask alloc] initWithItem:page
-                                                                  queue:_queue];
-            task.bookItem = _item;
-            [self addSubtask:task];
+            if (page.status != GSPageItemStatusComplete) {
+                GSLofiPageTask *task = [[GSLofiPageTask alloc] initWithItem:page
+                                                                      queue:_queue];
+                task.bookItem = _item;
+                [self addSubtask:task];
+            }
         }
         [self complete];
     }else {

@@ -8,6 +8,8 @@
 
 #import "GSDataControl.h"
 #import "GSGlobals.h"
+#import "GCoreDataManager.h"
+#import "GSDataDefines.h"
 
 @implementation GSDataControl
 
@@ -19,8 +21,19 @@
         _operationQueue = [[NSOperationQueue alloc] init];
         _operationQueue.maxConcurrentOperationCount = 1;
         _taskQueue = [[GSTaskQueue alloc] init];
+        _progressingBooks = [[NSMutableArray alloc] init];
+        [self loadProgressBooks];
     }
     return self;
+}
+
+- (void)loadProgressBooks {
+    NSArray<GSModelNetBook *> *books = [GSModelNetBook fetch:[NSPredicate predicateWithFormat:@"mark == YES AND status != %d", GSBookItemStatusPagesComplete]
+                                                       sorts:@[[NSSortDescriptor sortDescriptorWithKey:@"downloadDate"
+                                                          ascending:NO]]];
+    for (GSModelNetBook *book in books) {
+        [_progressingBooks addObject:[GSBookItem itemWithModel:book]];
+    }
 }
 
 - (ASIHTTPRequest *)mainRequest {
@@ -31,6 +44,10 @@
 - (ASIHTTPRequest *)searchRequest:(NSString *)keyword {
     ASIHTTPRequest *request = [GSGlobals requestForURL:[[self class] searchUrl:keyword]];
     return request;
+}
+
+- (NSArray *)progressingBooks {
+    return _progressingBooks;
 }
 
 + (NSURL *)mainUrl {
@@ -45,6 +62,34 @@
     return [NSArray array];
 }
 - (GSTask *)processBook:(GSBookItem *)book {return nil;}
-- (GSTask *)downloadBook:(GSBookItem *)book {return nil;}
+- (GSTask *)downloadBook:(GSBookItem *)book {
+    if (book.status != GSBookItemStatusPagesComplete &&
+        [_progressingBooks filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"pageUrl == %@", book.pageUrl]].count == 0) {
+        [_progressingBooks addObject:book];
+    }
+    return nil;
+}
+
+- (void)pauseBook:(GSBookItem *)book {
+    GSTask *task = [_taskQueue task:BookDownloadIdentifier(book)];
+    if (task) {
+        [task cancel];
+    }
+    task = [_taskQueue task:BookProcessIdentifier(book)];
+    if (task) {
+        [task cancel];
+    }
+}
+
+- (NSInteger)deleteBook:(GSBookItem *)book {
+    if ([_progressingBooks containsObject:book]) {
+        NSInteger index = [_progressingBooks indexOfObject:book];
+        [self pauseBook:book];
+        [book remove];
+        [_progressingBooks removeObject:book];
+        return index;
+    }
+    return -1;
+}
 
 @end

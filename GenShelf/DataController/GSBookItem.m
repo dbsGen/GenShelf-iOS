@@ -19,6 +19,8 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
     GSModelNetBook *_model;
 }
 
+@synthesize percent = _percent;
+
 + (NSMutableArray<GSBookItem*> *)allBooks {
     @synchronized(self) {
         if (!__allBooks) {
@@ -77,10 +79,19 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
     ret.mark = NO;
     ret.loading = NO;
     [ret->_page_items removeAllObjects];
+    int count = 0;
     for (GSModelNetPage *model in book.pages) {
         GSPageItem *item = [[GSPageItem alloc] initWithModel:model];
         item.book = ret;
         [ret->_page_items addObject:item];
+        if (item.status == GSPageItemStatusComplete) {
+            count ++;
+        }
+    }
+    ret->_percent = (float)count / ret.pages.count;
+    if (count == ret.pages.count && book.status.integerValue != GSBookItemStatusPagesComplete) {
+        ret.status = GSBookItemStatusPagesComplete;
+        book.status = [NSNumber numberWithInt:GSBookItemStatusPagesComplete];
     }
     return ret;
 }
@@ -113,6 +124,16 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
         [arr addObject:pitem.model];
     }
     [b setPages:[NSOrderedSet orderedSetWithArray:arr]];
+}
+
+- (void)updatePercent {
+    int count = 0;
+    for (NSInteger n = 0, t = self.pages.count; n < t; n++) {
+        if ([self.pages objectAtIndex:n].status == GSPageItemStatusComplete) {
+            count ++;
+        }
+    }
+    _percent = (float)count / self.pages.count;
 }
 
 - (NSArray<GSPageItem *>*)pages {
@@ -175,6 +196,22 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
     [self updateData];
     [[GCoreDataManager shareManager] save];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_PAGES
+                                                        object:self
+                                                      userInfo:nil];
+}
+
+- (void)pageProgress {
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_PROGRESS
+                                                        object:self
+                                                      userInfo:nil];
+}
+
+- (void)remove {
+    _mark = NO;
+    _loading = false;
+    [self updateData];
+    [[GCoreDataManager shareManager] save];
+    [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_REMOVE
                                                         object:self
                                                       userInfo:nil];
 }

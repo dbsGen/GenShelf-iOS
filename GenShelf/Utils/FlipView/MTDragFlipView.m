@@ -471,8 +471,12 @@ int count;
         n --;
         t --;
     }
-    [_cachedImageViews replaceObjectAtIndex:_pageIndex
-                                 withObject:[array lastObject]];
+    if (_cachedImageViews.count > _pageIndex) {
+        [_cachedImageViews replaceObjectAtIndex:_pageIndex
+                                     withObject:[array lastObject]];
+    }else  {
+        [_cachedImageViews addObject:[array lastObject]];
+    }
     _cacheRange.location = _pageIndex;
     _cacheRange.length=1;
     _animation = NO;

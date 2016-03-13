@@ -19,11 +19,13 @@ typedef void *(^GSRequestUpdateBlock)(NSUInteger count);
     @protected
     NSString *_name;
     CGFloat _requestDelay;
+    NSMutableArray *_progressingBooks;
 }
 
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSOperationQueue *operationQueue;
 @property (nonatomic, readonly) GSTaskQueue *taskQueue;
+@property (nonatomic, readonly) NSArray *progressingBooks;
 @property (nonatomic, assign) CGFloat   requestDelay;
 
 - (ASIHTTPRequest *)mainRequest;
@@ -36,5 +38,7 @@ typedef void *(^GSRequestUpdateBlock)(NSUInteger count);
 - (NSArray<GSBookItem *> *)parseMain:(NSString *)html;
 - (GSTask *)processBook:(GSBookItem *)book;
 - (GSTask *)downloadBook:(GSBookItem *)book;
+- (void)pauseBook:(GSBookItem *)book;
+- (NSInteger)deleteBook:(GSBookItem *)book;
 
 @end

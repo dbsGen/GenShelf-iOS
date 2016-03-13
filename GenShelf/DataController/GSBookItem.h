@@ -15,6 +15,8 @@
 #define BOOK_ITEM_FAILED    @"book_item_failed"
 #define BOOK_ITEM_PAGES     @"book_item_pages"
 #define BOOK_ITEM_DOWNLOAD  @"book_item_download"
+#define BOOK_ITEM_PROGRESS  @"book_item_progress"
+#define BOOK_ITEM_REMOVE    @"book_item_remove"
 
 typedef enum : NSUInteger {
     GSBookItemStatusNotStart    = 0,
@@ -23,7 +25,9 @@ typedef enum : NSUInteger {
     GSBookItemStatusPagesComplete,
 } GSBookItemStatus;
 
-@interface GSBookItem : NSObject
+@interface GSBookItem : NSObject {
+    CGFloat _percent;
+}
 
 + (NSArray<GSBookItem *> *)items:(NSArray<GSModelNetBook *> *)books;
 + (GSBookItem *)itemWithUrl:(NSString *)pageUrl;
@@ -40,6 +44,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) GSBookItemStatus status;
 @property (nonatomic, readonly) NSArray<GSPageItem *> *pages;
 @property (nonatomic, assign) BOOL loading;
+@property (nonatomic, readonly) CGFloat percent;
 
 - (void)loadPages:(NSArray<GSPageItem *> *)pages;
 
@@ -50,6 +55,8 @@ typedef enum : NSUInteger {
 - (void)reset;
 - (void)pagesComplete;
 - (void)download;
+- (void)pageProgress;
+- (void)remove;
 
 + (NSArray *)cachedItems:(NSInteger*)page hasNext:(BOOL*)hasNext expire:(BOOL *)expire;
 + (void)cacheItems:(NSArray *)items page:(NSInteger)page hasNext:(BOOL)hasNext;

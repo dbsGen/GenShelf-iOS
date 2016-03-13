@@ -7,19 +7,24 @@
 //
 
 #import "GSProgressViewController.h"
+#import "GSGlobals.h"
+#import "GSProgressCell.h"
 
-@interface GSProgressViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface GSProgressViewController () <UITableViewDelegate, UITableViewDataSource, GSProgressCellDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
 
 @end
 
-@implementation GSProgressViewController
+@implementation GSProgressViewController {
+    NSArray<GSBookItem *> *_datas;
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"进程";
+        _datas = [GSGlobals dataControl].progressingBooks;
     }
     return self;
 }
@@ -40,18 +45,38 @@
 
 #pragma mark - tableview
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 64;
+}
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return _datas.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     static NSString *identifier = @"ProgressCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+    GSProgressCell *cell = (GSProgressCell*)[tableView dequeueReusableCellWithIdentifier:identifier];
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                      reuseIdentifier:identifier];
+        cell = [[GSProgressCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                     reuseIdentifier:identifier];
+        cell.delegate = self;
     }
+    cell.data = [_datas objectAtIndex:indexPath.row];
     return cell;
+}
+
+- (void)progressCellResume:(GSProgressCell *)cell {
+    [[GSGlobals dataControl] downloadBook:cell.data];
+}
+
+- (void)progressCellPause:(GSProgressCell *)cell {
+    [[GSGlobals dataControl] pauseBook:cell.data];
+}
+
+- (void)progressCellDelete:(GSProgressCell *)cell {
+    NSInteger index = [[GSGlobals dataControl] deleteBook:cell.data];
+    [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
+                      withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 @end

@@ -1,0 +1,120 @@
+//
+//  GSProgressCell.m
+//  GenShelf
+//
+//  Created by Gen on 16/3/11.
+//  Copyright © 2016年 AirRaidClub. All rights reserved.
+//
+
+#import "GSProgressCell.h"
+
+@implementation GSProgressCell
+
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) {
+        CGRect bounds = self.bounds;
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, bounds.size.width - 160, 30)];
+        _nameLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        [self addSubview:_nameLabel];
+        
+        _resumeButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width - 150, 10, 40, 40)];
+        [_resumeButton setImage:[UIImage imageNamed:@"play"]
+                       forState:UIControlStateNormal];
+        _resumeButton.hidden = YES;
+        _resumeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+        [_resumeButton addTarget:self
+                          action:@selector(resumeClicked)
+                forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_resumeButton];
+        
+        _pauseButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width - 150, 10, 40, 40)];
+        [_pauseButton setImage:[UIImage imageNamed:@"pause"]
+                       forState:UIControlStateNormal];
+        _pauseButton.hidden = YES;
+        _pauseButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+        [_pauseButton addTarget:self
+                          action:@selector(pauseClicked)
+                forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_pauseButton];
+        
+        _deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width - 100, 10, 40, 40)];
+        [_deleteButton setImage:[UIImage imageNamed:@"delete"]
+                      forState:UIControlStateNormal];
+        _deleteButton.hidden = YES;
+        _deleteButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+        [_deleteButton addTarget:self
+                          action:@selector(deleteClicked)
+                forControlEvents:UIControlEventTouchUpInside];
+        [self addSubview:_deleteButton];
+        
+        _progressView = [[GSProgressView alloc] initWithFrame:CGRectMake(10, bounds.size.height - 4, bounds.size.width - 20, 4)];
+        _progressView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        [self addSubview:_progressView];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(onPercentUpdate:)
+                                                     name:BOOK_ITEM_PROGRESS
+                                                   object:nil];
+    }
+    return self;
+}
+
+- (void)setData:(GSBookItem *)data {
+    if (_data != data) {
+        _data = data;
+        _nameLabel.text = _data.title;
+        [self updatePercent];
+        [self updateStatus];
+    }
+}
+
+- (void)onPercentUpdate:(NSNotification*)notification {
+    if (notification.object == _data) {
+        [self updatePercent];
+    }
+}
+
+- (void)updatePercent {
+    _progressView.percent = _data.percent;
+}
+
+- (void)updateStatus {
+    switch (_data.status) {
+        case GSBookItemStatusNotStart:
+        case GSBookItemStatusComplete:
+        case GSBookItemStatusProgressing:
+            if (_data.loading) {
+                _resumeButton.hidden = YES;
+                _pauseButton.hidden = NO;
+                _deleteButton.hidden = NO;
+            }else {
+                _resumeButton.hidden = NO;
+                _pauseButton.hidden = YES;
+                _deleteButton.hidden = NO;
+            }
+            
+        default:
+            break;
+    }
+}
+
+- (void)resumeClicked {
+    if ([_delegate respondsToSelector:@selector(progressCellResume:)]) {
+        [_delegate progressCellResume:self];
+    }
+}
+
+- (void)pauseClicked {
+    if ([_delegate respondsToSelector:@selector(progressCellPause:)]) {
+        [_delegate progressCellPause:self];
+    }
+}
+
+- (void)deleteClicked {
+    if ([_delegate respondsToSelector:@selector(progressCellDelete:)]) {
+        [_delegate progressCellDelete:self];
+    }
+}
+
+@end

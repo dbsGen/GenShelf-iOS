@@ -74,6 +74,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:PAGE_ITEM_SET_IMAGE
                                                         object:self
                                                       userInfo:@{@"src": self.imageUrl}];
+    [_book pageProgress];
 }
 
 - (void)reset {

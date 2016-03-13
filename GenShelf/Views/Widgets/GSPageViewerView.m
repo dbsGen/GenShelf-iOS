@@ -85,14 +85,19 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
 - (void)setImage:(UIImage *)image {
     if (_image != image) {
         _image = image;
-        CGSize originalSize = image.size;
-        CGRect frame;
-        frame.size.height = self.bounds.size.height;
-        frame.size.width = originalSize.width * frame.size.height / originalSize.height;
-        frame.origin.y = 0;
-        frame.origin.x = (self.bounds.size.width - frame.size.width)/2;
-        _imageView.transform = CGAffineTransformIdentity;
-        _imageView.frame = frame;
+        if (image) {
+            CGSize originalSize = image.size;
+            CGRect frame;
+            frame.size.height = self.bounds.size.height;
+            frame.size.width = originalSize.width * frame.size.height / originalSize.height;
+            frame.origin.y = 0;
+            frame.origin.x = (self.bounds.size.width - frame.size.width)/2;
+            _imageView.transform = CGAffineTransformIdentity;
+            _imageView.frame = frame;
+        }else {
+            _imageView.transform = CGAffineTransformIdentity;
+            _imageView.frame = self.bounds;
+        }
         _imageView.image = image;
         [self updateTransformWithoutCallback];
     }

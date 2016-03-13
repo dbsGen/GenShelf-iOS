@@ -75,6 +75,7 @@
 }
 
 - (GSTask *)downloadBook:(GSBookItem *)book {
+    [super downloadBook:book];
     NSString *identifier = BookDownloadIdentifier(book);
     if (book.status == GSBookItemStatusPagesComplete) {
         return nil;
