@@ -16,7 +16,7 @@
 
 @interface GSShelfViewController ()<UITableViewDelegate, UITableViewDataSource> {
     NSArray<GSBookItem *> * _datas;
-    UIBarButtonItem *_editItem;
+    UIBarButtonItem *_editItem, *_doneItem;
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -36,6 +36,9 @@
         _editItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemEdit
                                                                   target:self
                                                                   action:@selector(editBooks)];
+        _doneItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+                                                                  target:self
+                                                                  action:@selector(editDone)];
         self.navigationItem.rightBarButtonItem = _editItem;
     }
     return self;
@@ -70,6 +73,12 @@
 
 - (void)editBooks {
     [_tableView setEditing:YES animated:YES];
+    self.navigationItem.rightBarButtonItem = _doneItem;
+}
+
+- (void)editDone {
+    [_tableView setEditing:NO animated:YES];
+    self.navigationItem.rightBarButtonItem = _editItem;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

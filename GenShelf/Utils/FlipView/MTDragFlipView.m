@@ -10,6 +10,7 @@
 #import <QuartzCore/QuartzCore.h>
 #import "GTween.h"
 
+#define clamp(val, min, max) (MAX(MIN(val, max), min))
 #define StateBarRect   (CGRect){0,0,320,20}
 #define kAngle          (M_PI / 4)
 #define GetProgress(float_pro)  (CATransform3DMakeScale(0.1*float_pro + 0.9, 0.1*float_pro + 0.9, 1))
@@ -158,10 +159,10 @@ int count;
     _tstate = state;
     if (self.state == FZDragFlipStateNormal) {
         self.userInteractionEnabled = YES;
-        [self resetNowView:[self imageViewWithIndex:_pageIndex]];
+        [self resetCurrentView:_pageIndex];
     }else {
         self.userInteractionEnabled = NO;
-        [self resetNowViewEx:[self imageViewWithIndex:_pageIndex]];
+        [self resetCurrentViewEx:_pageIndex];
     }
 }
 
@@ -185,7 +186,7 @@ int count;
     }
     if (_animationCount && !self.open) {
         _willToReload = YES;
-        [self resetNowViewEx:[self getDragingView:_pageIndex]];
+        [self resetCurrentViewEx:_pageIndex];
         return;
     }
     _animationCount = 0;
@@ -423,9 +424,7 @@ int count;
 
 - (void)backToTop:(BOOL)aniamted
 {
-    if (!self.open) {
-        [self scrollToPage:0 animated:YES];
-    }
+    [self scrollToPage:0 animated:YES];
 }
 
 - (void)reloadCurrentView {
@@ -463,7 +462,6 @@ int count;
 
 - (void)setTAnimation:(NSMutableArray*)array
 {
-    [self releaseAnimation];
     self.userInteractionEnabled = YES;
     if (array) {
         for (NSInteger n = 0, t = array.count; n < t; n++) {
@@ -510,6 +508,7 @@ int count;
     _animation = NO;
     _transationView.hidden = YES;
     [self reloadCurrentView];
+    [self releaseAnimation];
 }
 
 - (MTFlipAnimationView*)getDragingView:(NSInteger)index
@@ -608,90 +607,84 @@ int count;
             return;
         }
     }
-    
 }
 
-- (void)moveUpOut:(MTFlipAnimationView*)view
+- (void)turnNextWithOriginalIndex:(NSInteger)index
 {
-    [UIView transitionWithView:view
-                      duration:0.4
-                       options:UIViewAnimationOptionCurveLinear
-                    animations:^{
-                        [view setAnimationPercent:-1];
-                    } completion:^(BOOL finished) {
-                        [self releaseAnimation];
-                    }];
-    
+    MTFlipAnimationView *currentView = [self getDragingView:index];
+    MTFlipAnimationView *upView = [self getDragingView:index - 1];
+    MTFlipAnimationView *downView = [self getDragingView:index + 1];
+    [UIView animateWithDuration:0.4
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         [upView setAnimationPercent:-1];
+                         [currentView setAnimationPercent:-1];
+                         [downView setAnimationPercent:0];
+                     }
+                     completion:^(BOOL finished) {
+                         [self releaseAnimation];
+                     }];
 }
 
 
-- (void)moveDownIn:(MTFlipAnimationView*)view
+- (void)turnPrevWithOriginalIndex:(NSInteger)index
 {
-    [UIView transitionWithView:view
-                      duration:0.4
-                       options:UIViewAnimationOptionCurveLinear
-                    animations:^{
-                        [view setAnimationPercent:0];
-                    } completion:^(BOOL finished) {
-                        [self releaseAnimation];
-                    }];
+    MTFlipAnimationView *currentView = [self getDragingView:index];
+    MTFlipAnimationView *upView = [self getDragingView:index - 1];
+    MTFlipAnimationView *downView = [self getDragingView:index + 1];
+    [UIView animateWithDuration:0.4
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         [upView setAnimationPercent:0];
+                         [currentView setAnimationPercent:1];
+                         [downView setAnimationPercent:1];
+                     }
+                     completion:^(BOOL finished) {
+                         [self releaseAnimation];
+                     }];
 }
 
-- (void)resetNowView:(MTFlipAnimationView*)view
+- (void)resetCurrentView:(NSInteger)index
 {
     if (self.state == FZDragFlipStateLoading) {
-        [self resetNowViewEx:view];
+        [self resetCurrentViewEx:index];
         return;
     }
-    CGRect rect = self.bounds;
-    //_animation = YES;
     
-    CGFloat hOffset = view.frame.origin.y - rect.origin.y;
-    CGFloat sect = - hOffset / 3;
-    [UIView animateWithDuration:0.25
-                          delay:0 
+    MTFlipAnimationView *currentView = [self getDragingView:index];
+    MTFlipAnimationView *upView = [self getDragingView:index - 1];
+    MTFlipAnimationView *downView = [self getDragingView:index + 1];
+    [UIView animateWithDuration:0.4
+                          delay:0
                         options:UIViewAnimationOptionCurveEaseOut
-                     animations:^
-     {
-         [view setAnimationPercent:(sect / rect.size.height)];
-     } completion:^(BOOL finished) 
-     {
-         if (finished) {
-             [UIView animateWithDuration:0.13
-                                   delay:0
-                                 options:UIViewAnimationOptionCurveEaseIn
-                              animations:^
-              {
-                  [view setAnimationPercent:0];
-              } completion:^(BOOL finished) 
-              {
-                  [self releaseAnimation];
-              }];
-         }else {
-             [self releaseAnimation];
-         }
-     }];
+                     animations:^{
+                         [upView setAnimationPercent:-1];
+                         [currentView setAnimationPercent:0];
+                         [downView setAnimationPercent:1];
+                     }
+                     completion:^(BOOL finished) {
+                         [self releaseAnimation];
+                     }];
 }
 
-- (void)resetNowViewEx:(UIView *)view
+- (void)resetCurrentViewEx:(NSInteger)index
 {
-    CGRect rect = self.bounds;
-    CGPoint p;
-    if (self.state == FZDragFlipStateNormal) {
-        p = CGPointMake(rect.size.width / 2 + rect.origin.x,
-                        rect.size.height / 2 + rect.origin.y);
-    }else {
-        p = CGPointMake(rect.size.width / 2 + rect.origin.x,
-                        rect.size.height / 2 + rect.origin.y + 44);
-    }
-    [UIView transitionWithView:view
-                      duration:0.4
-                       options:UIViewAnimationOptionCurveEaseOut
-                    animations:^{
-                        view.center = p;
-                    } completion:^(BOOL finished) {
-                        [self releaseAnimation];
-                    }];
+    MTFlipAnimationView *currentView = [self getDragingView:index];
+    MTFlipAnimationView *upView = [self getDragingView:index - 1];
+    MTFlipAnimationView *downView = [self getDragingView:index + 1];
+    [UIView animateWithDuration:0.4
+                          delay:0
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         [upView setAnimationPercent:-1];
+                         [currentView setAnimationPercent:0];
+                         [downView setAnimationPercent:1];
+                     }
+                     completion:^(BOOL finished) {
+                         [self releaseAnimation];
+                     }];
 }
 
 
@@ -824,24 +817,16 @@ static NSTimeInterval __start;
                         (_tempPoint.y - p.y > 20 && 
                          t2 - __start < 0.2)) {
                             _pageIndex ++;
-                            if ((_tempPoint.y - p.y > 20 && 
-                                 t2 - __start < 0.2)) {
-                                [self moveUpOut:[self getDragingView:_pageIndex - 1]];
-                            }else 
-                                [self moveUpOut:[self getDragingView:_pageIndex - 1]];
+                            [self turnNextWithOriginalIndex:_pageIndex - 1];
                         }else {
-                            [self resetNowViewEx:[self getDragingView:_pageIndex]];
+                            [self resetCurrentViewEx:_pageIndex];
                         }
                 }else if (_state2 == 2) {
                     if (p.y - _tempPoint.y> height||
                         (p.y - _tempPoint.y > 20 && 
                          t2 - __start < 0.2)) {
                             _pageIndex --;
-                            if (p.y - _tempPoint.y > 20 && 
-                                t2 - __start < 0.2) {
-                                [self moveDownIn:[self getDragingView:_pageIndex]];
-                            }else 
-                                [self moveDownIn:[self getDragingView:_pageIndex]];
+                            [self turnPrevWithOriginalIndex:_pageIndex + 1];
                         }else {
                             [self resetUpview:[self getDragingView:_pageIndex - 1]];
                         }
@@ -851,14 +836,14 @@ static NSTimeInterval __start;
                             didDragToBorder:YES 
                                      offset:(_tempPoint.y - p.y) * 2 / 5];
                     }
-                    [self resetNowView:[self getDragingView:_pageIndex]];
+                    [self resetCurrentView:_pageIndex];
                 }else if (_state2 == 3) {
                     if ([_delegate respondsToSelector:@selector(flipView:didDragToBorder:offset:)]) {
                         [_delegate flipView:self
                             didDragToBorder:NO 
                                      offset:(p.y - _tempPoint.y) * 2 / 5];
                     }
-                    [self resetNowView:[self getDragingView:_pageIndex]];
+                    [self resetCurrentView:_pageIndex];
                 }else {
                     [self releaseAnimation];
                 }
@@ -967,37 +952,37 @@ static NSTimeInterval __start;
                 CGFloat height = rect.size.height;
                 MTFlipAnimationView *nowView = [self getDragingView:_pageIndex];
                 MTFlipAnimationView *upView = [self getDragingView:_pageIndex - 1];
+                MTFlipAnimationView *downView = [self getDragingView:_pageIndex + 1];
                 [self getDragingView:_pageIndex + 1];
                 if (p.y > _tempPoint.y) {
                     if (_pageIndex > 0 /*&& (_state2 == 2 || _state2 == 0)*/) {
                         _state2 = 2;
-                        CGFloat p2 = -1-(_tempPoint.y - p.y) / height;
-                        [upView setAnimationPercent:p2];
-                        [nowView setAnimationPercent:0];
+                        CGFloat p2 = (p.y-_tempPoint.y) / height;
+                        [upView setAnimationPercent:clamp(p2-1,-1, 1)];
+                        [nowView setAnimationPercent:p2];
+                        [downView setAnimationPercent:clamp(p2+1,-1, 1)];
                         _backgroundView.backgroundColor = _blackColor;
                         _bottomLabel.hidden = YES;
                         [_transationView insertSubview:_backgroundView
                                                atIndex:0];
                     }else if (_pageIndex <= 0 /*&& (_state2 == 4 || _state2 == 0)*/){
                         _state2 = 4;
-                        CGFloat p2 = (1 - (1+(_tempPoint.y - p.y) / height)) / 2;
-                        [nowView setAnimationPercent:p2];
+                        CGFloat p2 = (p.y-_tempPoint.y) / height / 2;
+                        [nowView setBorderPercent:p2];
                         
                         _backgroundView.backgroundColor = m_backgroundColor;
                         _topLabel.hidden = NO;
                         _bottomLabel.hidden = YES;
                         [_transationView insertSubview:_backgroundView
                                           belowSubview:nowView];
-                    }else {
-                        [upView setAnimationPercent:-1];
-                        [nowView setAnimationPercent:0];
                     }
                 }else if (p.y < _tempPoint.y) {
                     if (_pageIndex < _count - 1 /*&& (_state2 == 1 || _state2 == 0)*/) {
                         _state2 = 1;
-                        CGFloat p2 = (p.y - _tempPoint.y) / height;
-                        [upView setAnimationPercent:-1];
+                        CGFloat p2 = (p.y-_tempPoint.y) / height;
+                        [upView setAnimationPercent:clamp(p2-1,-1, 1)];
                         [nowView setAnimationPercent:p2];
+                        [downView setAnimationPercent:clamp(p2+1,-1, 1)];
                         
                         _backgroundView.backgroundColor = _blackColor;
                         _bottomLabel.hidden = YES;
@@ -1005,18 +990,14 @@ static NSTimeInterval __start;
                                                atIndex:0];
                     }else if (_pageIndex >= _count - 1 /*&& (_state2 == 3 || _state2 == 0)*/){
                         _state2 = 3;
-                        CGFloat p2 = (p.y - _tempPoint.y) / height / 2;
-                        [upView setAnimationPercent:-1];
-                        [nowView setAnimationPercent:p2];
+                        CGFloat p2 = (p.y-_tempPoint.y) / height / 2;
+                        [nowView setBorderPercent:p2];
                         
                         _backgroundView.backgroundColor = m_backgroundColor;
                         _topLabel.hidden = YES;
                         _bottomLabel.hidden = NO;
                         [_transationView insertSubview:_backgroundView
                                           belowSubview:nowView];
-                    }else {
-                        [upView setAnimationPercent:-1];
-                        [nowView setAnimationPercent:0];
                     }
                 }
                 [self sortSubviews];

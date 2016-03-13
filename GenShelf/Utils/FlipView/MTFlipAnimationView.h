@@ -26,6 +26,7 @@
  *
  */
 - (void)setAnimationPercent:(CGFloat)percent;
+- (void)setBorderPercent:(CGFloat)percent;
 - (NSOperationQueue*)mainQueue;
 
 - (void)renderedImage:(UIImage*)image;

@@ -228,6 +228,10 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
                                                       userInfo:nil];
 }
 
+- (void)pagesLoading {
+    [self setStatus:GSBookItemStatusComplete loading:YES];
+}
+
 - (void)pagesComplete {
     [self setStatus:GSBookItemStatusPagesComplete loading:NO];
     [self updateData];

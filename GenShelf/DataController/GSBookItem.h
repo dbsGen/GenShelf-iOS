@@ -63,6 +63,7 @@ typedef enum : NSUInteger {
 - (void)failed;
 - (void)cancel;
 - (void)reset;
+- (void)pagesLoading;
 - (void)pagesComplete;
 - (void)download;
 - (void)pageProgress;

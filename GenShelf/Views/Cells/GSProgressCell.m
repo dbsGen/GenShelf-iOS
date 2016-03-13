@@ -18,9 +18,14 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         CGRect bounds = self.bounds;
-        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 10, bounds.size.width - 160, 30)];
+        _nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 6, bounds.size.width - 160, 30)];
         _nameLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
         [self addSubview:_nameLabel];
+        
+        _detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 30, 200, 30)];
+        _detailLabel.textColor = [UIColor grayColor];
+        _detailLabel.font = [UIFont systemFontOfSize:12];
+        [self addSubview:_detailLabel];
         
         _resumeButton = [[UIButton alloc] initWithFrame:CGRectMake(bounds.size.width - 100, 10, 40, 40)];
         [_resumeButton setImage:[UIImage imageNamed:@"play"]
@@ -94,20 +99,41 @@
 - (void)updateStatus {
     switch (_data.status) {
         case GSBookItemStatusNotStart:
+            _detailLabel.text = @"未开始";
+            break;
         case GSBookItemStatusComplete:
         case GSBookItemStatusProgressing:
             if (_data.loading) {
-                _resumeButton.hidden = YES;
-                _pauseButton.hidden = NO;
-                _deleteButton.hidden = NO;
+                _detailLabel.text = @"进行中";
             }else {
-                _resumeButton.hidden = NO;
-                _pauseButton.hidden = YES;
-                _deleteButton.hidden = NO;
+                _detailLabel.text = @"暂停";
             }
+            break;
+        case GSBookItemStatusPagesComplete:
+            _detailLabel.text = @"已完成";
+            break;
             
         default:
             break;
+    }
+    [self updateLoading];
+}
+
+- (void)updateLoading {
+    if (_data.status == GSBookItemStatusPagesComplete) {
+        _resumeButton.hidden = YES;
+        _pauseButton.hidden = YES;
+        _deleteButton.hidden = NO;
+    }else {
+        if (_data.loading) {
+            _resumeButton.hidden = YES;
+            _pauseButton.hidden = NO;
+            _deleteButton.hidden = NO;
+        }else {
+            _resumeButton.hidden = NO;
+            _pauseButton.hidden = YES;
+            _deleteButton.hidden = NO;
+        }
     }
 }
 

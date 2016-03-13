@@ -70,7 +70,6 @@
     _flipView.backgroundColor = [UIColor grayColor];
     _flipView.bottomLabel.text = @"到底了";
     _flipView.topLabel.text = @"到顶了";
-    _flipView.backgroundColor = [UIColor blackColor];
     [_flipView reloadData];
     [self.view addSubview:_flipView];
     

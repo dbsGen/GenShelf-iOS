@@ -39,6 +39,9 @@ static NSOperationQueue *__queue;
 - (void)setAnimationPercent:(CGFloat)percent{
     _animationPercent = percent;
 }
+- (void)setBorderPercent:(CGFloat)percent {
+    self.animationPercent = percent;
+}
 
 - (NSOperationQueue*)mainQueue
 {

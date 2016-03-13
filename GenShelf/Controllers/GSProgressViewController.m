@@ -76,6 +76,10 @@
     return cell;
 }
 
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
 - (void)progressCellResume:(GSProgressCell *)cell {
     [[GSGlobals dataControl] downloadBook:cell.data];
 }

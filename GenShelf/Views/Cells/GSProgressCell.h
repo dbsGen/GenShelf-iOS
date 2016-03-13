@@ -26,6 +26,7 @@
 @property (nonatomic, strong) GSBookItem *data;
 
 @property (nonatomic, readonly) UILabel *nameLabel;
+@property (nonatomic, readonly) UILabel *detailLabel;
 @property (nonatomic, readonly) GSProgressView *progressView;
 @property (nonatomic, readonly) UIButton *resumeButton;
 @property (nonatomic, readonly) UIButton *pauseButton;

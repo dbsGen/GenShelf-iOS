@@ -55,6 +55,11 @@
     self.center = CGPointMake(bounds.size.width/2, bounds.size.height/2+ bounds.size.height * percent);
 }
 
+- (void)setBorderPercent:(CGFloat)percent {
+    CGRect bounds = self.bounds;
+    self.center = CGPointMake(bounds.size.width/2, bounds.size.height/2+ bounds.size.height * percent);
+}
+
 - (void)renderPath:(NSString *)path scale:(CGFloat)scale translation:(CGPoint)trans {
     _scale = scale;
     _translation = trans;

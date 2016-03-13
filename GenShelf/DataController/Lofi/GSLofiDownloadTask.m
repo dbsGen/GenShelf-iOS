@@ -109,6 +109,9 @@
                 [self addSubtask:task];
             }
         }
+        if (self.subtasks.count) {
+            [_item pagesLoading];
+        }
         [self complete];
     }else {
         [self failed:[NSError errorWithDomain:@"目标未完成"
