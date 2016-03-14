@@ -13,6 +13,7 @@
 #import "GSDataDefines.h"
 #import "GSLofiBookTask.h"
 #import "GSLofiDownloadTask.h"
+#import "GSLofiHomeTask.h"
 
 #define URL_HOST @"http://lofi.e-hentai.org/"
 #define FILTER_STR @"?f_doujinshi=0&f_manga=0&f_artistcg=0&f_gamecg=0&f_western=0&f_non-h=1&f_imageset=0&f_cosplay=0&f_asianporn=0&f_misc=0&f_apply=Apply+Filter"
@@ -39,46 +40,12 @@
     return [NSURL URLWithString:str];
 }
 
-- (NSArray<GSBookItem *> *)parseMain:(NSString *)html hasNext:(BOOL *)hasNext {
-    NSError *error = nil;
-    GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithHTMLString:html
-                                                                   error:&error];
-    CheckErrorR([NSArray array])
-    NSArray *divs = [doc nodesForXPath:@"//div[@class='ig']" error:&error];
-    CheckErrorR([NSArray array])
-    
-    NSMutableArray<GSBookItem *> *res = [NSMutableArray<GSBookItem*> array];
-    for (GDataXMLNode *node in divs) {
-        GDataXMLElement *imageNode = (GDataXMLElement*)[node firstNodeForXPath:@"node()//td[@class='ii']/a"
-                                                                         error:&error];
-        CheckErrorC
-        NSString *pageUrl = [imageNode attributeForName:@"href"].stringValue;
-        GSBookItem *item = [GSBookItem itemWithUrl:pageUrl];
-        
-        GDataXMLElement *sImageNode = (GDataXMLElement*)[imageNode firstNodeForXPath:@"img"
-                                                                               error:&error];
-        CheckErrorC
-        item.imageUrl = [sImageNode attributeForName:@"src"].stringValue;
-        
-        GDataXMLElement *titleNode = (GDataXMLElement*)[node firstNodeForXPath:@"node()//table[@class='it']//a[@class='b']"
-                                                                         error:&error];
-        CheckErrorC
-        item.title = titleNode.stringValue;
-        [res addObject:item];
-    }
-    NSArray *links = [doc nodesForXPath:@"//div[@id='ia']/a"
-                                  error:&error];
-    CheckErrorR([NSArray array])
-    *hasNext = NO;
-    for (GDataXMLElement *lNode in links) {
-        NSString *str = [lNode.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
-        if ([str hasPrefix:@"Next"] || [str hasPrefix:@"next"]) {
-            *hasNext = YES;
-            break;
-        }
-    }
-    
-    return res;
+- (GSHomeTask *)mainRequest:(NSInteger)pageIndex  {
+    GSLofiHomeTask *task = [self.taskQueue createTask:HomeRequestIdentifier
+                                              creator:^GSTask *{
+                                                  return [[GSLofiHomeTask alloc] initWithIndex:pageIndex queue:self.operationQueue];
+                                              }];
+    return task;
 }
 
 - (GSTask *)processBook:(GSBookItem *)book {

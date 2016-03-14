@@ -13,6 +13,7 @@
 #import "GCoreDataManager.h"
 #import "GSModelNetBook.h"
 #import "GSVBookViewController.h"
+#import "GSGlobals.h"
 
 @interface GSShelfViewController ()<UITableViewDelegate, UITableViewDataSource> {
     NSMutableArray<GSBookItem *> * _datas;
@@ -122,6 +123,23 @@
     GSVBookViewController *book = [[GSVBookViewController alloc] init];
     book.item = item;
     [self.navigationController pushViewController:book animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    switch (editingStyle) {
+        case UITableViewCellEditingStyleDelete:
+        {
+            GSBookItem *book = [_datas objectAtIndex:indexPath.row];
+            [_datas removeObjectAtIndex:indexPath.row];
+            [[GSGlobals dataControl] deleteBook:book];
+            [_tableView deleteRowsAtIndexPaths:@[indexPath]
+                              withRowAnimation:UITableViewRowAnimationAutomatic];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

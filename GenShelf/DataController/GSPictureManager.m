@@ -31,7 +31,7 @@ static GSPictureManager *__defaultManager = nil;
 - (NSString*)folderPath
 {
     if (!_tempPath) {
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *path = [paths lastObject];
         _tempPath = [path stringByAppendingPathComponent:DIR_PATH];
     }
@@ -64,7 +64,10 @@ static GSPictureManager *__defaultManager = nil;
 }
 
 - (NSString *)path:(GSBookItem *)book {
-    return [[self folderPath] stringByAppendingPathComponent:[self folderName:book]];
+    if (book) {
+        return [[self folderPath] stringByAppendingPathComponent:[self folderName:book]];
+    }
+    return nil;
 }
 
 - (NSString *)folderName:(GSBookItem *)book {

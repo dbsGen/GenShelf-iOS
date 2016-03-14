@@ -15,7 +15,7 @@
 #import "GSPreviewViewController.h"
 #import "GSBottomLoadingCell.h"
 
-@interface GSHomeViewController () <UITableViewDelegate, UITableViewDataSource, SRRefreshDelegate>
+@interface GSHomeViewController () <UITableViewDelegate, UITableViewDataSource, SRRefreshDelegate, GSTaskDelegate>
 
 @property (nonatomic, strong) SRRefreshView *refreshView;
 @property (nonatomic, strong) UITableView *tableView;
@@ -177,43 +177,35 @@
 - (void)requestDatas {
     if (_loading) return;
     _loading = YES;
-    ASIHTTPRequest *request = [[GSGlobals dataControl] mainRequest:0];
-    __weak ASIHTTPRequest *_request = request;
+    GSHomeTask *task = [[GSGlobals dataControl] mainRequest:0];
+    task.delegate = self;
+    task.tag = 1;
     [self updateLoadingStatus];
-    [request setCompletionBlock:^{
-        NSArray<GSBookItem *> *arr = [[GSGlobals dataControl] parseMain:_request.responseString hasNext:&_hasNext];
-        _datas = [NSMutableArray<GSBookItem *> arrayWithArray:arr];
-        [_tableView reloadData];
-        _loaded = YES;
-        [_refreshView endRefresh];
-        _index = 0;
-        [GSBookItem cacheItems:_datas page:_index hasNext:_hasNext];
-        _loading = NO;
-        [self updateLoadingStatus];
-    }];
-    [request setFailedBlock:^{
-        [_refreshView endRefresh];
-        [MBLMessageBanner showMessageBannerInViewController:self
-                                                      title:@"Error"
-                                                   subtitle:@"不能获得"
-                                                       type:MBLMessageBannerTypeError
-                                                 atPosition:MBLMessageBannerPositionTop];
-        _loading = NO;
-        [self updateLoadingStatus];
-    }];
-    [_queue addOperation:request];
 }
 
 - (void)requestMore {
     if (_loading)
         return;
     NSInteger index = _index + 1;
-    ASIHTTPRequest *request = [[GSGlobals dataControl] mainRequest:index];
-    __weak ASIHTTPRequest *_request = request;
+    GSHomeTask *task = [[GSGlobals dataControl] mainRequest:index];
+    task.delegate = self;
+    task.tag = 2;
     _loading = YES;
     [self updateLoadingStatus];
-    [request setCompletionBlock:^{
-        NSArray<GSBookItem *> *arr = [[GSGlobals dataControl] parseMain:_request.responseString hasNext:&_hasNext];
+}
+
+
+- (void)onTaskComplete:(GSHomeTask *)task {
+    if (task.tag == 1) {
+        _datas = [NSMutableArray<GSBookItem *> arrayWithArray:task.books];
+        [_tableView reloadData];
+        _loaded = YES;
+        [_refreshView endRefresh];
+        _index = task.index;
+        _hasNext = task.hasMore;
+        [GSBookItem cacheItems:_datas page:_index hasNext:_hasNext];
+    }else if (task.tag == 2) {
+        NSArray<GSBookItem *> *arr = task.books;
         NSMutableArray<NSIndexPath *> *indexes = [NSMutableArray array];
         [arr enumerateObjectsUsingBlock:^(GSBookItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (![_datas containsObject:obj]) {
@@ -224,12 +216,22 @@
         }];
         [_tableView insertRowsAtIndexPaths:indexes
                           withRowAnimation:UITableViewRowAnimationAutomatic];
-        _index = index;
+        _index = task.index;
+        _hasNext = task.hasMore;
         [GSBookItem cacheItems:_datas page:_index hasNext:_hasNext];
-        _loading = NO;
-        [self updateLoadingStatus];
-    }];
-    [request setFailedBlock:^{
+    }
+    _loading = NO;
+    [self updateLoadingStatus];
+}
+- (void)onTaskFailed:(GSTask *)task error:(NSError*)error {
+    if (task.tag == 1) {
+        [_refreshView endRefresh];
+        [MBLMessageBanner showMessageBannerInViewController:self
+                                                      title:@"Error"
+                                                   subtitle:@"不能获得"
+                                                       type:MBLMessageBannerTypeError
+                                                 atPosition:MBLMessageBannerPositionTop];
+    }else {
         [MBLMessageBanner showMessageBannerInViewController:self
                                                       title:@"Error"
                                                    subtitle:@"不能获得"
@@ -237,8 +239,9 @@
                                                  atPosition:MBLMessageBannerPositionTop];
         _loading = NO;
         [self updateLoadingStatus];
-    }];
-    [_queue addOperation:request];
+    }
+    _loading = NO;
+    [self updateLoadingStatus];
 }
 
 @end

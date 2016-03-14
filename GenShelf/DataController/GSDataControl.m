@@ -37,30 +37,16 @@
     }
 }
 
-- (ASIHTTPRequest *)mainRequest:(NSInteger)pageIndex {
-    ASIHTTPRequest *request = [GSGlobals requestForURL:[[self class] mainUrl:pageIndex]];
-    return request;
+- (GSHomeTask *)mainRequest:(NSInteger)pageIndex {
+    return nil;
 }
 
-- (ASIHTTPRequest *)searchRequest:(NSString *)keyword pageIndex:(NSInteger)pageIndex {
-    ASIHTTPRequest *request = [GSGlobals requestForURL:[[self class] searchUrl:keyword pageIndex:pageIndex]];
-    return request;
+- (GSTask *)searchRequest:(NSString *)keyword pageIndex:(NSInteger)pageIndex {
+    return nil;
 }
 
 - (NSArray *)progressingBooks {
     return _progressingBooks;
-}
-
-+ (NSURL *)mainUrl:(NSInteger)pageIndex {
-    return NULL;
-}
-
-+ (NSURL *)searchUrl:(NSString *)keyword pageIndex:(NSInteger)pageIndex {
-    return NULL;
-}
-
-- (NSArray<GSBookItem *> *)parseMain:(NSString *)html hasNext:(BOOL *)hasNext {
-    return [NSArray array];
 }
 - (GSTask *)processBook:(GSBookItem *)book {return nil;}
 - (GSTask *)downloadBook:(GSBookItem *)book {
@@ -74,10 +60,10 @@
 - (void)pauseBook:(GSBookItem *)book {}
 
 - (NSInteger)deleteBook:(GSBookItem *)book {
+    [[GSPictureManager defaultManager] deleteBook:book];
     if ([_progressingBooks containsObject:book]) {
         NSInteger index = [_progressingBooks indexOfObject:book];
         [self pauseBook:book];
-        [[GSPictureManager defaultManager] deleteBook:book];
         [_progressingBooks removeObject:book];
         return index;
     }

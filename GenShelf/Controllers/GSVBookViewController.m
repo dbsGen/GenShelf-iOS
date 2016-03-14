@@ -140,7 +140,21 @@
 }
 
 - (void)pageComplete:(NSNotification *)notification {
-    
+    NSArray *pages = [_item.pages filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"model == %@", [notification.object model]]];
+    if (pages.count) {
+        GSPageItem *currentPage = [pages firstObject];
+        GSPageItem *page = [_item.pages objectAtIndex:_flipView.pageIndex];
+        if ([currentPage.pageUrl isEqualToString:page.pageUrl]) {
+            _pageViewer.imagePath = page.imagePath;
+        }
+        
+        NSInteger index = [_item.pages indexOfObject:currentPage];
+        GSPageFlipView *view = (GSPageFlipView*)[_flipView imageViewWithIndex:index];
+        if (view) {
+            [view renderPath:[notification.object imagePath]
+                       scale:1 translation:CGPointMake(0, 0)];
+        }
+    }
 }
 
 #pragma mark - tableView

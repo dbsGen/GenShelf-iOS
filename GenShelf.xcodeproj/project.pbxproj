@@ -125,6 +125,9 @@
 		B2CF6A301C85520F00DC0CCC /* GSVBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF6A2F1C85520F00DC0CCC /* GSVBookViewController.m */; };
 		B2CF6A341C8569E900DC0CCC /* GSPageViewerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF6A331C8569E900DC0CCC /* GSPageViewerView.m */; };
 		B2CF6A371C8576FD00DC0CCC /* GSPageFlipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF6A361C8576FD00DC0CCC /* GSPageFlipView.m */; };
+		B2EB03AE1C96FE7700B95446 /* GSLofiHomeTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2EB03AD1C96FE7700B95446 /* GSLofiHomeTask.m */; };
+		B2EB03B31C970A5000B95446 /* GSContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2EB03B21C970A5000B95446 /* GSContainer.m */; };
+		B2EB03B61C971D0800B95446 /* GSHomeTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2EB03B51C971D0800B95446 /* GSHomeTask.m */; };
 		B2F02F151C75637700D93119 /* GSGlobals.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F141C75637700D93119 /* GSGlobals.m */; };
 		B2F02F181C75B24600D93119 /* GSSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F171C75B24600D93119 /* GSSwitchCell.m */; };
 		B2F02F251C75BE0D00D93119 /* GCallback.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F02F1C1C75BE0D00D93119 /* GCallback.m */; };
@@ -378,6 +381,13 @@
 		B2CF6A331C8569E900DC0CCC /* GSPageViewerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPageViewerView.m; sourceTree = "<group>"; };
 		B2CF6A351C8576FD00DC0CCC /* GSPageFlipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPageFlipView.h; sourceTree = "<group>"; };
 		B2CF6A361C8576FD00DC0CCC /* GSPageFlipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPageFlipView.m; sourceTree = "<group>"; };
+		B2EB03AC1C96FE7700B95446 /* GSLofiHomeTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiHomeTask.h; sourceTree = "<group>"; };
+		B2EB03AD1C96FE7700B95446 /* GSLofiHomeTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLofiHomeTask.m; sourceTree = "<group>"; };
+		B2EB03B01C96FFB300B95446 /* GSLofiDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSLofiDefines.h; sourceTree = "<group>"; };
+		B2EB03B11C970A5000B95446 /* GSContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSContainer.h; sourceTree = "<group>"; };
+		B2EB03B21C970A5000B95446 /* GSContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSContainer.m; sourceTree = "<group>"; };
+		B2EB03B41C971D0800B95446 /* GSHomeTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSHomeTask.h; sourceTree = "<group>"; };
+		B2EB03B51C971D0800B95446 /* GSHomeTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSHomeTask.m; sourceTree = "<group>"; };
 		B2F02F131C75637700D93119 /* GSGlobals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSGlobals.h; sourceTree = "<group>"; };
 		B2F02F141C75637700D93119 /* GSGlobals.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSGlobals.m; sourceTree = "<group>"; };
 		B2F02F161C75B24600D93119 /* GSSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSSwitchCell.h; sourceTree = "<group>"; };
@@ -802,6 +812,8 @@
 			children = (
 				B296F6E61C7F26E30031AA62 /* GSTask.h */,
 				B296F6E71C7F26E30031AA62 /* GSTask.m */,
+				B2EB03B41C971D0800B95446 /* GSHomeTask.h */,
+				B2EB03B51C971D0800B95446 /* GSHomeTask.m */,
 			);
 			path = TaskQueue;
 			sourceTree = "<group>";
@@ -824,6 +836,9 @@
 				B2ABBA311C8019DA00C02B7D /* GSLofiBookTask.m */,
 				B296F6EA1C8326870031AA62 /* GSLofiDownloadTask.h */,
 				B296F6EB1C8326870031AA62 /* GSLofiDownloadTask.m */,
+				B2EB03AC1C96FE7700B95446 /* GSLofiHomeTask.h */,
+				B2EB03AD1C96FE7700B95446 /* GSLofiHomeTask.m */,
+				B2EB03B01C96FFB300B95446 /* GSLofiDefines.h */,
 			);
 			path = Lofi;
 			sourceTree = "<group>";
@@ -1003,6 +1018,8 @@
 				B2ABBA331C80278900C02B7D /* GSDataDefines.h */,
 				B296F6EE1C8335170031AA62 /* GSPictureManager.h */,
 				B296F6EF1C8335170031AA62 /* GSPictureManager.m */,
+				B2EB03B11C970A5000B95446 /* GSContainer.h */,
+				B2EB03B21C970A5000B95446 /* GSContainer.m */,
 			);
 			path = DataController;
 			sourceTree = "<group>";
@@ -1261,6 +1278,7 @@
 				B268ED091C7777E5001DD15F /* MBLMessageBannerView.m in Sources */,
 				B2F181391C7C13F200DA5BF3 /* GSRadiusImageView.m in Sources */,
 				B2ABBA2E1C8019B900C02B7D /* GSLofiDataControl.m in Sources */,
+				B2EB03B31C970A5000B95446 /* GSContainer.m in Sources */,
 				B2ABBA321C8019DA00C02B7D /* GSLofiBookTask.m in Sources */,
 				B296F6E81C7F26E30031AA62 /* GSTask.m in Sources */,
 				B268ECF61C7777E5001DD15F /* MBLMessageBanner.m in Sources */,
@@ -1270,6 +1288,7 @@
 				B22675EF1C7C44DC00B5D5CC /* GSPageItem.m in Sources */,
 				B296F7011C93073F0031AA62 /* GenShelf.xcdatamodeld in Sources */,
 				B22305C41C78250E001B18F5 /* GCoreDataManager.m in Sources */,
+				B2EB03B61C971D0800B95446 /* GSHomeTask.m in Sources */,
 				B2F181301C7C062500DA5BF3 /* MTNetCacheElement.m in Sources */,
 				B268ECB81C7763BA001DD15F /* ASIDataDecompressor.m in Sources */,
 				B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */,
@@ -1324,6 +1343,7 @@
 				B22305D01C783632001B18F5 /* SRSlimeView.m in Sources */,
 				B2F02F151C75637700D93119 /* GSGlobals.m in Sources */,
 				B20A34231C746541000CCFA3 /* ShadowsocksRunner.m in Sources */,
+				B2EB03AE1C96FE7700B95446 /* GSLofiHomeTask.m in Sources */,
 				B2BDCBBD1C76DF5600DC3031 /* GSLoadingCell.m in Sources */,
 				B2A036F41C96A03800EA2130 /* GSBottomLoadingCell.m in Sources */,
 				B23366C41C7EEDE8003EA467 /* GSModelNetPage.m in Sources */,

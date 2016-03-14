@@ -49,6 +49,7 @@ typedef GSTask*(^GSTaskCreator)();
 @property (nonatomic, weak) id delegate;
 @property (nonatomic, assign) NSInteger retryCount;
 @property (nonatomic, assign) NSInteger offset;
+@property (nonatomic, assign) NSInteger tag;
 
 @property (nonatomic, assign) NSTimeInterval timeDelay;
 

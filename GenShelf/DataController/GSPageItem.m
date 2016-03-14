@@ -9,29 +9,56 @@
 #import "GSPageItem.h"
 #import "GCoreDataManager.h"
 #import "GSPictureManager.h"
+#import "GSContainer.h"
+
+static GSContainerQueue<GSPageItem*> *__cacheQueue = nil;
 
 @implementation GSPageItem {
     GSModelNetPage *_model;
 }
 
-- (id)initWithUrl:(NSString*)pageUrl {
++ (GSContainerQueue<GSPageItem*> *)cacheQueue {
+    @synchronized(self) {
+        if (!__cacheQueue) {
+            __cacheQueue = [[GSContainerQueue<GSPageItem*> alloc] init];
+        }
+    }
+    return __cacheQueue;
+}
+
+- (id)init {
     self = [super init];
     if (self) {
-        
+        [[GSPageItem cacheQueue] addObject:self];
     }
     return self;
 }
 
-- (id)initWithModel:(GSModelNetPage*)page {
-    self = [self init];
-    if (self) {
-        _status = page.status.integerValue;
-        _index = page.index.integerValue;
-        _pageUrl = page.pageUrl;
-        _imageUrl = page.imageUrl;
-        _thumUrl = page.thumUrl;
+- (void)dealloc {
+    [[GSPageItem cacheQueue] removeObject:self];
+}
+
++ (instancetype)itemWithUrl:(NSString *)pageUrl {
+    GSPageItem *ret = [[GSPageItem cacheQueue] object:^BOOL(id object) {
+        return [[object pageUrl] isEqualToString:pageUrl];
+    }];
+    if (ret) {
+        return ret;
     }
-    return self;
+    ret = [[GSPageItem alloc] init];
+    ret.pageUrl = pageUrl;
+    return ret;
+}
+
++ (instancetype)itemWithModel:(GSModelNetPage*)page {
+    GSPageItem *ret = [self itemWithUrl:page.pageUrl];
+    ret->_model = page;
+    ret.status = page.status.integerValue;
+    ret.index = page.index.integerValue;
+    ret.pageUrl = page.pageUrl;
+    ret.imageUrl = page.imageUrl;
+    ret.thumUrl = page.thumUrl;
+    return ret;
 }
 
 - (GSModelNetPage *)model {

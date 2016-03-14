@@ -9,10 +9,11 @@
 #import "GSBookItem.h"
 #import "GCoreDataManager.h"
 #import "GSModelHomeData.h"
+#import "GSContainer.h"
 
 const NSTimeInterval GSTimeADay = 3600*24;
 
-static NSMutableArray<GSBookItem*> *__allBooks = nil;
+static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
 
 @implementation GSBookItem {
     NSMutableArray<GSPageItem *> *_page_items;
@@ -21,13 +22,13 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
 
 @synthesize percent = _percent;
 
-+ (NSMutableArray<GSBookItem*> *)allBooks {
++ (GSContainerQueue<GSBookItem*> *)cacheQueue {
     @synchronized(self) {
-        if (!__allBooks) {
-            __allBooks = [[NSMutableArray<GSBookItem*> alloc] init];
+        if (!__cacheQueue) {
+            __cacheQueue = [[GSContainerQueue<GSBookItem*> alloc] init];
         }
     }
-    return __allBooks;
+    return __cacheQueue;
 }
 
 - (id)init {
@@ -36,8 +37,14 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
         _status = GSBookItemStatusNotStart;
         _page_items = [[NSMutableArray alloc] init];
         _loading = false;
+        
+        [[GSBookItem cacheQueue] addObject:self];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[GSBookItem cacheQueue] removeObject:self];
 }
 
 + (NSArray<GSBookItem *> *)items:(NSArray<GSModelNetBook *> *)books {
@@ -52,19 +59,15 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
 }
 
 + (GSBookItem *)itemWithUrl:(NSString *)pageUrl {
-    NSMutableArray<GSBookItem*> *all = [self allBooks];
-    for (GSBookItem *item in all) {
-        if ([item.pageUrl isEqualToString:pageUrl]) {
-            return item;
-        }
+    GSBookItem *obj = [[GSBookItem cacheQueue] object:^BOOL(id object) {
+        return [[object pageUrl] isEqualToString:pageUrl];
+    }];
+    if (obj) {
+        return obj;
     }
-    GSBookItem *ret = [[GSBookItem alloc] init];
-    ret.pageUrl = pageUrl;
-    [all addObject:ret];
-    while (all.count > 100) {
-        [all removeObjectAtIndex:0];
-    }
-    return ret;
+    obj = [[GSBookItem alloc] init];
+    obj.pageUrl = pageUrl;
+    return obj;
 }
 
 + (GSBookItem *)itemWithModel:(GSModelNetBook*)book {
@@ -81,7 +84,7 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
     [ret->_page_items removeAllObjects];
     int count = 0;
     for (GSModelNetPage *model in book.pages) {
-        GSPageItem *item = [[GSPageItem alloc] initWithModel:model];
+        GSPageItem *item = [GSPageItem itemWithModel:model];
         item.book = ret;
         [item checkPage];
         [ret->_page_items addObject:item];

@@ -31,7 +31,8 @@ typedef enum : NSUInteger {
 
 - (NSString *)imagePath;
 
-- (id)initWithModel:(GSModelNetPage*)page;
++ (instancetype)itemWithUrl:(NSString *)pageUrl;
++ (instancetype)itemWithModel:(GSModelNetPage*)page;
 - (GSModelNetPage *)model;
 
 - (void)checkPage;

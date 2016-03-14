@@ -140,11 +140,10 @@
     CheckError
     NSMutableArray<GSPageItem *> *pages = [NSMutableArray<GSPageItem *> array];
     for (GDataXMLNode *pNode in pNodes) {
-        GSPageItem *page = [[GSPageItem alloc] init];
         GDataXMLElement *a = (GDataXMLElement*)[pNode firstNodeForXPath:@"a"
                                                                   error:&error];
         CheckErrorC
-        page.pageUrl = [a attributeForName:@"href"].stringValue;
+        GSPageItem *page = [GSPageItem itemWithUrl:[a attributeForName:@"href"].stringValue];
         GDataXMLElement *img = (GDataXMLElement*)[a firstNodeForXPath:@"img"
                                                                 error:&error];
         CheckErrorC
