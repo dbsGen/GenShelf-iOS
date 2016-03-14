@@ -16,5 +16,8 @@
 
 - (void)insertPicture:(NSData *)data book:(GSBookItem *)book page:(GSPageItem *)page;
 - (NSString *)path:(GSBookItem *)book page:(GSPageItem *)page;
+- (NSString *)path:(GSBookItem *)book;
+- (void)deleteBook:(GSBookItem *)book;
+- (void)deletePage:(GSPageItem *)page;
 
 @end

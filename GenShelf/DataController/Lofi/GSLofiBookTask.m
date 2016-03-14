@@ -109,7 +109,7 @@
 }
 
 - (void)run {
-    if (_item.status == GSBookItemStatusComplete) {
+    if (_item.status >= GSBookItemStatusComplete) {
         [self complete];
     }else if (_item.loading) {
         [self fatalError:[NSError errorWithDomain:[NSString stringWithFormat:@"Bookitem %@ already in progressing or complete.", _item.title]
@@ -118,6 +118,9 @@
     }else {
         NSURL *url = [NSURL URLWithString:_item.otherData ? _item.otherData : _item.pageUrl];
         
+        if (!_item.otherData && _item.pages.count > 0) {
+            [_item reset];
+        }
         GSLofiBookSubtask *subtask = [[GSLofiBookSubtask alloc] initWithUrl:url
                                                                       queue:_queue];
         subtask.parentDelegate = self;
@@ -151,6 +154,7 @@
     
     NSArray *links = [doc nodesForXPath:@"//div[@id='ia']/a"
                                   error:&error];
+    CheckError
     for (GDataXMLElement *lNode in links) {
         NSString *str = [lNode.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
         if ([str hasPrefix:@"Next"] || [str hasPrefix:@"next"]) {

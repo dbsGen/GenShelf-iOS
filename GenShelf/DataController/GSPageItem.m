@@ -14,6 +14,14 @@
     GSModelNetPage *_model;
 }
 
+- (id)initWithUrl:(NSString*)pageUrl {
+    self = [super init];
+    if (self) {
+        
+    }
+    return self;
+}
+
 - (id)initWithModel:(GSModelNetPage*)page {
     self = [self init];
     if (self) {
@@ -47,6 +55,15 @@
                                                   page:self];
     }
     return nil;
+}
+
+- (void)checkPage {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:self.imagePath]) {
+        _status = GSPageItemStatusNotStart;
+    }else {
+        _status = GSPageItemStatusComplete;
+    }
+    [self updateData];
 }
 
 - (void)updateData {

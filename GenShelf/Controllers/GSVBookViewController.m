@@ -25,6 +25,10 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(pageComplete:)
+                                                     name:PAGE_ITEM_SET_IMAGE
+                                                   object:nil];
     }
     return self;
 }
@@ -85,6 +89,10 @@
     [button addTarget:self
                action:@selector(backClicked)
      forControlEvents:UIControlEventTouchUpInside];
+    button.layer.shadowColor = [UIColor whiteColor].CGColor;
+    button.layer.shadowOpacity = 1;
+    button.layer.shadowRadius = 2;
+    button.layer.shadowOffset = CGSizeMake(0, 0);
     [self.view addSubview:button];
 }
 
@@ -129,6 +137,10 @@
 
 - (void)backClicked {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)pageComplete:(NSNotification *)notification {
+    
 }
 
 #pragma mark - tableView

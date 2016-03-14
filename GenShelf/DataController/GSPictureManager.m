@@ -63,6 +63,10 @@ static GSPictureManager *__defaultManager = nil;
     return [bookFolder stringByAppendingPathComponent:fileName];
 }
 
+- (NSString *)path:(GSBookItem *)book {
+    return [[self folderPath] stringByAppendingPathComponent:[self folderName:book]];
+}
+
 - (NSString *)folderName:(GSBookItem *)book {
     const char *chs = book.title.UTF8String;
     long len = MIN(strlen(chs), 127);
@@ -78,7 +82,34 @@ static GSPictureManager *__defaultManager = nil;
         n_chs[n] = check ? '_' : chs[n];
     }
     n_chs[len] = 0;
-    return [NSString stringWithUTF8String:n_chs];
+    NSString *path = [NSString stringWithUTF8String:n_chs];
+    free(n_chs);
+    return path;
+}
+
+- (void)deleteBook:(GSBookItem *)book {
+    for (GSPageItem *page in book.pages) {
+        [page reset];
+    }
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *path = [self path:book];
+    if ([manager fileExistsAtPath:path]) {
+        NSError *error = nil;
+        [manager removeItemAtPath:path
+                            error:&error];
+    }
+    [book remove];
+}
+
+- (void)deletePage:(GSPageItem *)page {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *path = page.imagePath;
+    if ([manager fileExistsAtPath:path]) {
+        NSError *error = nil;
+        [manager removeItemAtPath:path
+                            error:&error];
+    }
+    [page reset];
 }
 
 @end

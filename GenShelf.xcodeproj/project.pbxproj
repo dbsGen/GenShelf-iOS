@@ -108,6 +108,7 @@
 		B296F71C1C94583D0031AA62 /* stop@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B296F7161C94583D0031AA62 /* stop@2x.png */; };
 		B296F71F1C9467F60031AA62 /* pause.png in Resources */ = {isa = PBXBuildFile; fileRef = B296F71D1C9467F60031AA62 /* pause.png */; };
 		B296F7201C9467F60031AA62 /* pause@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B296F71E1C9467F60031AA62 /* pause@2x.png */; };
+		B2A036F41C96A03800EA2130 /* GSBottomLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A036F31C96A03800EA2130 /* GSBottomLoadingCell.m */; };
 		B2A8C5621C929D4000306D0D /* GCoverView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A8C5611C929D4000306D0D /* GCoverView.m */; };
 		B2A8C5681C92B62600306D0D /* GSProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A8C5671C92B62600306D0D /* GSProgressViewController.m */; };
 		B2ABBA2E1C8019B900C02B7D /* GSLofiDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABBA2D1C8019B900C02B7D /* GSLofiDataControl.m */; };
@@ -345,6 +346,8 @@
 		B296F7161C94583D0031AA62 /* stop@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "stop@2x.png"; sourceTree = "<group>"; };
 		B296F71D1C9467F60031AA62 /* pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause.png; sourceTree = "<group>"; };
 		B296F71E1C9467F60031AA62 /* pause@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pause@2x.png"; sourceTree = "<group>"; };
+		B2A036F21C96A03800EA2130 /* GSBottomLoadingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSBottomLoadingCell.h; sourceTree = "<group>"; };
+		B2A036F31C96A03800EA2130 /* GSBottomLoadingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSBottomLoadingCell.m; sourceTree = "<group>"; };
 		B2A8C5601C929D4000306D0D /* GCoverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCoverView.h; sourceTree = "<group>"; };
 		B2A8C5611C929D4000306D0D /* GCoverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCoverView.m; sourceTree = "<group>"; };
 		B2A8C5661C92B62600306D0D /* GSProgressViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSProgressViewController.h; sourceTree = "<group>"; };
@@ -540,6 +543,8 @@
 				B2F44C451C7CB3D000639756 /* GSThumCell.m */,
 				B296F6F51C92F65C0031AA62 /* GSProgressCell.h */,
 				B296F6F61C92F65C0031AA62 /* GSProgressCell.m */,
+				B2A036F21C96A03800EA2130 /* GSBottomLoadingCell.h */,
+				B2A036F31C96A03800EA2130 /* GSBottomLoadingCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1320,6 +1325,7 @@
 				B2F02F151C75637700D93119 /* GSGlobals.m in Sources */,
 				B20A34231C746541000CCFA3 /* ShadowsocksRunner.m in Sources */,
 				B2BDCBBD1C76DF5600DC3031 /* GSLoadingCell.m in Sources */,
+				B2A036F41C96A03800EA2130 /* GSBottomLoadingCell.m in Sources */,
 				B23366C41C7EEDE8003EA467 /* GSModelNetPage.m in Sources */,
 				B268ECB61C7763BA001DD15F /* ASIAuthenticationDialog.m in Sources */,
 			);

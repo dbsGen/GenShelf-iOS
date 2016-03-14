@@ -15,7 +15,7 @@
 #import "GSVBookViewController.h"
 
 @interface GSShelfViewController ()<UITableViewDelegate, UITableViewDataSource> {
-    NSArray<GSBookItem *> * _datas;
+    NSMutableArray<GSBookItem *> * _datas;
     UIBarButtonItem *_editItem, *_doneItem;
 }
 
@@ -40,8 +40,23 @@
                                                                   target:self
                                                                   action:@selector(editDone)];
         self.navigationItem.rightBarButtonItem = _editItem;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(removeData:)
+                                                     name:BOOK_ITEM_REMOVE
+                                                   object:nil];
     }
     return self;
+}
+
+- (void)removeData:(NSNotification *)notification {
+    if ([_datas containsObject:notification.object]) {
+        NSInteger index = [_datas indexOfObject:notification.object];
+        [_datas removeObjectAtIndex:index];
+        [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index
+                                                                inSection:0]]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -49,7 +64,7 @@
     NSArray *arr = [GSModelNetBook fetch:[NSPredicate predicateWithFormat:@"mark==YES"]
                                    sorts:@[[NSSortDescriptor sortDescriptorWithKey:@"downloadDate"
                                                                          ascending:NO]]];
-    _datas = [GSBookItem items:arr];
+    _datas = [NSMutableArray<GSBookItem *> arrayWithArray:[GSBookItem items:arr]];
     [_tableView reloadData];
 }
 

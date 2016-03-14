@@ -49,6 +49,7 @@ static NSString *identifier = @"CellIdentifier";
                                                     name:BOOK_ITEM_UPDATE
                                                   object:nil];
     [[GSGlobals dataControl].taskQueue releaseTask:_currentTask];
+    [_refreshView removeFromSuperview];
 }
 
 - (void)setItem:(GSBookItem *)item {
@@ -131,8 +132,14 @@ static NSString *identifier = @"CellIdentifier";
 
 - (void)slimeRefreshStartRefresh:(SRRefreshView *)refreshView
 {
-    [_currentTask restart];
     [_item reset];
+    if (_currentTask) {
+        [_currentTask restart];
+    }else {
+        GSTask *task = [[GSGlobals dataControl] processBook:_item];
+        [[GSGlobals dataControl].taskQueue retainTask:task];
+        _currentTask = task;
+    }
     [_collectionView reloadData];
     
     [_refreshView performSelector:@selector(endRefresh)

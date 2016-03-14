@@ -10,6 +10,7 @@
 #import "GSGlobals.h"
 #import "GCoreDataManager.h"
 #import "GSDataDefines.h"
+#import "GSPictureManager.h"
 
 @implementation GSDataControl
 
@@ -36,13 +37,13 @@
     }
 }
 
-- (ASIHTTPRequest *)mainRequest {
-    ASIHTTPRequest *request = [GSGlobals requestForURL:[[self class] mainUrl]];
+- (ASIHTTPRequest *)mainRequest:(NSInteger)pageIndex {
+    ASIHTTPRequest *request = [GSGlobals requestForURL:[[self class] mainUrl:pageIndex]];
     return request;
 }
 
-- (ASIHTTPRequest *)searchRequest:(NSString *)keyword {
-    ASIHTTPRequest *request = [GSGlobals requestForURL:[[self class] searchUrl:keyword]];
+- (ASIHTTPRequest *)searchRequest:(NSString *)keyword pageIndex:(NSInteger)pageIndex {
+    ASIHTTPRequest *request = [GSGlobals requestForURL:[[self class] searchUrl:keyword pageIndex:pageIndex]];
     return request;
 }
 
@@ -50,15 +51,15 @@
     return _progressingBooks;
 }
 
-+ (NSURL *)mainUrl {
++ (NSURL *)mainUrl:(NSInteger)pageIndex {
     return NULL;
 }
 
-+ (NSURL *)searchUrl:(NSString *)keyword {
++ (NSURL *)searchUrl:(NSString *)keyword pageIndex:(NSInteger)pageIndex {
     return NULL;
 }
 
-- (NSArray<GSBookItem *> *)parseMain:(NSString *)html {
+- (NSArray<GSBookItem *> *)parseMain:(NSString *)html hasNext:(BOOL *)hasNext {
     return [NSArray array];
 }
 - (GSTask *)processBook:(GSBookItem *)book {return nil;}
@@ -76,7 +77,7 @@
     if ([_progressingBooks containsObject:book]) {
         NSInteger index = [_progressingBooks indexOfObject:book];
         [self pauseBook:book];
-        [book remove];
+        [[GSPictureManager defaultManager] deleteBook:book];
         [_progressingBooks removeObject:book];
         return index;
     }

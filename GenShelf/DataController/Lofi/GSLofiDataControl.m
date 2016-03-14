@@ -28,11 +28,18 @@
     return self;
 }
 
-+ (NSURL *)mainUrl {
-    return [NSURL URLWithString:[URL_HOST stringByAppendingString:FILTER_STR]];
++ (NSURL *)mainUrl:(NSInteger)pageIndex {
+    NSString *str = [[URL_HOST stringByAppendingString:FILTER_STR] stringByAppendingString:[NSString stringWithFormat:@"&page=%d", (int)pageIndex]];
+    return [NSURL URLWithString:str];
 }
 
-- (NSArray<GSBookItem *> *)parseMain:(NSString *)html {
++ (NSURL *)searchUrl:(NSString *)keyword pageIndex:(NSInteger)pageIndex {
+    NSString *str = [URL_HOST stringByAppendingString:FILTER_STR];
+    str = [NSString stringWithFormat:@"%@&page=%d&f_search=%@", str, (int)pageIndex, keyword];
+    return [NSURL URLWithString:str];
+}
+
+- (NSArray<GSBookItem *> *)parseMain:(NSString *)html hasNext:(BOOL *)hasNext {
     NSError *error = nil;
     GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithHTMLString:html
                                                                    error:&error];
@@ -59,11 +66,23 @@
         item.title = titleNode.stringValue;
         [res addObject:item];
     }
+    NSArray *links = [doc nodesForXPath:@"//div[@id='ia']/a"
+                                  error:&error];
+    CheckErrorR([NSArray array])
+    *hasNext = NO;
+    for (GDataXMLElement *lNode in links) {
+        NSString *str = [lNode.stringValue stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+        if ([str hasPrefix:@"Next"] || [str hasPrefix:@"next"]) {
+            *hasNext = YES;
+            break;
+        }
+    }
+    
     return res;
 }
 
 - (GSTask *)processBook:(GSBookItem *)book {
-    if (book.status != GSBookItemStatusComplete) {
+    if (book.status < GSBookItemStatusComplete) {
         GSLofiBookTask *task = [self.taskQueue createTask:BookProcessIdentifier(book)
                                                   creator:^GSTask *{
                                                       return [[GSLofiBookTask alloc] initWithItem:book

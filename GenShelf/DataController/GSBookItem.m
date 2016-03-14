@@ -83,13 +83,14 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
     for (GSModelNetPage *model in book.pages) {
         GSPageItem *item = [[GSPageItem alloc] initWithModel:model];
         item.book = ret;
+        [item checkPage];
         [ret->_page_items addObject:item];
         if (item.status == GSPageItemStatusComplete) {
             count ++;
         }
     }
     ret->_percent = (float)count / ret.pages.count;
-    if (count == ret.pages.count && book.status.integerValue != GSBookItemStatusPagesComplete) {
+    if (count == ret.pages.count && book.status.integerValue == GSBookItemStatusComplete) {
         ret.status = GSBookItemStatusPagesComplete;
         book.status = [NSNumber numberWithInt:GSBookItemStatusPagesComplete];
     }
@@ -150,6 +151,7 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
     for (GSPageItem *item in pages) {
         item.index = _page_items.count;
         item.book = self;
+        [item checkPage];
         [_page_items addObject:item];
     }
     [self updateData];
@@ -250,7 +252,7 @@ static NSMutableArray<GSBookItem*> *__allBooks = nil;
 
 - (void)remove {
     _mark = NO;
-    self.loading = NO;
+    [self setStatus:GSBookItemStatusNotStart loading:NO];
     [self updateData];
     [[GCoreDataManager shareManager] save];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_REMOVE

@@ -34,6 +34,7 @@ typedef enum : NSUInteger {
 - (id)initWithModel:(GSModelNetPage*)page;
 - (GSModelNetPage *)model;
 
+- (void)checkPage;
 - (void)updateData;
 
 - (void)requestImage;

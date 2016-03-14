@@ -28,14 +28,15 @@ typedef void *(^GSRequestUpdateBlock)(NSUInteger count);
 @property (nonatomic, readonly) NSArray *progressingBooks;
 @property (nonatomic, assign) CGFloat   requestDelay;
 
-- (ASIHTTPRequest *)mainRequest;
-- (ASIHTTPRequest *)searchRequest:(NSString *)keyword;
+- (ASIHTTPRequest *)mainRequest:(NSInteger)pageIndex;
+- (ASIHTTPRequest *)searchRequest:(NSString *)keyword pageIndex:(NSInteger)pageIndex;
 
 // Need override
-+ (NSURL *)mainUrl;
-+ (NSURL *)searchUrl:(NSString*)keyword;
++ (NSURL *)mainUrl:(NSInteger)pageIndex;
++ (NSURL *)searchUrl:(NSString*)keyword pageIndex:(NSInteger)pageIndex;
 
-- (NSArray<GSBookItem *> *)parseMain:(NSString *)html;
+- (NSArray<GSBookItem *> *)parseMain:(NSString *)html hasNext:(BOOL*)hasNext;
+
 - (GSTask *)processBook:(GSBookItem *)book;
 - (GSTask *)downloadBook:(GSBookItem *)book;
 - (void)pauseBook:(GSBookItem *)book;
