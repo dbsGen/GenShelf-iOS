@@ -6,9 +6,9 @@
 //  Copyright © 2016年 AirRaidClub. All rights reserved.
 //
 
-#import "GSHomeTask.h"
+#import "GSRequestTask.h"
 
-@implementation GSHomeTask
+@implementation GSRequestTask
 
 @synthesize hasMore = _hasMore, books = _books, index = _index;
 

@@ -15,10 +15,13 @@
 #import "ShadowsocksRunner.h"
 #import "GTween.h"
 #import "ASIHTTPRequest.h"
+#import "GSScannerViewController.h"
+#import "MBLMessageBanner.h"
 
 @interface GSSSSettingViewController () {
     GSSwitchCell *_toggleProxyCell;
     GSInputCell *_currentPortCell;
+    UITableViewCell *_scanQRCodeCell;
     GSInputCell *_serverIpCell;
     GSInputCell *_serverPortCell;
     GSInputCell *_passwordCell;
@@ -48,7 +51,6 @@
     _toggleProxyCell = [[GSSwitchCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:@"ToggleProxy"];
     _toggleProxyCell.textLabel.text = @"开启代理";
-    _toggleProxyCell.switchItem.on = [GSGlobals isProxyOn];
     [_toggleProxyCell.switchItem addTarget:self
                                 action:@selector(toggleProxy:)
                       forControlEvents:UIControlEventValueChanged];
@@ -57,35 +59,35 @@
                                           reuseIdentifier:@"CurrentPort"];
     _currentPortCell.textLabel.text = @"本地端口";
     _currentPortCell.inputView.placeholder = @"Port";
-    _currentPortCell.inputView.text = [GSGlobals currentPort];
+    
+    _scanQRCodeCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                             reuseIdentifier:@"ScanQRCode"];
+    _scanQRCodeCell.textLabel.text = @"扫描二维码";
+    _scanQRCodeCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     _serverIpCell = [[GSInputCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:@"ServerIP"];
     _serverIpCell.textLabel.text = @"服务器地址";
     _serverIpCell.inputView.placeholder = @"IP";
-    _serverIpCell.inputView.text = [GSGlobals serverIP];
     
     _serverPortCell = [[GSInputCell alloc] initWithStyle:UITableViewCellStyleDefault
                                          reuseIdentifier:@"ServerPort"];
     _serverPortCell.textLabel.text = @"服务器端口";
     _serverPortCell.inputView.placeholder = @"Port";
-    _serverPortCell.inputView.text = [GSGlobals serverPort];
     
     _passwordCell = [[GSInputCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:@"Password"];
     _passwordCell.textLabel.text = @"密码";
     _passwordCell.inputView.placeholder = @"Password";
-    _passwordCell.inputView.text = [GSGlobals password];
     
     _encryptionTypeCell = [[GSSelectCell alloc] initWithStyle:UITableViewCellStyleDefault
                                               reuseIdentifier:@"EncrytionType"];
     _encryptionTypeCell.textLabel.text = @"加密类型";
-    _encryptionTypeCell.options = [GSGlobals encryptionTypes];
-    _encryptionTypeCell.opetionSelected = [_encryptionTypeCell.options indexOfObject:[GSGlobals encryptionType]];
     
     _testCell = [[GSLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault
                                      reuseIdentifier:@"TestCell"];
     _testCell.textLabel.text = @"测试";
+    [self updateSettings];
     
     self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.tableView = [[UITableView alloc] initWithFrame:self.view.bounds
@@ -109,6 +111,16 @@
 
 - (UIInterfaceOrientationMask)supportedInterfaceOrientations {
     return UIInterfaceOrientationMaskAll;
+}
+
+- (void)updateSettings {
+    _toggleProxyCell.switchItem.on = [GSGlobals isProxyOn];
+    _currentPortCell.inputView.text = [GSGlobals currentPort];
+    _serverIpCell.inputView.text = [GSGlobals serverIP];
+    _serverPortCell.inputView.text = [GSGlobals serverPort];
+    _passwordCell.inputView.text = [GSGlobals password];
+    _encryptionTypeCell.options = [GSGlobals encryptionTypes];
+    _encryptionTypeCell.opetionSelected = [_encryptionTypeCell.options indexOfObject:[GSGlobals encryptionType]];
 }
 
 - (void)saveClicked {
@@ -142,7 +154,7 @@
         case 1:
             return 1;
         case 2:
-            return 4;
+            return 5;
         case 3:
             return 1;
         default:
@@ -164,15 +176,18 @@
         case 2: {
             switch (indexPath.row) {
                 case 0: {
-                    return _serverIpCell;
+                    return _scanQRCodeCell;
                 }
                 case 1: {
-                    return _serverPortCell;
+                    return _serverIpCell;
                 }
                 case 2: {
-                    return _passwordCell;
+                    return _serverPortCell;
                 }
                 case 3: {
+                    return _passwordCell;
+                }
+                case 4: {
                     return _encryptionTypeCell;
                 }
                     
@@ -192,11 +207,33 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     NSUInteger row = indexPath.row;
     NSUInteger section = indexPath.section;
-    if (section == 2 && row == 3) {
-        GSSelectView *pickerView = [_encryptionTypeCell makePickView];
-        [self.view addSubview:pickerView];
-        [pickerView show];
-        [self.view endEditing:YES];
+    if (section == 2) {
+        if (row == 0) {
+            GSScannerViewController *con = [[GSScannerViewController alloc] init];
+            con.block = ^(NSString *res) {
+                [MBLMessageBanner showMessageBannerInViewController:self
+                                                              title:@"是否使用这个服务器?"
+                                                           subtitle:res
+                                                              image:nil
+                                                               type:MBLMessageBannerTypeMessage
+                                                           duration:5
+                                             userDissmissedCallback:nil
+                                                        buttonTitle:@"使用"
+                                          userPressedButtonCallback:^(MBLMessageBannerView *banner) {
+                                              [ShadowsocksRunner openSSURL:[NSURL URLWithString:res]];
+                                              [self updateSettings];
+                                          }
+                                                         atPosition:MBLMessageBannerPositionBottom
+                                               canBeDismissedByUser:YES
+                                                           delegate:nil];
+            };
+            [self.navigationController pushViewController:con animated:YES];
+        }else if (row == 4) {
+            GSSelectView *pickerView = [_encryptionTypeCell makePickView];
+            [self.view addSubview:pickerView];
+            [pickerView show];
+            [self.view endEditing:YES];
+        }
     }else if (section == 3) {
         NSURL *testUrl = [NSURL URLWithString:@"http://lofi.e-hentai.org/"];
         ASIHTTPRequest *request = [[ASIHTTPRequest alloc] initWithURL:testUrl];

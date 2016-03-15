@@ -12,6 +12,7 @@ typedef enum : NSUInteger {
     GSBottomCellStatusLoading,
     GSBottomCellStatusHasMore,
     GSBottomCellStatusNoMore,
+    GSBottomCellStatusWhite,
 } GSBottomCellStatus;
 
 @interface GSBottomLoadingCell : UITableViewCell

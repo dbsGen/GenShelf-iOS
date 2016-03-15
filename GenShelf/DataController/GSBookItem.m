@@ -81,17 +81,18 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
     ret.downloadDate = book.downloadDate;
     ret.mark = book.mark.boolValue;
     ret.loading = NO;
-    [ret->_page_items removeAllObjects];
     int count = 0;
+    NSMutableArray *mArr = [NSMutableArray array];
     for (GSModelNetPage *model in book.pages) {
         GSPageItem *item = [GSPageItem itemWithModel:model];
         item.book = ret;
         [item checkPage];
-        [ret->_page_items addObject:item];
+        [mArr addObject:item];
         if (item.status == GSPageItemStatusComplete) {
             count ++;
         }
     }
+    ret->_page_items = mArr;
     ret->_percent = (float)count / ret.pages.count;
     if (count == ret.pages.count && book.status.integerValue == GSBookItemStatusComplete) {
         ret.status = GSBookItemStatusPagesComplete;
@@ -143,6 +144,9 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
         if ([_delegate respondsToSelector:@selector(bookItem:progress:)]) {
             [_delegate bookItem:self progress:_percent];
         }
+    }
+    if (count == self.pages.count) {
+        [self pagesComplete];
     }
 }
 

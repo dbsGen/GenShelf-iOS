@@ -9,7 +9,7 @@
 #import "GSTask.h"
 #import "GSBookItem.h"
 
-@interface GSHomeTask : GSTask {
+@interface GSRequestTask : GSTask {
 @protected
     BOOL        _hasMore;
     NSUInteger  _index;

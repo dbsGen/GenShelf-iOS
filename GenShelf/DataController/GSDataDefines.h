@@ -27,5 +27,6 @@ return RET;\
 #define BookProcessIdentifier(BOOK) BOOK.pageUrl
 #define BookDownloadIdentifier(BOOK) [NSString stringWithFormat:@"Download %@", BOOK.pageUrl]
 #define HomeRequestIdentifier @"HomeRequest"
+#define SearchRequestIdentifier @"SearchRequest"
 
 #endif /* GSDataDefines_h */

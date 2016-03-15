@@ -9,7 +9,11 @@
 #ifndef GSLofiDefines_h
 #define GSLofiDefines_h
 
+#import "GSGlobals.h"
+
 #define URL_HOST @"http://lofi.e-hentai.org/"
-#define FILTER_STR @"?f_doujinshi=0&f_manga=0&f_artistcg=0&f_gamecg=0&f_western=0&f_non-h=1&f_imageset=0&f_cosplay=0&f_asianporn=0&f_misc=0&f_apply=Apply+Filter"
+#define FILTER_STR @"?f_doujinshi={{adult}}&f_manga={{adult}}&f_artistcg=0&f_gamecg=0&f_western=0&f_non-h=1&f_imageset=0&f_cosplay=0&f_asianporn=0&f_misc=0&f_apply=Apply+Filter"
+
+NSString *filterString(BOOL adult);
 
 #endif /* GSLofiDefines_h */

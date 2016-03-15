@@ -77,7 +77,7 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
         }
         [_menuControllers addObject:self];
         
-        _navigationController = [[UINavigationController alloc] init];
+        _navController = [[UINavigationController alloc] init];
     }
     return self;
 }
@@ -116,7 +116,7 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
     _coverView.endBlock = ^(CGPoint p) {
         [that touchEnd];
     };
-    [_contentView addSubview:_navigationController.view];
+    [_contentView addSubview:_navController.view];
     [_contentView addSubview:_coverView];
     [_coverView setHidden:YES];
     [self.view addSubview:_contentView];
@@ -207,13 +207,17 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
 - (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
     _tableView.frame = CGRectMake(0, 0, MENU_WIDTH,
                                   self.view.bounds.size.height);
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [self.navController didRotateFromInterfaceOrientation:fromInterfaceOrientation];
 }
 
-- (void)willTransitionToTraitCollection:(UITraitCollection *)newCollection withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
-    [coordinator notifyWhenInteractionEndsUsingBlock:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    [super viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
+    [coordinator animateAlongsideTransition:^(id<UIViewControllerTransitionCoordinatorContext>  _Nonnull context) {
         _tableView.frame = CGRectMake(0, 0, MENU_WIDTH,
                                       self.view.bounds.size.height);
-    }];
+    } completion:nil];
+    [self.navController viewWillTransitionToSize:size withTransitionCoordinator:coordinator];
 }
 
 - (void)updateView {
@@ -222,14 +226,14 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
         [_currentView removeFromSuperview];
         GSideMenuItem *item = [_items objectAtIndex:_selectedIndex];
         if (item.controller) {
-            [_navigationController setViewControllers:@[item.controller]
-                                             animated:YES];
+            [_navController setViewControllers:@[item.controller]
+                                      animated:YES];
         }
     }else {
         GSideMenuItem *item = [_items objectAtIndex:_selectedIndex];
         if (item.controller) {
-            [_navigationController setViewControllers:@[item.controller]
-                                             animated:YES];
+            [_navController setViewControllers:@[item.controller]
+                                      animated:YES];
         }
     }
 }

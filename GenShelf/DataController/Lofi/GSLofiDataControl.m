@@ -14,9 +14,7 @@
 #import "GSLofiBookTask.h"
 #import "GSLofiDownloadTask.h"
 #import "GSLofiHomeTask.h"
-
-#define URL_HOST @"http://lofi.e-hentai.org/"
-#define FILTER_STR @"?f_doujinshi=0&f_manga=0&f_artistcg=0&f_gamecg=0&f_western=0&f_non-h=1&f_imageset=0&f_cosplay=0&f_asianporn=0&f_misc=0&f_apply=Apply+Filter"
+#import "GSLofiSearchTask.h"
 
 @implementation GSLofiDataControl
 
@@ -29,22 +27,21 @@
     return self;
 }
 
-+ (NSURL *)mainUrl:(NSInteger)pageIndex {
-    NSString *str = [[URL_HOST stringByAppendingString:FILTER_STR] stringByAppendingString:[NSString stringWithFormat:@"&page=%d", (int)pageIndex]];
-    return [NSURL URLWithString:str];
-}
-
-+ (NSURL *)searchUrl:(NSString *)keyword pageIndex:(NSInteger)pageIndex {
-    NSString *str = [URL_HOST stringByAppendingString:FILTER_STR];
-    str = [NSString stringWithFormat:@"%@&page=%d&f_search=%@", str, (int)pageIndex, keyword];
-    return [NSURL URLWithString:str];
-}
-
-- (GSHomeTask *)mainRequest:(NSInteger)pageIndex  {
+- (GSRequestTask *)mainRequest:(NSInteger)pageIndex  {
     GSLofiHomeTask *task = [self.taskQueue createTask:HomeRequestIdentifier
                                               creator:^GSTask *{
                                                   return [[GSLofiHomeTask alloc] initWithIndex:pageIndex queue:self.operationQueue];
                                               }];
+    return task;
+}
+
+- (GSRequestTask *)searchRequest:(NSString *)keyword pageIndex:(NSInteger)pageIndex {
+    GSLofiSearchTask *task = [self.taskQueue createTask:SearchRequestIdentifier
+                                                creator:^GSTask *{
+                                                    return [[GSLofiSearchTask alloc] initWithKey:keyword
+                                                                                           index:pageIndex
+                                                                                           queue:self.operationQueue];
+                                                }];
     return task;
 }
 

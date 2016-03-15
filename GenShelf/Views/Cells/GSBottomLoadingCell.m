@@ -43,18 +43,33 @@
 - (void)setStatus:(GSBottomCellStatus)status {
     if (_status != status) {
         _status = status;
-        if (_status == GSBottomCellStatusLoading) {
-            _titleLabel.text = @"Loading...";
-            [_indicatorView startAnimating];
-            self.selectionStyle = UITableViewCellSelectionStyleNone;
-        }else if (_status == GSBottomCellStatusNoMore) {
-            [_indicatorView stopAnimating];
-            _titleLabel.text = @"No more";
-            self.selectionStyle = UITableViewCellSelectionStyleNone;
-        }else if (_status == GSBottomCellStatusHasMore) {
-            [_indicatorView stopAnimating];
-            _titleLabel.text = @"Load more";
-            self.selectionStyle = UITableViewCellSelectionStyleDefault;
+        switch (_status) {
+            case GSBottomCellStatusLoading:
+                [_indicatorView startAnimating];
+                self.selectionStyle = UITableViewCellSelectionStyleNone;
+                _titleLabel.text = @"Loading...";
+                break;
+            case GSBottomCellStatusNoMore: {
+                [_indicatorView stopAnimating];
+                _titleLabel.text = @"No more";
+                self.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+                break;
+            case GSBottomCellStatusHasMore: {
+                [_indicatorView stopAnimating];
+                _titleLabel.text = @"Load more";
+                self.selectionStyle = UITableViewCellSelectionStyleDefault;
+            }
+                break;
+            case GSBottomCellStatusWhite: {
+                [_indicatorView stopAnimating];
+                _titleLabel.text = nil;
+                self.selectionStyle = UITableViewCellSelectionStyleNone;
+            }
+                break;
+                
+            default:
+                break;
         }
     }
 }

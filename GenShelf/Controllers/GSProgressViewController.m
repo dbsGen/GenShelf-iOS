@@ -24,12 +24,17 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = @"进程";
+        [[GSGlobals dataControl] updateProgressingBooks];
         _datas = [GSGlobals dataControl].progressingBooks;
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭"
                                                                                   style:UIBarButtonItemStylePlain
                                                                                  target:self
                                                                                  action:@selector(closeMenu)];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(bookComplete:)
+                                                     name:BOOK_ITEM_PAGES
+                                                   object:nil];
     }
     return self;
 }
@@ -51,6 +56,14 @@
 - (void)closeMenu {
     if (_onClose) {
         _onClose();
+    }
+}
+
+- (void)bookComplete:(NSNotification *)notification {
+    NSInteger index = [[GSGlobals dataControl] removeProgressingBook:notification.object];
+    if (index >= 0) {
+        [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
+                          withRowAnimation:UITableViewRowAnimationAutomatic];
     }
 }
 

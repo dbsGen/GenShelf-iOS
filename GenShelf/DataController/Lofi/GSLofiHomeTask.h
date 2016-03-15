@@ -6,10 +6,10 @@
 //  Copyright © 2016年 AirRaidClub. All rights reserved.
 //
 
-#import "GSHomeTask.h"
+#import "GSRequestTask.h"
 #import "GSBookItem.h"
 
-@interface GSLofiHomeTask : GSHomeTask {
+@interface GSLofiHomeTask : GSRequestTask {
     NSOperationQueue *_queue;
 }
 

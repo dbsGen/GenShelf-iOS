@@ -26,7 +26,7 @@ typedef void(^GSideMenuItemBlock)();
 
 @interface GSideMenuController : UIViewController
 
-@property (nonatomic, strong) UINavigationController *navigationController;
+@property (nonatomic, strong) UINavigationController *navController;
 @property (nonatomic, strong) NSArray<GSideMenuItem*> *items;
 
 @property (nonatomic) NSUInteger selectedIndex;

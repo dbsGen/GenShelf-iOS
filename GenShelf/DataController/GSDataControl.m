@@ -28,6 +28,25 @@
     return self;
 }
 
+- (void)updateProgressingBooks {
+    for (NSInteger n = 0, t = _progressingBooks.count; n < t; n++) {
+        GSBookItem *book = [_progressingBooks objectAtIndex:n];
+        if (book.status == GSBookItemStatusPagesComplete || !book.mark) {
+            [_progressingBooks removeObjectAtIndex:n];
+            n --;
+            t --;
+        }
+    }
+}
+
+- (NSInteger)removeProgressingBook:(GSBookItem *)book {
+    NSInteger index = [_progressingBooks indexOfObject:book];
+    if (index >= 0) {
+        [_progressingBooks removeObjectAtIndex:index];
+    }
+    return index;
+}
+
 - (void)loadProgressBooks {
     NSArray<GSModelNetBook *> *books = [GSModelNetBook fetch:[NSPredicate predicateWithFormat:@"mark == YES AND status != %d", GSBookItemStatusPagesComplete]
                                                        sorts:@[[NSSortDescriptor sortDescriptorWithKey:@"downloadDate"
@@ -37,13 +56,8 @@
     }
 }
 
-- (GSHomeTask *)mainRequest:(NSInteger)pageIndex {
-    return nil;
-}
-
-- (GSTask *)searchRequest:(NSString *)keyword pageIndex:(NSInteger)pageIndex {
-    return nil;
-}
+- (GSRequestTask *)mainRequest:(NSInteger)pageIndex {return nil;}
+- (GSRequestTask *)searchRequest:(NSString *)keyword pageIndex:(NSInteger)pageIndex {return nil;}
 
 - (NSArray *)progressingBooks {
     return _progressingBooks;

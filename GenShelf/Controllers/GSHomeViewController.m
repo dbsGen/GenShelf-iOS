@@ -60,7 +60,8 @@
     _refreshView.delegate = self;
     [_tableView addSubview:_refreshView];
     BOOL expire = NO;
-    _datas = [NSMutableArray arrayWithArray:[GSBookItem cachedItems:&_index hasNext:&_hasNext
+    _datas = [NSMutableArray arrayWithArray:[GSBookItem cachedItems:&_index
+                                                            hasNext:&_hasNext
                                                              expire:&expire]];
     [_refreshView update:20 + self.navigationController.navigationBar.bounds.size.height];
     
@@ -121,7 +122,8 @@
         cell.titleLabel.text = item.title;
         return cell;
     }else {
-        [self requestMore];
+        if (_hasNext)
+            [self requestMore];
         return _bottomCell;
     }
 }
@@ -177,7 +179,7 @@
 - (void)requestDatas {
     if (_loading) return;
     _loading = YES;
-    GSHomeTask *task = [[GSGlobals dataControl] mainRequest:0];
+    GSRequestTask *task = [[GSGlobals dataControl] mainRequest:0];
     task.delegate = self;
     task.tag = 1;
     [self updateLoadingStatus];
@@ -187,7 +189,7 @@
     if (_loading)
         return;
     NSInteger index = _index + 1;
-    GSHomeTask *task = [[GSGlobals dataControl] mainRequest:index];
+    GSRequestTask *task = [[GSGlobals dataControl] mainRequest:index];
     task.delegate = self;
     task.tag = 2;
     _loading = YES;
@@ -195,7 +197,7 @@
 }
 
 
-- (void)onTaskComplete:(GSHomeTask *)task {
+- (void)onTaskComplete:(GSRequestTask *)task {
     if (task.tag == 1) {
         _datas = [NSMutableArray<GSBookItem *> arrayWithArray:task.books];
         [_tableView reloadData];

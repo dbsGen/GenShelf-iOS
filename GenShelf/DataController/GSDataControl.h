@@ -11,7 +11,7 @@
 #import "GSBookItem.h"
 #import "GSPageItem.h"
 #import "GSTask.h"
-#import "GSHomeTask.h"
+#import "GSRequestTask.h"
 
 typedef ASIHTTPRequest *(^GSRequestBlock)(NSURL *url);
 typedef void *(^GSRequestUpdateBlock)(NSUInteger count);
@@ -29,8 +29,11 @@ typedef void *(^GSRequestUpdateBlock)(NSUInteger count);
 @property (nonatomic, readonly) NSArray *progressingBooks;
 @property (nonatomic, assign) CGFloat   requestDelay;
 
-- (GSHomeTask *)mainRequest:(NSInteger)pageIndex;
-- (GSTask *)searchRequest:(NSString *)keyword pageIndex:(NSInteger)pageIndex;
+- (void)updateProgressingBooks;
+- (NSInteger)removeProgressingBook:(GSBookItem *)book;
+
+- (GSRequestTask *)mainRequest:(NSInteger)pageIndex;
+- (GSRequestTask *)searchRequest:(NSString *)keyword pageIndex:(NSInteger)pageIndex;
 - (GSTask *)processBook:(GSBookItem *)book;
 - (GSTask *)downloadBook:(GSBookItem *)book;
 - (void)pauseBook:(GSBookItem *)book;

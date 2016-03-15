@@ -12,6 +12,13 @@
 
 @interface GSGlobals : NSObject
 
+#pragma mark - settings
+
++ (void)setAdult:(BOOL)adult;
++ (BOOL)isAdult;
+
+#pragma mark - proxy
+
 + (void)turnProxy:(BOOL)on;
 + (BOOL)isProxyOn;
 

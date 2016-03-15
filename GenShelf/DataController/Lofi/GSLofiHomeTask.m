@@ -31,7 +31,7 @@
 }
 
 - (void)run {
-    _request = [GSGlobals requestForURL:[NSURL URLWithString:[[URL_HOST stringByAppendingString:FILTER_STR] stringByAppendingString:[NSString stringWithFormat:@"&page=%d", (int)_index]]]];
+    _request = [GSGlobals requestForURL:[NSURL URLWithString:[[URL_HOST stringByAppendingString:filterString(NO)] stringByAppendingString:[NSString stringWithFormat:@"&page=%d", (int)_index]]]];
     _request.delegate = self;
     [_queue addOperation:_request];
 }

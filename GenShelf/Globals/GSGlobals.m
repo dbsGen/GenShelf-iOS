@@ -10,6 +10,7 @@
 #import "ShadowsocksRunner.h"
 #import "GSLofiDataControl.h"
 
+#define kAdultKey       @"GSAdult"
 #define kTurnProxy      @"GSGTurnProxy"
 #define kCurrentPort    @"GSGCurrentPort"
 
@@ -24,6 +25,14 @@
 static BOOL shadowsocks_running = NO;
 
 @implementation GSGlobals
+
++ (void)setAdult:(BOOL)adult {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSNumber numberWithBool:adult]
+                                              forKey:kAdultKey];
+}
++ (BOOL)isAdult {
+    return [[NSUserDefaults standardUserDefaults] boolForKey:kAdultKey];
+}
 
 + (void)turnProxy:(BOOL)on {
     shadowsocks_running = on;

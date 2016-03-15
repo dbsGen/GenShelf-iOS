@@ -23,6 +23,6 @@ typedef BOOL(^GSContainerQueueBlock)(id object);
 @property (nonatomic, readonly) NSArray<GSContainer<ObjectType>*> *containers;
 - (void)addObject:(ObjectType)object;
 - (void)removeObject:(ObjectType)object;
-- (ObjectType)object:(GSContainerQueueBlock)block;
+- (ObjectType)object:(GSContainerQueueBlock)checker;
 
 @end
