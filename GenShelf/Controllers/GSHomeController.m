@@ -13,7 +13,7 @@
 #import "GSSettingsViewController.h"
 #import "GSProgressViewController.h"
 #import "GSBookItem.h"
-#import "MBLMessageBanner.h"
+#import "RKDropdownAlert.h"
 #import "GCoverView.h"
 
 @interface GSHomeController ()
@@ -56,11 +56,9 @@
 - (void)onFailed:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[GSBookItem class]]) {
         GSBookItem *item = notification.object;
-        [MBLMessageBanner showMessageBannerInViewController:self
-                                                      title:@"Error"
-                                                   subtitle:[NSString stringWithFormat:@"%@ 失败!", item.title]
-                                                       type:MBLMessageBannerTypeError
-                                                 atPosition:MBLMessageBannerPositionBottom];
+        [RKDropdownAlert title:[NSString stringWithFormat:@"%@ 失败!", item.title]
+               backgroundColor:[UIColor redColor]
+                     textColor:[UIColor whiteColor]];
     }
 }
 

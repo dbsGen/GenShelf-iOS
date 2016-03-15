@@ -171,6 +171,9 @@ int count;
     [super setFrame:frame];
     _bottomLabel.frame = CGRectMake(0, self.bounds.size.height - 15, self.bounds.size.width, 15);
     _transationView.frame = self.bounds;
+    if (_count) {
+        [self reloadData];
+    }
 }
 
 - (void)dealloc
@@ -191,6 +194,9 @@ int count;
     }
     _animationCount = 0;
     _count = [_delegate numberOfFlipViewPage:self];
+    if (_pageIndex < 0) {
+        _pageIndex = 0;
+    }
     NSInteger page = _pageIndex;
     if (page >= _count) {
         page = _count - 1;

@@ -11,7 +11,7 @@
 #import "GSGlobals.h"
 #import "SRRefreshView.h"
 #import "GSBookCell.h"
-#import "MBLMessageBanner.h"
+#import "RKDropdownAlert.h"
 #import "GSPreviewViewController.h"
 #import "GSBottomLoadingCell.h"
 
@@ -226,21 +226,17 @@
     [self updateLoadingStatus];
 }
 - (void)onTaskFailed:(GSTask *)task error:(NSError*)error {
+    [_refreshView endRefresh];
     if (task.tag == 1) {
-        [_refreshView endRefresh];
-        [MBLMessageBanner showMessageBannerInViewController:self
-                                                      title:@"Error"
-                                                   subtitle:@"不能获得"
-                                                       type:MBLMessageBannerTypeError
-                                                 atPosition:MBLMessageBannerPositionTop];
+        [RKDropdownAlert title:@"网络错误"
+                       message:error.localizedDescription
+               backgroundColor:[UIColor redColor]
+                     textColor:[UIColor whiteColor]];
     }else {
-        [MBLMessageBanner showMessageBannerInViewController:self
-                                                      title:@"Error"
-                                                   subtitle:@"不能获得"
-                                                       type:MBLMessageBannerTypeError
-                                                 atPosition:MBLMessageBannerPositionTop];
-        _loading = NO;
-        [self updateLoadingStatus];
+        [RKDropdownAlert title:@"网络错误"
+                       message:error.localizedDescription
+               backgroundColor:[UIColor redColor]
+                     textColor:[UIColor whiteColor]];
     }
     _loading = NO;
     [self updateLoadingStatus];

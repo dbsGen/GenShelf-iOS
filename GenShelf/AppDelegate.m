@@ -26,9 +26,7 @@
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     GSHomeController *menu = [[GSHomeController alloc] init];
-    UINavigationController *nav = [[UINavigationController alloc] initWithRootViewController:menu];
-    nav.navigationBarHidden = YES;
-    self.window.rootViewController = nav;
+    self.window.rootViewController = menu;
     [self.window makeKeyAndVisible];
     
     return YES;

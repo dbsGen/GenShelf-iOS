@@ -12,4 +12,6 @@
 
 @interface GSLofiDataControl : GSDataControl
 
+@property (nonatomic, readonly) GSTaskQueue *pageTaskQueue;
+
 @end

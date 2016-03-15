@@ -199,9 +199,9 @@
         if ([self.delegate respondsToSelector:@selector(onTaskCancel:)]) {
             [self.delegate onTaskCancel:self];
         }
-        if ([_parent respondsToSelector:@selector(onTaskCancel:)]) {
-            [_parent onTaskCancel:self];
-        }
+    }
+    if ([_parent respondsToSelector:@selector(onTaskCancel:)]) {
+        [_parent onTaskCancel:self];
     }
 }
 

@@ -20,7 +20,7 @@
     self = [super init];
     if (self) {
         _operationQueue = [[NSOperationQueue alloc] init];
-        _operationQueue.maxConcurrentOperationCount = 1;
+        _operationQueue.maxConcurrentOperationCount = 3;
         _taskQueue = [[GSTaskQueue alloc] init];
         _progressingBooks = [[NSMutableArray alloc] init];
         [self loadProgressBooks];

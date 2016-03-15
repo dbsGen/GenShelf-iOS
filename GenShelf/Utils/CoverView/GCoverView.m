@@ -7,12 +7,11 @@
 //
 
 #import "GCoverView.h"
-#import "FXBlurView.h"
 #import "GTween.h"
 #import <objc/runtime.h>
 
 @implementation GCoverView {
-    FXBlurView  *_blurView;
+    UIView  *_coverView;
     UIViewController *_controller;
     BOOL    _showing;
 }
@@ -20,12 +19,12 @@
 - (id)initWithSubview:(UIView *)subview {
     self = [super init];
     if (self) {
-        _blurView = [[FXBlurView alloc] initWithFrame:self.bounds];
-        _blurView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+        _coverView = [[UIView alloc] initWithFrame:self.bounds];
+        _coverView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
         UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
                                                                               action:@selector(onTap)];
-        [_blurView addGestureRecognizer:tap];
-        [self addSubview:_blurView];
+        [_coverView addGestureRecognizer:tap];
+        [self addSubview:_coverView];
         self.contentSubview = subview;
         
         _showing = NO;
@@ -74,17 +73,13 @@
     }
     _showing = YES;
     [view addSubview:self];
-    _blurView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
-    _blurView.tintColor = [UIColor clearColor];
-//    _blurView.underlyingView = view;
-//    _blurView.blurRadius = 15;
+    _coverView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.6];
     
     self.frame = view.bounds;
     [self updateSize];
-    [_blurView stopAllTweens];
-    _blurView.alpha = 0;
-    [_blurView setBlurEnabled:YES];
-    GTween *tween = [GTween tween:_blurView
+    [_coverView stopAllTweens];
+    _coverView.alpha = 0;
+    GTween *tween = [GTween tween:_coverView
                          duration:kTIME_DURING
                              ease:[GEaseCubicOut class]];
     [tween floatPro:@"alpha" to:1];
@@ -113,8 +108,8 @@
         return;
     }
     _showing = NO;
-    [_blurView stopAllTweens];
-    GTween *tween = [GTween tween:_blurView
+    [_coverView stopAllTweens];
+    GTween *tween = [GTween tween:_coverView
                          duration:kTIME_DURING
                              ease:[GEaseCubicOut class]];
     [tween floatPro:@"alpha" to:0];

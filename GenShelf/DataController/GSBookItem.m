@@ -80,7 +80,6 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
     ret.otherData = book.otherData;
     ret.downloadDate = book.downloadDate;
     ret.mark = book.mark.boolValue;
-    ret.loading = NO;
     int count = 0;
     NSMutableArray *mArr = [NSMutableArray array];
     for (GSModelNetPage *model in book.pages) {

@@ -33,6 +33,10 @@
     return self;
 }
 
+- (void)dealloc {
+    _flipView.delegate = nil;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self.navigationController setNavigationBarHidden:YES animated:animated];
@@ -68,12 +72,14 @@
             }
         }
     };
+    _pageViewer.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
     _flipView = [[MTDragFlipView alloc] initWithFrame:self.view.bounds];
     _flipView.delegate = self;
     _flipView.backgroundColor = [UIColor grayColor];
     _flipView.bottomLabel.text = @"到底了";
     _flipView.topLabel.text = @"到顶了";
+    _flipView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [_flipView reloadData];
     [self.view addSubview:_flipView];
     
@@ -131,9 +137,17 @@
     return view;
 }
 
-- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
-}
+//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+//    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
+//}
+//
+//- (BOOL)shouldAutorotate {
+//    return YES;
+//}
+//
+//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+//    return UIInterfaceOrientationPortrait;
+//}
 
 - (void)backClicked {
     [self.navigationController popViewControllerAnimated:YES];

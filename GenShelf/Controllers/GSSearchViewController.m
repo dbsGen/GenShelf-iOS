@@ -14,7 +14,7 @@
 #import "GSBottomLoadingCell.h"
 #import "GSBookCell.h"
 #import "GSPreviewViewController.h"
-#import "MBLMessageBanner.h"
+#import "RKDropdownAlert.h"
 
 #define MIN_LENGTH 3
 
@@ -185,11 +185,9 @@
 - (void)requestDatas {
     if (!_searchKey || _searchKey.length < MIN_LENGTH) {
         [_refreshView endRefresh];
-        [MBLMessageBanner showMessageBannerInViewController:self
-                                                      title:@"Warning"
-                                                   subtitle:@"关键字太短"
-                                                       type:MBLMessageBannerTypeWarning
-                                                 atPosition:MBLMessageBannerPositionTop];
+        [RKDropdownAlert title:@"关键字太短"
+               backgroundColor:[UIColor orangeColor]
+                     textColor:[UIColor whiteColor]];
         return;
     }
     if (_loading) return;
@@ -204,11 +202,9 @@
 - (void)requestMore {
     if (!_searchKey || _searchKey.length < MIN_LENGTH) {
         [_refreshView endRefresh];
-        [MBLMessageBanner showMessageBannerInViewController:self
-                                                      title:@"Warning"
-                                                   subtitle:@"关键字太短"
-                                                       type:MBLMessageBannerTypeWarning
-                                                 atPosition:MBLMessageBannerPositionTop];
+        [RKDropdownAlert title:@"关键字太短"
+               backgroundColor:[UIColor orangeColor]
+                     textColor:[UIColor whiteColor]];
         return;
     }
     if (_loading)
@@ -248,20 +244,17 @@
     [self updateLoadingStatus];
 }
 - (void)onTaskFailed:(GSTask *)task error:(NSError*)error {
+    [_refreshView endRefresh];
     if (task.tag == 1) {
-        [_refreshView endRefresh];
-        [MBLMessageBanner showMessageBannerInViewController:self
-                                                      title:@"Error"
-                                                   subtitle:@"不能获得"
-                                                       type:MBLMessageBannerTypeError
-                                                 atPosition:MBLMessageBannerPositionTop];
+        [RKDropdownAlert title:@"网络错误"
+                       message:error.localizedDescription
+               backgroundColor:[UIColor redColor]
+                     textColor:[UIColor whiteColor]];
     }else {
-        [MBLMessageBanner showMessageBannerInViewController:self
-                                                      title:@"Error"
-                                                   subtitle:@"不能获得"
-                                                       type:MBLMessageBannerTypeError
-                                                 atPosition:MBLMessageBannerPositionTop];
-        [self updateLoadingStatus];
+        [RKDropdownAlert title:@"网络错误"
+                       message:error.localizedDescription
+               backgroundColor:[UIColor redColor]
+                     textColor:[UIColor whiteColor]];
     }
     _loading = NO;
     [self updateLoadingStatus];

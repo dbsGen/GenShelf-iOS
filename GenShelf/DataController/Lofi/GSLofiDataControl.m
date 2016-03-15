@@ -23,6 +23,7 @@
     if (self) {
         _name = @"Lofi";
         _requestDelay = 2;
+        _pageTaskQueue = [[GSTaskQueue alloc] init];
     }
     return self;
 }
@@ -72,7 +73,7 @@
             }
             [self.taskQueue retainTask:processTask];
         }
-        GSLofiDownloadTask *task = [self.taskQueue createTask:identifier
+        GSLofiDownloadTask *task = [_pageTaskQueue createTask:identifier
                                                       creator:^GSTask *{
                                                           return [[GSLofiDownloadTask alloc] initWithItem:book
                                                                                                     queue:self.operationQueue];
@@ -83,7 +84,7 @@
 }
 
 - (void)pauseBook:(GSBookItem *)book {
-    GSTask *task = [self.taskQueue task:BookDownloadIdentifier(book)];
+    GSTask *task = [_pageTaskQueue task:BookDownloadIdentifier(book)];
     if (task) {
         [task cancel];
     }

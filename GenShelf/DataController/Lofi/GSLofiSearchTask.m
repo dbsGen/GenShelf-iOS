@@ -42,7 +42,7 @@
 
 - (void)run {
     NSString *str = [URL_HOST stringByAppendingString:filterString(YES)];
-    str = [NSString stringWithFormat:@"%@&page=%d&f_search=%@", str, (int)_index, _searchKey];
+    str = [NSString stringWithFormat:@"%@&page=%d&f_search=%@", str, (int)_index, [_searchKey stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
     _request = [GSGlobals requestForURL:[NSURL URLWithString:str]];
     _request.delegate = self;
     [_queue addOperation:_request];

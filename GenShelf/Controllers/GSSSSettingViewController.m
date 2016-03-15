@@ -16,9 +16,9 @@
 #import "GTween.h"
 #import "ASIHTTPRequest.h"
 #import "GSScannerViewController.h"
-#import "MBLMessageBanner.h"
+#import "MTAlertView.h"
 
-@interface GSSSSettingViewController () {
+@interface GSSSSettingViewController () <MTAlertViewDelegate>  {
     GSSwitchCell *_toggleProxyCell;
     GSInputCell *_currentPortCell;
     UITableViewCell *_scanQRCodeCell;
@@ -211,21 +211,13 @@
         if (row == 0) {
             GSScannerViewController *con = [[GSScannerViewController alloc] init];
             con.block = ^(NSString *res) {
-                [MBLMessageBanner showMessageBannerInViewController:self
-                                                              title:@"是否使用这个服务器?"
-                                                           subtitle:res
-                                                              image:nil
-                                                               type:MBLMessageBannerTypeMessage
-                                                           duration:5
-                                             userDissmissedCallback:nil
-                                                        buttonTitle:@"使用"
-                                          userPressedButtonCallback:^(MBLMessageBannerView *banner) {
-                                              [ShadowsocksRunner openSSURL:[NSURL URLWithString:res]];
-                                              [self updateSettings];
-                                          }
-                                                         atPosition:MBLMessageBannerPositionBottom
-                                               canBeDismissedByUser:YES
-                                                           delegate:nil];
+                MTAlertView *alert = [[MTAlertView alloc] initWithContent:[NSString stringWithFormat:@"是否使用这个服务器?\n%@", res]
+                                                                    image:nil
+                                                                  buttons:@"是", @"否", nil];
+                alert.delegate = self;
+                alert.customerData = res;
+                alert.backgroundColor = [UIColor grayColor];
+                [alert show];
             };
             [self.navigationController pushViewController:con animated:YES];
         }else if (row == 4) {
@@ -253,6 +245,15 @@
         }];
         [request startAsynchronous];
         _testCell.status = GSLoadingCellStatusLoading;
+    }
+}
+
+- (void)alertView:(MTAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex  {
+    if (buttonIndex == 0) {
+        if ([ShadowsocksRunner openSSURL:[NSURL URLWithString:alertView.customerData]])
+            [self updateSettings];
+    }else {
+        [alertView miss];
     }
 }
 

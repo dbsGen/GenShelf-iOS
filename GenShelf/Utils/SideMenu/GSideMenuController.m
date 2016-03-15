@@ -319,6 +319,39 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
 
 - (void)sideMenuSelect:(NSUInteger)index {}
 
+- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
+    if (_navController.visibleViewController) {
+        return _navController.visibleViewController.supportedInterfaceOrientations;
+    }
+    if (_navController.topViewController) {
+        return _navController.topViewController.supportedInterfaceOrientations;
+    }
+    return _navController.supportedInterfaceOrientations;
+}
+
+- (BOOL)shouldAutorotate
+{
+    if (_navController.visibleViewController) {
+        return _navController.visibleViewController.shouldAutorotate;
+    }
+    if(_navController.visibleViewController)
+    {
+        return _navController.visibleViewController.shouldAutorotate;
+    }
+    return NO;
+}
+
+- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
+    if (_navController.visibleViewController) {
+        return _navController.visibleViewController.preferredInterfaceOrientationForPresentation;
+    }
+    if(_navController.visibleViewController)
+    {
+        return _navController.visibleViewController.preferredInterfaceOrientationForPresentation;
+    }
+    return _navController.preferredInterfaceOrientationForPresentation;
+}
+
 @end
 
 @implementation UIViewController (GSideMenuController)
