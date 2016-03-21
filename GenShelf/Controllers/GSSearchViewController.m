@@ -39,7 +39,7 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         _datas = [NSMutableArray array];
-        self.title = @"搜索";
+        self.title = local(Search);
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"]
                                                                                  style:UIBarButtonItemStylePlain
                                                                                 target:self.sideMenuController
@@ -53,7 +53,7 @@
     CGRect bounds = self.view.bounds;
     _searchBar = [[UISearchBar alloc] init];
     _searchBar.frame = CGRectMake(0, self.navigationController.navigationBar.bounds.size.height + 20, bounds.size.width, 40);
-    _searchBar.placeholder = @"请输入关键字";
+    _searchBar.placeholder = local(Input key words here);
     
     _tableView = [[UITableView alloc] initWithFrame:bounds
                                               style:UITableViewStylePlain];
@@ -185,7 +185,7 @@
 - (void)requestDatas {
     if (!_searchKey || _searchKey.length < MIN_LENGTH) {
         [_refreshView endRefresh];
-        [RKDropdownAlert title:@"关键字太短"
+        [RKDropdownAlert title:local(Key word is too short)
                backgroundColor:[UIColor orangeColor]
                      textColor:[UIColor whiteColor]];
         return;
@@ -202,7 +202,7 @@
 - (void)requestMore {
     if (!_searchKey || _searchKey.length < MIN_LENGTH) {
         [_refreshView endRefresh];
-        [RKDropdownAlert title:@"关键字太短"
+        [RKDropdownAlert title:local(Key word is too short)
                backgroundColor:[UIColor orangeColor]
                      textColor:[UIColor whiteColor]];
         return;
@@ -246,12 +246,12 @@
 - (void)onTaskFailed:(GSTask *)task error:(NSError*)error {
     [_refreshView endRefresh];
     if (task.tag == 1) {
-        [RKDropdownAlert title:@"网络错误"
+        [RKDropdownAlert title:local(Network error)
                        message:error.localizedDescription
                backgroundColor:[UIColor redColor]
                      textColor:[UIColor whiteColor]];
     }else {
-        [RKDropdownAlert title:@"网络错误"
+        [RKDropdownAlert title:local(Network error)
                        message:error.localizedDescription
                backgroundColor:[UIColor redColor]
                      textColor:[UIColor whiteColor]];

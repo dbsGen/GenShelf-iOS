@@ -1,0 +1,51 @@
+/* 
+  Localization.strings
+  GenShelf
+
+  Created by Gen on 16/3/16.
+  Copyright © 2016年 AirRaidClub. All rights reserved.
+*/
+
+"YES"="YES";
+"NO"="NO";
+
+"Shelf"="Shelf";
+"Library"="Library";
+"Search"="Search";
+"ProgressingC"="Progressing";
+"Settings"="Settings";
+"Shadowsocks settings"="Shadowsocks Settings";
+"QRCode Scanner"="QRCode Scanner";
+
+"Close"="Close";
+"Input key words here"="Input key words here";
+"Key word is too short"="Key word is too short";
+"Network error"="Network error";
+"Adult"="Adult";
+
+"Settings2"="Settings";
+"Proxy"="Proxy";
+
+
+"Download failed"="Download failed: %@";
+"Collect"="Collect";
+"Collected"="Collected";
+
+"No prev"="No Prev";
+"No next"="No Next";
+"Page N"="Page %d";
+
+"Loading list"="Loading list ...";
+"Not start"="Not start";
+"Progressing"="Progressing...";
+"Paused"="Paused";
+"Complete"="Complete";
+
+"Proxy Switch"="Proxy Switch";
+"Local Port"="Current Port";
+"Scan QRCode"="Scan QRCode";
+"Server IP"="Server IP";
+"Server Port"="Server Port";
+"Password"="Password";
+"Encryption Type"="Encryption Type";
+"Test"="Test";

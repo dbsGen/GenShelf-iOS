@@ -111,10 +111,6 @@
 - (void)run {
     if (_item.status >= GSBookItemStatusComplete) {
         [self complete];
-    }else if (_item.loading) {
-        [self fatalError:[NSError errorWithDomain:[NSString stringWithFormat:@"Bookitem %@ already in progressing or complete.", _item.title]
-                                             code:101
-                                         userInfo:nil]];
     }else {
         NSURL *url = [NSURL URLWithString:_item.otherData ? _item.otherData : _item.pageUrl];
         
@@ -171,11 +167,6 @@
     _item.otherData = nil;
     [_item loadPages:pages];
     [_item complete];
-}
-
-- (void)finalFailed:(NSError *)error {
-    NSLog(@"Request %@ failed, %@.", _item.title, error);
-    [_item failed];
 }
 
 - (void)cancel {

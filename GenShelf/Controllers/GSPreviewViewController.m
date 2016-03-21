@@ -19,6 +19,7 @@ static NSString *identifier = @"CellIdentifier";
 @interface GSPreviewViewController () <UICollectionViewDataSource, UICollectionViewDelegate, SRRefreshDelegate> {
     SRRefreshView *_refreshView;
     GSTask *_currentTask;
+    UIBarButtonItem *_collectItem, *_collectedItem;
 }
 
 @property (nonatomic, strong) GSRadiusImageView *coverImageView;
@@ -37,9 +38,14 @@ static NSString *identifier = @"CellIdentifier";
                                                  selector:@selector(onBookUpdate:)
                                                      name:BOOK_ITEM_UPDATE
                                                    object:nil];
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"下载"
-                                                                                  style:UIBarButtonItemStylePlain
-                                                                                 target:self action:@selector(onDownload)];
+        _collectItem = [[UIBarButtonItem alloc] initWithTitle:local(Collect)
+                                                        style:UIBarButtonItemStylePlain
+                                                       target:self
+                                                       action:@selector(onDownload)];
+        _collectedItem = [[UIBarButtonItem alloc] initWithTitle:local(Collected)
+                                                          style:UIBarButtonItemStyleDone
+                                                         target:nil
+                                                         action:nil];
     }
     return self;
 }
@@ -56,12 +62,15 @@ static NSString *identifier = @"CellIdentifier";
     if (_item != item) {
         _item = item;
         self.title = item.title;
-        GSTask *task = [[GSGlobals dataControl] processBook:_item];
-        [[GSGlobals dataControl].taskQueue retainTask:task];
-        if (_currentTask) {
-            [[GSGlobals dataControl].taskQueue releaseTask:_currentTask];
+        if (_item.status < GSBookItemStatusComplete) {
+            GSTask *task = [[GSGlobals dataControl] processBook:_item];
+            [[GSGlobals dataControl].taskQueue retainTask:task];
+            if (_currentTask) {
+                [[GSGlobals dataControl].taskQueue releaseTask:_currentTask];
+            }
+            _currentTask = task;
         }
-        _currentTask = task;
+        self.navigationItem.rightBarButtonItem = _item.mark ? _collectedItem : _collectItem;
     }
 }
 
@@ -114,6 +123,7 @@ static NSString *identifier = @"CellIdentifier";
 
 - (void)onDownload {
     [[GSGlobals dataControl] downloadBook:_item];
+    [self.navigationItem setRightBarButtonItem:_collectedItem animated:YES];
 }
 
 #pragma mark - scrollView delegate

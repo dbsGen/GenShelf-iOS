@@ -90,11 +90,19 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
     _image = image;
     if (image) {
         CGSize originalSize = image.size;
+        CGRect bounds = self.bounds;
         CGRect frame;
-        frame.size.height = self.bounds.size.height;
-        frame.size.width = originalSize.width * frame.size.height / originalSize.height;
-        frame.origin.y = 0;
-        frame.origin.x = (self.bounds.size.width - frame.size.width)/2;
+        if (originalSize.height/originalSize.width > bounds.size.height/bounds.size.width) {
+            frame.size.height = bounds.size.height;
+            frame.size.width = originalSize.width * frame.size.height / originalSize.height;
+            frame.origin.y = 0;
+            frame.origin.x = (bounds.size.width - frame.size.width)/2;
+        }else {
+            frame.size.width = bounds.size.width;
+            frame.size.height = originalSize.height * frame.size.width / originalSize.width;
+            frame.origin.y = (bounds.size.height - frame.size.height)/2;
+            frame.origin.x = 0;
+        }
         _imageView.transform = CGAffineTransformIdentity;
         _imageView.frame = frame;
     }else {

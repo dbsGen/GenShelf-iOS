@@ -38,7 +38,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"设置";
+        self.title = local(Shadowsocks settings);
         UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
                                                                                     target:self
                                                                                     action:@selector(saveClicked)];
@@ -50,43 +50,43 @@
 - (void)viewDidLoad {
     _toggleProxyCell = [[GSSwitchCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:@"ToggleProxy"];
-    _toggleProxyCell.textLabel.text = @"开启代理";
+    _toggleProxyCell.textLabel.text = local(Proxy Switch);
     [_toggleProxyCell.switchItem addTarget:self
                                 action:@selector(toggleProxy:)
                       forControlEvents:UIControlEventValueChanged];
     
     _currentPortCell = [[GSInputCell alloc] initWithStyle:UITableViewCellStyleDefault
                                           reuseIdentifier:@"CurrentPort"];
-    _currentPortCell.textLabel.text = @"本地端口";
+    _currentPortCell.textLabel.text = local(Local Port);
     _currentPortCell.inputView.placeholder = @"Port";
     
     _scanQRCodeCell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                              reuseIdentifier:@"ScanQRCode"];
-    _scanQRCodeCell.textLabel.text = @"扫描二维码";
+    _scanQRCodeCell.textLabel.text = local(Scan QRCode);
     _scanQRCodeCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     _serverIpCell = [[GSInputCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:@"ServerIP"];
-    _serverIpCell.textLabel.text = @"服务器地址";
+    _serverIpCell.textLabel.text = local(Server IP);
     _serverIpCell.inputView.placeholder = @"IP";
     
     _serverPortCell = [[GSInputCell alloc] initWithStyle:UITableViewCellStyleDefault
                                          reuseIdentifier:@"ServerPort"];
-    _serverPortCell.textLabel.text = @"服务器端口";
+    _serverPortCell.textLabel.text = local(Server Port);
     _serverPortCell.inputView.placeholder = @"Port";
     
     _passwordCell = [[GSInputCell alloc] initWithStyle:UITableViewCellStyleDefault
                                        reuseIdentifier:@"Password"];
-    _passwordCell.textLabel.text = @"密码";
+    _passwordCell.textLabel.text = local(Password);
     _passwordCell.inputView.placeholder = @"Password";
     
     _encryptionTypeCell = [[GSSelectCell alloc] initWithStyle:UITableViewCellStyleDefault
                                               reuseIdentifier:@"EncrytionType"];
-    _encryptionTypeCell.textLabel.text = @"加密类型";
+    _encryptionTypeCell.textLabel.text = local(Encryption Type);
     
     _testCell = [[GSLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault
                                      reuseIdentifier:@"TestCell"];
-    _testCell.textLabel.text = @"测试";
+    _testCell.textLabel.text = local(Test);
     [self updateSettings];
     
     self.view.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;

@@ -194,6 +194,9 @@ int count;
     }
     _animationCount = 0;
     _count = [_delegate numberOfFlipViewPage:self];
+    if (!_count) {
+        return;
+    }
     if (_pageIndex < 0) {
         _pageIndex = 0;
     }
@@ -798,7 +801,7 @@ static NSTimeInterval __start;
 
 - (void)panndOn:(UIPanGestureRecognizer*)pan
 {
-    if (_animation == YES || _stop || !_dragEnable || _willToReload) {
+    if (_animation == YES || _stop || !_dragEnable || _willToReload || !_count) {
         return;
     }
     int state = pan.state;

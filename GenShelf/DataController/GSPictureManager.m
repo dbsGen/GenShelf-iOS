@@ -72,20 +72,28 @@ static GSPictureManager *__defaultManager = nil;
 
 - (NSString *)folderName:(GSBookItem *)book {
     const char *chs = book.title.UTF8String;
-    long len = MIN(strlen(chs), 127);
+    long len = strlen(chs);
     char *n_chs = malloc(sizeof(char)*(len+1));
+    int count = 0;
     for (int n = 0; n < len; n++) {
         bool check = false;
         for (int m = 0; m < replace_leng; m++) {
-            if (chs[n] == replacement[m]) {
+            if (chs[n] == replacement[m] || chs[n] < 33 || chs[n] > 125) {
                 check = true;
                 break;
             }
         }
-        n_chs[n] = check ? '_' : chs[n];
+        if (!check) {
+            n_chs[count++] = chs[n];
+            if (count >= 127) {
+                break;
+            }
+        }
     }
-    n_chs[len] = 0;
+    NSLog(@"Len is %ld string is %s", len, n_chs);
+    n_chs[count] = 0;
     NSString *path = [NSString stringWithUTF8String:n_chs];
+    NSLog(@"path is %@", path);
     free(n_chs);
     return path;
 }

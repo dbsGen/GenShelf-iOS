@@ -59,6 +59,9 @@
 - (void)setPercent:(CGFloat)percent animated:(BOOL)animated {
     if (animated) {
         [self stopAllTweens];
+        if (isnan(_percent)) {
+            _percent = 0;
+        }
         GTween *tween = [GTween tween:self
                              duration:0.2
                                  ease:[GEaseCubicInOut class]];

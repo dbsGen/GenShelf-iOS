@@ -29,7 +29,7 @@
         self.items = @[[GSideMenuItem itemWithController:[[GSShelfViewController alloc] init] image:[UIImage imageNamed:@"squares"]],
                        [GSideMenuItem itemWithController:[[GSHomeViewController alloc] init] image:[UIImage imageNamed:@"home"]],
                        [GSideMenuItem itemWithController:[[GSSearchViewController alloc] init] image:[UIImage imageNamed:@"search"]],
-                       [GSideMenuItem itemWithTitle:@"进程" image:[UIImage imageNamed:@"progress"] block:^{
+                       [GSideMenuItem itemWithTitle:local(ProgressingC) image:[UIImage imageNamed:@"progress"] block:^{
                            GSProgressViewController *con = [[GSProgressViewController alloc] init];
                            UINavigationController *progress = [[UINavigationController alloc] initWithRootViewController:con];
                            GCoverView *cover = [[GCoverView alloc] initWithController:progress];
@@ -56,7 +56,7 @@
 - (void)onFailed:(NSNotification *)notification {
     if ([notification.object isKindOfClass:[GSBookItem class]]) {
         GSBookItem *item = notification.object;
-        [RKDropdownAlert title:[NSString stringWithFormat:@"%@ 失败!", item.title]
+        [RKDropdownAlert title:[NSString stringWithFormat:local(Download failed), item.title]
                backgroundColor:[UIColor redColor]
                      textColor:[UIColor whiteColor]];
     }

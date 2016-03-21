@@ -12,7 +12,9 @@
 #import "GSPictureManager.h"
 #import "GSPageFlipView.h"
 
-@interface GSVBookViewController () <MTDragFlipViewDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface GSVBookViewController () <MTDragFlipViewDelegate, UITableViewDelegate, UITableViewDataSource> {
+    NSInteger   _oldIndex;
+}
 
 @property (nonatomic, strong) MTDragFlipView *flipView;
 @property (nonatomic, strong) GSPageViewerView *pageViewer;
@@ -29,6 +31,7 @@
                                                  selector:@selector(pageComplete:)
                                                      name:PAGE_ITEM_SET_IMAGE
                                                    object:nil];
+        _oldIndex = 0;
     }
     return self;
 }
@@ -77,8 +80,8 @@
     _flipView = [[MTDragFlipView alloc] initWithFrame:self.view.bounds];
     _flipView.delegate = self;
     _flipView.backgroundColor = [UIColor grayColor];
-    _flipView.bottomLabel.text = @"到底了";
-    _flipView.topLabel.text = @"到顶了";
+    _flipView.bottomLabel.text = local(No next);
+    _flipView.topLabel.text = local(No prev);
     _flipView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [_flipView reloadData];
     [self.view addSubview:_flipView];
@@ -111,6 +114,16 @@
     _pageViewer.scale = view ? view.scale : 1;
     _pageViewer.translation = view ? view.translation : CGPointMake(0, 0);
     _pageViewer.imagePath = [_item.pages objectAtIndex:index].imagePath;
+    [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:MAX(0, index - 4)
+                                                          inSection:0]
+                      atScrollPosition:UITableViewScrollPositionTop
+                              animated:YES];
+    [_tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:_oldIndex
+                                                            inSection:0],
+                                         [NSIndexPath indexPathForRow:index
+                                                            inSection:0]]
+                      withRowAnimation:UITableViewRowAnimationAutomatic];
+    _oldIndex = index;
     return _pageViewer;
 }
 
@@ -184,7 +197,14 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                       reuseIdentifier:identifier];
     }
-    cell.textLabel.text = [NSString stringWithFormat:@"第%d页", (int)indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:local(Page N), (int)indexPath.row];
+    if (indexPath.row == _flipView.pageIndex) {
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.backgroundColor = [UIColor grayColor];
+    }else {
+        cell.selectionStyle = UITableViewCellSelectionStyleDefault;
+        cell.backgroundColor = [UIColor whiteColor];
+    }
     return cell;
 }
 

@@ -35,7 +35,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"主页";
+        self.title = local(Library);
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"]
                                                                                  style:UIBarButtonItemStylePlain
                                                                                 target:self
@@ -228,12 +228,12 @@
 - (void)onTaskFailed:(GSTask *)task error:(NSError*)error {
     [_refreshView endRefresh];
     if (task.tag == 1) {
-        [RKDropdownAlert title:@"网络错误"
+        [RKDropdownAlert title:local(Network error)
                        message:error.localizedDescription
                backgroundColor:[UIColor redColor]
                      textColor:[UIColor whiteColor]];
     }else {
-        [RKDropdownAlert title:@"网络错误"
+        [RKDropdownAlert title:local(Network error)
                        message:error.localizedDescription
                backgroundColor:[UIColor redColor]
                      textColor:[UIColor whiteColor]];

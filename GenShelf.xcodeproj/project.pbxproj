@@ -91,6 +91,17 @@
 		B2A8C5681C92B62600306D0D /* GSProgressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2A8C5671C92B62600306D0D /* GSProgressViewController.m */; };
 		B2ABBA2E1C8019B900C02B7D /* GSLofiDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABBA2D1C8019B900C02B7D /* GSLofiDataControl.m */; };
 		B2ABBA321C8019DA00C02B7D /* GSLofiBookTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2ABBA311C8019DA00C02B7D /* GSLofiBookTask.m */; };
+		B2ACD8B11C9930BC001E461B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2ACD8B31C9930BC001E461B /* Localizable.strings */; };
+		B2ACD8BF1C9956AD001E461B /* AppIcon29x29@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2ACD8B61C9956AD001E461B /* AppIcon29x29@2x.png */; };
+		B2ACD8C01C9956AD001E461B /* AppIcon29x29@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B2ACD8B71C9956AD001E461B /* AppIcon29x29@2x~ipad.png */; };
+		B2ACD8C11C9956AD001E461B /* AppIcon29x29~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B2ACD8B81C9956AD001E461B /* AppIcon29x29~ipad.png */; };
+		B2ACD8C21C9956AD001E461B /* AppIcon40x40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2ACD8B91C9956AD001E461B /* AppIcon40x40@2x.png */; };
+		B2ACD8C31C9956AD001E461B /* AppIcon40x40@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B2ACD8BA1C9956AD001E461B /* AppIcon40x40@2x~ipad.png */; };
+		B2ACD8C41C9956AD001E461B /* AppIcon40x40~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B2ACD8BB1C9956AD001E461B /* AppIcon40x40~ipad.png */; };
+		B2ACD8C51C9956AD001E461B /* AppIcon60x60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B2ACD8BC1C9956AD001E461B /* AppIcon60x60@2x.png */; };
+		B2ACD8C61C9956AD001E461B /* AppIcon76x76@2x~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B2ACD8BD1C9956AD001E461B /* AppIcon76x76@2x~ipad.png */; };
+		B2ACD8C71C9956AD001E461B /* AppIcon76x76~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = B2ACD8BE1C9956AD001E461B /* AppIcon76x76~ipad.png */; };
+		B2ACD8CA1C99593E001E461B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = B2ACD8CC1C99593E001E461B /* InfoPlist.strings */; };
 		B2AD57831C7D4D2400280667 /* libsodium.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2AD57821C7D4D0800280667 /* libsodium.a */; };
 		B2B1E04B1C7EB185004DCDF7 /* NSObject+GTools.m in Sources */ = {isa = PBXBuildFile; fileRef = B2B1E04A1C7EB185004DCDF7 /* NSObject+GTools.m */; };
 		B2BDCBBD1C76DF5600DC3031 /* GSLoadingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2BDCBBC1C76DF5600DC3031 /* GSLoadingCell.m */; };
@@ -537,6 +548,19 @@
 		B2ABBA301C8019DA00C02B7D /* GSLofiBookTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiBookTask.h; sourceTree = "<group>"; };
 		B2ABBA311C8019DA00C02B7D /* GSLofiBookTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSLofiBookTask.m; sourceTree = "<group>"; };
 		B2ABBA331C80278900C02B7D /* GSDataDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GSDataDefines.h; sourceTree = "<group>"; };
+		B2ACD8B21C9930BC001E461B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		B2ACD8B41C9930CB001E461B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		B2ACD8B61C9956AD001E461B /* AppIcon29x29@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@2x.png"; sourceTree = "<group>"; };
+		B2ACD8B71C9956AD001E461B /* AppIcon29x29@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29@2x~ipad.png"; sourceTree = "<group>"; };
+		B2ACD8B81C9956AD001E461B /* AppIcon29x29~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon29x29~ipad.png"; sourceTree = "<group>"; };
+		B2ACD8B91C9956AD001E461B /* AppIcon40x40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon40x40@2x.png"; sourceTree = "<group>"; };
+		B2ACD8BA1C9956AD001E461B /* AppIcon40x40@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon40x40@2x~ipad.png"; sourceTree = "<group>"; };
+		B2ACD8BB1C9956AD001E461B /* AppIcon40x40~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon40x40~ipad.png"; sourceTree = "<group>"; };
+		B2ACD8BC1C9956AD001E461B /* AppIcon60x60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon60x60@2x.png"; sourceTree = "<group>"; };
+		B2ACD8BD1C9956AD001E461B /* AppIcon76x76@2x~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon76x76@2x~ipad.png"; sourceTree = "<group>"; };
+		B2ACD8BE1C9956AD001E461B /* AppIcon76x76~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AppIcon76x76~ipad.png"; sourceTree = "<group>"; };
+		B2ACD8CB1C99593E001E461B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		B2ACD8CD1C99593F001E461B /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		B2AD55861C7D4D0600280667 /* sodium.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = sodium.xcodeproj; sourceTree = "<group>"; };
 		B2B1E0491C7EB185004DCDF7 /* NSObject+GTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+GTools.h"; sourceTree = "<group>"; };
 		B2B1E04A1C7EB185004DCDF7 /* NSObject+GTools.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+GTools.m"; sourceTree = "<group>"; };
@@ -1299,6 +1323,8 @@
 			isa = PBXGroup;
 			children = (
 				B250EE2D1C73054D00198CDE /* main.m */,
+				B2ACD8B31C9930BC001E461B /* Localizable.strings */,
+				B2ACD8CC1C99593E001E461B /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1404,6 +1430,22 @@
 			path = Lofi;
 			sourceTree = "<group>";
 		};
+		B2ACD8B51C9956AD001E461B /* Icons */ = {
+			isa = PBXGroup;
+			children = (
+				B2ACD8B61C9956AD001E461B /* AppIcon29x29@2x.png */,
+				B2ACD8B71C9956AD001E461B /* AppIcon29x29@2x~ipad.png */,
+				B2ACD8B81C9956AD001E461B /* AppIcon29x29~ipad.png */,
+				B2ACD8B91C9956AD001E461B /* AppIcon40x40@2x.png */,
+				B2ACD8BA1C9956AD001E461B /* AppIcon40x40@2x~ipad.png */,
+				B2ACD8BB1C9956AD001E461B /* AppIcon40x40~ipad.png */,
+				B2ACD8BC1C9956AD001E461B /* AppIcon60x60@2x.png */,
+				B2ACD8BD1C9956AD001E461B /* AppIcon76x76@2x~ipad.png */,
+				B2ACD8BE1C9956AD001E461B /* AppIcon76x76~ipad.png */,
+			);
+			path = Icons;
+			sourceTree = "<group>";
+		};
 		B2AD55851C7D4D0600280667 /* sodium */ = {
 			isa = PBXGroup;
 			children = (
@@ -1446,6 +1488,7 @@
 		B2BDCBC51C77122C00DC3031 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B2ACD8B51C9956AD001E461B /* Icons */,
 				B279C0891C951C93009AB881 /* back.png */,
 				B279C08A1C951C93009AB881 /* back@2x.png */,
 				B296F71D1C9467F60031AA62 /* pause.png */,
@@ -2446,6 +2489,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hans",
 			);
 			mainGroup = B250EE201C73054D00198CDE;
 			productRefGroup = B250EE2A1C73054D00198CDE /* Products */;
@@ -2481,6 +2525,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2ACD8C71C9956AD001E461B /* AppIcon76x76~ipad.png in Resources */,
 				B2BDCBCB1C7719C000DC3031 /* menu.png in Resources */,
 				B268ECD41C77745D001DD15F /* search.png in Resources */,
 				B296F7201C9467F60031AA62 /* pause@2x.png in Resources */,
@@ -2488,19 +2533,28 @@
 				B268ECD31C77745D001DD15F /* progress@2x.png in Resources */,
 				B268ECD01C77745D001DD15F /* home.png in Resources */,
 				B2BDCBCD1C771A8500DC3031 /* menu@2x.png in Resources */,
+				B2ACD8B11C9930BC001E461B /* Localizable.strings in Resources */,
+				B2ACD8C11C9956AD001E461B /* AppIcon29x29~ipad.png in Resources */,
+				B2ACD8BF1C9956AD001E461B /* AppIcon29x29@2x.png in Resources */,
 				B296F71A1C94583D0031AA62 /* play@2x.png in Resources */,
 				B268ECD91C77745D001DD15F /* squares@2x.png in Resources */,
+				B2ACD8C61C9956AD001E461B /* AppIcon76x76@2x~ipad.png in Resources */,
 				B279C08B1C951C93009AB881 /* back.png in Resources */,
 				B22675EC1C7C355600B5D5CC /* no_image@2x.png in Resources */,
 				B296F7181C94583D0031AA62 /* delete@2x.png in Resources */,
+				B2ACD8C41C9956AD001E461B /* AppIcon40x40~ipad.png in Resources */,
 				B296F71B1C94583D0031AA62 /* stop.png in Resources */,
+				B2ACD8C21C9956AD001E461B /* AppIcon40x40@2x.png in Resources */,
 				B268ECD71C77745D001DD15F /* setting@2x.png in Resources */,
 				B268ECD61C77745D001DD15F /* setting.png in Resources */,
+				B2ACD8C51C9956AD001E461B /* AppIcon60x60@2x.png in Resources */,
 				B250EE3C1C73054D00198CDE /* Assets.xcassets in Resources */,
 				B296F71C1C94583D0031AA62 /* stop@2x.png in Resources */,
 				B296F71F1C9467F60031AA62 /* pause.png in Resources */,
 				B26936F51C844D2100D2D35E /* bg_detail_panelshadow.png in Resources */,
 				B20A34891C747FB7000CCFA3 /* LaunchScreen.storyboard in Resources */,
+				B2ACD8C01C9956AD001E461B /* AppIcon29x29@2x~ipad.png in Resources */,
+				B2ACD8CA1C99593E001E461B /* InfoPlist.strings in Resources */,
 				B268ECD21C77745D001DD15F /* progress.png in Resources */,
 				B22305CE1C783632001B18F5 /* sr_refresh@2X.png in Resources */,
 				B268ECD81C77745D001DD15F /* squares.png in Resources */,
@@ -2511,6 +2565,7 @@
 				B26936F61C844D2100D2D35E /* bg_detail_panelshadow@2X.png in Resources */,
 				B268ECD11C77745D001DD15F /* home@2x.png in Resources */,
 				B22675EB1C7C355600B5D5CC /* no_image.png in Resources */,
+				B2ACD8C31C9956AD001E461B /* AppIcon40x40@2x~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2884,6 +2939,27 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		B2ACD8B31C9930BC001E461B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2ACD8B21C9930BC001E461B /* en */,
+				B2ACD8B41C9930CB001E461B /* zh-Hans */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		B2ACD8CC1C99593E001E461B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2ACD8CB1C99593E001E461B /* en */,
+				B2ACD8CD1C99593F001E461B /* zh-Hans */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		B20A34811C747283000CCFA3 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -3007,7 +3083,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: bo yu (39W5WTNDBE)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "GenShelf/GenShelf-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -3022,7 +3098,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f82b43e1-25fc-4d0f-9da5-ac3b28935152";
+				PROVISIONING_PROFILE = "3e855474-2573-4357-b029-3726d56e0bd8";
 			};
 			name = Debug;
 		};
@@ -3030,7 +3106,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer: bo yu (39W5WTNDBE)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "GenShelf/GenShelf-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -3045,7 +3121,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "f82b43e1-25fc-4d0f-9da5-ac3b28935152";
+				PROVISIONING_PROFILE = "3e855474-2573-4357-b029-3726d56e0bd8";
 			};
 			name = Release;
 		};

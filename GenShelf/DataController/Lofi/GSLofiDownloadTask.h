@@ -14,6 +14,7 @@
     NSOperationQueue *_queue;
 }
 
+@property (nonatomic, strong) GSTaskQueue *downloadQueue;
 - (id)initWithItem:(GSBookItem *)item queue:(NSOperationQueue *)queue;
 
 @end

@@ -25,7 +25,7 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"设置";
+        self.title = local(Settings);
         self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"]
                                                                                  style:UIBarButtonItemStylePlain
                                                                                 target:self.sideMenuController
@@ -38,7 +38,7 @@
     [super viewDidLoad];
     _adultCell = [[GSSwitchCell alloc] initWithStyle:UITableViewCellStyleDefault
                                      reuseIdentifier:@"AdultCell"];
-    _adultCell.textLabel.text = @"绅士";
+    _adultCell.textLabel.text = local(Adult);
     _adultCell.switchItem.on = [GSGlobals isAdult];
     [_adultCell.switchItem addTarget:self
                               action:@selector(toggleAdult:)
@@ -61,9 +61,9 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return @"设置";
+            return local(Settings2);
         case 1:
-            return @"代理";
+            return local(Proxy);
             
         default:
             break;
@@ -108,7 +108,7 @@
             }
             switch (indexPath.row) {
                 case 0:
-                    cell.textLabel.text = @"Shadowsocks设置";
+                    cell.textLabel.text = local(Shadowsocks settings);
                     break;
                     
                 default:

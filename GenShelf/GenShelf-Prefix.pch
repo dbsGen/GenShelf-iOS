@@ -8,6 +8,9 @@
 
 
 #import <Availability.h>
+
+#define local(str) NSLocalizedString(@#str, @"")
+
 #ifdef __OBJC__
 
     #import <UIKit/UIKit.h>

@@ -99,18 +99,22 @@
 - (void)updateStatus {
     switch (_data.status) {
         case GSBookItemStatusNotStart:
-            _detailLabel.text = @"未开始";
+            if (_data.loading) {
+                _detailLabel.text = local(Loading list);
+            }else {
+                _detailLabel.text = local(Not start);
+            }
             break;
         case GSBookItemStatusComplete:
         case GSBookItemStatusProgressing:
             if (_data.loading) {
-                _detailLabel.text = @"进行中";
+                _detailLabel.text = local(Progressing);
             }else {
-                _detailLabel.text = @"暂停";
+                _detailLabel.text = local(Paused);
             }
             break;
         case GSBookItemStatusPagesComplete:
-            _detailLabel.text = @"已完成";
+            _detailLabel.text = local(Complete);
             break;
             
         default:

@@ -71,10 +71,17 @@
         UIImage *image = [UIImage imageWithContentsOfFile:path];
         CGSize originalSize = image.size;
         CGRect frame;
-        frame.size.height = bounds.size.height;
-        frame.size.width = originalSize.width * frame.size.height / originalSize.height;
-        frame.origin.y = 0;
-        frame.origin.x = (bounds.size.width - frame.size.width)/2;
+        if (originalSize.height/originalSize.width > bounds.size.height/bounds.size.width) {
+            frame.size.height = bounds.size.height;
+            frame.size.width = originalSize.width * frame.size.height / originalSize.height;
+            frame.origin.y = 0;
+            frame.origin.x = (bounds.size.width - frame.size.width)/2;
+        }else {
+            frame.size.width = bounds.size.width;
+            frame.size.height = originalSize.height * frame.size.width / originalSize.width;
+            frame.origin.y = (bounds.size.height - frame.size.height)/2;
+            frame.origin.x = 0;
+        }
         CGSize translation = bounds.size;
         frame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeTranslation(trans.x/2-translation.width/2, -trans.y/2-translation.height/2));
         frame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeScale(scale, scale));
@@ -97,10 +104,17 @@
         CGContextScaleCTM(context, 1.0f, -1.0f);
         CGSize originalSize = image.size;
         CGRect frame;
-        frame.size.height = bounds.size.height;
-        frame.size.width = originalSize.width * frame.size.height / originalSize.height;
-        frame.origin.y = 0;
-        frame.origin.x = (bounds.size.width - frame.size.width)/2;
+        if (originalSize.height/originalSize.width > bounds.size.height/bounds.size.width) {
+            frame.size.height = bounds.size.height;
+            frame.size.width = originalSize.width * frame.size.height / originalSize.height;
+            frame.origin.y = 0;
+            frame.origin.x = (bounds.size.width - frame.size.width)/2;
+        }else {
+            frame.size.width = bounds.size.width;
+            frame.size.height = originalSize.height * frame.size.width / originalSize.width;
+            frame.origin.y = (bounds.size.height - frame.size.height)/2;
+            frame.origin.x = 0;
+        }
         CGSize translation = bounds.size;
         frame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeTranslation(trans.x/2-translation.width/2, -trans.y/2-translation.height/2));
         frame = CGRectApplyAffineTransform(frame, CGAffineTransformMakeScale(scale, scale));

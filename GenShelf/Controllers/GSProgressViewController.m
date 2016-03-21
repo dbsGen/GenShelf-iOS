@@ -23,11 +23,11 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        self.title = @"进程";
+        self.title = local(ProgressingC);
         [[GSGlobals dataControl] updateProgressingBooks];
         _datas = [GSGlobals dataControl].progressingBooks;
         
-        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"关闭"
+        self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:local(Close)
                                                                                   style:UIBarButtonItemStylePlain
                                                                                  target:self
                                                                                  action:@selector(closeMenu)];

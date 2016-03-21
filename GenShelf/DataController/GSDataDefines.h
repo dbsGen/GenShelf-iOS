@@ -26,6 +26,7 @@ return RET;\
 
 #define BookProcessIdentifier(BOOK) BOOK.pageUrl
 #define BookDownloadIdentifier(BOOK) [NSString stringWithFormat:@"Download %@", BOOK.pageUrl]
+#define PageDownloadIdentifier(PAGE) [NSString stringWithFormat:@"Download %@ p", PAGE.pageUrl]
 #define HomeRequestIdentifier @"HomeRequest"
 #define SearchRequestIdentifier @"SearchRequest"
 

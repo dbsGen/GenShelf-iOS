@@ -1,0 +1,50 @@
+/* 
+  Localization.strings
+  GenShelf
+
+  Created by Gen on 16/3/16.
+  Copyright © 2016年 AirRaidClub. All rights reserved.
+*/
+
+"YES"="是";
+"NO"="否";
+
+"Shelf"="绅士的书架";
+"Library"="绅士的藏书馆";
+"Search"="绅士的挖掘";
+"ProgressingC"="绅士的行进";
+"Settings"="绅士的设置";
+"Shadowsocks settings"="Shadowsocks设置";
+"QRCode Scanner"="扫描二维码";
+
+"Close"="关闭";
+"Input key words here"="请输入搜索关键字";
+"Key word is too short"="关键字太短";
+"Network error"="网络错误";
+"Adult"="绅士";
+
+"Settings2"="设置";
+"Proxy"="代理";
+
+"Download failed"="下载失败: %@";
+"Collect"="收藏";
+"Collected"="已收藏";
+
+"No prev"="到顶了";
+"No next"="到底了";
+"Page N"="第%d页";
+
+"Loading list"="读取列表中...";
+"Not start"="未开始";
+"Progressing"="进行中...";
+"Paused"="暂停";
+"Complete"="已完成";
+
+"Proxy Switch"="开启代理";
+"Local Port"="本地端口";
+"Scan QRCode"="扫描二维码";
+"Server IP"="服务器地址";
+"Server Port"="服务器端口";
+"Password"="密码";
+"Encryption Type"="加密类型";
+"Test"="测试";

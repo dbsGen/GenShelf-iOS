@@ -101,17 +101,18 @@
 
 - (void)run {
     if (_item.status == GSBookItemStatusComplete) {
-        for (GSPageItem *page in _item.pages) {
-            if (page.status != GSPageItemStatusComplete) {
-                GSLofiPageTask *task = [[GSLofiPageTask alloc] initWithItem:page
-                                                                      queue:_queue];
-                task.bookItem = _item;
-                [self addSubtask:task];
+        [_item startLoading];
+        [_item.pages enumerateObjectsUsingBlock:^(GSPageItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.status != GSPageItemStatusComplete) {
+                [_downloadQueue createTask:PageDownloadIdentifier(obj)
+                                   creator:^GSTask *{
+                                       GSLofiPageTask *task = [[GSLofiPageTask alloc] initWithItem:obj
+                                                                                             queue:_queue];
+                                       task.bookItem = _item;
+                                       return task;
+                                   }];
             }
-        }
-        if (self.subtasks.count) {
-            [_item pagesLoading];
-        }
+        }];
         [self complete];
     }else {
         [self failed:[NSError errorWithDomain:@"目标未完成"
@@ -123,6 +124,12 @@
 - (void)cancel {
     [super cancel];
     [self cleatSubtasks];
+}
+
+- (void)finalFailed:(NSError *)error {
+    [super finalFailed:error];
+    NSLog(@"Request %@ failed, %@.", _item.title, error);
+    [_item failed];
 }
 
 @end

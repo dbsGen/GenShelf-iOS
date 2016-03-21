@@ -168,7 +168,7 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
 }
 
 - (void)startLoading {
-    [self setStatus:GSBookItemStatusProgressing loading:YES];
+    self.loading = YES;
 }
 
 - (void)complete {
@@ -181,7 +181,7 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
 }
 
 - (void)failed {
-    [self setStatus:GSBookItemStatusProgressing loading:NO];
+    self.loading = NO;
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_FAILED
                                                         object:self
                                                       userInfo:nil];
