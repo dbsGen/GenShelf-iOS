@@ -431,6 +431,20 @@ int count;
     }
 }
 
+- (void)didMoveToSuperview {
+    [super didMoveToSuperview];
+    if (!self.superview) {
+        [NSObject cancelPreviousPerformRequestsWithTarget:self];
+        [self clean];
+        NSArray<UIView *> *subviews = [_transationView subviews];
+        for (UIView *view in subviews) {
+            [view stopAllTweens];
+            [view removeFromSuperview];
+        }
+        _cacheRange.length = 0;
+    }
+}
+
 - (void)backToTop:(BOOL)aniamted
 {
     [self scrollToPage:0 animated:YES];
@@ -455,19 +469,6 @@ int count;
         }
     }
 }
-                 
-//- (void)animationHandle:(MTFlipAnimationView*)view
-//{
-//    [self sortSubviews];
-//    [UIView animateWithDuration:kBaseDurationK
-//                          delay:0
-//                        options:UIViewAnimationOptionCurveEaseOut
-//                     animations:^{
-//                         [view setAnimationPercent:0];
-//                     } completion:^(BOOL finished) {
-//                         
-//                     }];
-//}
 
 - (void)setTAnimation:(NSMutableArray*)array
 {
@@ -506,14 +507,17 @@ int count;
         n --;
         t --;
     }
-    if (_cachedImageViews.count > _pageIndex) {
-        [_cachedImageViews replaceObjectAtIndex:_pageIndex
-                                     withObject:[array lastObject]];
-    }else  {
-        [_cachedImageViews addObject:[array lastObject]];
-    }
     _cacheRange.location = _pageIndex;
-    _cacheRange.length=1;
+    if ([array count]) {
+        if (_cachedImageViews.count > _pageIndex) {
+            [_cachedImageViews replaceObjectAtIndex:_pageIndex
+                                         withObject:[array lastObject]];
+        }else  {
+            [_cachedImageViews addObject:[array lastObject]];
+        }
+        _cacheRange.length=1;
+    }else
+        _cacheRange.length=0;
     _animation = NO;
     _transationView.hidden = YES;
     [self reloadCurrentView];

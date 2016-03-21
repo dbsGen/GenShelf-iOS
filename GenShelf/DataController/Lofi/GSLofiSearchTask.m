@@ -53,7 +53,6 @@
 - (void)requestFinished:(ASIHTTPRequest *)request {
     if (_request == request) {
         
-        
         NSError *error = nil;
         GDataXMLDocument *doc = [[GDataXMLDocument alloc] initWithHTMLString:request.responseString
                                                                        error:&error];

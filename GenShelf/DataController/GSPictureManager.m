@@ -90,10 +90,8 @@ static GSPictureManager *__defaultManager = nil;
             }
         }
     }
-    NSLog(@"Len is %ld string is %s", len, n_chs);
     n_chs[count] = 0;
     NSString *path = [NSString stringWithUTF8String:n_chs];
-    NSLog(@"path is %@", path);
     free(n_chs);
     return path;
 }

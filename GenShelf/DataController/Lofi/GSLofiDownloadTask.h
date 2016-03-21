@@ -12,6 +12,7 @@
 @interface GSLofiDownloadTask : GSTask {
     GSBookItem *_item;
     NSOperationQueue *_queue;
+    NSUInteger _taskCount;
 }
 
 @property (nonatomic, strong) GSTaskQueue *downloadQueue;

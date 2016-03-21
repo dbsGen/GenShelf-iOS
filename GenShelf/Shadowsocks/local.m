@@ -561,9 +561,11 @@ void set_config(const char *server, const char *remote_port, const char* passwor
     config_encryption(password, method);
 }
 
+static ev_io *current_io;
+int listenfd;
+
 int local_main (const char *port)
 {
-    int listenfd;
     listenfd = create_and_bind(port);
     if (listenfd < 0) {
 #ifdef DEBUG
@@ -584,12 +586,19 @@ int local_main (const char *port)
     listen_ctx.fd = listenfd;
     struct ev_loop *loop = EV_DEFAULT;
     ev_io_init (&listen_ctx.io, accept_cb, listenfd, EV_READ);
-    ev_io_start (loop, &listen_ctx.io);
+    current_io = &listen_ctx.io;
+    ev_io_start (loop, current_io);
     ev_run (loop, 0);
+    current_io = NULL;
     return 0;
 }
 
 void sd_cancel() {
-    ev_break(EV_DEFAULT, EVBREAK_CANCEL);
+    if (listenfd >= 0) {
+        close(listenfd);
+    }
+    if (current_io) {
+        ev_io_stop(EV_DEFAULT, current_io);
+    }
 }
 

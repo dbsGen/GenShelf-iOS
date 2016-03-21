@@ -91,6 +91,7 @@
                                               style:UITableViewStylePlain];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleRightMargin;
     
     UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(20, 30, 40, 40)];
     [button setImage:[UIImage imageNamed:@"back"]
@@ -107,6 +108,9 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    _tableView = nil;
+    _pageViewer = nil;
+    _flipView = nil;
 }
 
 - (UIView*)flipView:(MTDragFlipView*)flipView subViewAtIndex:(NSInteger)index {
@@ -129,6 +133,7 @@
 
 - (UIView *)flipView:(MTDragFlipView *)flipView backgroudView:(NSInteger)index left:(BOOL)isLeft {
     if (isLeft) {
+        _tableView.frame = self.view.bounds;
         return _tableView;
     }
     return nil;

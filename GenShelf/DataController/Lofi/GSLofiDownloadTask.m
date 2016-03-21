@@ -102,6 +102,7 @@
 - (void)run {
     if (_item.status == GSBookItemStatusComplete) {
         [_item startLoading];
+        _taskCount = 0;
         [_item.pages enumerateObjectsUsingBlock:^(GSPageItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (obj.status != GSPageItemStatusComplete) {
                 [_downloadQueue createTask:PageDownloadIdentifier(obj)
@@ -109,11 +110,12 @@
                                        GSLofiPageTask *task = [[GSLofiPageTask alloc] initWithItem:obj
                                                                                              queue:_queue];
                                        task.bookItem = _item;
+                                       task.delegate = self;
+                                       _taskCount ++;
                                        return task;
                                    }];
             }
         }];
-        [self complete];
     }else {
         [self failed:[NSError errorWithDomain:@"目标未完成"
                                          code:102
@@ -123,13 +125,51 @@
 
 - (void)cancel {
     [super cancel];
-    [self cleatSubtasks];
+    [self stopTasks];
+}
+
+- (void)reset {
+    [super reset];
+    [self stopTasks];
 }
 
 - (void)finalFailed:(NSError *)error {
     [super finalFailed:error];
     NSLog(@"Request %@ failed, %@.", _item.title, error);
+    [self stopTasks];
     [_item failed];
+}
+
+- (void)onTaskComplete:(GSTask *)task {
+    [self overPage];
+}
+
+- (void)onTaskFailed:(GSTask *)task error:(NSError *)error {
+    [self failed:error];
+}
+
+- (void)onTaskCancel:(GSTask *)task {
+    [self overPage];
+}
+
+- (void)overPage {
+    _taskCount--;
+    if (_taskCount <= 0) {
+        [self stopTasks];
+        [self complete];
+    }
+}
+
+- (void)stopTasks {
+    [_item.pages enumerateObjectsUsingBlock:^(GSPageItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.status != GSPageItemStatusComplete) {
+            GSTask *task = [_downloadQueue task:PageDownloadIdentifier(obj)];
+            if (task) {
+                [task cancel];
+            }
+        }
+    }];
+    _taskCount = 0;
 }
 
 @end

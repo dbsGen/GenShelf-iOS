@@ -7,7 +7,6 @@
 #import "local.h"
 #import "libev/ev.h"
 
-static struct ev_loop *current_loop = NULL;
 static NSString *shadowsocksStatus = SHADOWSOCKS_SUCCESS;
 
 @implementation ShadowsocksRunner {
@@ -42,7 +41,7 @@ static NSString *shadowsocksStatus = SHADOWSOCKS_SUCCESS;
 //            default:
 //                break;
 //        }
-        current_loop = NULL;
+        NSLog(@"Stop");
         return YES;
     } else {
 #ifdef DEBUG
@@ -53,10 +52,7 @@ static NSString *shadowsocksStatus = SHADOWSOCKS_SUCCESS;
 }
 
 + (void)cancel {
-    if (current_loop) {
-        sd_cancel(current_loop);
-        current_loop = NULL;
-    }
+    sd_cancel();
 }
 
 + (void)reloadConfig {

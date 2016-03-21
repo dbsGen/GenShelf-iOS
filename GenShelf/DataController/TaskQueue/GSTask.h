@@ -41,7 +41,10 @@ typedef GSTask*(^GSTaskCreator)();
 
 @end
 
-@interface GSTask : NSObject <GSTaskDelegate>
+@interface GSTask : NSObject <GSTaskDelegate> {
+    @private
+    __weak id _parent;
+}
 
 @property (nonatomic, readonly) NSArray<GSTask *> *subtasks;
 @property (nonatomic, assign) BOOL running;
@@ -54,7 +57,7 @@ typedef GSTask*(^GSTaskCreator)();
 @property (nonatomic, assign) NSTimeInterval timeDelay;
 
 - (void)addSubtask:(GSTask*)task;
-- (void)cleatSubtasks;
+- (void)clearSubtasks;
 
 - (void)start;
 - (void)restart;

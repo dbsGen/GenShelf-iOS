@@ -27,28 +27,40 @@
 @implementation GSTaskQueue {
     NSMutableArray<GSTask*> *_tasks;
     BOOL _running;
+    BOOL _willCheck;
 }
 
 - (id)init {
     self = [super init];
     if (self) {
         _running = NO;
+        _willCheck = NO;
         _tasks = [[NSMutableArray<GSTask*> alloc] init];
     }
     return self;
 }
 
 - (void)_checkQueue {
-    if (_tasks.count == 0) {
-        _running = NO;
-        return;
+    _willCheck = YES;
+    [self performSelector:@selector(_checkFrameHandle)
+               withObject:nil
+               afterDelay:0];
+}
+
+- (void)_checkFrameHandle {
+    if (_willCheck) {
+        _willCheck = NO;
+        if (_tasks.count == 0) {
+            _running = NO;
+            return;
+        }
+        if (_running) {
+            return;
+        }
+        _running = YES;
+        GSTask *task = [_tasks objectAtIndex:0];
+        [task start];
     }
-    if (_running) {
-        return;
-    }
-    _running = YES;
-    GSTask *task = [_tasks objectAtIndex:0];
-    [task start];
 }
 
 - (NSArray<GSTask*>*)tasks {
@@ -148,6 +160,8 @@
     NSInteger _tryCount;
     BOOL _willChecked;
 }
+
+@synthesize parent = _parent;
 
 - (id)init {
     self = [super init];
@@ -291,7 +305,7 @@
     [_subtasks addObject:task];
 }
 
-- (void)cleatSubtasks {
+- (void)clearSubtasks {
     [_subtasks removeAllObjects];
 }
 

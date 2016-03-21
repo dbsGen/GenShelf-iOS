@@ -2927,7 +2927,7 @@ time_update (EV_P_ ev_tstamp max_block)
 }
 
 void
-ev_run (EV_P_ int flags)
+ev_run (struct ev_loop *loop, int flags)
 {
 #if EV_FEATURE_API
   ++loop_depth;
@@ -2940,7 +2940,7 @@ ev_run (EV_P_ int flags)
   EV_INVOKE_PENDING; /* in case we recurse, ensure ordering stays nice and clean */
 
   do
-    {
+  {
 #if EV_VERIFY >= 2
       ev_verify (EV_A);
 #endif
