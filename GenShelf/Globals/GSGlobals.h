@@ -49,4 +49,7 @@
 
 + (ASIHTTPRequest *)requestForURL:(NSURL *)url;
 
++ (GSTask *)processBook:(GSBookItem *)book;
++ (GSTask *)downloadBook:(GSBookItem *)book;
+
 @end

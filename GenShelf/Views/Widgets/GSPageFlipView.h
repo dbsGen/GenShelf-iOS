@@ -12,6 +12,7 @@
 
 @property (nonatomic, readonly) CGFloat scale;
 @property (nonatomic, readonly) CGPoint translation;
+@property (nonatomic, assign) BOOL fullMode;
 
 - (void)renderPath:(NSString *)path scale:(CGFloat)scale translation:(CGPoint)trans;
 - (void)renderImage:(UIImage *)image scale:(CGFloat)scale translation:(CGPoint)trans;

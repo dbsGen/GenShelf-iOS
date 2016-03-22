@@ -74,4 +74,7 @@ typedef GSTask*(^GSTaskCreator)();
 - (void)finalFailed:(NSError *)error;
 - (void)finalComplete;
 
+- (void)taskRelease;
+- (void)taskRetain;
+
 @end

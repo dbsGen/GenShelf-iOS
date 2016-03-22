@@ -343,4 +343,15 @@
     }
 }
 
+
+- (void)taskRelease {
+    self.refCount --;
+    if (self.refCount <= 0) {
+        [self cancel];
+    }
+}
+- (void)taskRetain {
+    self.refCount ++;
+}
+
 @end

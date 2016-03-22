@@ -12,8 +12,11 @@
 
 typedef void(^GSPageViewerBlock)(GSPageViewerView *sender);
 
-@interface GSPageViewerView : UIView
+@interface GSPageViewerView : UIView {
+    BOOL _fullMode;
+}
 
+@property (nonatomic, assign) BOOL fullMode;
 @property (nonatomic, strong) NSString *imagePath;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, readonly) UIImageView *imageView;

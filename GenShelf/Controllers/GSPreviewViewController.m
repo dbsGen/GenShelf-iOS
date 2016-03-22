@@ -54,7 +54,7 @@ static NSString *identifier = @"CellIdentifier";
     [[NSNotificationCenter defaultCenter] removeObserver:self
                                                     name:BOOK_ITEM_UPDATE
                                                   object:nil];
-    [[GSGlobals dataControl].taskQueue releaseTask:_currentTask];
+    [_currentTask taskRelease];
     [_refreshView removeFromSuperview];
 }
 
@@ -63,10 +63,10 @@ static NSString *identifier = @"CellIdentifier";
         _item = item;
         self.title = item.title;
         if (_item.status < GSBookItemStatusComplete) {
-            GSTask *task = [[GSGlobals dataControl] processBook:_item];
-            [[GSGlobals dataControl].taskQueue retainTask:task];
+            GSTask *task = [GSGlobals processBook:_item];
+            [task taskRetain];
             if (_currentTask) {
-                [[GSGlobals dataControl].taskQueue releaseTask:_currentTask];
+                [_currentTask taskRelease];
             }
             _currentTask = task;
         }
@@ -122,7 +122,7 @@ static NSString *identifier = @"CellIdentifier";
 }
 
 - (void)onDownload {
-    [[GSGlobals dataControl] downloadBook:_item];
+    [GSGlobals downloadBook:_item];
     [self.navigationItem setRightBarButtonItem:_collectedItem animated:YES];
 }
 
@@ -146,8 +146,8 @@ static NSString *identifier = @"CellIdentifier";
     if (_currentTask) {
         [_currentTask restart];
     }else {
-        GSTask *task = [[GSGlobals dataControl] processBook:_item];
-        [[GSGlobals dataControl].taskQueue retainTask:task];
+        GSTask *task = [GSGlobals processBook:_item];
+        [task taskRetain];
         _currentTask = task;
     }
     [_collectionView reloadData];

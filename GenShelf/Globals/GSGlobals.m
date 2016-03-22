@@ -183,7 +183,10 @@ static NSMutableArray<NSString*> *_dataControlNames;
     [_dataControlNames addObject:dataControl.name];
 }
 + (GSDataControl *)getDataControl:(NSString *)name {
-    return [_dataControls objectForKey:name];
+    if (name) {
+        return [_dataControls objectForKey:name];
+    }
+    return nil;
 }
 + (NSString *)selectedDataControl {
     NSString *key = [[NSUserDefaults standardUserDefaults] stringForKey:kDataControl];
@@ -208,6 +211,22 @@ static NSMutableArray<NSString*> *_dataControlNames;
         request.proxyType = (__bridge NSString *)(kCFProxyTypeSOCKS);
     }
     return request;
+}
+
++ (GSTask *)processBook:(GSBookItem *)book {
+    GSDataControl *dataControl = [self getDataControl:book.source];
+    if (dataControl) {
+        return [dataControl processBook:book];
+    }
+    return [[self dataControl] processBook:book];
+}
+
++ (GSTask *)downloadBook:(GSBookItem *)book {
+    GSDataControl *dataControl = [self getDataControl:book.source];
+    if (dataControl) {
+        return [dataControl downloadBook:book];
+    }
+    return [[self dataControl] downloadBook:book];
 }
 
 @end

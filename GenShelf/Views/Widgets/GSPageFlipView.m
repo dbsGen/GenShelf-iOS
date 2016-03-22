@@ -34,6 +34,7 @@
         self.imageSize = CGSizeMake(frame.size.width/2, frame.size.height/2);
         
         _scale = 1;
+        _fullMode = NO;
     }
     return self;
 }
@@ -65,13 +66,18 @@
     _translation = trans;
     CGRect bounds = self.bounds;
     bounds.size = self.imageSize;
+    BOOL fullMode = _fullMode;
     void (^block)(CGContextRef context) = ^(CGContextRef context){
         CGContextTranslateCTM(context, 0.0f, bounds.size.height);
         CGContextScaleCTM(context, 1.0f, -1.0f);
         UIImage *image = [UIImage imageWithContentsOfFile:path];
         CGSize originalSize = image.size;
         CGRect frame;
-        if (originalSize.height/originalSize.width > bounds.size.height/bounds.size.width) {
+        BOOL check = originalSize.height/originalSize.width > bounds.size.height/bounds.size.width;
+        if (fullMode) {
+            check = !check;
+        }
+        if (check) {
             frame.size.height = bounds.size.height;
             frame.size.width = originalSize.width * frame.size.height / originalSize.height;
             frame.origin.y = 0;
@@ -99,12 +105,17 @@
     _translation = trans;
     CGRect bounds = self.bounds;
     bounds.size = self.imageSize;
+    BOOL fullMode = _fullMode;
     void (^block)(CGContextRef context) = ^(CGContextRef context){
         CGContextTranslateCTM(context, 0.0f, bounds.size.height);
         CGContextScaleCTM(context, 1.0f, -1.0f);
         CGSize originalSize = image.size;
         CGRect frame;
-        if (originalSize.height/originalSize.width > bounds.size.height/bounds.size.width) {
+        BOOL check = originalSize.height/originalSize.width > bounds.size.height/bounds.size.width;
+        if (fullMode) {
+            check = !check;
+        }
+        if (check) {
             frame.size.height = bounds.size.height;
             frame.size.width = originalSize.width * frame.size.height / originalSize.height;
             frame.origin.y = 0;

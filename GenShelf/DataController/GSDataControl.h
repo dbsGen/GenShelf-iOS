@@ -20,17 +20,16 @@ typedef void *(^GSRequestUpdateBlock)(NSUInteger count);
     @protected
     NSString *_name;
     CGFloat _requestDelay;
-    NSMutableArray *_progressingBooks;
 }
 
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSOperationQueue *operationQueue;
 @property (nonatomic, readonly) GSTaskQueue *taskQueue;
-@property (nonatomic, readonly) NSArray *progressingBooks;
 @property (nonatomic, assign) CGFloat   requestDelay;
 
-- (void)updateProgressingBooks;
-- (NSInteger)removeProgressingBook:(GSBookItem *)book;
++ (void)updateProgressingBooks;
++ (NSInteger)removeProgressingBook:(GSBookItem *)book;
++ (NSArray*)progressingBooks;
 
 - (GSRequestTask *)mainRequest:(NSInteger)pageIndex;
 - (GSRequestTask *)searchRequest:(NSString *)keyword pageIndex:(NSInteger)pageIndex;
