@@ -78,12 +78,12 @@ static GSPictureManager *__defaultManager = nil;
     for (int n = 0; n < len; n++) {
         bool check = false;
         for (int m = 0; m < replace_leng; m++) {
-            if (chs[n] == replacement[m] || chs[n] < 33 || chs[n] > 125) {
+            if (chs[n] == replacement[m]) {
                 check = true;
                 break;
             }
         }
-        if (!check) {
+        if (!check && (chs[n] >= 33 && chs[n] <= 125)) {
             n_chs[count++] = chs[n];
             if (count >= 127) {
                 break;

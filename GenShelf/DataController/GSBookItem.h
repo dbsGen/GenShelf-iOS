@@ -42,6 +42,7 @@ typedef enum : NSUInteger {
 + (GSBookItem *)itemWithModel:(GSModelNetBook*)book;
 - (GSModelNetBook *)model;
 
+@property (nonatomic, retain) NSString *source;
 @property (nonatomic, retain) NSString *title;
 @property (nonatomic, retain) NSString *pageUrl;
 @property (nonatomic, retain) NSString *imageUrl;

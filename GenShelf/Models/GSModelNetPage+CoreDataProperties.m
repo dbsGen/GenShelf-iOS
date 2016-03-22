@@ -13,6 +13,7 @@
 
 @implementation GSModelNetPage (CoreDataProperties)
 
+@dynamic source;
 @dynamic imageUrl;
 @dynamic index;
 @dynamic pageUrl;

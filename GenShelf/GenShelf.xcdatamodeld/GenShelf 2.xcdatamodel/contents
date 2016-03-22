@@ -13,6 +13,7 @@
         <attribute name="mark" optional="YES" attributeType="Boolean" defaultValueString="NO" indexed="YES" syncable="YES"/>
         <attribute name="otherData" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pageUrl" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="source" optional="YES" attributeType="String" defaultValueString="Lofi" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="pages" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="GSModelNetPage" inverseName="book" inverseEntity="GSModelNetPage" syncable="YES"/>
@@ -21,13 +22,14 @@
         <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="index" optional="YES" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
         <attribute name="pageUrl" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="source" optional="YES" attributeType="String" defaultValueString="Lofi" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="thumUrl" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="book" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="GSModelNetBook" inverseName="pages" inverseEntity="GSModelNetBook" syncable="YES"/>
     </entity>
     <elements>
         <element name="GSModelHomeData" positionX="117" positionY="81" width="128" height="105"/>
-        <element name="GSModelNetBook" positionX="99" positionY="63" width="128" height="180"/>
-        <element name="GSModelNetPage" positionX="108" positionY="72" width="128" height="135"/>
+        <element name="GSModelNetBook" positionX="99" positionY="63" width="128" height="195"/>
+        <element name="GSModelNetPage" positionX="108" positionY="72" width="128" height="150"/>
     </elements>
 </model>

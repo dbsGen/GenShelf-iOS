@@ -14,7 +14,7 @@
 #define kTurnProxy      @"GSGTurnProxy"
 #define kCurrentPort    @"GSGCurrentPort"
 
-#define kDataControl    @"GSDataControl"
+#define kDataControl    @"GSDataControlKey"
 
 #define kDefaultCurrentPort @"41080"
 #define kDefaultServerIP    @"192.168.1.10"
@@ -164,22 +164,40 @@ static BOOL shadowsocks_running = NO;
     [ShadowsocksRunner reloadConfig];
 }
 
-static NSArray<GSDataControl *> * _dataControls;
-+ (NSArray<GSDataControl *> *)dataControls {
-    if (!_dataControls) {
-        _dataControls = @[[[GSLofiDataControl alloc] init]];
+static NSMutableDictionary<NSString *, GSDataControl *> * _dataControls;
+static NSMutableArray<NSString*> *_dataControlNames;
++ (NSArray<NSString*>*)dataControlNames {
+    return _dataControlNames;
+}
++ (void)registerDataControl:(GSDataControl*)dataControl {
+    if ([_dataControlNames containsObject:dataControl.name]) {
+        return;
     }
-    return _dataControls;
+    if (!_dataControls) {
+        _dataControls = [[NSMutableDictionary alloc] init];
+    }
+    if (!_dataControlNames) {
+        _dataControlNames = [[NSMutableArray alloc] init];
+    }
+    [_dataControls setObject:dataControl forKey:dataControl.name];
+    [_dataControlNames addObject:dataControl.name];
 }
-+ (NSUInteger)selectedDataControl {
-    return [[NSUserDefaults standardUserDefaults] integerForKey:kDataControl];
++ (GSDataControl *)getDataControl:(NSString *)name {
+    return [_dataControls objectForKey:name];
 }
-+ (void)setSelectedDataControl:(NSUInteger)selectedNumber {
-    [[NSUserDefaults standardUserDefaults] setInteger:selectedNumber
-                                               forKey:kDataControl];
++ (NSString *)selectedDataControl {
+    NSString *key = [[NSUserDefaults standardUserDefaults] stringForKey:kDataControl];
+    if (!key) {
+        key = _dataControlNames.firstObject;
+    }
+    return key;
+}
++ (void)setSelectedDataControl:(NSString *)controlName {
+    [[NSUserDefaults standardUserDefaults] setObject:controlName
+                                              forKey:kDataControl];
 }
 + (GSDataControl *)dataControl {
-    return [[self dataControls] objectAtIndex:[self selectedDataControl]];
+    return [self getDataControl:[self selectedDataControl]];
 }
 
 + (ASIHTTPRequest *)requestForURL:(NSURL *)url {

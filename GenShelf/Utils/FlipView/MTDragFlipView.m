@@ -14,7 +14,7 @@
 #define StateBarRect   (CGRect){0,0,320,20}
 #define kAngle          (M_PI / 4)
 #define GetProgress(float_pro)  (CATransform3DMakeScale(0.1*float_pro + 0.9, 0.1*float_pro + 0.9, 1))
-#define kLengthLimite   20
+#define kLengthLimite   18
 
 typedef struct FZAction {
 SEL action;
@@ -1216,7 +1216,7 @@ static NSTimeInterval __start;
 {
     NSInteger totle = [_cachedImageViews count];
     _cacheRange.location = _pageIndex;
-    _cacheRange.length = 1;
+    _cacheRange.length = 0;
     for (int n = 0; n < totle; n++) {
         if (n < _pageIndex) {
             MTFlipAnimationView *view = [_cachedImageViews objectAtIndex:n];

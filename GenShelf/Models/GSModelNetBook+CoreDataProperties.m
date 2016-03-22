@@ -13,6 +13,7 @@
 
 @implementation GSModelNetBook (CoreDataProperties)
 
+@dynamic source;
 @dynamic downloadDate;
 @dynamic mark;
 @dynamic imageUrl;

@@ -22,6 +22,7 @@ typedef enum : NSUInteger {
 
 @interface GSPageItem : NSObject
 
+@property (nonatomic, retain) NSString *source;
 @property (nonatomic, weak) GSBookItem *book;
 @property (nonatomic, assign) GSPageItemStatus status;
 @property (nonatomic, assign) NSUInteger index;

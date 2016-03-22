@@ -40,9 +40,11 @@
 + (void)resetShadowsocks;
 + (void)reloadShadowsocksConfig;
 
-+ (NSArray<GSDataControl *> *)dataControls;
-+ (NSUInteger)selectedDataControl;
-+ (void)setSelectedDataControl:(NSUInteger)selectedNumber;
++ (void)registerDataControl:(GSDataControl*)dataControl;
++ (NSArray<NSString*>*)dataControlNames;
++ (GSDataControl *)getDataControl:(NSString *)name;
++ (NSString *)selectedDataControl;
++ (void)setSelectedDataControl:(NSString *)selectedNumber;
 + (GSDataControl *)dataControl;
 
 + (ASIHTTPRequest *)requestForURL:(NSURL *)url;

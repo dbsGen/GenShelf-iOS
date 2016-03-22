@@ -55,7 +55,11 @@ static GCoreDataManager *_defaultManager = NULL;
         NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"GenShelf.sqlite"];
         NSError *error = nil;
         NSString *failureReason = @"There was an error creating or loading the application's saved data.";
-        if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+        NSDictionary *options = @{
+                                  NSMigratePersistentStoresAutomaticallyOption : @YES,
+                                  NSInferMappingModelAutomaticallyOption : @YES
+                                  };
+        if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:options error:&error]) {
             // Report any error we got.
             NSMutableDictionary *dict = [NSMutableDictionary dictionary];
             dict[NSLocalizedDescriptionKey] = @"Failed to initialize the application's saved data";
@@ -67,15 +71,17 @@ static GCoreDataManager *_defaultManager = NULL;
             NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
             error = nil;
             if (first) {
-                [[NSFileManager defaultManager] removeItemAtURL:storeURL
-                                                          error:&error];
+//                [[NSFileManager defaultManager] removeItemAtURL:storeURL
+//                                                          error:&error];
+                first = NO;
                 _persistentStoreCoordinator = nil;
                 continue;
             }else {
                 abort();
             }
         }
-    } while (false);
+        break;
+    } while (true);
     
     return _persistentStoreCoordinator;
 }

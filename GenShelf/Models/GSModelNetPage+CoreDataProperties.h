@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GSModelNetPage (CoreDataProperties)
 
+@property (nullable, nonatomic, retain) NSString *source;
 @property (nullable, nonatomic, retain) NSString *imageUrl;
 @property (nullable, nonatomic, retain) NSNumber *index;
 @property (nullable, nonatomic, retain) NSString *pageUrl;
