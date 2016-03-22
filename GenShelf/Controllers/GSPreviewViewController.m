@@ -56,6 +56,8 @@ static NSString *identifier = @"CellIdentifier";
                                                   object:nil];
     [_currentTask taskRelease];
     [_refreshView removeFromSuperview];
+    _collectionView.delegate = nil;
+    _collectionView.dataSource = nil;
 }
 
 - (void)setItem:(GSBookItem *)item {
@@ -106,7 +108,10 @@ static NSString *identifier = @"CellIdentifier";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     _coverImageView = nil;
+    _collectionView.delegate = nil;
+    _collectionView.dataSource = nil;
     _collectionView = nil;
+    _refreshView = nil;
 }
 
 - (void)onBookUpdate:(NSNotification*)data {
