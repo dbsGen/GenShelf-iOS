@@ -13,7 +13,7 @@ typedef void (^MTBlockOperationComplete)(UIImage *image);
 
 @interface MTBlockOperation : NSOperation
 
-@property (nonatomic, copy) MTBlockOperationBlock   block;
+@property (atomic, copy) MTBlockOperationBlock   block;
 @property (nonatomic, copy) MTBlockOperationComplete    completeBlock;
 @property (nonatomic, assign)   CGSize  size;
 

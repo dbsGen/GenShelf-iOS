@@ -116,6 +116,7 @@
                                    }];
             }
         }];
+        [self cache];
     }else {
         [self failed:[NSError errorWithDomain:@"目标未完成"
                                          code:102

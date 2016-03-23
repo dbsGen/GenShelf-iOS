@@ -24,8 +24,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         self.title = local(ProgressingC);
-        [[GSGlobals dataControl] updateProgressingBooks];
-        _datas = [GSGlobals dataControl].progressingBooks;
+        [GSDataControl updateProgressingBooks];
+        _datas = [GSDataControl progressingBooks];
         
         self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:local(Close)
                                                                                   style:UIBarButtonItemStylePlain
@@ -60,7 +60,7 @@
 }
 
 - (void)bookComplete:(NSNotification *)notification {
-    NSInteger index = [[GSGlobals dataControl] removeProgressingBook:notification.object];
+    NSInteger index = [GSDataControl removeProgressingBook:notification.object];
     if (index >= 0) {
         [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
                           withRowAnimation:UITableViewRowAnimationAutomatic];
@@ -94,15 +94,15 @@
 }
 
 - (void)progressCellResume:(GSProgressCell *)cell {
-    [[GSGlobals dataControl] downloadBook:cell.data];
+    [GSGlobals downloadBook:cell.data];
 }
 
 - (void)progressCellPause:(GSProgressCell *)cell {
-    [[GSGlobals dataControl] pauseBook:cell.data];
+    [[GSGlobals getDataControl:cell.data.source] pauseBook:cell.data];
 }
 
 - (void)progressCellDelete:(GSProgressCell *)cell {
-    NSInteger index = [[GSGlobals dataControl] deleteBook:cell.data];
+    NSInteger index = [[GSGlobals getDataControl:cell.data.source] deleteBook:cell.data];
     [_tableView deleteRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:index inSection:0]]
                       withRowAnimation:UITableViewRowAnimationAutomatic];
 }

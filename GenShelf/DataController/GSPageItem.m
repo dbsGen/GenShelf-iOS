@@ -59,6 +59,7 @@ static GSContainerQueue<GSPageItem*> *__cacheQueue = nil;
     ret.imageUrl = page.imageUrl;
     ret.thumUrl = page.thumUrl;
     ret.custmorData = page.custmorData;
+    ret.source = page.source;
     return ret;
 }
 
@@ -73,6 +74,7 @@ static GSContainerQueue<GSPageItem*> *__cacheQueue = nil;
                                        page.imageUrl = _imageUrl;
                                        page.thumUrl = _thumUrl;
                                        page.custmorData = _custmorData;
+                                       page.source = _source;
                                    }];
     }
     return _model;
@@ -103,6 +105,7 @@ static GSContainerQueue<GSPageItem*> *__cacheQueue = nil;
     model.imageUrl = _imageUrl;
     model.thumUrl = _thumUrl;
     model.custmorData = _custmorData;
+    model.source = _source;
 }
 
 - (void)requestImage {

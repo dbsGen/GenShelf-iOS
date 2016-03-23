@@ -31,7 +31,8 @@
 - (GSRequestTask *)mainRequest:(NSInteger)pageIndex  {
     GSLofiHomeTask *task = [self.taskQueue createTask:HomeRequestIdentifier
                                               creator:^GSTask *{
-                                                  return [[GSLofiHomeTask alloc] initWithIndex:pageIndex queue:self.operationQueue];
+                                                  return [[GSLofiHomeTask alloc] initWithIndex:pageIndex
+                                                                                         queue:self.operationQueue];
                                               }];
     return task;
 }
@@ -47,6 +48,7 @@
 }
 
 - (GSTask *)processBook:(GSBookItem *)book {
+    [super processBook:book];
     if (book.status < GSBookItemStatusComplete) {
         GSLofiBookTask *task = [self.taskQueue createTask:BookProcessIdentifier(book)
                                                   creator:^GSTask *{

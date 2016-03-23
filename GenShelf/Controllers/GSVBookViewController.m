@@ -69,6 +69,7 @@
                 
 //                [v renderImage:view.image
 //                         frame:frame];
+                v.fullMode = view.fullMode;
                 [v renderImage:view.image
                          scale:view.scale
                    translation:view.translation];
@@ -117,6 +118,7 @@
     GSPageFlipView *view = (GSPageFlipView*)[flipView getDragingView:index];
     _pageViewer.scale = view ? view.scale : 1;
     _pageViewer.translation = view ? view.translation : CGPointMake(0, 0);
+    _pageViewer.fullMode = view.fullMode;
     _pageViewer.imagePath = [_item.pages objectAtIndex:index].imagePath;
     [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:MAX(0, index - 4)
                                                           inSection:0]

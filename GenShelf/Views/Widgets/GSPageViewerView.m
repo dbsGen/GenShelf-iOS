@@ -56,6 +56,8 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
     BOOL _bordLeft, _bordRight, _bordTop, _bordBottom;
 }
 
+@synthesize fullMode = _fullMode;
+
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
@@ -72,7 +74,13 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
                                                                                     action:@selector(onPinch:)];
         [self addGestureRecognizer:pinch];
         
+        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                                              action:@selector(onTap:)];
+        tap.numberOfTapsRequired = 2;
+        [self addGestureRecognizer:tap];
+        
         self.clipsToBounds = YES;
+        _fullMode = NO;
     }
     return self;
 }
@@ -88,11 +96,21 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
 
 - (void)setImage:(UIImage *)image {
     _image = image;
-    if (image) {
-        CGSize originalSize = image.size;
+    [self updateImageFrame];
+    _imageView.image = image;
+    [self updateTransformWithoutCallback];
+}
+
+- (void)updateImageFrame {
+    if (_image) {
+        CGSize originalSize = _image.size;
         CGRect bounds = self.bounds;
         CGRect frame;
-        if (originalSize.height/originalSize.width > bounds.size.height/bounds.size.width) {
+        BOOL check = originalSize.height/originalSize.width > bounds.size.height/bounds.size.width;
+        if (_fullMode) {
+            check = !check;
+        }
+        if (check) {
             frame.size.height = bounds.size.height;
             frame.size.width = originalSize.width * frame.size.height / originalSize.height;
             frame.origin.y = 0;
@@ -109,10 +127,7 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
         _imageView.transform = CGAffineTransformIdentity;
         _imageView.frame = self.bounds;
     }
-    _imageView.image = image;
-    [self updateTransformWithoutCallback];
 }
-
 
 - (void)onPan:(UIPanGestureRecognizer *)pan {
     switch (pan.state) {
@@ -161,6 +176,17 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
         }
             break;
     }
+}
+
+- (void)onTap:(UITapGestureRecognizer *)tap {
+    _fullMode = !_fullMode;
+    [UIView transitionWithView:_imageView
+                      duration:0.24
+                       options:UIViewAnimationOptionCurveEaseOut
+                    animations:^{
+                        [self updateImageFrame];
+                        [self updateTransform];
+                    } completion:nil];
 }
 
 - (void)updateTransform {

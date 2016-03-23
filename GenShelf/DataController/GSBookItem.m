@@ -75,6 +75,7 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
     ret->_model = book;
     ret.status = book.status.integerValue;
     ret.title = book.title;
+    ret.source = book.source;
     ret.pageUrl = book.pageUrl;
     ret.imageUrl = book.imageUrl;
     ret.otherData = book.otherData;
@@ -106,6 +107,7 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
                                    constructor:^(id object) {
                                        GSModelNetBook *book = object;
                                        book.title = _title;
+                                       book.source = _source;
                                        book.pageUrl = _pageUrl;
                                        book.imageUrl = _imageUrl;
                                        book.otherData = _otherData;
@@ -123,6 +125,7 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
     b.otherData = _otherData;
     b.mark = [NSNumber numberWithBool:_mark];
     b.downloadDate = _downloadDate;
+    b.source = _source;
     NSMutableArray *arr = [NSMutableArray array];
     for (GSPageItem *pitem in self.pages) {
         [arr addObject:pitem.model];
@@ -157,6 +160,7 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
     for (GSPageItem *item in pages) {
         item.index = _page_items.count;
         item.book = self;
+        item.source = _source;
         [item checkPage];
         [_page_items addObject:item];
     }
@@ -250,6 +254,9 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
 }
 
 - (void)pageProgress {
+    if (!self.loading && self.status != GSBookItemStatusPagesComplete) {
+        self.loading = YES;
+    }
     [self updatePercent];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_PROGRESS
                                                         object:self

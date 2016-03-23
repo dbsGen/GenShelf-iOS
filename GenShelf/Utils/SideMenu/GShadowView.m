@@ -69,6 +69,7 @@
     }
     
     CGContextDrawLinearGradient(context, gradientRef, endp, startp, kCGGradientDrawsBeforeStartLocation);
+    CFRelease(colorArray);
     CGGradientRelease(gradientRef);
     CGColorSpaceRelease(colorSpaceRef);
     free(cgColors);

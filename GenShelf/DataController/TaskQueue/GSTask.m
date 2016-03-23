@@ -26,6 +26,7 @@
 
 @implementation GSTaskQueue {
     NSMutableArray<GSTask*> *_tasks;
+    NSMutableArray<GSTask*> *_cacheTasks;
     BOOL _running;
     BOOL _willCheck;
 }
@@ -44,6 +45,7 @@
         _running = NO;
         _willCheck = NO;
         _tasks = [[NSMutableArray<GSTask*> alloc] init];
+        _cacheTasks = [[NSMutableArray<GSTask*> alloc] init];
     }
     return self;
 }
@@ -78,6 +80,12 @@
 - (GSTask *)task:(NSString *)identifier {
     for (NSUInteger n = 0, t = _tasks.count; n < t; n ++) {
         GSTask *task = [_tasks objectAtIndex:n];
+        if ([task.identifier isEqualToString:identifier]) {
+            return task;
+        }
+    }
+    for (NSUInteger n = 0, t = _cacheTasks.count; n < t; n++) {
+        GSTask *task = [_cacheTasks objectAtIndex:n];
         if ([task.identifier isEqualToString:identifier]) {
             return task;
         }
@@ -146,19 +154,38 @@
 }
 
 - (void)onTaskComplete:(GSTask *)task {
-    [_tasks removeObject:task];
-    _running = NO;
-    [self _checkQueue];
+    if ([_tasks containsObject:task]) {
+        [_tasks removeObject:task];
+        _running = NO;
+        [self _checkQueue];
+    }else if ([_cacheTasks containsObject:task]) {
+        [_cacheTasks removeObject:task];
+    }
 }
 
 - (void)onTaskFailed:(GSTask *)task error:(NSError *)error {
-    [_tasks removeObject:task];
-    _running = NO;
-    [self _checkQueue];
+    if ([_tasks containsObject:task]) {
+        [_tasks removeObject:task];
+        _running = NO;
+        [self _checkQueue];
+    }else if ([_cacheTasks containsObject:task]) {
+        [_cacheTasks removeObject:task];
+    }
 }
 
 - (void)onTaskCancel:(GSTask *)task {
+    if ([_tasks containsObject:task]) {
+        [_tasks removeObject:task];
+        _running = NO;
+        [self _checkQueue];
+    }else if ([_cacheTasks containsObject:task]) {
+        [_cacheTasks removeObject:task];
+    }
+}
+
+- (void)onTaskMoveCache:(GSTask *)task {
     [_tasks removeObject:task];
+    [_cacheTasks addObject:task];
     _running = NO;
     [self _checkQueue];
 }
@@ -225,6 +252,12 @@
     }
     if ([_parent respondsToSelector:@selector(onTaskCancel:)]) {
         [_parent onTaskCancel:self];
+    }
+}
+
+- (void)cache {
+    if ([_parent respondsToSelector:@selector(onTaskMoveCache:)]) {
+        [_parent onTaskMoveCache:self];
     }
 }
 
@@ -351,6 +384,17 @@
         _willChecked = NO;
         [self _checkSubtasks];
     }
+}
+
+
+- (void)taskRelease {
+    self.refCount --;
+    if (self.refCount <= 0) {
+        [self cancel];
+    }
+}
+- (void)taskRetain {
+    self.refCount ++;
 }
 
 @end

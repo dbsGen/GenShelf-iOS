@@ -52,6 +52,7 @@
 {
     if (_completeBlock) {
         _completeBlock(image);
+        _completeBlock = nil;
     }
     _completeBlock = nil;
     _block = nil;

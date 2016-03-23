@@ -15,6 +15,7 @@
 @optional
 - (void)onTaskStart:(GSTask *)task;
 - (void)onTaskComplete:(GSTask *)task;
+- (void)onTaskMoveCache:(GSTask *)task;
 - (void)onTaskFailed:(GSTask *)task error:(NSError*)error;
 - (void)onTaskCancel:(GSTask *)task;
 - (void)onTask:(GSTask *)task progress:(CGFloat)progress;
@@ -67,6 +68,7 @@ typedef GSTask*(^GSTaskCreator)();
 - (void)restart;
 - (void)cancel;
 
+- (void)cache;
 - (void)complete;
 - (void)failed:(NSError *)error;
 - (void)fatalError:(NSError *)error;
@@ -77,5 +79,8 @@ typedef GSTask*(^GSTaskCreator)();
 - (void)run;
 - (void)finalFailed:(NSError *)error;
 - (void)finalComplete;
+
+- (void)taskRelease;
+- (void)taskRetain;
 
 @end

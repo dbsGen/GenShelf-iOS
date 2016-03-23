@@ -50,6 +50,7 @@
 @implementation GSDataControl
 
 @synthesize name = _name, requestDelay = _requestDelay, taskQueue = _taskQueue;
+NSMutableArray *_progressingBooks;
 
 - (id)init {
     self = [super init];
@@ -58,7 +59,7 @@
         _operationQueue.maxConcurrentOperationCount = 3;
         _progressingBooks = [[NSMutableArray alloc] init];
         _saveFlag = NO;
-        [self loadProgressBooks];
+        [GSDataControl loadProgressBooks];
     }
     return self;
 }
@@ -150,7 +151,7 @@
     [self makeChange];
 }
 
-- (void)updateProgressingBooks {
++ (void)updateProgressingBooks {
     for (NSInteger n = 0, t = _progressingBooks.count; n < t; n++) {
         GSBookItem *book = [_progressingBooks objectAtIndex:n];
         if (book.status == GSBookItemStatusPagesComplete || !book.mark) {
@@ -161,7 +162,7 @@
     }
 }
 
-- (NSInteger)removeProgressingBook:(GSBookItem *)book {
++ (NSInteger)removeProgressingBook:(GSBookItem *)book {
     NSInteger index = [_progressingBooks indexOfObject:book];
     if (index >= 0) {
         [_progressingBooks removeObjectAtIndex:index];
@@ -169,7 +170,7 @@
     return index;
 }
 
-- (void)loadProgressBooks {
++ (void)loadProgressBooks {
     NSArray<GSModelNetBook *> *books = [GSModelNetBook fetch:[NSPredicate predicateWithFormat:@"mark == YES AND status != %d", GSBookItemStatusPagesComplete]
                                                        sorts:@[[NSSortDescriptor sortDescriptorWithKey:@"downloadDate"
                                                           ascending:NO]]];
@@ -181,10 +182,15 @@
 - (GSRequestTask *)mainRequest:(NSInteger)pageIndex {return nil;}
 - (GSRequestTask *)searchRequest:(NSString *)keyword pageIndex:(NSInteger)pageIndex {return nil;}
 
-- (NSArray *)progressingBooks {
++ (NSArray *)progressingBooks {
     return _progressingBooks;
 }
-- (GSTask *)processBook:(GSBookItem *)book {return nil;}
+- (GSTask *)processBook:(GSBookItem *)book {
+    if (!book.source) {
+        book.source = self.name;
+    }
+    return nil;
+}
 - (GSTask *)downloadBook:(GSBookItem *)book {
     if (book.status != GSBookItemStatusPagesComplete &&
         [_progressingBooks filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"pageUrl == %@", book.pageUrl]].count == 0) {
