@@ -38,6 +38,10 @@ static GSPictureManager *__defaultManager = nil;
     return _tempPath;
 }
 
+- (NSString *)cachePath {
+    return [[self folderPath] stringByAppendingPathComponent:@"caches"];
+}
+
 - (void)insertPicture:(NSData *)data book:(GSBookItem *)book page:(GSPageItem *)page {
     NSString *path = [self path:book page:page];
     NSFileManager *fileManager = [NSFileManager defaultManager];
@@ -45,6 +49,35 @@ static GSPictureManager *__defaultManager = nil;
         [fileManager removeItemAtPath:path error:nil];
     }
     [data writeToFile:path atomically:YES];
+}
+
+- (NSString *)fullPath:(NSString *)path {
+    return [[self cachePath] stringByAppendingPathComponent:path];
+}
+
+- (NSString *)insertCachePicture:(NSData *)data source:(NSString *)source keyword:(NSString *)keyword {
+    NSString *path = [self path:source keyword:keyword];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    if ([fileManager fileExistsAtPath:path]) {
+        [fileManager removeItemAtPath:path error:nil];
+    }
+    [data writeToFile:path atomically:YES];
+    return [source stringByAppendingPathComponent:keyword];
+}
+
+- (NSString *)path:(NSString *)source keyword:(NSString *)keyword {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *folder = [[self cachePath] stringByAppendingPathComponent:source];
+    if (![fileManager fileExistsAtPath:folder]) {
+        NSError *error = nil;
+        [fileManager createDirectoryAtPath:folder
+               withIntermediateDirectories:YES
+                                attributes:nil
+                                     error:&error];
+        CheckErrorR(nil);
+    }
+    NSString *path = [folder stringByAppendingPathComponent:keyword];
+    return path;
 }
 
 - (NSString *)path:(GSBookItem *)book page:(GSPageItem *)page {

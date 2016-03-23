@@ -10,6 +10,8 @@
 #import "ASIHTTPRequest.h"
 #import "MTNetCacheManager.h"
 #import "GSGlobals.h"
+#import "RegexKitLite.h"
+#import "GSPictureManager.h"
 
 @implementation GSThumCell {
     ASIHTTPRequest *_currentRequest;
@@ -38,7 +40,10 @@
         }
         _imageView.image = [UIImage imageNamed:@"no_image"];
         _imageUrl = imageUrl;
-        if (_imageUrl) {
+        if (!_imageUrl) {
+            return;
+        }
+        if ([_imageUrl isMatchedByRegex:@"https?://"]) {
             [[MTNetCacheManager defaultManager] getImageWithUrl:imageUrl
                                                           block:^(id result) {
                                                               if (result) {
@@ -49,6 +54,8 @@
                                                                   [_currentRequest startAsynchronous];
                                                               }
                                                           }];
+        }else {
+            _imageView.image = [UIImage imageWithContentsOfFile:[[GSPictureManager defaultManager] fullPath:_imageUrl]];
         }
     }
 }

@@ -14,6 +14,7 @@
 
 @interface GSSettingsViewController () <UITableViewDelegate, UITableViewDataSource> {
     GSSwitchCell *_adultCell;
+    NSUInteger _dataControlIndex;
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -30,6 +31,7 @@
                                                                                  style:UIBarButtonItemStylePlain
                                                                                 target:self.sideMenuController
                                                                                 action:@selector(openMenu)];
+        _dataControlIndex = [[GSGlobals dataControlNames] indexOfObject:[GSGlobals selectedDataControl]];
     }
     return self;
 }
@@ -61,9 +63,11 @@
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     switch (section) {
         case 0:
-            return local(Settings2);
-        case 1:
             return local(Proxy);
+        case 1:
+            return local(Source);
+        case 2:
+            return local(Source Settings);
             
         default:
             break;
@@ -72,7 +76,7 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -80,7 +84,9 @@
         case 0:
             return 1;
         case 1:
-            return 1;
+            return [GSGlobals dataControlNames].count;
+        case 2:
+            return [GSGlobals dataControl].properties.count;
         default:
             break;
     }
@@ -89,16 +95,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     switch (indexPath.section) {
-        case 0:
-            switch (indexPath.row) {
-                case 0:
-                    return _adultCell;
-                    
-                default:
-                    break;
-            }
-            break;
-        case 1: {
+        case 0: {
             static NSString *identifier = @"NormalCell";
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
             if (!cell) {
@@ -116,6 +113,53 @@
             }
             return cell;
         }
+        case 1: {
+            static NSString *identifier = @"CheckCell";
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                              reuseIdentifier:identifier];
+            }
+            NSInteger row = indexPath.row;
+            cell.textLabel.text = [[GSGlobals dataControlNames] objectAtIndex:row];
+            cell.accessoryType = _dataControlIndex == row ? UITableViewCellAccessoryCheckmark : UITableViewCellAccessoryNone;
+            return cell;
+        }
+        case 2: {
+            NSUInteger row = indexPath.row;
+            GSDataProperty *setting = [[GSGlobals dataControl].properties objectAtIndex:row];
+            switch (setting.type) {
+                case GSDataPropertyTypeBOOL: {
+                    static NSString *identifier = @"SwitchCell";
+                    GSSwitchCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+                    if (!cell) {
+                        cell = [[GSSwitchCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                   reuseIdentifier:identifier];
+                        [cell.switchItem addTarget:self
+                                            action:@selector(onSettingSwitch:)
+                                  forControlEvents:UIControlEventValueChanged];
+                    }
+                    cell.textLabel.text = NSLocalizedString(setting.name, @"");
+                    cell.switchItem.on = [[[GSGlobals dataControl] getProperty:setting.name] boolValue];
+                    cell.switchItem.tag = row;
+                    return cell;
+                }
+                    
+                    break;
+                    
+                default: {
+                    static NSString *identifier = @"UnkownCell";
+                    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+                    if (!cell) {
+                        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                      reuseIdentifier:identifier];
+                    }
+                    cell.textLabel.text = local(Unkown);
+                    return cell;
+                }
+                    break;
+            }
+        }
             
         default:
             break;
@@ -128,17 +172,24 @@
         case 0:
         {
             
-        }
-            break;
-        case 1:
-        {
-            
             switch (indexPath.row) {
                 case 0:
                     [self.navigationController pushViewController:[[GSSSSettingViewController alloc] init]
                                                          animated:YES];
                     break;
             }
+        }
+        case 1:
+        {
+            NSUInteger old = _dataControlIndex;
+            _dataControlIndex = indexPath.row;
+            [tableView reloadRowsAtIndexPaths:@[[NSIndexPath indexPathForRow:old inSection:1], [NSIndexPath indexPathForRow:_dataControlIndex inSection:1]]
+                             withRowAnimation:UITableViewRowAnimationAutomatic];
+            
+            NSString *name = [[GSGlobals dataControlNames] objectAtIndex:_dataControlIndex];
+            [GSGlobals setSelectedDataControl:name];
+            [tableView reloadSections:[NSIndexSet indexSetWithIndex:2]
+                     withRowAnimation:UITableViewRowAnimationAutomatic];
         }
             
         default:
@@ -150,6 +201,12 @@
 
 - (void)toggleAdult:(UISwitch *)sw {
     [GSGlobals setAdult:sw.on];
+}
+
+- (void)onSettingSwitch:(UISwitch *)sw {
+    GSDataProperty *setting = [[GSGlobals dataControl].properties objectAtIndex:sw.tag];
+    [[GSGlobals dataControl] setProperty:[NSNumber numberWithBool:sw.on]
+                                withName:setting.name];
 }
 
 @end

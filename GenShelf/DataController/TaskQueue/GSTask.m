@@ -30,6 +30,14 @@
     BOOL _willCheck;
 }
 
+- (id)initWithSource:(NSString *)source {
+    self = [self init];
+    if (self) {
+        _source = source;
+    }
+    return self;
+}
+
 - (id)init {
     self = [super init];
     if (self) {
@@ -83,6 +91,7 @@
         task = creator();
         task.parent = self;
         task.refCount = 0;
+        task.source = _source;
         task.identifier = identifier;
         [_tasks addObject:task];
         [self _checkQueue];
@@ -302,6 +311,7 @@
 
 - (void)addSubtask:(GSTask *)task {
     task.parent = self;
+    task.source = _source;
     [_subtasks addObject:task];
 }
 

@@ -32,6 +32,13 @@
     return self;
 }
 
+- (void)reset {
+    [super reset];
+    [_request cancel];
+    _request.delegate = nil;
+    _request = nil;
+}
+
 - (void)cancel {
     [super cancel];
     if (_request) {

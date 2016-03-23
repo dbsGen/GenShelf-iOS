@@ -25,6 +25,8 @@
 
 "Settings2"="设置";
 "Proxy"="代理";
+"Source" = "数据源";
+"Source Settings" = "数据源设置";
 
 "Download failed"="下载失败: %@";
 "Collect"="收藏";

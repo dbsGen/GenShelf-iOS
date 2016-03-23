@@ -59,6 +59,7 @@ static NSOperationQueue *__queue;
     operation.block = block;
     [operation setCompleteBlock:^(UIImage *image) {
         [self renderedImage:image];
+        _operation = nil;
     }];
     operation.size = _imageSize;
     [self.mainQueue addOperation:operation];

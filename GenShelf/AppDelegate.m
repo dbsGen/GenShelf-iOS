@@ -12,6 +12,7 @@
 #import "GCoreDataManager.h"
 #import "ASIHTTPRequest.h"
 #import "GSLofiDataControl.h"
+#import "GSEHentaiDataControl.h"
 
 @interface AppDelegate ()
 
@@ -24,6 +25,7 @@
     [ASIHTTPRequest sharedQueue].maxConcurrentOperationCount = 3;
     
     [GSGlobals registerDataControl:[[GSLofiDataControl alloc] init]];
+    [GSGlobals registerDataControl:[[GSEHentaiDataControl alloc] init]];
     [GSGlobals runShadowsocksThread];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];

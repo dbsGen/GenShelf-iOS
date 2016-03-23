@@ -53,6 +53,8 @@
     if (_completeBlock) {
         _completeBlock(image);
     }
+    _completeBlock = nil;
+    _block = nil;
 }
 
 - (void)setSize:(CGSize)size {

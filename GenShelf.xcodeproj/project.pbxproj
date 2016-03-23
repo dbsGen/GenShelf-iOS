@@ -114,6 +114,16 @@
 		B2CF6A301C85520F00DC0CCC /* GSVBookViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF6A2F1C85520F00DC0CCC /* GSVBookViewController.m */; };
 		B2CF6A341C8569E900DC0CCC /* GSPageViewerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF6A331C8569E900DC0CCC /* GSPageViewerView.m */; };
 		B2CF6A371C8576FD00DC0CCC /* GSPageFlipView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2CF6A361C8576FD00DC0CCC /* GSPageFlipView.m */; };
+		B2DAF4301CA24625004196E5 /* GSModelData+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAF42D1CA24625004196E5 /* GSModelData+CoreDataProperties.m */; };
+		B2DAF4311CA24625004196E5 /* GSModelData.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAF42F1CA24625004196E5 /* GSModelData.m */; };
+		B2DAF4411CA2532B004196E5 /* GSEHentaiBookTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAF4361CA2532B004196E5 /* GSEHentaiBookTask.m */; };
+		B2DAF4421CA2532B004196E5 /* GSEHentaiDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAF4381CA2532B004196E5 /* GSEHentaiDataControl.m */; };
+		B2DAF4431CA2532B004196E5 /* GSEHentaiDefines.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAF43A1CA2532B004196E5 /* GSEHentaiDefines.m */; };
+		B2DAF4441CA2532B004196E5 /* GSEHentaiDownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAF43C1CA2532B004196E5 /* GSEHentaiDownloadTask.m */; };
+		B2DAF4451CA2532B004196E5 /* GSEHentaiHomeTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAF43E1CA2532B004196E5 /* GSEHentaiHomeTask.m */; };
+		B2DAF4461CA2532B004196E5 /* GSEHentaiSearchTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAF4401CA2532B004196E5 /* GSEHentaiSearchTask.m */; };
+		B2DAF44A1CA271DB004196E5 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DAF4491CA271DB004196E5 /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B2DAF44C1CA27B62004196E5 /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2DAF44B1CA27B62004196E5 /* libicucore.tbd */; };
 		B2DC6DCD1C97FFFA00F4C9CA /* GSScannerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DC6DCC1C97FFFA00F4C9CA /* GSScannerViewController.m */; };
 		B2DC6FB91C98011700F4C9CA /* ZXAztecDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DC6DD31C98011600F4C9CA /* ZXAztecDecoder.m */; };
 		B2DC6FBA1C98011700F4C9CA /* ZXAztecDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = B2DC6DD61C98011600F4C9CA /* ZXAztecDetector.m */; };
@@ -582,6 +592,26 @@
 		B2CF6A331C8569E900DC0CCC /* GSPageViewerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPageViewerView.m; sourceTree = "<group>"; };
 		B2CF6A351C8576FD00DC0CCC /* GSPageFlipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPageFlipView.h; sourceTree = "<group>"; };
 		B2CF6A361C8576FD00DC0CCC /* GSPageFlipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPageFlipView.m; sourceTree = "<group>"; };
+		B2DAF42C1CA24625004196E5 /* GSModelData+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSModelData+CoreDataProperties.h"; sourceTree = "<group>"; };
+		B2DAF42D1CA24625004196E5 /* GSModelData+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GSModelData+CoreDataProperties.m"; sourceTree = "<group>"; };
+		B2DAF42E1CA24625004196E5 /* GSModelData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSModelData.h; sourceTree = "<group>"; };
+		B2DAF42F1CA24625004196E5 /* GSModelData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSModelData.m; sourceTree = "<group>"; };
+		B2DAF4351CA2532B004196E5 /* GSEHentaiBookTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEHentaiBookTask.h; sourceTree = "<group>"; };
+		B2DAF4361CA2532B004196E5 /* GSEHentaiBookTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSEHentaiBookTask.m; sourceTree = "<group>"; };
+		B2DAF4371CA2532B004196E5 /* GSEHentaiDataControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEHentaiDataControl.h; sourceTree = "<group>"; };
+		B2DAF4381CA2532B004196E5 /* GSEHentaiDataControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSEHentaiDataControl.m; sourceTree = "<group>"; };
+		B2DAF4391CA2532B004196E5 /* GSEHentaiDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEHentaiDefines.h; sourceTree = "<group>"; };
+		B2DAF43A1CA2532B004196E5 /* GSEHentaiDefines.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSEHentaiDefines.m; sourceTree = "<group>"; };
+		B2DAF43B1CA2532B004196E5 /* GSEHentaiDownloadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEHentaiDownloadTask.h; sourceTree = "<group>"; };
+		B2DAF43C1CA2532B004196E5 /* GSEHentaiDownloadTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSEHentaiDownloadTask.m; sourceTree = "<group>"; };
+		B2DAF43D1CA2532B004196E5 /* GSEHentaiHomeTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEHentaiHomeTask.h; sourceTree = "<group>"; };
+		B2DAF43E1CA2532B004196E5 /* GSEHentaiHomeTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSEHentaiHomeTask.m; sourceTree = "<group>"; };
+		B2DAF43F1CA2532B004196E5 /* GSEHentaiSearchTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSEHentaiSearchTask.h; sourceTree = "<group>"; };
+		B2DAF4401CA2532B004196E5 /* GSEHentaiSearchTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSEHentaiSearchTask.m; sourceTree = "<group>"; };
+		B2DAF4481CA271DB004196E5 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		B2DAF4491CA271DB004196E5 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		B2DAF44B1CA27B62004196E5 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		B2DAF44D1CA280BD004196E5 /* GenShelf 3.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "GenShelf 3.xcdatamodel"; sourceTree = "<group>"; };
 		B2DC6DCB1C97FFFA00F4C9CA /* GSScannerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSScannerViewController.h; sourceTree = "<group>"; };
 		B2DC6DCC1C97FFFA00F4C9CA /* GSScannerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSScannerViewController.m; sourceTree = "<group>"; };
 		B2DC6DD21C98011600F4C9CA /* ZXAztecDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZXAztecDecoder.h; sourceTree = "<group>"; };
@@ -1111,6 +1141,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2DAF44C1CA27B62004196E5 /* libicucore.tbd in Frameworks */,
 				B2AD57831C7D4D2400280667 /* libsodium.a in Frameworks */,
 				B268ECC21C7764A7001DD15F /* libxml2.tbd in Frameworks */,
 				B20A34871C747306000CCFA3 /* libshadowsocks.a in Frameworks */,
@@ -1158,6 +1189,7 @@
 		B20A34161C745F1B000CCFA3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2DAF44B1CA27B62004196E5 /* libicucore.tbd */,
 				B268ECC11C7764A7001DD15F /* libxml2.tbd */,
 				B20A34741C746D24000CCFA3 /* libz.1.2.5.tbd */,
 				B20A34171C745F2F000CCFA3 /* libsodium.a */,
@@ -1250,6 +1282,10 @@
 				B23366BA1C7EEDE8003EA467 /* GSModelNetPage.m */,
 				B23366C51C7EEF45003EA467 /* GSModelHomeData+CoreDataProperties.h */,
 				B23366C61C7EEF45003EA467 /* GSModelHomeData+CoreDataProperties.m */,
+				B2DAF42C1CA24625004196E5 /* GSModelData+CoreDataProperties.h */,
+				B2DAF42D1CA24625004196E5 /* GSModelData+CoreDataProperties.m */,
+				B2DAF42E1CA24625004196E5 /* GSModelData.h */,
+				B2DAF42F1CA24625004196E5 /* GSModelData.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1518,6 +1554,34 @@
 				B2BDCBCA1C7719C000DC3031 /* menu.png */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		B2DAF4251CA23A90004196E5 /* EHentai */ = {
+			isa = PBXGroup;
+			children = (
+				B2DAF4351CA2532B004196E5 /* GSEHentaiBookTask.h */,
+				B2DAF4361CA2532B004196E5 /* GSEHentaiBookTask.m */,
+				B2DAF4371CA2532B004196E5 /* GSEHentaiDataControl.h */,
+				B2DAF4381CA2532B004196E5 /* GSEHentaiDataControl.m */,
+				B2DAF4391CA2532B004196E5 /* GSEHentaiDefines.h */,
+				B2DAF43A1CA2532B004196E5 /* GSEHentaiDefines.m */,
+				B2DAF43B1CA2532B004196E5 /* GSEHentaiDownloadTask.h */,
+				B2DAF43C1CA2532B004196E5 /* GSEHentaiDownloadTask.m */,
+				B2DAF43D1CA2532B004196E5 /* GSEHentaiHomeTask.h */,
+				B2DAF43E1CA2532B004196E5 /* GSEHentaiHomeTask.m */,
+				B2DAF43F1CA2532B004196E5 /* GSEHentaiSearchTask.h */,
+				B2DAF4401CA2532B004196E5 /* GSEHentaiSearchTask.m */,
+			);
+			path = EHentai;
+			sourceTree = "<group>";
+		};
+		B2DAF4471CA271DB004196E5 /* RegexKitLite */ = {
+			isa = PBXGroup;
+			children = (
+				B2DAF4481CA271DB004196E5 /* RegexKitLite.h */,
+				B2DAF4491CA271DB004196E5 /* RegexKitLite.m */,
+			);
+			path = RegexKitLite;
 			sourceTree = "<group>";
 		};
 		B2DC6DCF1C98011600F4C9CA /* ZXingObjC */ = {
@@ -2270,6 +2334,7 @@
 		B2F02F191C75BE0D00D93119 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B2DAF4471CA271DB004196E5 /* RegexKitLite */,
 				B21AD0E81CA150D8004419F6 /* VersionControl */,
 				B2EB03D51C984A6600B95446 /* Alert */,
 				B2EB03C61C983F2100B95446 /* RKDropdownAlert */,
@@ -2353,6 +2418,7 @@
 		B2F44C1F1C78A1C600639756 /* DataController */ = {
 			isa = PBXGroup;
 			children = (
+				B2DAF4251CA23A90004196E5 /* EHentai */,
 				B2ABBA2B1C8019B900C02B7D /* Lofi */,
 				B296F6E21C7F26D30031AA62 /* TaskQueue */,
 				B2F44C2D1C78BD5C00639756 /* GSBookItem.h */,
@@ -2623,10 +2689,12 @@
 				B2DC702A1C98011700F4C9CA /* ZXAI013103decoder.m in Sources */,
 				B2DC6FE81C98011700F4C9CA /* ZXWifiResultParser.m in Sources */,
 				B2DC706B1C98011700F4C9CA /* ZXPDF417DetectionResultRowIndicatorColumn.m in Sources */,
+				B2DAF44A1CA271DB004196E5 /* RegexKitLite.m in Sources */,
 				B2DC701F1C98011700F4C9CA /* ZXDataMatrixTextEncoder.m in Sources */,
 				B268ECBB1C7763BA001DD15F /* ASIHTTPRequest.m in Sources */,
 				B268EC961C7742E5001DD15F /* GSHomeViewController.m in Sources */,
 				B268ECBE1C7763BA001DD15F /* Reachability.m in Sources */,
+				B2DAF4451CA2532B004196E5 /* GSEHentaiHomeTask.m in Sources */,
 				B2DC707E1C98011700F4C9CA /* ZXQRCodeDecoderMetaData.m in Sources */,
 				B2DC702C1C98011700F4C9CA /* ZXAI01392xDecoder.m in Sources */,
 				B2DC70221C98011700F4C9CA /* ZXDataMatrixWriter.m in Sources */,
@@ -2661,6 +2729,7 @@
 				B2DC6FD21C98011700F4C9CA /* ZXGeoResultParser.m in Sources */,
 				B268EC991C7742FE001DD15F /* GSSearchViewController.m in Sources */,
 				B2DC70001C98011700F4C9CA /* ZXPerspectiveTransform.m in Sources */,
+				B2DAF4431CA2532B004196E5 /* GSEHentaiDefines.m in Sources */,
 				B2DC70921C98011700F4C9CA /* ZXQRCodeWriter.m in Sources */,
 				B23366C21C7EEDE8003EA467 /* GSModelHomeData.m in Sources */,
 				B26936F71C844D2100D2D35E /* MTBlockOperation.m in Sources */,
@@ -2682,6 +2751,7 @@
 				B2DC700C1C98011700F4C9CA /* ZXResult.m in Sources */,
 				B2DC70081C98011700F4C9CA /* ZXErrors.m in Sources */,
 				B2DC6FBB1C98011700F4C9CA /* ZXAztecBinaryShiftToken.m in Sources */,
+				B2DAF4411CA2532B004196E5 /* GSEHentaiBookTask.m in Sources */,
 				B2DC700E1C98011700F4C9CA /* ZXRGBLuminanceSource.m in Sources */,
 				B268ECB81C7763BA001DD15F /* ASIDataDecompressor.m in Sources */,
 				B2CE81311C74B6DA00980186 /* GSSelectCell.m in Sources */,
@@ -2759,6 +2829,7 @@
 				B22305CF1C783632001B18F5 /* SRRefreshView.m in Sources */,
 				B2BF4E6E1C97D53500647F83 /* GSLofiSearchTask.m in Sources */,
 				B2DC70171C98011700F4C9CA /* ZXDataMatrixC40Encoder.m in Sources */,
+				B2DAF4311CA24625004196E5 /* GSModelData.m in Sources */,
 				B2DC70621C98011700F4C9CA /* ZXPDF417ECErrorCorrection.m in Sources */,
 				B2DC703C1C98011700F4C9CA /* ZXBitArrayBuilder.m in Sources */,
 				B2DC6FFF1C98011700F4C9CA /* ZXIntArray.m in Sources */,
@@ -2767,6 +2838,7 @@
 				B2DC701C1C98011700F4C9CA /* ZXDataMatrixHighLevelEncoder.m in Sources */,
 				B2DC70261C98011700F4C9CA /* ZXMaxiCodeReader.m in Sources */,
 				B2DC70011C98011700F4C9CA /* ZXStringUtils.m in Sources */,
+				B2DAF4421CA2532B004196E5 /* GSEHentaiDataControl.m in Sources */,
 				B2DC70381C98011700F4C9CA /* ZXRSSExpandedDecodedNumeric.m in Sources */,
 				B2DC70511C98011700F4C9CA /* ZXEANManufacturerOrgSupport.m in Sources */,
 				B2DC70451C98011700F4C9CA /* ZXRSSUtils.m in Sources */,
@@ -2834,6 +2906,7 @@
 				B2DC6FD31C98011700F4C9CA /* ZXISBNParsedResult.m in Sources */,
 				B2DC704D1C98011700F4C9CA /* ZXEAN13Reader.m in Sources */,
 				B2DC705F1C98011700F4C9CA /* ZXUPCEReader.m in Sources */,
+				B2DAF4441CA2532B004196E5 /* GSEHentaiDownloadTask.m in Sources */,
 				B2F44C431C7CA2C300639756 /* GSPreviewViewController.m in Sources */,
 				B2DC703E1C98011700F4C9CA /* ZXRSSExpandedReader.m in Sources */,
 				B2DC70291C98011700F4C9CA /* ZXAbstractExpandedDecoder.m in Sources */,
@@ -2851,6 +2924,7 @@
 				B2DC702D1C98011700F4C9CA /* ZXAI01393xDecoder.m in Sources */,
 				B2DC708A1C98011700F4C9CA /* ZXQRCodeBlockPair.m in Sources */,
 				B2DC70731C98011700F4C9CA /* ZXPDF417ErrorCorrection.m in Sources */,
+				B2DAF4301CA24625004196E5 /* GSModelData+CoreDataProperties.m in Sources */,
 				B268ECB71C7763BA001DD15F /* ASIDataCompressor.m in Sources */,
 				B2DC706D1C98011700F4C9CA /* ZXPDF417Detector.m in Sources */,
 				B2DC6FCD1C98011700F4C9CA /* ZXEmailAddressResultParser.m in Sources */,
@@ -2871,6 +2945,7 @@
 				B2DC70571C98011700F4C9CA /* ZXOneDReader.m in Sources */,
 				B2DC707A1C98011700F4C9CA /* ZXQRCodeDataBlock.m in Sources */,
 				B2DC70701C98011700F4C9CA /* ZXPDF417BarcodeMatrix.m in Sources */,
+				B2DAF4461CA2532B004196E5 /* GSEHentaiSearchTask.m in Sources */,
 				B2DC70391C98011700F4C9CA /* ZXRSSExpandedDecodedObject.m in Sources */,
 				B2DC6FEF1C98011700F4C9CA /* ZXGenericGF.m in Sources */,
 				B2DC6FE01C98011700F4C9CA /* ZXURIParsedResult.m in Sources */,
@@ -3230,10 +3305,11 @@
 		B24CD93F1CA154D100E3FFD9 /* GenShelf.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B2DAF44D1CA280BD004196E5 /* GenShelf 3.xcdatamodel */,
 				B24CD9421CA154E000E3FFD9 /* GenShelf 2.xcdatamodel */,
 				B24CD9401CA154D100E3FFD9 /* GenShelf.xcdatamodel */,
 			);
-			currentVersion = B24CD9421CA154E000E3FFD9 /* GenShelf 2.xcdatamodel */;
+			currentVersion = B2DAF44D1CA280BD004196E5 /* GenShelf 3.xcdatamodel */;
 			path = GenShelf.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

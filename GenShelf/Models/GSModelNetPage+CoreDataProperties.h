@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *status;
 @property (nullable, nonatomic, retain) NSString *thumUrl;
 @property (nullable, nonatomic, retain) GSModelNetBook *book;
+@property (nullable, nonatomic, retain) NSString *custmorData;
 
 @end
 

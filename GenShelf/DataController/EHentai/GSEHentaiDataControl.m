@@ -6,22 +6,22 @@
 //  Copyright © 2016年 AirRaidClub. All rights reserved.
 //
 
-#import "GSLofiDataControl.h"
+#import "GSEHentaiDataControl.h"
 #import "GDataXMLNode.h"
 #import "GSGlobals.h"
 #import "NSObject+GTools.h"
 #import "GSDataDefines.h"
-#import "GSLofiBookTask.h"
-#import "GSLofiDownloadTask.h"
-#import "GSLofiHomeTask.h"
-#import "GSLofiSearchTask.h"
+#import "GSEHentaiBookTask.h"
+#import "GSEHentaiDownloadTask.h"
+#import "GSEHentaiHomeTask.h"
+#import "GSEHentaiSearchTask.h"
 
-@implementation GSLofiDataControl
+@implementation GSEHentaiDataControl
 
 - (id)init {
     self = [super init];
     if (self) {
-        _name = @"Lofi";
+        _name = @"EHentai";
         _requestDelay = 2;
         _pageTaskQueue = [[GSTaskQueue alloc] init];
     }
@@ -29,17 +29,17 @@
 }
 
 - (GSRequestTask *)mainRequest:(NSInteger)pageIndex  {
-    GSLofiHomeTask *task = [self.taskQueue createTask:HomeRequestIdentifier
+    GSEHentaiHomeTask *task = [self.taskQueue createTask:HomeRequestIdentifier
                                               creator:^GSTask *{
-                                                  return [[GSLofiHomeTask alloc] initWithIndex:pageIndex queue:self.operationQueue];
+                                                  return [[GSEHentaiHomeTask alloc] initWithIndex:pageIndex queue:self.operationQueue];
                                               }];
     return task;
 }
 
 - (GSRequestTask *)searchRequest:(NSString *)keyword pageIndex:(NSInteger)pageIndex {
-    GSLofiSearchTask *task = [self.taskQueue createTask:SearchRequestIdentifier
+    GSEHentaiSearchTask *task = [self.taskQueue createTask:SearchRequestIdentifier
                                                 creator:^GSTask *{
-                                                    return [[GSLofiSearchTask alloc] initWithKey:keyword
+                                                    return [[GSEHentaiSearchTask alloc] initWithKey:keyword
                                                                                            index:pageIndex
                                                                                            queue:self.operationQueue];
                                                 }];
@@ -48,9 +48,9 @@
 
 - (GSTask *)processBook:(GSBookItem *)book {
     if (book.status < GSBookItemStatusComplete) {
-        GSLofiBookTask *task = [self.taskQueue createTask:BookProcessIdentifier(book)
+        GSEHentaiBookTask *task = [self.taskQueue createTask:BookProcessIdentifier(book)
                                                   creator:^GSTask *{
-                                                      return [[GSLofiBookTask alloc] initWithItem:book
+                                                      return [[GSEHentaiBookTask alloc] initWithItem:book
                                                                                             queue:self.operationQueue];
                                                   }];
         return task;
@@ -73,9 +73,9 @@
             }
             [self.taskQueue retainTask:processTask];
         }
-        GSLofiDownloadTask *task = [self.taskQueue createTask:identifier
+        GSEHentaiDownloadTask *task = [self.taskQueue createTask:identifier
                                                       creator:^GSTask *{
-                                                          GSLofiDownloadTask *task = [[GSLofiDownloadTask alloc] initWithItem:book
+                                                          GSEHentaiDownloadTask *task = [[GSEHentaiDownloadTask alloc] initWithItem:book
                                                                                              queue:self.operationQueue];
                                                           task.downloadQueue = _pageTaskQueue;
                                                           return task;
@@ -100,8 +100,9 @@
 #undef URL_HOST
 
 - (void)makeProperties {
-    [self insertProperty:[GSDataProperty boolPropertyWithName:kGSLofiAdultKey
-                                                 defaultValue:NO]];
+    [self insertProperty:[GSDataProperty propertyWithName:kGSEHentaiAdultKey
+                                             defaultValue:[NSNumber numberWithBool:NO]
+                                                     type:GSDataPropertyTypeBOOL]];
 }
 
 @end

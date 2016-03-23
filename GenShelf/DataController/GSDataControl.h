@@ -16,18 +16,50 @@
 typedef ASIHTTPRequest *(^GSRequestBlock)(NSURL *url);
 typedef void *(^GSRequestUpdateBlock)(NSUInteger count);
 
+typedef enum : NSUInteger {
+    GSDataPropertyTypeBOOL,
+    GSDataPropertyTypeString,
+    GSDataPropertyTypeSwitch,
+} GSDataPropertyType;
+
+@interface GSDataProperty : NSObject
+
+@property (nonatomic, readonly) NSString *name;
+@property (nonatomic, readonly) id defaultValue;
+@property (nonatomic, readonly) GSDataPropertyType type;
+@property (nonatomic, strong) id custmorData;
+
++ (instancetype)propertyWithName:(NSString *)name defaultValue:(id)value type:(GSDataPropertyType)type;
++ (instancetype)propertyWithName:(NSString *)name defaultValue:(id)value type:(GSDataPropertyType)type data:(id)data;
+
++ (instancetype)boolPropertyWithName:(NSString *)name defaultValue:(BOOL)value;
+
+@end
+
 @interface GSDataControl : NSObject {
     @protected
     NSString *_name;
     CGFloat _requestDelay;
     NSMutableArray *_progressingBooks;
+    @private
+    BOOL _saveFlag;
+    NSMutableArray<GSDataProperty*> *_properties;
+    NSMutableDictionary<NSString *, GSDataProperty*> *_propertiesIndex;
+    NSMutableDictionary *_propertiesValues;
 }
 
+@property (nonatomic, readonly) NSArray<GSDataProperty*> *properties;
 @property (nonatomic, readonly) NSString *name;
 @property (nonatomic, readonly) NSOperationQueue *operationQueue;
 @property (nonatomic, readonly) GSTaskQueue *taskQueue;
 @property (nonatomic, readonly) NSArray *progressingBooks;
 @property (nonatomic, assign) CGFloat   requestDelay;
+
+- (void)insertProperty:(GSDataProperty *)property;
+- (id)getProperty:(NSString*)name;
+- (void)setProperty:(id)value withName:(NSString *)name;
+// Need override
+- (void)makeProperties;
 
 - (void)updateProgressingBooks;
 - (NSInteger)removeProgressingBook:(GSBookItem *)book;

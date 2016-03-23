@@ -25,6 +25,8 @@
 
 "Settings2"="Settings";
 "Proxy"="Proxy";
+"Source" = "Source";
+"Source Settings" = "Source Settings";
 
 
 "Download failed"="Download failed: %@";

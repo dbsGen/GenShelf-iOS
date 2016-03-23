@@ -28,6 +28,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, assign) NSUInteger index;
 @property (nonatomic, strong) NSString *pageUrl;
 @property (nonatomic, strong) NSString *thumUrl;
+@property (nonatomic, strong) NSString *custmorData;
 @property (nonatomic, strong) NSString *imageUrl;
 
 - (NSString *)imagePath;

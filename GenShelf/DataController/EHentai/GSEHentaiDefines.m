@@ -6,14 +6,14 @@
 //  Copyright © 2016年 AirRaidClub. All rights reserved.
 //
 
-#include "GSLofiDefines.h"
-#include "GSLofiDataControl.h"
+#include "GSEHentaiDefines.h"
+#include "GSEHentaiDataControl.h"
 
-NSString *filterString(BOOL adult)
+NSString *EHentaiFilterString(BOOL adult)
 {
     NSString *ret = FILTER_STR;
     if (adult) {
-        ret = [ret stringByReplacingOccurrencesOfString:@"{{adult}}" withString:[[[GSGlobals getDataControl:@"Lofi"] getProperty:kGSLofiAdultKey] boolValue] ? @"1":@"0"];
+        ret = [ret stringByReplacingOccurrencesOfString:@"{{adult}}" withString:[[[GSGlobals getDataControl:@"EHentai"] getProperty:kGSEHentaiAdultKey] boolValue] ? @"1":@"0"];
     }else {
         ret = [ret stringByReplacingOccurrencesOfString:@"{{adult}}" withString:@"0"];
     }

@@ -10,9 +10,9 @@
 #import "GSDataControl.h"
 #import "GSTask.h"
 
-#define kGSLofiAdultKey @"Adult"
+#define kGSEHentaiAdultKey @"Adult"
 
-@interface GSLofiDataControl : GSDataControl
+@interface GSEHentaiDataControl : GSDataControl
 
 @property (nonatomic, readonly) GSTaskQueue *pageTaskQueue;
 

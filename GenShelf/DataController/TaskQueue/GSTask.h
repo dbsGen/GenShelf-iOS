@@ -26,6 +26,9 @@ typedef GSTask*(^GSTaskCreator)();
 @interface GSTaskQueue : NSObject
 
 @property (nonatomic, readonly) NSArray<GSTask *> *tasks;
+@property (nonatomic, strong) NSString *source;
+
+- (instancetype)initWithSource:(NSString *)source;
 
 - (GSTask *)task:(NSString *)identifier;
 - (id)createTask:(NSString *)identifier creator:(GSTaskCreator)creator;
@@ -46,6 +49,7 @@ typedef GSTask*(^GSTaskCreator)();
     __weak id _parent;
 }
 
+@property (nonatomic, strong) NSString *source;
 @property (nonatomic, readonly) NSArray<GSTask *> *subtasks;
 @property (nonatomic, assign) BOOL running;
 @property (nonatomic, readonly) BOOL isCancel;

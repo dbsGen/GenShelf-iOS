@@ -30,6 +30,21 @@
     return self;
 }
 
+
+- (void)reset {
+    [super reset];
+    [_request cancel];
+    _request.delegate = nil;
+    _request = nil;
+}
+
+- (void)cancel {
+    [super cancel];
+    [_request cancel];
+    _request.delegate = nil;
+    _request = nil;
+}
+
 - (void)run {
     _request = [GSGlobals requestForURL:[NSURL URLWithString:[[URL_HOST stringByAppendingString:filterString(NO)] stringByAppendingString:[NSString stringWithFormat:@"&page=%d", (int)_index]]]];
     _request.delegate = self;

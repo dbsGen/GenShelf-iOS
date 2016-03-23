@@ -31,3 +31,12 @@ NSString *MD5StringFrom(const void* bytes, unsigned long size)
     outStr[32] = 0;
     return [NSString stringWithUTF8String:outStr];
 }
+
+@implementation NSString (MTMd5)
+
+- (NSString *)MD5String {
+    const char *chs = self.UTF8String;
+    return MD5StringFrom(chs, strlen(chs));
+}
+
+@end
