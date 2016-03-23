@@ -40,7 +40,6 @@ typedef enum : NSUInteger {
     @protected
     NSString *_name;
     CGFloat _requestDelay;
-    NSMutableArray *_progressingBooks;
     @private
     BOOL _saveFlag;
     NSMutableArray<GSDataProperty*> *_properties;

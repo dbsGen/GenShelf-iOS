@@ -72,6 +72,7 @@
                                                                                error:&error];
         CheckErrorC
         item.imageUrl = [sImageNode attributeForName:@"src"].stringValue;
+        item.source = self.source;
         
         GDataXMLElement *titleNode = (GDataXMLElement*)[node firstNodeForXPath:@"node()//table[@class='it']//a[@class='b']"
                                                                          error:&error];

@@ -186,6 +186,12 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
     }
 }
 
+- (void)dealloc {
+    if (_request) {
+        _request.delegate = nil;
+    }
+}
+
 - (void)processImage:(UIImage *)image {
     MTBlockOperation *operation = [[MTBlockOperation alloc] init];
     operation.size = _rect.size;
@@ -224,6 +230,7 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
 @interface GSEHentaiProcessPagesTask : GSTask
 
 @property (nonatomic, readonly) NSArray<GSPageItem*> *pages;
+@property (nonatomic, strong) NSString* nextUrl;
 
 - (instancetype)initWithQueue:(NSOperationQueue *)queue;
 
@@ -440,34 +447,26 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
             NSLog(@"Image url is %@ , %@", imageUrl, NSStringFromCGRect(offsetRect));
         
     }
-    [self addSubtask:task];
     
     
-    GDataXMLElement *last = (GDataXMLElement*)[doc firstNodeForXPath:@"//table[@class='ptb']/tbody/tr/td[last()]"
+    GDataXMLElement *last = (GDataXMLElement*)[doc firstNodeForXPath:@"//table[@class='ptb']//td[last()]"
                                                                error:&error];
     BOOL hasMore = YES;
     GDataXMLNode *attNode = [last attributeForName:@"class"];
-    if (pages.count && attNode) {
+    if (pages.count && last) {
         hasMore = !(attNode && [[(GDataXMLElement *)attNode stringValue] isEqualToString:@"ptdd"]);
     }else hasMore = NO;
     
+    [self addSubtask:task];
     if (hasMore) {
         GDataXMLElement *aNode = (GDataXMLElement*)[last firstNodeForXPath:@"a"
                                                                  error:&error];
         CheckError
         NSString *href = [aNode attributeForName:@"href"].stringValue;
+        task.nextUrl = href;
         _item.otherData = href;
-        GSEHentaiBookSubtask *subtask = [[GSEHentaiBookSubtask alloc] initWithUrl:[NSURL URLWithString:href]
-                                                                            queue:_queue];
-        subtask.parentDelegate = self;
-        [self addSubtask:subtask];
         return;
-        
     }
-    
-    _item.otherData = nil;
-    
-    [_item complete];
 }
 
 - (void)cancel {
@@ -481,11 +480,21 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
 }
 
 - (void)onTaskComplete:(GSTask *)task {
-    [super onTaskComplete:task];
     if ([task isKindOfClass:[GSEHentaiProcessPagesTask class]]) {
         GSEHentaiProcessPagesTask *pagesTask = (GSEHentaiProcessPagesTask *)task;
         [_item loadPages:pagesTask.pages];
+        if (!pagesTask.nextUrl) {
+            _item.otherData = nil;
+            [_item complete];
+        }else {
+            _item.otherData = pagesTask.nextUrl;
+            GSEHentaiBookSubtask *subtask = [[GSEHentaiBookSubtask alloc] initWithUrl:[NSURL URLWithString:pagesTask.nextUrl]
+                                                                                queue:_queue];
+            subtask.parentDelegate = self;
+            [self addSubtask:subtask];
+        }
     }
+    [super onTaskComplete:task];
 }
 
 @end

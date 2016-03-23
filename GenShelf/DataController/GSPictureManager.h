@@ -24,4 +24,6 @@
 - (void)deleteBook:(GSBookItem *)book;
 - (void)deletePage:(GSPageItem *)page;
 
+- (void)update1_2;
+
 @end

@@ -13,6 +13,8 @@
 #import "ASIHTTPRequest.h"
 #import "GSLofiDataControl.h"
 #import "GSEHentaiDataControl.h"
+#import "GVersionControl.h"
+#import "GSPictureManager.h"
 
 @interface AppDelegate ()
 
@@ -21,6 +23,7 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self checkVersion];
     
     [ASIHTTPRequest sharedQueue].maxConcurrentOperationCount = 3;
     
@@ -32,6 +35,7 @@
     GSHomeController *menu = [[GSHomeController alloc] init];
     self.window.rootViewController = menu;
     [self.window makeKeyAndVisible];
+    
     
     return YES;
 }
@@ -59,6 +63,16 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
     [[GCoreDataManager shareManager] save];
+}
+
+- (void)checkVersion {
+    GVersionControl *ver = [GVersionControl instance];
+    [ver addVersion:[GVersion version:@"1.2"]
+              block:^BOOL(NSString *versionPrev, NSString *versionAfter) {
+                  [[GSPictureManager defaultManager] update1_2];
+                  return YES;
+              }];
+    [ver update];
 }
 
 @end

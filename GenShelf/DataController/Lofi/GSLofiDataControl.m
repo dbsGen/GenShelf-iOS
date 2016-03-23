@@ -23,7 +23,7 @@
     if (self) {
         _name = @"Lofi";
         _requestDelay = 2;
-        _pageTaskQueue = [[GSTaskQueue alloc] init];
+        _pageTaskQueue = [[GSTaskQueue alloc] initWithSource:_name];
     }
     return self;
 }
@@ -85,18 +85,6 @@
         [book download];
         return task;
     }
-}
-
-- (void)pauseBook:(GSBookItem *)book {
-    GSTask *task = [self.taskQueue task:BookDownloadIdentifier(book)];
-    if (task) {
-        [task cancel];
-    }
-    task = [self.taskQueue task:BookProcessIdentifier(book)];
-    if (task) {
-        [task cancel];
-    }
-    [book cancel];
 }
 
 #undef URL_HOST

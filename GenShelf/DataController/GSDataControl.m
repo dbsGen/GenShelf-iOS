@@ -50,16 +50,17 @@
 @implementation GSDataControl
 
 @synthesize name = _name, requestDelay = _requestDelay, taskQueue = _taskQueue;
-NSMutableArray *_progressingBooks;
+static NSMutableArray *_progressingBooks;
 
 - (id)init {
     self = [super init];
     if (self) {
         _operationQueue = [[NSOperationQueue alloc] init];
         _operationQueue.maxConcurrentOperationCount = 3;
-        _progressingBooks = [[NSMutableArray alloc] init];
         _saveFlag = NO;
-        [GSDataControl loadProgressBooks];
+        if (!_progressingBooks) {
+            [GSDataControl loadProgressBooks];
+        }
     }
     return self;
 }
@@ -79,6 +80,7 @@ NSMutableArray *_progressingBooks;
         if (_propertiesValues) {
             [GSModelData setValue:[NSKeyedArchiver archivedDataWithRootObject:_propertiesValues]
                            forKey:kSaveKey];
+            [[GCoreDataManager shareManager] save];
         }
     }
 }
@@ -171,6 +173,10 @@ NSMutableArray *_progressingBooks;
 }
 
 + (void)loadProgressBooks {
+    if (!_progressingBooks) {
+        _progressingBooks = [[NSMutableArray alloc] init];
+    }
+    [_progressingBooks removeAllObjects];
     NSArray<GSModelNetBook *> *books = [GSModelNetBook fetch:[NSPredicate predicateWithFormat:@"mark == YES AND status != %d", GSBookItemStatusPagesComplete]
                                                        sorts:@[[NSSortDescriptor sortDescriptorWithKey:@"downloadDate"
                                                           ascending:NO]]];
@@ -194,21 +200,33 @@ NSMutableArray *_progressingBooks;
 - (GSTask *)downloadBook:(GSBookItem *)book {
     if (book.status != GSBookItemStatusPagesComplete &&
         [_progressingBooks filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"pageUrl == %@", book.pageUrl]].count == 0) {
+        
         [_progressingBooks addObject:book];
     }
     return nil;
 }
 
-- (void)pauseBook:(GSBookItem *)book {}
+- (void)pauseBook:(GSBookItem *)book {
+    GSTask *task = [self.taskQueue task:BookDownloadIdentifier(book)];
+    if (task) {
+        [task cancel];
+    }
+    task = [self.taskQueue task:BookProcessIdentifier(book)];
+    if (task) {
+        [task cancel];
+    }
+    [book cancel];
+}
 
 - (NSInteger)deleteBook:(GSBookItem *)book {
-    [[GSPictureManager defaultManager] deleteBook:book];
     if ([_progressingBooks containsObject:book]) {
         NSInteger index = [_progressingBooks indexOfObject:book];
         [self pauseBook:book];
+        [[GSPictureManager defaultManager] deleteBook:book];
         [_progressingBooks removeObject:book];
         return index;
     }
+    [[GSPictureManager defaultManager] deleteBook:book];
     return -1;
 }
 

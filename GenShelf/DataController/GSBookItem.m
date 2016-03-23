@@ -265,6 +265,7 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
 
 - (void)remove {
     _mark = NO;
+    [_page_items removeAllObjects];
     [self setStatus:GSBookItemStatusNotStart loading:NO];
     [self updateData];
     [[GCoreDataManager shareManager] save];

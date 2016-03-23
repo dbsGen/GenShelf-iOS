@@ -104,7 +104,8 @@ static GSPictureManager *__defaultManager = nil;
 }
 
 - (NSString *)folderName:(GSBookItem *)book {
-    const char *chs = book.title.UTF8String;
+    NSString *string = [NSString stringWithFormat:@"%@_%@", book.source, book.title];
+    const char *chs = string.UTF8String;
     long len = strlen(chs);
     char *n_chs = malloc(sizeof(char)*(len+1));
     int count = 0;
@@ -152,6 +153,32 @@ static GSPictureManager *__defaultManager = nil;
                             error:&error];
     }
     [page reset];
+}
+
+- (void)update1_2 {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSString *folder = [self folderPath];
+    NSDirectoryEnumerator<NSString *> *en = [manager enumeratorAtPath:folder];
+    for (NSString *subPath in en) {
+        NSString *lastPathComponent = [subPath lastPathComponent];
+        if (![lastPathComponent isEqualToString:@"caches"] && ![lastPathComponent hasPrefix:@"Lofi_"]) {
+            NSString *newPathComponent = [NSString stringWithFormat:@"Lofi_%@", lastPathComponent];
+            newPathComponent = [newPathComponent substringToIndex:MIN(127, newPathComponent.length)];
+            newPathComponent = [folder stringByAppendingPathComponent:newPathComponent];
+            
+            NSError *error;
+            if ([manager fileExistsAtPath:newPathComponent]) {
+                [manager removeItemAtPath:newPathComponent
+                                    error:&error];
+                CheckErrorC
+            }
+            
+            [manager moveItemAtPath:[folder stringByAppendingPathComponent:subPath]
+                             toPath:newPathComponent
+                              error:&error];
+            CheckErrorC
+        }
+    }
 }
 
 @end

@@ -69,6 +69,7 @@
             NSString *pageUrl = [hrefNode attributeForName:@"href"].stringValue;
             GSBookItem *item = [GSBookItem itemWithUrl:pageUrl];
             item.title = hrefNode.stringValue;
+            item.source = self.source;
             
             GDataXMLElement *imageNode = (GDataXMLElement*)[node firstNodeForXPath:@"td[@class='itd']//div[@class='it2']"
                                                                              error:&error];
@@ -93,7 +94,7 @@
             }
             NSLog(@"Can not get image with %@ white %@", item.title, [imageNode XMLString]);
         }
-        GDataXMLElement *last = (GDataXMLElement*)[doc firstNodeForXPath:@"//table[@class='ptb']/tbody/tr/td[last()]"
+        GDataXMLElement *last = (GDataXMLElement*)[doc firstNodeForXPath:@"//table[@class='ptb']//td[last()]"
                                                                    error:&error];
         CheckError
         GDataXMLNode *attNode = [last attributeForName:@"class"];

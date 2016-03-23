@@ -85,18 +85,6 @@
     }
 }
 
-- (void)pauseBook:(GSBookItem *)book {
-    GSTask *task = [self.taskQueue task:BookDownloadIdentifier(book)];
-    if (task) {
-        [task cancel];
-    }
-    task = [self.taskQueue task:BookProcessIdentifier(book)];
-    if (task) {
-        [task cancel];
-    }
-    [book cancel];
-}
-
 #undef URL_HOST
 
 - (void)makeProperties {

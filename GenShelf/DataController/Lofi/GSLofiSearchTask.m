@@ -74,6 +74,7 @@
             CheckErrorC
             NSString *pageUrl = [imageNode attributeForName:@"href"].stringValue;
             GSBookItem *item = [GSBookItem itemWithUrl:pageUrl];
+            item.source = self.source;
             
             GDataXMLElement *sImageNode = (GDataXMLElement*)[imageNode firstNodeForXPath:@"img"
                                                                                    error:&error];
