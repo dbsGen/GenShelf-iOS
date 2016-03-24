@@ -117,7 +117,7 @@ static GSPictureManager *__defaultManager = nil;
                 break;
             }
         }
-        if (!check && (chs[n] >= 33 && chs[n] <= 125)) {
+        if (!check && (chs[n] >= 32 && chs[n] <= 125)) {
             n_chs[count++] = chs[n];
             if (count >= 127) {
                 break;

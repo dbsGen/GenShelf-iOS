@@ -288,6 +288,9 @@ static NSMutableArray<GSideMenuController*> *_menuControllers;
 }
 
 - (void)touchMove:(CGFloat)offset {
+    if (!_tableView.superview) {
+        [self.view insertSubview:_tableView atIndex:0];
+    }
     CGRect frame = _contentView.frame;
     frame.origin.x = MIN(MAX(0, frame.origin.x + offset), MENU_WIDTH);
     [self updateTableScale];

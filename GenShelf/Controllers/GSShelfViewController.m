@@ -18,6 +18,7 @@
 @interface GSShelfViewController ()<UITableViewDelegate, UITableViewDataSource> {
     NSMutableArray<GSBookItem *> * _datas;
     UIBarButtonItem *_editItem, *_doneItem;
+    CGFloat _oldPosx;
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -78,6 +79,10 @@
     _tableView.dataSource = self;
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight;
     [self.view addSubview:_tableView];
+    
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(onPan:)];
+    [self.view addGestureRecognizer:pan];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -139,6 +144,25 @@
             break;
             
         default:
+            break;
+    }
+}
+
+- (void)onPan:(UIPanGestureRecognizer*)pan {
+    switch (pan.state) {
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateFailed:
+            [self.sideMenuController touchEnd];
+            break;
+        case UIGestureRecognizerStateBegan:
+            _oldPosx = [pan translationInView:pan.view].x;
+            break;
+        default: {
+            CGFloat newPosx = [pan translationInView:pan.view].x;
+            [self.sideMenuController touchMove:newPosx-_oldPosx];
+            _oldPosx = newPosx;
+        }
             break;
     }
 }

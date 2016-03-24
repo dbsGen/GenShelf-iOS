@@ -25,6 +25,7 @@
     BOOL    _loading;
     GSBottomLoadingCell *_bottomCell;
     NSString *_searchKey;
+    CGFloat _oldPosx;
 }
 
 @property (nonatomic, strong) UITableView *tableView;
@@ -77,6 +78,10 @@
     _bottomCell = [[GSBottomLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault
                                              reuseIdentifier:@"BottomCell"];
     [self updateLoadingStatus];
+    
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(onPan:)];
+    [self.view addGestureRecognizer:pan];
 }
 
 - (void)updateLoadingStatus {
@@ -258,6 +263,25 @@
     }
     _loading = NO;
     [self updateLoadingStatus];
+}
+
+- (void)onPan:(UIPanGestureRecognizer*)pan {
+    switch (pan.state) {
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateFailed:
+            [self.sideMenuController touchEnd];
+            break;
+        case UIGestureRecognizerStateBegan:
+            _oldPosx = [pan translationInView:pan.view].x;
+            break;
+        default: {
+            CGFloat newPosx = [pan translationInView:pan.view].x;
+            [self.sideMenuController touchMove:newPosx-_oldPosx];
+            _oldPosx = newPosx;
+        }
+            break;
+    }
 }
 
 @end

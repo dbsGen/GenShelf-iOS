@@ -79,17 +79,27 @@ static GSContainerQueue<GSPageItem*> *__cacheQueue = nil;
     }
     return _model;
 }
+- (NSString *)source {
+    if (!_source) {
+        return @"Lofi";
+    }
+    return _source;
+}
 
 - (NSString *)imagePath {
     if (_status == GSPageItemStatusComplete) {
-        return [[GSPictureManager defaultManager] path:self.book
-                                                  page:self];
+        return [self _imagePath];
     }
     return nil;
 }
 
+- (NSString *)_imagePath {
+    return [[GSPictureManager defaultManager] path:self.book
+                                              page:self];
+}
+
 - (void)checkPage {
-    if (![[NSFileManager defaultManager] fileExistsAtPath:self.imagePath]) {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:self._imagePath]) {
         _status = GSPageItemStatusNotStart;
     }else {
         _status = GSPageItemStatusComplete;

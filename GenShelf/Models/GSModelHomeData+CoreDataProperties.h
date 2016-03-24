@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface GSModelHomeData (CoreDataProperties)
 
+@property (nullable, nonatomic, retain) NSString *source;
 @property (nullable, nonatomic, retain) NSNumber *hasNext;
 @property (nullable, nonatomic, retain) NSNumber *page;
 @property (nullable, nonatomic, retain) NSDate *date;

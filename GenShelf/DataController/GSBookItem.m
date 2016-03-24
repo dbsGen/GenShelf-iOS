@@ -10,6 +10,7 @@
 #import "GCoreDataManager.h"
 #import "GSModelHomeData.h"
 #import "GSContainer.h"
+#import "GSGlobals.h"
 
 const NSTimeInterval GSTimeADay = 3600*24;
 
@@ -117,6 +118,14 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
                                    }];
     }
     return _model;
+}
+
+
+- (NSString *)source {
+    if (!_source) {
+        return @"Lofi";
+    }
+    return _source;
 }
 
 - (void)updateData {
@@ -286,7 +295,7 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
 }
 
 + (NSArray *)cachedItems:(NSInteger *)page hasNext:(BOOL *)hasNext expire:(BOOL *)expire {
-    NSArray *all = [GSModelHomeData all];
+    NSArray *all = [GSModelHomeData fetch:[NSPredicate predicateWithFormat:@"source == %@", [GSGlobals selectedDataControl]]];
     if (all.count > 0) {
         NSMutableArray *res = [NSMutableArray array];
         GSModelHomeData *data = all.firstObject;
@@ -306,11 +315,12 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
 }
 
 + (void)cacheItems:(NSArray *)items page:(NSInteger)page hasNext:(BOOL)hasNext {
-    NSArray *all = [GSModelHomeData all];
+    NSArray *all = [GSModelHomeData fetch:[NSPredicate predicateWithFormat:@"source == %@", [GSGlobals selectedDataControl]]];
     for (GSModelHomeData *data in all) {
         [data remove];
     }
     GSModelHomeData *hd = [GSModelHomeData create];
+    hd.source = [GSGlobals selectedDataControl];
     hd.page = [NSNumber numberWithInteger:page];
     hd.hasNext = [NSNumber numberWithBool:hasNext];
     hd.date = [NSDate date];
@@ -319,6 +329,13 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
         [hd addBooksObject:bi.model];
     }
     [[GCoreDataManager shareManager] save];
+}
+
++ (void)cleanCachedItems {
+    NSArray *all = [GSModelHomeData fetch:[NSPredicate predicateWithFormat:@"source == %@", [GSGlobals selectedDataControl]]];
+    for (GSModelHomeData *data in all) {
+        [data remove];
+    }
 }
 
 - (void)pageComplete:(GSPageItem *)page {

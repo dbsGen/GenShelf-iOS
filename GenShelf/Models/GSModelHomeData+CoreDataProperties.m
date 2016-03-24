@@ -13,6 +13,7 @@
 
 @implementation GSModelHomeData (CoreDataProperties)
 
+@dynamic source;
 @dynamic hasNext;
 @dynamic page;
 @dynamic date;

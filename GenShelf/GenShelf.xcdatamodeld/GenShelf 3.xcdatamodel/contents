@@ -8,6 +8,7 @@
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="hasNext" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
         <attribute name="page" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="source" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="books" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="GSModelNetBook" syncable="YES"/>
     </entity>
     <entity name="GSModelNetBook" representedClassName="GSModelNetBook" syncable="YES">
@@ -34,7 +35,7 @@
     </entity>
     <elements>
         <element name="GSModelData" positionX="108" positionY="144" width="128" height="75"/>
-        <element name="GSModelHomeData" positionX="117" positionY="81" width="128" height="105"/>
+        <element name="GSModelHomeData" positionX="117" positionY="81" width="128" height="120"/>
         <element name="GSModelNetBook" positionX="99" positionY="63" width="128" height="195"/>
         <element name="GSModelNetPage" positionX="108" positionY="72" width="128" height="165"/>
     </elements>

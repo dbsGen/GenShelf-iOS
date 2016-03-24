@@ -72,6 +72,7 @@ typedef enum : NSUInteger {
 
 + (NSArray *)cachedItems:(NSInteger*)page hasNext:(BOOL*)hasNext expire:(BOOL *)expire;
 + (void)cacheItems:(NSArray *)items page:(NSInteger)page hasNext:(BOOL)hasNext;
++ (void)cleanCachedItems;
 
 - (void)pageComplete:(GSPageItem *)page;
 

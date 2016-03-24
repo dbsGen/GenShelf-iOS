@@ -30,6 +30,7 @@
     BOOL _hasNext;
     NSMutableArray<GSBookItem *> *_datas;
     GSBottomLoadingCell *_bottomCell;
+    CGFloat _oldPosx;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -59,15 +60,28 @@
     _refreshView.slimeMissWhenGoingBack = YES;
     _refreshView.delegate = self;
     [_tableView addSubview:_refreshView];
-    BOOL expire = NO;
-    _datas = [NSMutableArray arrayWithArray:[GSBookItem cachedItems:&_index
-                                                            hasNext:&_hasNext
-                                                             expire:&expire]];
     [_refreshView update:20 + self.navigationController.navigationBar.bounds.size.height];
     
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth| UIViewAutoresizingFlexibleHeight;
     _tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
     [self.view addSubview:_tableView];
+    
+    _bottomCell = [[GSBottomLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                             reuseIdentifier:@"BottomCell"];
+    [self updateLoadingStatus];
+    
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                          action:@selector(onPan:)];
+    [self.view addGestureRecognizer:pan];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    BOOL expire = NO;
+    _datas = [NSMutableArray arrayWithArray:[GSBookItem cachedItems:&_index
+                                                            hasNext:&_hasNext
+                                                             expire:&expire]];
+    [_tableView reloadData];
     
     if (_datas.count == 0 || expire) {
         [self requestDatas];
@@ -75,9 +89,6 @@
         _tableView.contentInset = UIEdgeInsetsMake(_refreshView.upInset, 0, 0, 0);
     }
     
-    _bottomCell = [[GSBottomLoadingCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                             reuseIdentifier:@"BottomCell"];
-    [self updateLoadingStatus];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -240,6 +251,26 @@
     }
     _loading = NO;
     [self updateLoadingStatus];
+}
+
+
+- (void)onPan:(UIPanGestureRecognizer*)pan {
+    switch (pan.state) {
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:
+        case UIGestureRecognizerStateFailed:
+            [self.sideMenuController touchEnd];
+            break;
+        case UIGestureRecognizerStateBegan:
+            _oldPosx = [pan translationInView:pan.view].x;
+            break;
+        default: {
+            CGFloat newPosx = [pan translationInView:pan.view].x;
+            [self.sideMenuController touchMove:newPosx-_oldPosx];
+            _oldPosx = newPosx;
+        }
+            break;
+    }
 }
 
 @end
