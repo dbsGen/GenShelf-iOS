@@ -38,12 +38,10 @@
 }
 
 - (void)run {
-    _request = [GSGlobals requestForURL:[NSURL URLWithString:_item.pageUrl]];
+    NSURL *url = [NSURL URLWithString:_item.pageUrl];
+    _request = [GSGlobals requestForURL:url];
     _request.delegate = self;
     _request.tag = 1;
-    [_request setUserAgent:@"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/48.0.2564.116 Safari/537.36"];
-    [_request addRequestHeader:@"uconfig" value:@"uh_y-rc_0-cats_0-xns_0-ts_m-tr_2-prn_y-dm_l-ar_0-rx_0-ry_0-ms_n-mt_n-cs_a-to_a-pn_0-sc_0-tl_r-fs_p-ru_rrggb-xr_a-sa_y-oi_n-qb_n-tf_n-hp_-hk_-xl_"];
-    [_request addRequestHeader:@"tips" value:@"1"];
     [_queue addOperation:_request];
 }
 

@@ -11,6 +11,7 @@
 #import "GDataXMLNode.h"
 #import "GSDataDefines.h"
 #import "GSPictureManager.h"
+#import "GSLofiDataControl.h"
 
 @interface GSLofiPageTask : GSTask <ASIHTTPRequestDelegate> {
     GSPageItem *_item;
@@ -38,7 +39,21 @@
 }
 
 - (void)run {
-    _request = [GSGlobals requestForURL:[NSURL URLWithString:_item.pageUrl]];
+    GSDataControl *control = [GSGlobals getDataControl:self.source];
+    NSURL *url = [NSURL URLWithString:_item.pageUrl];
+    NSInteger sizeKey = [[control getProperty:kGSLofiSizeKey] integerValue];
+    NSMutableDictionary *cookieProperties = [NSMutableDictionary dictionary];
+    [cookieProperties setObject:@"lowres" forKey:NSHTTPCookieName];
+    [cookieProperties setObject:sizeKey==0?@"2":@"3" forKey:NSHTTPCookieValue];
+    [cookieProperties setObject:url.host forKey:NSHTTPCookieDomain];
+    [cookieProperties setObject:url.host forKey:NSHTTPCookieOriginURL];
+    [cookieProperties setObject:@"/" forKey:NSHTTPCookiePath];
+    [cookieProperties setObject:@"0" forKey:NSHTTPCookieVersion];
+    
+    NSHTTPCookie *cookie = [[NSHTTPCookie alloc] initWithProperties:cookieProperties];
+     [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookie:cookie];
+    [ASIHTTPRequest setSessionCookies:[NSMutableArray arrayWithObject:cookie]];
+    _request = [GSGlobals requestForURL:url];
     _request.delegate = self;
     _request.tag = 1;
     [_queue addOperation:_request];

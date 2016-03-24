@@ -90,6 +90,9 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     self.opetionSelected = row;
+    if ([_delegate respondsToSelector:@selector(selectCellChanged:)]) {
+        [_delegate selectCellChanged:self];
+    }
 }
 
 @end

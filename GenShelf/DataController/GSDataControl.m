@@ -37,6 +37,14 @@
                              type:GSDataPropertyTypeBOOL];
 }
 
++ (instancetype)optionsPropertyWithName:(NSString *)name defaultValue:(NSUInteger)selected options:(NSArray<NSString*>*)options {
+    GSDataProperty *property = [self propertyWithName:name
+                                         defaultValue:[NSNumber numberWithInteger:selected]
+                                                 type:GSDataPropertyTypeOptions];
+    property.custmorData = options;
+    return property;
+}
+
 @end
 
 @interface GSDataControl ()
@@ -119,6 +127,16 @@ static NSMutableArray *_progressingBooks;
 }
 
 - (void)makeProperties {}
+
+- (GSDataProperty*)getPropertyItem:(NSString*)name {
+    [self checkProperties];
+    for (GSDataProperty *property in _properties) {
+        if ([property.name isEqualToString:name]) {
+            return property;
+        }
+    }
+    return nil;
+}
 
 - (void)insertProperty:(GSDataProperty *)property {
     [self checkProperties];

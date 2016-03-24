@@ -92,6 +92,9 @@
 - (void)makeProperties {
     [self insertProperty:[GSDataProperty boolPropertyWithName:kGSLofiAdultKey
                                                  defaultValue:NO]];
+    [self insertProperty:[GSDataProperty optionsPropertyWithName:kGSLofiSizeKey
+                                                    defaultValue:1
+                                                         options:@[@"780x", @"980x"]]];
 }
 
 @end

@@ -19,7 +19,7 @@ typedef void *(^GSRequestUpdateBlock)(NSUInteger count);
 typedef enum : NSUInteger {
     GSDataPropertyTypeBOOL,
     GSDataPropertyTypeString,
-    GSDataPropertyTypeSwitch,
+    GSDataPropertyTypeOptions,
 } GSDataPropertyType;
 
 @interface GSDataProperty : NSObject
@@ -33,6 +33,7 @@ typedef enum : NSUInteger {
 + (instancetype)propertyWithName:(NSString *)name defaultValue:(id)value type:(GSDataPropertyType)type data:(id)data;
 
 + (instancetype)boolPropertyWithName:(NSString *)name defaultValue:(BOOL)value;
++ (instancetype)optionsPropertyWithName:(NSString *)name defaultValue:(NSUInteger)selected options:(NSArray<NSString*>*)options;
 
 @end
 
@@ -53,6 +54,7 @@ typedef enum : NSUInteger {
 @property (nonatomic, readonly) GSTaskQueue *taskQueue;
 @property (nonatomic, assign) CGFloat   requestDelay;
 
+- (GSDataProperty*)getPropertyItem:(NSString*)name;
 - (void)insertProperty:(GSDataProperty *)property;
 - (id)getProperty:(NSString*)name;
 - (void)setProperty:(id)value withName:(NSString *)name;

@@ -11,6 +11,7 @@
 #import "GSTask.h"
 
 #define kGSLofiAdultKey @"Adult"
+#define kGSLofiSizeKey @"Size"
 
 @interface GSLofiDataControl : GSDataControl
 

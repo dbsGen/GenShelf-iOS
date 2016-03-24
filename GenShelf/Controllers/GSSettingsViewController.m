@@ -11,8 +11,9 @@
 #import "GSideMenuController.h"
 #import "GSSwitchCell.h"
 #import "GSGlobals.h"
+#import "GSSelectCell.h"
 
-@interface GSSettingsViewController () <UITableViewDelegate, UITableViewDataSource> {
+@interface GSSettingsViewController () <UITableViewDelegate, UITableViewDataSource, GSSelectCellDelegate> {
     GSSwitchCell *_adultCell;
     NSUInteger _dataControlIndex;
     CGFloat _oldPosx;
@@ -151,6 +152,22 @@
                 }
                     
                     break;
+                case GSDataPropertyTypeOptions: {
+                    static NSString *identifier = @"OptionsCell";
+                    GSSelectCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier];
+                    if (!cell) {
+                        cell = [[GSSelectCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                                   reuseIdentifier:identifier];
+                        cell.delegate = self;
+                    }
+                    NSInteger selectIndex = [[[GSGlobals dataControl] getProperty:setting.name] integerValue];
+                    cell.opetionSelected = selectIndex;
+                    cell.options = setting.custmorData;
+                    cell.textLabel.text = NSLocalizedString(setting.name, @"");
+                    cell.tag = indexPath.row;
+                    return cell;
+                }
+                    break;
                     
                 default: {
                     static NSString *identifier = @"UnkownCell";
@@ -184,6 +201,7 @@
                     break;
             }
         }
+            break;
         case 1:
         {
             NSUInteger old = _dataControlIndex;
@@ -196,7 +214,19 @@
             [tableView reloadSections:[NSIndexSet indexSetWithIndex:2]
                      withRowAnimation:UITableViewRowAnimationAutomatic];
         }
-            
+            break;
+        case 2:
+        {
+            UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            if ([cell isKindOfClass:[GSSelectCell class]]) {
+                GSSelectCell *selectCell = (GSSelectCell*)cell;
+                GSSelectView *pickerView = [selectCell makePickView];
+                [self.view addSubview:pickerView];
+                [pickerView show];
+                [self.view endEditing:YES];
+            }
+        }
+            break;
         default:
             break;
     }
@@ -230,6 +260,12 @@
 - (void)onSettingSwitch:(UISwitch *)sw {
     GSDataProperty *setting = [[GSGlobals dataControl].properties objectAtIndex:sw.tag];
     [[GSGlobals dataControl] setProperty:[NSNumber numberWithBool:sw.on]
+                                withName:setting.name];
+}
+
+- (void)selectCellChanged:(GSSelectCell *)cell {
+    GSDataProperty *setting = [[GSGlobals dataControl].properties objectAtIndex:cell.tag];
+    [[GSGlobals dataControl] setProperty:[NSNumber numberWithInteger:cell.opetionSelected]
                                 withName:setting.name];
 }
 
