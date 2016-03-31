@@ -13,6 +13,7 @@
 #import "GSGlobals.h"
 #import "GSRadiusImageView.h"
 #import "SRRefreshView.h"
+#import "GSShelfViewController.h"
 
 static NSString *identifier = @"CellIdentifier";
 
@@ -129,6 +130,7 @@ static NSString *identifier = @"CellIdentifier";
 - (void)onDownload {
     [GSGlobals downloadBook:_item];
     [self.navigationItem setRightBarButtonItem:_collectedItem animated:YES];
+    [GSShelfViewController setReloadCache:YES];
 }
 
 #pragma mark - scrollView delegate

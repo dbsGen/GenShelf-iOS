@@ -19,45 +19,33 @@
 @end
 
 @implementation GSContainerQueue {
-    NSMutableArray<GSContainer *> *_containers;
+    NSMutableDictionary<NSString* ,GSContainer *> *_containers;
 }
 
 - (id)init {
     self = [super init];
     if (self) {
-        _containers = [[NSMutableArray alloc] init];
+        _containers = [[NSMutableDictionary alloc] init];
     }
     return self;
 }
 
-- (NSArray<GSContainer*>*)containers {
+- (NSDictionary<NSString* ,GSContainer<id>*>*)containers {
     return _containers;
 }
 
-- (void)addObject:(id)object {
-    [_containers addObject:[GSContainer containerWithObject:object]];
+- (void)addObject:(id)object forKey:(NSString *)key {
+    [_containers setObject:[GSContainer containerWithObject:object] forKey:key];
 }
 
-- (void)removeObject:(id)object {
-    __block GSContainer *target = nil;
-    [_containers enumerateObjectsUsingBlock:^(GSContainer * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.object == object) {
-            *stop = YES;
-            target = obj;
-        }
-    }];
-    if (target)  [_containers removeObject:target];
+- (void)removeObjectForKey:(NSString *)key {
+    [_containers removeObjectForKey:key];
 }
 
-- (id)object:(GSContainerQueueBlock)block {
-    __block GSContainer *target = nil;
-    [_containers enumerateObjectsUsingBlock:^(GSContainer * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (block(obj.object)) {
-            *stop = YES;
-            target = obj;
-        }
-    }];
-    return target.object;
+- (id)objectForKey:(NSString *)key {
+    GSContainer *container = [_containers objectForKey:key];
+    if (container) return container.object;
+    return nil;
 }
 
 @end

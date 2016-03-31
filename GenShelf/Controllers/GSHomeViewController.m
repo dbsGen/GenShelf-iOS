@@ -15,6 +15,8 @@
 #import "GSPreviewViewController.h"
 #import "GSBottomLoadingCell.h"
 
+static BOOL _reload_cache = YES;
+
 @interface GSHomeViewController () <UITableViewDelegate, UITableViewDataSource, SRRefreshDelegate, GSTaskDelegate>
 
 @property (nonatomic, strong) SRRefreshView *refreshView;
@@ -31,6 +33,10 @@
     NSMutableArray<GSBookItem *> *_datas;
     GSBottomLoadingCell *_bottomCell;
     CGFloat _oldPosx;
+}
+
++ (void)setReloadCache:(BOOL)reload {
+    _reload_cache = reload;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -75,20 +81,22 @@
     [self.view addGestureRecognizer:pan];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    BOOL expire = NO;
-    _datas = [NSMutableArray arrayWithArray:[GSBookItem cachedItems:&_index
-                                                            hasNext:&_hasNext
-                                                             expire:&expire]];
-    [_tableView reloadData];
-    
-    if (_datas.count == 0 || expire) {
-        [self requestDatas];
-        _refreshView.loading = YES;
-        _tableView.contentInset = UIEdgeInsetsMake(_refreshView.upInset, 0, 0, 0);
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (_reload_cache || !_datas) {
+        _reload_cache = NO;
+        BOOL expire = NO;
+        _datas = [NSMutableArray arrayWithArray:[GSBookItem cachedItems:&_index
+                                                                hasNext:&_hasNext
+                                                                 expire:&expire]];
+        [_tableView reloadData];
+        
+        if (_datas.count == 0 || expire) {
+            [self requestDatas];
+            _refreshView.loading = YES;
+            _tableView.contentInset = UIEdgeInsetsMake(_refreshView.upInset, 0, 0, 0);
+        }
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,6 +105,7 @@
     _tableView = NULL;
     _refreshView = NULL;
     _bottomCell = NULL;
+    _datas = nil;
 }
 
 - (void)dealloc

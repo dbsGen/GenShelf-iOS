@@ -26,27 +26,18 @@ static GSContainerQueue<GSPageItem*> *__cacheQueue = nil;
     return __cacheQueue;
 }
 
-- (id)init {
-    self = [super init];
-    if (self) {
-        [[GSPageItem cacheQueue] addObject:self];
-    }
-    return self;
-}
-
 - (void)dealloc {
-    [[GSPageItem cacheQueue] removeObject:self];
+    [[GSPageItem cacheQueue] removeObjectForKey:self.pageUrl];
 }
 
 + (instancetype)itemWithUrl:(NSString *)pageUrl {
-    GSPageItem *ret = [[GSPageItem cacheQueue] object:^BOOL(id object) {
-        return [[object pageUrl] isEqualToString:pageUrl];
-    }];
+    GSPageItem *ret = [[GSPageItem cacheQueue] objectForKey:pageUrl];
     if (ret) {
         return ret;
     }
     ret = [[GSPageItem alloc] init];
     ret.pageUrl = pageUrl;
+    [[GSPageItem cacheQueue] addObject:ret forKey:pageUrl];
     return ret;
 }
 

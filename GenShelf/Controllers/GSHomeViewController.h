@@ -10,4 +10,6 @@
 
 @interface GSHomeViewController : UIViewController
 
++ (void)setReloadCache:(BOOL)reload;
+
 @end

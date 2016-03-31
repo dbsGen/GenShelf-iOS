@@ -38,14 +38,12 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
         _status = GSBookItemStatusNotStart;
         _page_items = [[NSMutableArray alloc] init];
         _loading = false;
-        
-        [[GSBookItem cacheQueue] addObject:self];
     }
     return self;
 }
 
 - (void)dealloc {
-    [[GSBookItem cacheQueue] removeObject:self];
+    [[GSBookItem cacheQueue] removeObjectForKey:self.pageUrl];
 }
 
 + (NSArray<GSBookItem *> *)items:(NSArray<GSModelNetBook *> *)books {
@@ -60,14 +58,13 @@ static GSContainerQueue<GSBookItem*> *__cacheQueue = nil;
 }
 
 + (GSBookItem *)itemWithUrl:(NSString *)pageUrl {
-    GSBookItem *obj = [[GSBookItem cacheQueue] object:^BOOL(id object) {
-        return [[object pageUrl] isEqualToString:pageUrl];
-    }];
+    GSBookItem *obj = [[GSBookItem cacheQueue] objectForKey:pageUrl];
     if (obj) {
         return obj;
     }
     obj = [[GSBookItem alloc] init];
     obj.pageUrl = pageUrl;
+    [[GSBookItem cacheQueue] addObject:obj forKey:pageUrl];
     return obj;
 }
 

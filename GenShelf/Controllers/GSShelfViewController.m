@@ -15,6 +15,8 @@
 #import "GSVBookViewController.h"
 #import "GSGlobals.h"
 
+static BOOL _shelf_reload = YES;
+
 @interface GSShelfViewController ()<UITableViewDelegate, UITableViewDataSource> {
     NSMutableArray<GSBookItem *> * _datas;
     UIBarButtonItem *_editItem, *_doneItem;
@@ -61,13 +63,19 @@
     }
 }
 
++ (void)setReloadCache:(BOOL)reload {
+    _shelf_reload = reload;
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    NSArray *arr = [GSModelNetBook fetch:[NSPredicate predicateWithFormat:@"mark==YES"]
-                                   sorts:@[[NSSortDescriptor sortDescriptorWithKey:@"downloadDate"
-                                                                         ascending:NO]]];
-    _datas = [NSMutableArray<GSBookItem *> arrayWithArray:[GSBookItem items:arr]];
-    [_tableView reloadData];
+    if (_shelf_reload || !_datas) {
+        NSArray *arr = [GSModelNetBook fetch:[NSPredicate predicateWithFormat:@"mark==YES"]
+                                       sorts:@[[NSSortDescriptor sortDescriptorWithKey:@"downloadDate"
+                                                                             ascending:NO]]];
+        _datas = [NSMutableArray<GSBookItem *> arrayWithArray:[GSBookItem items:arr]];
+        [_tableView reloadData];
+    }
 }
 
 - (void)viewDidLoad {
@@ -87,6 +95,8 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    _tableView = nil;
+    _datas = nil;
 }
 
 - (void)openMenu {

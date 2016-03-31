@@ -10,4 +10,6 @@
 
 @interface GSShelfViewController : UIViewController
 
++ (void)setReloadCache:(BOOL)reload;
+
 @end

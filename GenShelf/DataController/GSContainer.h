@@ -20,9 +20,9 @@ typedef BOOL(^GSContainerQueueBlock)(id object);
 
 @interface GSContainerQueue<ObjectType> : NSObject
 
-@property (nonatomic, readonly) NSArray<GSContainer<ObjectType>*> *containers;
-- (void)addObject:(ObjectType)object;
-- (void)removeObject:(ObjectType)object;
-- (ObjectType)object:(GSContainerQueueBlock)checker;
+@property (nonatomic, readonly) NSDictionary<NSString* ,GSContainer<ObjectType>*> *containers;
+- (void)addObject:(ObjectType)object forKey:(NSString*)key;
+- (void)removeObjectForKey:(NSString*)key;
+- (ObjectType)objectForKey:(NSString*)key;
 
 @end

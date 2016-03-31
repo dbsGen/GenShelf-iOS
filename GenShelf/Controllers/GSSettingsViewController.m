@@ -12,6 +12,7 @@
 #import "GSSwitchCell.h"
 #import "GSGlobals.h"
 #import "GSSelectCell.h"
+#import "GSHomeViewController.h"
 
 @interface GSSettingsViewController () <UITableViewDelegate, UITableViewDataSource, GSSelectCellDelegate> {
     GSSwitchCell *_adultCell;
@@ -213,6 +214,8 @@
             [GSGlobals setSelectedDataControl:name];
             [tableView reloadSections:[NSIndexSet indexSetWithIndex:2]
                      withRowAnimation:UITableViewRowAnimationAutomatic];
+            [GSHomeViewController setReloadCache:YES];
+            
         }
             break;
         case 2:
