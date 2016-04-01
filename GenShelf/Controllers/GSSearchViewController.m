@@ -123,7 +123,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < _datas.count) {
-        return 180;
+        return 140;
     }else {
         return 64;
     }
@@ -159,6 +159,9 @@
         preview.item = item;
         [self.navigationController pushViewController:preview
                                              animated:YES];
+    }else {
+        if (_hasNext && !_loading)
+            [self requestMore];
     }
 }
 

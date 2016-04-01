@@ -1287,7 +1287,8 @@
 				B2DAF42E1CA24625004196E5 /* GSModelData.h */,
 				B2DAF42F1CA24625004196E5 /* GSModelData.m */,
 			);
-			path = Models;
+			name = Models;
+			path = ../Models;
 			sourceTree = "<group>";
 		};
 		B22305C11C7824F4001B18F5 /* DataManager */ = {
@@ -1342,7 +1343,6 @@
 				B2BDCBC51C77122C00DC3031 /* Resources */,
 				B2F02F191C75BE0D00D93119 /* Utils */,
 				B2F02F121C75635200D93119 /* Globals */,
-				B22305B41C782011001B18F5 /* Models */,
 				B20A348A1C7481DF000CCFA3 /* Views */,
 				B20A34701C746B80000CCFA3 /* Controllers */,
 				B20A34091C745E37000CCFA3 /* Shadowsocks */,
@@ -2418,6 +2418,7 @@
 		B2F44C1F1C78A1C600639756 /* DataController */ = {
 			isa = PBXGroup;
 			children = (
+				B22305B41C782011001B18F5 /* Models */,
 				B2DAF4251CA23A90004196E5 /* EHentai */,
 				B2ABBA2B1C8019B900C02B7D /* Lofi */,
 				B296F6E21C7F26D30031AA62 /* TaskQueue */,

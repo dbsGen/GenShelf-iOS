@@ -10,6 +10,12 @@
 
 @implementation GSModelNetPage
 
-// Insert code here to add functionality to your managed object subclass
+- (void)setPageStatus:(GSPageStatus)pageStatus {
+    self.status = [NSNumber numberWithInteger:pageStatus];
+}
+
+- (GSPageStatus)pageStatus {
+    return  [self.status integerValue];
+}
 
 @end

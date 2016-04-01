@@ -84,8 +84,8 @@ static NSString *identifier = @"CellIdentifier";
     UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
     layout.sectionInset = UIEdgeInsetsMake(kBORDER_WIDTH, kBORDER_WIDTH,
                                            kBORDER_WIDTH, kBORDER_WIDTH);
-    layout.minimumLineSpacing = 9;
-    layout.itemSize = CGSizeMake(160, 160);
+    layout.minimumLineSpacing = 5;
+    layout.itemSize = CGSizeMake(130, 160);
     
     _refreshView = [[SRRefreshView alloc] init];
     _refreshView.slimeMissWhenGoingBack = YES;

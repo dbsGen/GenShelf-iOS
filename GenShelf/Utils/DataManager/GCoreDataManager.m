@@ -199,4 +199,8 @@ static GCoreDataManager *_defaultManager = NULL;
     [[GCoreDataManager shareManager].managedObjectContext deleteObject:self];
 }
 
+- (void)save {
+    [[GCoreDataManager shareManager] save];
+}
+
 @end

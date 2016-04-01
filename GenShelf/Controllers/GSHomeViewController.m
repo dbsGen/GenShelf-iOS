@@ -119,7 +119,7 @@ static BOOL _reload_cache = YES;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < _datas.count) {
-        return 180;
+        return 140;
     }else {
         return 64;
     }
@@ -155,6 +155,9 @@ static BOOL _reload_cache = YES;
         preview.item = item;
         [self.navigationController pushViewController:preview
                                              animated:YES];
+    }else {
+        if (_hasNext && !_loading)
+            [self requestMore];
     }
 }
 

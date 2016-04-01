@@ -28,34 +28,14 @@ typedef enum : NSUInteger {
 @protocol GSBookItemDelegate <NSObject>
 
 @optional
-- (void)bookItem:(GSBookItem *)item progress:(CGFloat)percent;
-- (void)bookItem:(GSBookItem *)item status:(GSBookItemStatus)status loading:(BOOL)loading;
+- (void)bookItem:(GSModelNetBook *)item progress:(CGFloat)percent;
+- (void)bookItem:(GSModelNetBook *)item status:(GSBookItemStatus)status loading:(BOOL)loading;
 
 @end
 
-@interface GSBookItem : NSObject {
-    CGFloat _percent;
-}
+@interface GSModelNetBook (GSBookItem)
 
-+ (NSArray<GSBookItem *> *)items:(NSArray<GSModelNetBook *> *)books;
-+ (GSBookItem *)itemWithUrl:(NSString *)pageUrl;
-+ (GSBookItem *)itemWithModel:(GSModelNetBook*)book;
-- (GSModelNetBook *)model;
-
-@property (nonatomic, retain) NSString *source;
-@property (nonatomic, retain) NSString *title;
-@property (nonatomic, retain) NSString *pageUrl;
-@property (nonatomic, retain) NSString *imageUrl;
-@property (nonatomic, retain) NSString *otherData;
-@property (nonatomic, retain) NSDate *downloadDate;
-@property (nonatomic, assign) BOOL mark;
-
-@property (nonatomic, assign) GSBookItemStatus status;
-@property (nonatomic, readonly) NSArray<GSPageItem *> *pages;
-@property (nonatomic, assign) BOOL loading;
-@property (nonatomic, readonly) CGFloat percent;
-
-@property (nonatomic, weak) id<GSBookItemDelegate> delegate;
++ (GSModelNetBook *)itemWithUrl:(NSString *)pageUrl;
 
 - (void)loadPages:(NSArray<GSPageItem *> *)pages;
 

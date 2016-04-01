@@ -36,5 +36,6 @@ typedef void(^GConstuctorBlock)(id object);
 + (instancetype)create;
 + (instancetype)fetchOrCreate:(NSPredicate *)predicate constructor:(GConstuctorBlock)block;
 - (void)remove;
+- (void)save;
 
 @end

@@ -21,12 +21,12 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _thumView = [[GSRadiusImageView alloc] initWithFrame:CGRectMake(10, 10, 160, 160)];
+        _thumView = [[GSRadiusImageView alloc] initWithFrame:CGRectMake(10, 10, 120, 120)];
         _thumView.radius = 5;
         _thumView.image = [UIImage imageNamed:@"no_image"];
         [self.contentView addSubview:_thumView];
         
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(220, 10, self.contentView.bounds.size.width - 230, self.contentView.bounds.size.height - 20)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(140, 10, self.contentView.bounds.size.width - 150, self.contentView.bounds.size.height - 20)];
         _titleLabel.numberOfLines = 0;
         _titleLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
         [self.contentView addSubview:_titleLabel];

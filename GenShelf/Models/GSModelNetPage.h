@@ -9,13 +9,21 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+
+typedef enum : NSUInteger {
+    GSPageStatusNotStart    = 0,
+    GSPageStatusProgressing,
+    GSPageStatusComplete,
+} GSPageStatus;
+
 NS_ASSUME_NONNULL_BEGIN
 
 @class GSModelNetBook;
 
 @interface GSModelNetPage : NSManagedObject
 
-// Insert code here to declare functionality of your managed object subclass
+@property (nonatomic, assign) GSPageStatus pageStatus;
+- (void)checkStatus;
 
 @end
 
