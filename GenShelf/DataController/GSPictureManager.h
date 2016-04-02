@@ -25,5 +25,6 @@
 - (void)deletePage:(GSModelNetPage *)page;
 
 - (void)update1_2;
+- (void)update1_3;
 
 @end

@@ -72,6 +72,11 @@
                   [[GSPictureManager defaultManager] update1_2];
                   return YES;
               }];
+    [ver addVersion:[GVersion version:@"1.3"]
+              block:^BOOL(NSString *versionPrev, NSString *versionAfter) {
+                  [[GSPictureManager defaultManager] update1_3];
+                  return YES;
+              }];
     [ver update];
 }
 

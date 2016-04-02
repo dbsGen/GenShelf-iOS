@@ -71,6 +71,9 @@
 		B26936F91C844D2100D2D35E /* MTFlipAnimationView.m in Sources */ = {isa = PBXBuildFile; fileRef = B26936F41C844D2100D2D35E /* MTFlipAnimationView.m */; };
 		B279C08B1C951C93009AB881 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = B279C0891C951C93009AB881 /* back.png */; };
 		B279C08C1C951C93009AB881 /* back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B279C08A1C951C93009AB881 /* back@2x.png */; };
+		B294F7031CAFA6CA006539EC /* JGActionSheet.m in Sources */ = {isa = PBXBuildFile; fileRef = B294F7021CAFA6CA006539EC /* JGActionSheet.m */; };
+		B294F7061CAFAB82006539EC /* more.png in Resources */ = {isa = PBXBuildFile; fileRef = B294F7041CAFAB82006539EC /* more.png */; };
+		B294F7071CAFAB82006539EC /* more@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B294F7051CAFAB82006539EC /* more@2x.png */; };
 		B296F6E81C7F26E30031AA62 /* GSTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6E71C7F26E30031AA62 /* GSTask.m */; };
 		B296F6EC1C8326870031AA62 /* GSLofiDownloadTask.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6EB1C8326870031AA62 /* GSLofiDownloadTask.m */; };
 		B296F6F01C8335170031AA62 /* GSPictureManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B296F6EF1C8335170031AA62 /* GSPictureManager.m */; };
@@ -524,6 +527,10 @@
 		B279C0891C951C93009AB881 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		B279C08A1C951C93009AB881 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
 		B294F6FF1CAF5B61006539EC /* GenShelf 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "GenShelf 4.xcdatamodel"; sourceTree = "<group>"; };
+		B294F7011CAFA6CA006539EC /* JGActionSheet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGActionSheet.h; sourceTree = "<group>"; };
+		B294F7021CAFA6CA006539EC /* JGActionSheet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGActionSheet.m; sourceTree = "<group>"; };
+		B294F7041CAFAB82006539EC /* more.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = more.png; sourceTree = "<group>"; };
+		B294F7051CAFAB82006539EC /* more@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "more@2x.png"; sourceTree = "<group>"; };
 		B296F6E61C7F26E30031AA62 /* GSTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSTask.h; sourceTree = "<group>"; };
 		B296F6E71C7F26E30031AA62 /* GSTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTask.m; sourceTree = "<group>"; };
 		B296F6EA1C8326870031AA62 /* GSLofiDownloadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiDownloadTask.h; sourceTree = "<group>"; };
@@ -1425,6 +1432,15 @@
 			path = FlipView;
 			sourceTree = "<group>";
 		};
+		B294F7001CAFA6CA006539EC /* JGActionSheet */ = {
+			isa = PBXGroup;
+			children = (
+				B294F7011CAFA6CA006539EC /* JGActionSheet.h */,
+				B294F7021CAFA6CA006539EC /* JGActionSheet.m */,
+			);
+			path = JGActionSheet;
+			sourceTree = "<group>";
+		};
 		B296F6E21C7F26D30031AA62 /* TaskQueue */ = {
 			isa = PBXGroup;
 			children = (
@@ -1547,6 +1563,8 @@
 				B268ECCF1C77745D001DD15F /* squares@2x.png */,
 				B2BDCBCC1C771A8500DC3031 /* menu@2x.png */,
 				B2BDCBCA1C7719C000DC3031 /* menu.png */,
+				B294F7041CAFAB82006539EC /* more.png */,
+				B294F7051CAFAB82006539EC /* more@2x.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -2329,6 +2347,7 @@
 		B2F02F191C75BE0D00D93119 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B294F7001CAFA6CA006539EC /* JGActionSheet */,
 				B2DAF4471CA271DB004196E5 /* RegexKitLite */,
 				B21AD0E81CA150D8004419F6 /* VersionControl */,
 				B2EB03D51C984A6600B95446 /* Alert */,
@@ -2608,11 +2627,13 @@
 				B296F71B1C94583D0031AA62 /* stop.png in Resources */,
 				B2ACD8C21C9956AD001E461B /* AppIcon40x40@2x.png in Resources */,
 				B268ECD71C77745D001DD15F /* setting@2x.png in Resources */,
+				B294F7071CAFAB82006539EC /* more@2x.png in Resources */,
 				B268ECD61C77745D001DD15F /* setting.png in Resources */,
 				B2ACD8C51C9956AD001E461B /* AppIcon60x60@2x.png in Resources */,
 				B250EE3C1C73054D00198CDE /* Assets.xcassets in Resources */,
 				B296F71C1C94583D0031AA62 /* stop@2x.png in Resources */,
 				B296F71F1C9467F60031AA62 /* pause.png in Resources */,
+				B294F7061CAFAB82006539EC /* more.png in Resources */,
 				B26936F51C844D2100D2D35E /* bg_detail_panelshadow.png in Resources */,
 				B20A34891C747FB7000CCFA3 /* LaunchScreen.storyboard in Resources */,
 				B2ACD8C01C9956AD001E461B /* AppIcon29x29@2x~ipad.png in Resources */,
@@ -2876,6 +2897,7 @@
 				B20A348E1C7482A8000CCFA3 /* GSInputCell.m in Sources */,
 				B2DC704E1C98011700F4C9CA /* ZXEAN13Writer.m in Sources */,
 				B2DC70791C98011700F4C9CA /* ZXQRCodeBitMatrixParser.m in Sources */,
+				B294F7031CAFA6CA006539EC /* JGActionSheet.m in Sources */,
 				B2DC6FDA1C98011700F4C9CA /* ZXSMSParsedResult.m in Sources */,
 				B2DC703D1C98011700F4C9CA /* ZXRSSExpandedPair.m in Sources */,
 				B2A8C5621C929D4000306D0D /* GCoverView.m in Sources */,

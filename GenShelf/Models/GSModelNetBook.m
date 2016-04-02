@@ -75,6 +75,22 @@ const NSTimeInterval GSTimeADay = 3600*3;
     }
 }
 
+- (void)fullyCheckStatues {
+    int count = 0;
+    for (GSModelNetPage *page in self.pages) {
+        [page checkStatus];
+        if (page.pageStatus == GSPageStatusComplete) {
+            count ++;
+        }
+    }
+    _percent = (float)count / self.pages.count;
+    if (count == self.pages.count) {
+        self.bookStatus = GSBookStatusPagesComplete;
+    }else if (self.bookStatus == GSBookStatusPagesComplete){
+        self.bookStatus = GSBookStatusComplete;
+    }
+}
+
 - (void)loadPages:(NSOrderedSet<GSModelNetPage *> *)pages {
     NSInteger count = self.pages.count;
     for (GSModelNetPage *item in pages) {
@@ -150,8 +166,12 @@ const NSTimeInterval GSTimeADay = 3600*3;
 }
 
 - (void)reset {
-    [self removePages:self.pages];
+    for (GSModelNetPage *page in self.pages) {
+        [page remove];
+    }
     self.bookStatus = GSBookStatusProgressing;
+    self.count = 0;
+    self.percent = 0;
     [self save];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_UPDATE
                                                         object:self
@@ -174,11 +194,28 @@ const NSTimeInterval GSTimeADay = 3600*3;
     if (!self.loading && self.bookStatus != GSBookStatusPagesComplete) {
         self.loading = YES;
     }
-    self.count += 1;
+    NSInteger currentCount = self.count = self.count + 1;
+    BOOL complete = NO;
+    if (currentCount >= self.pages.count) {
+        NSInteger c = 0;
+        for (GSModelNetPage *pt in self.pages) {
+            if (pt.pageStatus == GSPageStatusComplete) {
+                c ++;
+            }
+        }
+        if (currentCount == c) {
+            complete = YES;
+        }else {
+            self.count = c;
+        }
+    }
     [self save];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_PROGRESS
                                                         object:self
                                                       userInfo:nil];
+    if (complete) {
+        [self pagesComplete];
+    }
 }
 
 - (void)remove {
@@ -240,15 +277,6 @@ const NSTimeInterval GSTimeADay = 3600*3;
     for (GSModelHomeData *data in all) {
         [data remove];
     }
-}
-
-- (void)pageComplete:(GSModelNetPage *)page {
-    for (GSModelNetPage *pt in self.pages) {
-        if (pt.pageStatus != GSPageStatusComplete) {
-            return;
-        }
-    }
-    [self pagesComplete];
 }
 
 - (void)awakeFromFetch {

@@ -46,6 +46,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) GSBookStatus bookStatus;
 
 - (void)checkStatues;
+- (void)fullyCheckStatues;
 - (void)loadPages:(NSOrderedSet<GSModelNetPage *> *)pages;
 
 - (void)startLoading;
@@ -62,8 +63,6 @@ NS_ASSUME_NONNULL_BEGIN
 + (NSOrderedSet<GSModelNetBook *> *)cachedItems:(NSInteger*)page hasNext:(BOOL*)hasNext expire:(BOOL *)expire;
 + (void)cacheItems:(NSOrderedSet<GSModelNetBook*> *)items page:(NSInteger)page hasNext:(BOOL)hasNext;
 + (void)cleanCachedItems;
-
-- (void)pageComplete:(GSModelNetPage *)page;
 
 @end
 

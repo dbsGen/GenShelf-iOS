@@ -11,6 +11,8 @@
 #import "GSPageViewerView.h"
 #import "GSPictureManager.h"
 #import "GSPageFlipView.h"
+#import "JGActionSheet.h"
+#import "GSGlobals.h"
 
 @interface GSVBookViewController () <MTDragFlipViewDelegate, UITableViewDelegate, UITableViewDataSource> {
     NSInteger   _oldIndex;
@@ -103,7 +105,19 @@
     button.layer.shadowColor = [UIColor whiteColor].CGColor;
     button.layer.shadowOpacity = 1;
     button.layer.shadowRadius = 2;
-    button.layer.shadowOffset = CGSizeMake(0, 0);
+    button.layer.shadowOffset = CGSizeMake(1, 1);
+    [self.view addSubview:button];
+    
+    button = [[UIButton alloc] initWithFrame:CGRectMake(self.view.bounds.size.width - 60, 30, 40, 40)];
+    [button setImage:[UIImage imageNamed:@"more"]
+            forState:UIControlStateNormal];
+    [button addTarget:self
+               action:@selector(moreClicked)
+     forControlEvents:UIControlEventTouchUpInside];
+    button.layer.shadowColor = [UIColor whiteColor].CGColor;
+    button.layer.shadowOpacity = 1;
+    button.layer.shadowRadius = 2;
+    button.layer.shadowOffset = CGSizeMake(1, 1);
     [self.view addSubview:button];
 }
 
@@ -156,20 +170,94 @@
     return view;
 }
 
-//- (UIInterfaceOrientationMask)supportedInterfaceOrientations {
-//    return UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown;
-//}
-//
-//- (BOOL)shouldAutorotate {
-//    return YES;
-//}
-//
-//- (UIInterfaceOrientation)preferredInterfaceOrientationForPresentation {
-//    return UIInterfaceOrientationPortrait;
-//}
-
 - (void)backClicked {
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)moreClicked {
+    NSMutableArray *buttons = [NSMutableArray array];
+    switch (_item.bookStatus) {
+        case GSBookStatusNotStart:
+            [buttons addObject:local(Download)];
+            break;
+        case GSBookStatusProgressing:
+            if (_item.loading) {
+                [buttons addObject:local(Pause)];
+            }else {
+                [buttons addObject:local(Mark page to reload)];
+                [buttons addObject:local(Download)];
+            }
+            break;
+        case GSBookStatusComplete:
+            if (_item.loading) {
+                [buttons addObject:local(Pause)];
+            }else {
+                [buttons addObject:local(Mark page to reload)];
+                [buttons addObject:local(Download)];
+            }
+            break;
+        case GSBookStatusPagesComplete:
+            [buttons addObject:local(Mark page to reload)];
+            [buttons addObject:local(Reload pages)];
+            [buttons addObject:local(Reload list)];
+            break;
+            
+        default:
+            break;
+    }
+    JGActionSheetSection *section1 = [JGActionSheetSection sectionWithTitle:local(Picture Options)
+                                                                    message:[self statusString]
+                                                               buttonTitles:buttons
+                                                                buttonStyle:JGActionSheetButtonStyleBlue];
+    JGActionSheetSection *cancelSection = [JGActionSheetSection sectionWithTitle:nil
+                                                                         message:nil
+                                                                    buttonTitles:@[local(Close)]
+                                                                     buttonStyle:JGActionSheetButtonStyleCancel];
+    JGActionSheet *sheet = [JGActionSheet actionSheetWithSections:@[section1, cancelSection]];
+    
+    [sheet setButtonPressedBlock:^(JGActionSheet *sheet, NSIndexPath *indexPath) {
+        [sheet dismissAnimated:YES];
+        NSString *str = [buttons objectAtIndex:indexPath.row];
+        if ([str isEqualToString:local(Mark page to reload)]) {
+            [_item.pages objectAtIndex:_flipView.pageIndex].pageStatus = GSPageStatusNotStart;
+        }else if ([str isEqualToString:local(Download)]) {
+            [GSGlobals downloadBook:_item];
+        }else if ([str isEqualToString:local(Pause)]) {
+            [[GSGlobals getDataControl:_item.source] pauseBook:_item];
+        }else if ([str isEqualToString:local(Reload pages)]) {
+            [_item fullyCheckStatues];
+            [GSGlobals downloadBook:_item];
+        }else if ([str isEqualToString:local(Reload list)]) {
+            [_item reset];
+            [GSGlobals downloadBook:_item];
+        }
+        sheet.buttonPressedBlock = nil;
+    }];
+    
+    [sheet showInView:self.view animated:YES];
+}
+
+- (NSString*)statusString {
+    NSString *st;
+    switch (_item.bookStatus) {
+        case GSBookStatusComplete:
+            if (_item.loading) {
+                st = local(Progressing);
+            }else {
+                st = local(Paused);
+            }
+            break;
+        case GSBookStatusNotStart:
+            st = local(Not start);
+            break;
+        case GSBookStatusProgressing:
+            st = local(Loading list);
+            break;
+        case GSBookStatusPagesComplete:
+            st = local(Complete);
+            break;
+    }
+    return [NSString stringWithFormat:@"%@: %@ (%d/%d)",local(Status), st, (int)_item.readyCount.integerValue, (int)_item.pages.count];
 }
 
 - (void)pageComplete:(NSNotification *)notification {

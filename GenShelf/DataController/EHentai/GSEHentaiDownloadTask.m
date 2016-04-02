@@ -111,9 +111,10 @@
 }
 
 - (void)run {
-    if (_item.bookStatus == GSBookStatusComplete) {
+    if (_item.bookStatus >= GSBookStatusComplete) {
         [_item startLoading];
         _taskCount = 0;
+        __block BOOL hasPage = NO;
         [_item.pages enumerateObjectsUsingBlock:^(GSModelNetPage * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (obj.pageStatus != GSPageStatusComplete) {
                 [_downloadQueue createTask:PageDownloadIdentifier(obj)
@@ -125,8 +126,15 @@
                                        _taskCount ++;
                                        return task;
                                    }];
+                hasPage = YES;
             }
         }];
+        if (!hasPage) {
+            [_item pagesComplete];
+            [self complete];
+        }else {
+            [self cache];
+        }
     }else {
         [self failed:[NSError errorWithDomain:@"目标未完成"
                                          code:102

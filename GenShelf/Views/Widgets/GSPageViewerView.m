@@ -80,7 +80,6 @@ static BOOL _fillMode;
         [self addGestureRecognizer:tap];
         
         self.clipsToBounds = YES;
-        _fillMode = NO;
     }
     return self;
 }
@@ -223,23 +222,23 @@ static BOOL _fillMode;
     CGPoint trans = _translation;
     if (frame.origin.x > 0) {
         willRevert = YES;
-        trans.x -= frame.origin.x;
+        trans.x -= frame.origin.x/2;
         if (frame.origin.x + frame.size.width < bounds.size.width) {
             trans.x = 0;
         }
     }else if (frame.origin.x + frame.size.width < bounds.size.width) {
         willRevert = YES;
-        trans.x += bounds.size.width - (frame.origin.x + frame.size.width);
+        trans.x += (bounds.size.width - (frame.origin.x + frame.size.width))/2;
     }
     if (frame.origin.y > 0) {
         willRevert = YES;
-        trans.y -= frame.origin.y;
+        trans.y -= frame.origin.y/2;
         if (frame.origin.y + frame.size.height < bounds.size.height) {
             trans.y = 0;
         }
     }else if (frame.origin.y + frame.size.height < bounds.size.height) {
         willRevert = YES;
-        trans.y += bounds.size.height - (frame.origin.y + frame.size.height);
+        trans.y += (bounds.size.height - (frame.origin.y + frame.size.height))/2;
     }
     
     float toScale = _scale;

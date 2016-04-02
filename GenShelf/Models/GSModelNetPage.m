@@ -24,8 +24,6 @@
 - (void)checkStatus {
     if (![[NSFileManager defaultManager] fileExistsAtPath:self._imagePath]) {
         self.pageStatus = GSPageStatusNotStart;
-    }else {
-        self.pageStatus = GSPageStatusComplete;
     }
 }
 

@@ -51,3 +51,11 @@
 "Encryption Type"="加密类型";
 "Test"="测试";
 "Size"="尺寸";
+
+"Picture Options" = "图片选项";
+"Status"="状态";
+"Mark page to reload"="标记重载本页";
+"Reload pages"="重新下载";
+"Download" = "下载";
+"Reload list"="重载列表";
+"Pause" = "暂停";

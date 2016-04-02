@@ -15,6 +15,19 @@ const int replace_leng = 9;
 
 static NSString *_tempPath = nil;
 
+unsigned int BKDRHash(const char *str)
+{
+    unsigned int seed = 131; // 31 131 1313 13131 131313 etc..
+    unsigned int hash = 0;
+    
+    while (*str)
+    {
+        hash = hash * seed + (*str++);
+    }
+    
+    return (hash & 0x7FFFFFFF);
+}
+
 @implementation GSPictureManager
 
 static GSPictureManager *__defaultManager = nil;
@@ -103,8 +116,36 @@ static GSPictureManager *__defaultManager = nil;
     return nil;
 }
 
-- (NSString *)folderName:(GSModelNetBook *)book {
+- (NSString *)_1_2_folderName:(GSModelNetBook *)book {
     NSString *string = [NSString stringWithFormat:@"%@_%@", book.source, book.title];
+    const char *chs = string.UTF8String;
+    long len = strlen(chs);
+    char *n_chs = malloc(sizeof(char)*(len+1));
+    int count = 0;
+    for (int n = 0; n < len; n++) {
+        bool check = false;
+        for (int m = 0; m < replace_leng; m++) {
+            if (chs[n] == replacement[m]) {
+                check = true;
+                break;
+            }
+        }
+        if (!check && (chs[n] >= 32 && chs[n] <= 125)) {
+            n_chs[count++] = chs[n];
+            if (count >= 127) {
+                break;
+            }
+        }
+    }
+    n_chs[count] = 0;
+    NSString *path = [NSString stringWithUTF8String:n_chs];
+    free(n_chs);
+    return path;
+}
+
+- (NSString *)folderName:(GSModelNetBook *)book {
+    unsigned int hash = BKDRHash(book.title.UTF8String);
+    NSString *string = [NSString stringWithFormat:@"{%@%d}%@", book.source, hash, book.title];
     const char *chs = string.UTF8String;
     long len = strlen(chs);
     char *n_chs = malloc(sizeof(char)*(len+1));
@@ -179,6 +220,33 @@ static GSPictureManager *__defaultManager = nil;
             CheckErrorC
         }
     }
+}
+
+- (void)update1_3 {
+    NSFileManager *manager = [NSFileManager defaultManager];
+    
+    NSString *folder = [self folderPath];
+    
+    NSArray *arr = [GSModelNetBook fetch:[NSPredicate predicateWithFormat:@"mark==YES"]
+                                   sorts:@[[NSSortDescriptor sortDescriptorWithKey:@"downloadDate"
+                                                                         ascending:NO]]];
+    for (GSModelNetBook *book in arr) {
+        NSString *oldPath = [folder stringByAppendingPathComponent:[self _1_2_folderName:book]];
+        if ([manager fileExistsAtPath:oldPath]) {
+            NSString *newPath = [folder stringByAppendingPathComponent:[self folderName:book]];
+            NSError *error;
+            if ([manager fileExistsAtPath:newPath]) {
+                [manager removeItemAtPath:newPath
+                                    error:&error];
+                CheckErrorC
+            }
+            [manager moveItemAtPath:oldPath
+                             toPath:newPath
+                              error:&error];
+            CheckErrorC
+        }
+    }
+    
 }
 
 @end
