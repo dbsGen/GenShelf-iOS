@@ -8,10 +8,22 @@
 
 #import "GSPageFlipView.h"
 #import "GEase.h"
+#import "GSPageViewerView.h"
 
 @implementation GSPageFlipView {
     UIImageView     *_topShadow,
                     *_downShadow;
+    UIImage *_image;
+}
+
+static BOOL _fillMode;
+
+- (void)setFillMode:(BOOL)fillMode {
+    _fillMode = fillMode;
+}
+
+- (BOOL)fillMode {
+    return _fillMode;
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -34,9 +46,24 @@
         self.imageSize = CGSizeMake(frame.size.width/2, frame.size.height/2);
         
         _scale = 1;
-        _fullMode = NO;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(fillModeChange:)
+                                                     name:GSPAGE_FILL_MODEL_CHANGE
+                                                   object:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:GSPAGE_FILL_MODEL_CHANGE
+                                                  object:nil];
+}
+
+- (void)fillModeChange:(NSNotification*)notification {
+    self.fillMode = [notification.object boolValue];
+    [self rerender];
 }
 
 - (void)setAnimationPercent:(CGFloat)percent
@@ -61,20 +88,27 @@
     self.center = CGPointMake(bounds.size.width/2, bounds.size.height/2+ bounds.size.height * percent);
 }
 
+- (void)rerender {
+    [self renderImage:_image
+                scale:_scale
+          translation:_translation];
+}
+
 - (void)renderPath:(NSString *)path scale:(CGFloat)scale translation:(CGPoint)trans {
     _scale = scale;
     _translation = trans;
     CGRect bounds = self.bounds;
     bounds.size = self.imageSize;
-    BOOL fullMode = _fullMode;
+    BOOL fillMode = self.fillMode;
     void (^block)(CGContextRef context) = ^(CGContextRef context){
         CGContextTranslateCTM(context, 0.0f, bounds.size.height);
         CGContextScaleCTM(context, 1.0f, -1.0f);
         UIImage *image = [UIImage imageWithContentsOfFile:path];
+        _image = image;
         CGSize originalSize = image.size;
         CGRect frame;
         BOOL check = originalSize.height/originalSize.width > bounds.size.height/bounds.size.width;
-        if (fullMode) {
+        if (fillMode) {
             check = !check;
         }
         if (check) {
@@ -101,18 +135,19 @@
     if (!image) {
         return;
     }
+    _image = image;
     _scale = scale;
     _translation = trans;
     CGRect bounds = self.bounds;
     bounds.size = self.imageSize;
-    BOOL fullMode = _fullMode;
+    BOOL fillMode = self.fillMode;
     void (^block)(CGContextRef context) = ^(CGContextRef context){
         CGContextTranslateCTM(context, 0.0f, bounds.size.height);
         CGContextScaleCTM(context, 1.0f, -1.0f);
         CGSize originalSize = image.size;
         CGRect frame;
         BOOL check = originalSize.height/originalSize.width > bounds.size.height/bounds.size.width;
-        if (fullMode) {
+        if (fillMode) {
             check = !check;
         }
         if (check) {

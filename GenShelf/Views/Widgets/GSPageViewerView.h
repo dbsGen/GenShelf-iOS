@@ -8,15 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+#define GSPAGE_FILL_MODEL_CHANGE @"GSPAGE_FILL_MODEL_CHANGE"
+
 @class GSPageViewerView;
 
 typedef void(^GSPageViewerBlock)(GSPageViewerView *sender);
 
 @interface GSPageViewerView : UIView {
-    BOOL _fullMode;
 }
 
-@property (nonatomic, assign) BOOL fullMode;
+@property (nonatomic, assign) BOOL fillMode;
 @property (nonatomic, strong) NSString *imagePath;
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, readonly) UIImageView *imageView;

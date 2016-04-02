@@ -7,15 +7,15 @@
 //
 
 #import "GSTask.h"
-#import "GSBookItem.h"
+#import "GSModelNetBook.h"
 
 @interface GSEHentaiDownloadTask : GSTask {
-    GSBookItem *_item;
+    GSModelNetBook *_item;
     NSOperationQueue *_queue;
     NSUInteger _taskCount;
 }
 
 @property (nonatomic, strong) GSTaskQueue *downloadQueue;
-- (id)initWithItem:(GSBookItem *)item queue:(NSOperationQueue *)queue;
+- (id)initWithItem:(GSModelNetBook *)item queue:(NSOperationQueue *)queue;
 
 @end

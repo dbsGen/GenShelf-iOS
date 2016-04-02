@@ -46,8 +46,8 @@
     return task;
 }
 
-- (GSTask *)processBook:(GSBookItem *)book {
-    if (book.status < GSBookItemStatusComplete) {
+- (GSTask *)processBook:(GSModelNetBook *)book {
+    if (book.bookStatus < GSBookStatusComplete) {
         GSEHentaiBookTask *task = [self.taskQueue createTask:BookProcessIdentifier(book)
                                                   creator:^GSTask *{
                                                       return [[GSEHentaiBookTask alloc] initWithItem:book
@@ -58,13 +58,13 @@
     return nil;
 }
 
-- (GSTask *)downloadBook:(GSBookItem *)book {
+- (GSTask *)downloadBook:(GSModelNetBook *)book {
     [super downloadBook:book];
     NSString *identifier = BookDownloadIdentifier(book);
-    if (book.status == GSBookItemStatusPagesComplete) {
+    if (book.bookStatus == GSBookStatusPagesComplete) {
         return nil;
     }else {
-        if (book.status != GSBookItemStatusComplete) {
+        if (book.bookStatus != GSBookStatusComplete) {
             GSTask *processTask = nil;
             if (![self.taskQueue hasTaskI:book.pageUrl]) {
                 processTask = [self processBook:book];

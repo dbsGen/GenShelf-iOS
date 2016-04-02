@@ -8,7 +8,7 @@
 
 #import "GSShelfViewController.h"
 #import "GSideMenuController.h"
-#import "GSBookItem.h"
+#import "GSModelNetBook.h"
 #import "GSBookCell.h"
 #import "GCoreDataManager.h"
 #import "GSModelNetBook.h"
@@ -18,7 +18,7 @@
 static BOOL _shelf_reload = YES;
 
 @interface GSShelfViewController ()<UITableViewDelegate, UITableViewDataSource> {
-    NSMutableArray<GSBookItem *> * _datas;
+    NSMutableArray<GSModelNetBook *> * _datas;
     UIBarButtonItem *_editItem, *_doneItem;
     CGFloat _oldPosx;
 }
@@ -73,7 +73,7 @@ static BOOL _shelf_reload = YES;
         NSArray *arr = [GSModelNetBook fetch:[NSPredicate predicateWithFormat:@"mark==YES"]
                                        sorts:@[[NSSortDescriptor sortDescriptorWithKey:@"downloadDate"
                                                                              ascending:NO]]];
-        _datas = [NSMutableArray<GSBookItem *> arrayWithArray:[GSBookItem items:arr]];
+        _datas = [NSMutableArray<GSModelNetBook *> arrayWithArray:arr];
         [_tableView reloadData];
     }
 }
@@ -128,14 +128,14 @@ static BOOL _shelf_reload = YES;
         cell = [[GSBookCell alloc] initWithStyle:UITableViewCellStyleDefault
                                  reuseIdentifier:identifier];
     }
-    GSBookItem *item = [_datas objectAtIndex:indexPath.row];
+    GSModelNetBook *item = [_datas objectAtIndex:indexPath.row];
     cell.imageUrl = item.imageUrl;
     cell.titleLabel.text = item.title;
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    GSBookItem *item = [_datas objectAtIndex:indexPath.row];
+    GSModelNetBook *item = [_datas objectAtIndex:indexPath.row];
     GSVBookViewController *book = [[GSVBookViewController alloc] init];
     book.item = item;
     [self.navigationController pushViewController:book animated:YES];
@@ -145,7 +145,7 @@ static BOOL _shelf_reload = YES;
     switch (editingStyle) {
         case UITableViewCellEditingStyleDelete:
         {
-            GSBookItem *book = [_datas objectAtIndex:indexPath.row];
+            GSModelNetBook *book = [_datas objectAtIndex:indexPath.row];
             [_datas removeObjectAtIndex:indexPath.row];
             [[GSGlobals dataControl] deleteBook:book];
             [_tableView deleteRowsAtIndexPaths:@[indexPath]

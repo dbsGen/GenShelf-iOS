@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
+#import "GCoreDataManager.h"
 
 #define BOOK_ITEM_UPDATE    @"book_item_update"
 #define BOOK_ITEM_OVER      @"book_item_over"

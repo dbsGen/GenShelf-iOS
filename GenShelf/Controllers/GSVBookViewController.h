@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GSBookItem.h"
+#import "GSModelNetBook.h"
 
 @interface GSVBookViewController : UIViewController
 
-@property (nonatomic, strong) GSBookItem *item;
+@property (nonatomic, strong) GSModelNetBook *item;
 
 @end

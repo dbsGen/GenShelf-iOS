@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "ASIHTTPRequest.h"
-#import "GSBookItem.h"
-#import "GSPageItem.h"
+#import "GSModelNetBook.h"
+#import "GSModelNetPage.h"
 #import "GSTask.h"
 #import "GSRequestTask.h"
 
@@ -62,14 +62,14 @@ typedef enum : NSUInteger {
 - (void)makeProperties;
 
 + (void)updateProgressingBooks;
-+ (NSInteger)removeProgressingBook:(GSBookItem *)book;
++ (NSInteger)removeProgressingBook:(GSModelNetBook *)book;
 + (NSArray*)progressingBooks;
 
 - (GSRequestTask *)mainRequest:(NSInteger)pageIndex;
 - (GSRequestTask *)searchRequest:(NSString *)keyword pageIndex:(NSInteger)pageIndex;
-- (GSTask *)processBook:(GSBookItem *)book;
-- (GSTask *)downloadBook:(GSBookItem *)book;
-- (void)pauseBook:(GSBookItem *)book;
-- (NSInteger)deleteBook:(GSBookItem *)book;
+- (GSTask *)processBook:(GSModelNetBook *)book;
+- (GSTask *)downloadBook:(GSModelNetBook *)book;
+- (void)pauseBook:(GSModelNetBook *)book;
+- (NSInteger)deleteBook:(GSModelNetBook *)book;
 
 @end

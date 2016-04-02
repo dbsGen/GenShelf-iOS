@@ -61,13 +61,17 @@
         NSArray *divs = [doc nodesForXPath:@"//tr[@class='gtr0']|//tr[@class='gtr1']" error:&error];
         CheckError
         
-        NSMutableArray<GSBookItem *> *res = [NSMutableArray<GSBookItem*> array];
+        NSMutableArray<GSModelNetBook *> *res = [NSMutableArray<GSModelNetBook*> array];
         for (GDataXMLNode *node in divs) {
             GDataXMLElement *hrefNode = (GDataXMLElement*)[node firstNodeForXPath:@"td[@class='itd']//div[@class='it5']/a"
                                                                             error:&error];
             CheckErrorC
             NSString *pageUrl = [hrefNode attributeForName:@"href"].stringValue;
-            GSBookItem *item = [GSBookItem itemWithUrl:pageUrl];
+            GSModelNetBook *item = [GSModelNetBook fetchOrCreate:[NSPredicate predicateWithFormat:@"pageUrl==%@", pageUrl]
+                                                     constructor:^(id object) {
+                                                         GSModelNetBook *book = object;
+                                                         book.pageUrl = pageUrl;
+                                                     }];
             item.title = hrefNode.stringValue;
             item.source = self.source;
             

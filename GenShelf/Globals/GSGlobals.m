@@ -213,7 +213,7 @@ static NSMutableArray<NSString*> *_dataControlNames;
     return request;
 }
 
-+ (GSTask *)processBook:(GSBookItem *)book {
++ (GSTask *)processBook:(GSModelNetBook *)book {
     GSDataControl *dataControl = [self getDataControl:book.source];
     if (dataControl) {
         return [dataControl processBook:book];
@@ -221,7 +221,7 @@ static NSMutableArray<NSString*> *_dataControlNames;
     return [[self dataControl] processBook:book];
 }
 
-+ (GSTask *)downloadBook:(GSBookItem *)book {
++ (GSTask *)downloadBook:(GSModelNetBook *)book {
     GSDataControl *dataControl = [self getDataControl:book.source];
     if (dataControl) {
         return [dataControl downloadBook:book];

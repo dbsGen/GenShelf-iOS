@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#define PAGE_ITEM_REQUEST_IMAGE @"page_item_request_image"
+#define PAGE_ITEM_SET_IMAGE     @"page_item_set_image"
 
 typedef enum : NSUInteger {
     GSPageStatusNotStart    = 0,
@@ -24,6 +26,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, assign) GSPageStatus pageStatus;
 - (void)checkStatus;
+
+- (NSString *)imagePath;
+
+- (void)requestImage;
+- (void)complete;
+- (void)reset;
 
 @end
 

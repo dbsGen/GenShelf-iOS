@@ -7,7 +7,6 @@
 //
 
 #import "GSRequestTask.h"
-#import "GSBookItem.h"
 
 @interface GSLofiHomeTask : GSRequestTask {
     NSOperationQueue *_queue;

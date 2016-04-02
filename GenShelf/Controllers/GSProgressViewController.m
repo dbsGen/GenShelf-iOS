@@ -17,7 +17,7 @@
 @end
 
 @implementation GSProgressViewController {
-    NSArray<GSBookItem *> *_datas;
+    NSArray<GSModelNetBook *> *_datas;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
@@ -37,6 +37,12 @@
                                                    object:nil];
     }
     return self;
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self
+                                                    name:BOOK_ITEM_PAGES
+                                                  object:nil];
 }
 
 - (void)viewDidLoad {

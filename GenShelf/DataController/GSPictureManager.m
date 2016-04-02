@@ -42,7 +42,7 @@ static GSPictureManager *__defaultManager = nil;
     return [[self folderPath] stringByAppendingPathComponent:@"caches"];
 }
 
-- (void)insertPicture:(NSData *)data book:(GSBookItem *)book page:(GSPageItem *)page {
+- (void)insertPicture:(NSData *)data book:(GSModelNetBook *)book page:(GSModelNetPage *)page {
     NSString *path = [self path:book page:page];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if ([fileManager fileExistsAtPath:path]) {
@@ -80,7 +80,7 @@ static GSPictureManager *__defaultManager = nil;
     return path;
 }
 
-- (NSString *)path:(GSBookItem *)book page:(GSPageItem *)page {
+- (NSString *)path:(GSModelNetBook *)book page:(GSModelNetPage *)page {
     NSString *bookFolder = [[self folderPath] stringByAppendingPathComponent:[self folderName:book]];
     NSFileManager *fileManager = [NSFileManager defaultManager];
     if (![fileManager fileExistsAtPath:bookFolder
@@ -92,18 +92,18 @@ static GSPictureManager *__defaultManager = nil;
                                      error:&error];
         CheckErrorR(nil);
     }
-    NSString *fileName = [NSString stringWithFormat:@"%04d.%@", (int)page.index, [page.imageUrl pathExtension]];
+    NSString *fileName = [NSString stringWithFormat:@"%04d.%@", (int)page.index.integerValue, [page.imageUrl pathExtension]];
     return [bookFolder stringByAppendingPathComponent:fileName];
 }
 
-- (NSString *)path:(GSBookItem *)book {
+- (NSString *)path:(GSModelNetBook *)book {
     if (book) {
         return [[self folderPath] stringByAppendingPathComponent:[self folderName:book]];
     }
     return nil;
 }
 
-- (NSString *)folderName:(GSBookItem *)book {
+- (NSString *)folderName:(GSModelNetBook *)book {
     NSString *string = [NSString stringWithFormat:@"%@_%@", book.source, book.title];
     const char *chs = string.UTF8String;
     long len = strlen(chs);
@@ -130,8 +130,8 @@ static GSPictureManager *__defaultManager = nil;
     return path;
 }
 
-- (void)deleteBook:(GSBookItem *)book {
-    for (GSPageItem *page in book.pages) {
+- (void)deleteBook:(GSModelNetBook *)book {
+    for (GSModelNetPage *page in book.pages) {
         [page reset];
     }
     NSFileManager *manager = [NSFileManager defaultManager];
@@ -144,7 +144,7 @@ static GSPictureManager *__defaultManager = nil;
     [book remove];
 }
 
-- (void)deletePage:(GSPageItem *)page {
+- (void)deletePage:(GSModelNetPage *)page {
     NSFileManager *manager = [NSFileManager defaultManager];
     NSString *path = page.imagePath;
     if ([manager fileExistsAtPath:path]) {

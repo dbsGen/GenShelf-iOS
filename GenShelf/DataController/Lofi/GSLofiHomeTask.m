@@ -60,13 +60,20 @@
     NSArray *divs = [doc nodesForXPath:@"//div[@class='ig']" error:&error];
     CheckError
     
-    NSMutableArray<GSBookItem *> *res = [NSMutableArray<GSBookItem*> array];
+    NSMutableArray<GSModelNetBook *> *res = [NSMutableArray<GSModelNetBook*> array];
     for (GDataXMLNode *node in divs) {
         GDataXMLElement *imageNode = (GDataXMLElement*)[node firstNodeForXPath:@"node()//td[@class='ii']/a"
                                                                          error:&error];
         CheckErrorC
         NSString *pageUrl = [imageNode attributeForName:@"href"].stringValue;
-        GSBookItem *item = [GSBookItem itemWithUrl:pageUrl];
+        if (!pageUrl) {
+            continue;
+        }
+        GSModelNetBook *item = [GSModelNetBook fetchOrCreate:[NSPredicate predicateWithFormat:@"pageUrl == %@", pageUrl]
+                                                 constructor:^(id object) {
+                                                     GSModelNetBook *book = object;
+                                                     book.pageUrl = pageUrl;
+                                                 }];
         
         GDataXMLElement *sImageNode = (GDataXMLElement*)[imageNode firstNodeForXPath:@"img"
                                                                                error:&error];

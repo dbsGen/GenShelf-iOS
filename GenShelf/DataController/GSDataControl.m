@@ -58,7 +58,7 @@
 @implementation GSDataControl
 
 @synthesize name = _name, requestDelay = _requestDelay, taskQueue = _taskQueue;
-static NSMutableArray *_progressingBooks;
+static NSMutableArray<GSModelNetBook*> *_progressingBooks;
 
 - (id)init {
     self = [super init];
@@ -173,8 +173,8 @@ static NSMutableArray *_progressingBooks;
 
 + (void)updateProgressingBooks {
     for (NSInteger n = 0, t = _progressingBooks.count; n < t; n++) {
-        GSBookItem *book = [_progressingBooks objectAtIndex:n];
-        if (book.status == GSBookItemStatusPagesComplete || !book.mark) {
+        GSModelNetBook *book = [_progressingBooks objectAtIndex:n];
+        if (book.bookStatus == GSBookStatusPagesComplete || !book.mark) {
             [_progressingBooks removeObjectAtIndex:n];
             n --;
             t --;
@@ -182,7 +182,7 @@ static NSMutableArray *_progressingBooks;
     }
 }
 
-+ (NSInteger)removeProgressingBook:(GSBookItem *)book {
++ (NSInteger)removeProgressingBook:(GSModelNetBook *)book {
     NSInteger index = [_progressingBooks indexOfObject:book];
     if (index >= 0) {
         [_progressingBooks removeObjectAtIndex:index];
@@ -195,12 +195,10 @@ static NSMutableArray *_progressingBooks;
         _progressingBooks = [[NSMutableArray alloc] init];
     }
     [_progressingBooks removeAllObjects];
-    NSArray<GSModelNetBook *> *books = [GSModelNetBook fetch:[NSPredicate predicateWithFormat:@"mark == YES AND status != %d", GSBookItemStatusPagesComplete]
+    NSArray<GSModelNetBook *> *books = [GSModelNetBook fetch:[NSPredicate predicateWithFormat:@"mark == YES AND status != %d", GSBookStatusPagesComplete]
                                                        sorts:@[[NSSortDescriptor sortDescriptorWithKey:@"downloadDate"
                                                           ascending:NO]]];
-    for (GSModelNetBook *book in books) {
-        [_progressingBooks addObject:[GSBookItem itemWithModel:book]];
-    }
+    [_progressingBooks addObjectsFromArray:books];
 }
 
 - (GSRequestTask *)mainRequest:(NSInteger)pageIndex {return nil;}
@@ -209,14 +207,14 @@ static NSMutableArray *_progressingBooks;
 + (NSArray *)progressingBooks {
     return _progressingBooks;
 }
-- (GSTask *)processBook:(GSBookItem *)book {
+- (GSTask *)processBook:(GSModelNetBook *)book {
     if (!book.source) {
         book.source = self.name;
     }
     return nil;
 }
-- (GSTask *)downloadBook:(GSBookItem *)book {
-    if (book.status != GSBookItemStatusPagesComplete &&
+- (GSTask *)downloadBook:(GSModelNetBook *)book {
+    if (book.bookStatus != GSBookStatusPagesComplete &&
         [_progressingBooks filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"pageUrl == %@", book.pageUrl]].count == 0) {
         
         [_progressingBooks addObject:book];
@@ -224,7 +222,7 @@ static NSMutableArray *_progressingBooks;
     return nil;
 }
 
-- (void)pauseBook:(GSBookItem *)book {
+- (void)pauseBook:(GSModelNetBook *)book {
     GSTask *task = [self.taskQueue task:BookDownloadIdentifier(book)];
     if (task) {
         [task cancel];
@@ -236,7 +234,7 @@ static NSMutableArray *_progressingBooks;
     [book cancel];
 }
 
-- (NSInteger)deleteBook:(GSBookItem *)book {
+- (NSInteger)deleteBook:(GSModelNetBook *)book {
     if ([_progressingBooks containsObject:book]) {
         NSInteger index = [_progressingBooks indexOfObject:book];
         [self pauseBook:book];

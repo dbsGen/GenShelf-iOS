@@ -13,6 +13,7 @@
 
 @implementation GSModelNetBook (CoreDataProperties)
 
+@dynamic readyCount;
 @dynamic source;
 @dynamic downloadDate;
 @dynamic mark;

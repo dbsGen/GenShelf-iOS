@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "GSBookItem.h"
-#import "GSPageItem.h"
+#import "GSModelNetBook.h"
+#import "GSModelNetPage.h"
 
 @interface GSPictureManager : NSObject
 
@@ -17,12 +17,12 @@
 - (NSString *)insertCachePicture:(NSData *)data source:(NSString *)source keyword:(NSString *)keyword;
 - (NSString *)path:(NSString *)source keyword:(NSString *)keyword;
 
-- (void)insertPicture:(NSData *)data book:(GSBookItem *)book page:(GSPageItem *)page;
+- (void)insertPicture:(NSData *)data book:(GSModelNetBook *)book page:(GSModelNetPage *)page;
 - (NSString *)fullPath:(NSString *)path;
-- (NSString *)path:(GSBookItem *)book page:(GSPageItem *)page;
-- (NSString *)path:(GSBookItem *)book;
-- (void)deleteBook:(GSBookItem *)book;
-- (void)deletePage:(GSPageItem *)page;
+- (NSString *)path:(GSModelNetBook *)book page:(GSModelNetPage *)page;
+- (NSString *)path:(GSModelNetBook *)book;
+- (void)deleteBook:(GSModelNetBook *)book;
+- (void)deletePage:(GSModelNetPage *)page;
 
 - (void)update1_2;
 

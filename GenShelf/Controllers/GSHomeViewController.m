@@ -30,7 +30,7 @@ static BOOL _reload_cache = YES;
     BOOL _loaded;
     BOOL _loading;
     BOOL _hasNext;
-    NSMutableArray<GSBookItem *> *_datas;
+    NSMutableOrderedSet<GSModelNetBook*> *_datas;
     GSBottomLoadingCell *_bottomCell;
     CGFloat _oldPosx;
 }
@@ -86,9 +86,9 @@ static BOOL _reload_cache = YES;
     if (_reload_cache || !_datas) {
         _reload_cache = NO;
         BOOL expire = NO;
-        _datas = [NSMutableArray arrayWithArray:[GSBookItem cachedItems:&_index
-                                                                hasNext:&_hasNext
-                                                                 expire:&expire]];
+        _datas = [NSMutableOrderedSet orderedSetWithOrderedSet:[GSModelNetBook cachedItems:&_index
+                                                                                   hasNext:&_hasNext
+                                                                                    expire:&expire]];
         [_tableView reloadData];
         
         if (_datas.count == 0 || expire) {
@@ -137,7 +137,7 @@ static BOOL _reload_cache = YES;
             cell = [[GSBookCell alloc] initWithStyle:UITableViewCellStyleDefault
                                      reuseIdentifier:identifier];
         }
-        GSBookItem *item = [_datas objectAtIndex:indexPath.row];
+        GSModelNetBook *item = [_datas objectAtIndex:indexPath.row];
         cell.imageUrl = item.imageUrl;
         cell.titleLabel.text = item.title;
         return cell;
@@ -150,7 +150,7 @@ static BOOL _reload_cache = YES;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < _datas.count) {
-        GSBookItem *item = [_datas objectAtIndex:indexPath.row];
+        GSModelNetBook *item = [_datas objectAtIndex:indexPath.row];
         GSPreviewViewController *preview = [[GSPreviewViewController alloc] init];
         preview.item = item;
         [self.navigationController pushViewController:preview
@@ -222,17 +222,17 @@ static BOOL _reload_cache = YES;
 
 - (void)onTaskComplete:(GSRequestTask *)task {
     if (task.tag == 1) {
-        _datas = [NSMutableArray<GSBookItem *> arrayWithArray:task.books];
+        _datas = [NSMutableOrderedSet<GSModelNetBook *> orderedSetWithArray:task.books];
         [_tableView reloadData];
         _loaded = YES;
         [_refreshView endRefresh];
         _index = task.index;
         _hasNext = task.hasMore;
-        [GSBookItem cacheItems:_datas page:_index hasNext:_hasNext];
+        [GSModelNetBook cacheItems:_datas page:_index hasNext:_hasNext];
     }else if (task.tag == 2) {
-        NSArray<GSBookItem *> *arr = task.books;
+        NSArray<GSModelNetBook *> *arr = task.books;
         NSMutableArray<NSIndexPath *> *indexes = [NSMutableArray array];
-        [arr enumerateObjectsUsingBlock:^(GSBookItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [arr enumerateObjectsUsingBlock:^(GSModelNetBook * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (![_datas containsObject:obj]) {
                 [indexes addObject:[NSIndexPath indexPathForRow:_datas.count
                                                       inSection:0]];
@@ -243,7 +243,7 @@ static BOOL _reload_cache = YES;
                           withRowAnimation:UITableViewRowAnimationAutomatic];
         _index = task.index;
         _hasNext = task.hasMore;
-        [GSBookItem cacheItems:_datas page:_index hasNext:_hasNext];
+        [GSModelNetBook cacheItems:_datas page:_index hasNext:_hasNext];
     }
     _loading = NO;
     [self updateLoadingStatus];

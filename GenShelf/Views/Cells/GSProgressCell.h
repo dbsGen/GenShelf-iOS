@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "GSBookItem.h"
+#import "GSModelNetBook.h"
 #import "GSProgressView.h"
 
 @class GSProgressCell;
@@ -23,7 +23,7 @@
 
 @interface GSProgressCell : UITableViewCell
 
-@property (nonatomic, strong) GSBookItem *data;
+@property (nonatomic, strong) GSModelNetBook *data;
 
 @property (nonatomic, readonly) UILabel *nameLabel;
 @property (nonatomic, readonly) UILabel *detailLabel;

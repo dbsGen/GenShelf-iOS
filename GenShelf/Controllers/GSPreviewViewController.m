@@ -61,11 +61,11 @@ static NSString *identifier = @"CellIdentifier";
     _collectionView.dataSource = nil;
 }
 
-- (void)setItem:(GSBookItem *)item {
+- (void)setItem:(GSModelNetBook *)item {
     if (_item != item) {
         _item = item;
         self.title = item.title;
-        if (_item.status < GSBookItemStatusComplete) {
+        if (_item.bookStatus < GSBookStatusComplete) {
             GSTask *task = [GSGlobals processBook:_item];
             [task taskRetain];
             if (_currentTask) {
@@ -73,7 +73,7 @@ static NSString *identifier = @"CellIdentifier";
             }
             _currentTask = task;
         }
-        self.navigationItem.rightBarButtonItem = _item.mark ? _collectedItem : _collectItem;
+        self.navigationItem.rightBarButtonItem = [_item.mark boolValue] ? _collectedItem : _collectItem;
     }
 }
 

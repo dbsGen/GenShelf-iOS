@@ -113,9 +113,9 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
 
 @property (nonatomic, readonly) NSString *imageUrl;
 @property (nonatomic, readonly) CGRect rect;
-@property (nonatomic, strong) GSPageItem *item;
+@property (nonatomic, strong) GSModelNetPage *item;
 
-- (instancetype)initWithImageUrl:(NSString *)imageUrl rect:(CGRect)rect item:(GSPageItem*)item queue:(NSOperationQueue *)queue;
+- (instancetype)initWithImageUrl:(NSString *)imageUrl rect:(CGRect)rect item:(GSModelNetPage*)item queue:(NSOperationQueue *)queue;
 
 @end
 
@@ -124,7 +124,7 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
     ASIHTTPRequest *_request;
 }
 
-- (instancetype)initWithImageUrl:(NSString *)imageUrl rect:(CGRect)rect item:(GSPageItem *)item queue:(NSOperationQueue *)queue {
+- (instancetype)initWithImageUrl:(NSString *)imageUrl rect:(CGRect)rect item:(GSModelNetPage *)item queue:(NSOperationQueue *)queue {
     self = [super init];
     if (self) {
         _imageUrl = imageUrl;
@@ -208,7 +208,6 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
                                                                         source:self.source
                                                                        keyword:keyword];
         _item.thumUrl = path;
-        [_item updateData];
         [self complete];
     };
     [_queue addOperation:operation];
@@ -229,17 +228,17 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
 
 @interface GSEHentaiProcessPagesTask : GSTask
 
-@property (nonatomic, readonly) NSArray<GSPageItem*> *pages;
+@property (nonatomic, readonly) NSArray<GSModelNetPage*> *pages;
 @property (nonatomic, strong) NSString* nextUrl;
 
 - (instancetype)initWithQueue:(NSOperationQueue *)queue;
 
-- (void)insertPage:(GSPageItem *)page imageUrl:(NSString *)imageUrl rect:(CGRect)rect;
+- (void)insertPage:(GSModelNetPage *)page imageUrl:(NSString *)imageUrl rect:(CGRect)rect;
 
 @end
 
 @implementation GSEHentaiProcessPagesTask {
-    NSMutableArray<GSPageItem*> *_pages;
+    NSMutableArray<GSModelNetPage*> *_pages;
     NSMutableArray<GSEHentaiProcessItem*> *_items;
     NSOperationQueue *_queue;
 }
@@ -254,11 +253,11 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
     return self;
 }
 
-- (NSArray<GSPageItem*> *)pages {
+- (NSArray<GSModelNetPage*> *)pages {
     return _pages;
 }
 
-- (void)insertPage:(GSPageItem *)page imageUrl:(NSString *)imageUrl rect:(CGRect)rect {
+- (void)insertPage:(GSModelNetPage *)page imageUrl:(NSString *)imageUrl rect:(CGRect)rect {
     [_pages addObject:page];
     GSEHentaiProcessItem *item = [[GSEHentaiProcessItem alloc] init];
     item.imageUrl = imageUrl;
@@ -268,7 +267,7 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
 
 - (void)run {
     for (NSInteger n = 0, t = _pages.count; n < t; n++) {
-        GSPageItem *page = [_pages objectAtIndex:n];
+        GSModelNetPage *page = [_pages objectAtIndex:n];
         GSEHentaiProcessItem *item = [_items objectAtIndex:n];
         [self addSubtask:[[GSEHentaiPageThumTask alloc] initWithImageUrl:item.imageUrl
                                                                     rect:item.rect
@@ -368,7 +367,7 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
 
 @implementation GSEHentaiBookTask
 
-- (id)initWithItem:(GSBookItem *)item queue:(NSOperationQueue *)queue {
+- (id)initWithItem:(GSModelNetBook *)item queue:(NSOperationQueue *)queue {
     self = [super init];
     if (self) {
         _item = item;
@@ -378,7 +377,7 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
 }
 
 - (void)run {
-    if (_item.status >= GSBookItemStatusComplete) {
+    if (_item.bookStatus >= GSBookStatusComplete) {
         [self complete];
     }else {
         NSURL *url = [NSURL URLWithString:_item.otherData ? _item.otherData : _item.pageUrl];
@@ -403,13 +402,21 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
     NSArray *pNodes = [doc nodesForXPath:@"//div[@id='gdt']/div[@class='gdtm']"
                                    error:&error];
     CheckError
-    NSMutableArray<GSPageItem *> *pages = [NSMutableArray<GSPageItem *> array];
+    NSMutableArray<GSModelNetPage *> *pages = [NSMutableArray<GSModelNetPage *> array];
     GSEHentaiProcessPagesTask *task = [[GSEHentaiProcessPagesTask alloc] initWithQueue:_queue];
     for (GDataXMLNode *pNode in pNodes) {
         GDataXMLElement *a = (GDataXMLElement*)[pNode firstNodeForXPath:@"node()/a"
                                                                   error:&error];
         CheckErrorC
-        GSPageItem *page = [GSPageItem itemWithUrl:[a attributeForName:@"href"].stringValue];
+        NSString *href = [a attributeForName:@"href"].stringValue;
+        if (!href) {
+            continue;
+        }
+        GSModelNetPage *page = [GSModelNetPage fetchOrCreate:[NSPredicate predicateWithFormat:@"pageUrl==%@", href]
+                                                 constructor:^(id object) {
+                                                     GSModelNetPage *page = object;
+                                                     page.pageUrl = href;
+                                                 }];
         
         GDataXMLElement *div = (GDataXMLElement*)[pNode firstNodeForXPath:@"div"
                                                                     error:&error];
@@ -482,7 +489,7 @@ typedef void(^GSProcessStyleBlock)(NSInteger index, NSString *val);
 - (void)onTaskComplete:(GSTask *)task {
     if ([task isKindOfClass:[GSEHentaiProcessPagesTask class]]) {
         GSEHentaiProcessPagesTask *pagesTask = (GSEHentaiProcessPagesTask *)task;
-        [_item loadPages:pagesTask.pages];
+        [_item loadPages:[NSOrderedSet orderedSetWithArray:pagesTask.pages]];
         if (!pagesTask.nextUrl) {
             _item.otherData = nil;
             [_item complete];

@@ -12,7 +12,7 @@
 #import "GSSearchViewController.h"
 #import "GSSettingsViewController.h"
 #import "GSProgressViewController.h"
-#import "GSBookItem.h"
+#import "GSModelNetBook.h"
 #import "RKDropdownAlert.h"
 #import "GCoverView.h"
 
@@ -54,8 +54,8 @@
 }
 
 - (void)onFailed:(NSNotification *)notification {
-    if ([notification.object isKindOfClass:[GSBookItem class]]) {
-        GSBookItem *item = notification.object;
+    if ([notification.object isKindOfClass:[GSModelNetBook class]]) {
+        GSModelNetBook *item = notification.object;
         [RKDropdownAlert title:[NSString stringWithFormat:local(Download failed), item.title]
                backgroundColor:[UIColor redColor]
                      textColor:[UIColor whiteColor]];

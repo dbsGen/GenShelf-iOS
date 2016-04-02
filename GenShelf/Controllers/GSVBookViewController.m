@@ -69,7 +69,7 @@
                 
 //                [v renderImage:view.image
 //                         frame:frame];
-                v.fullMode = view.fullMode;
+                v.fillMode = view.fillMode;
                 [v renderImage:view.image
                          scale:view.scale
                    translation:view.translation];
@@ -118,7 +118,6 @@
     GSPageFlipView *view = (GSPageFlipView*)[flipView getDragingView:index];
     _pageViewer.scale = view ? view.scale : 1;
     _pageViewer.translation = view ? view.translation : CGPointMake(0, 0);
-    _pageViewer.fullMode = view.fullMode;
     _pageViewer.imagePath = [_item.pages objectAtIndex:index].imagePath;
     [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:MAX(0, index - 4)
                                                           inSection:0]
@@ -174,10 +173,10 @@
 }
 
 - (void)pageComplete:(NSNotification *)notification {
-    NSArray *pages = [_item.pages filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"model == %@", [notification.object model]]];
+    NSOrderedSet *pages = [_item.pages filteredOrderedSetUsingPredicate:[NSPredicate predicateWithFormat:@"self == %@", notification.object]];
     if (pages.count) {
-        GSPageItem *currentPage = [pages firstObject];
-        GSPageItem *page = [_item.pages objectAtIndex:_flipView.pageIndex];
+        GSModelNetPage *currentPage = [pages firstObject];
+        GSModelNetPage *page = [_item.pages objectAtIndex:_flipView.pageIndex];
         if ([currentPage.pageUrl isEqualToString:page.pageUrl]) {
             _pageViewer.imagePath = page.imagePath;
         }

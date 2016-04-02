@@ -56,7 +56,7 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
     BOOL _bordLeft, _bordRight, _bordTop, _bordBottom;
 }
 
-@synthesize fullMode = _fullMode;
+static BOOL _fillMode;
 
 - (id)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
@@ -80,9 +80,21 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
         [self addGestureRecognizer:tap];
         
         self.clipsToBounds = YES;
-        _fullMode = NO;
+        _fillMode = NO;
     }
     return self;
+}
+
+- (void)setFillMode:(BOOL)fillMode {
+    if (_fillMode != fillMode) {
+        _fillMode = fillMode;
+        [[NSNotificationCenter defaultCenter] postNotificationName:GSPAGE_FILL_MODEL_CHANGE
+                                                            object:[NSNumber numberWithBool:_fillMode]];
+    }
+}
+
+- (BOOL)fillMode {
+    return _fillMode;
 }
 
 - (void)setImagePath:(NSString *)imagePath {
@@ -107,7 +119,7 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
         CGRect bounds = self.bounds;
         CGRect frame;
         BOOL check = originalSize.height/originalSize.width > bounds.size.height/bounds.size.width;
-        if (_fullMode) {
+        if (_fillMode) {
             check = !check;
         }
         if (check) {
@@ -179,7 +191,7 @@ CGAffineTransform transformLerp(CGAffineTransform from, CGAffineTransform to, fl
 }
 
 - (void)onTap:(UITapGestureRecognizer *)tap {
-    _fullMode = !_fullMode;
+    self.fillMode = !_fillMode;
     [UIView transitionWithView:_imageView
                       duration:0.24
                        options:UIViewAnimationOptionCurveEaseOut

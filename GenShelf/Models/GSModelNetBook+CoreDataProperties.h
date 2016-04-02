@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSNumber *mark;
 @property (nullable, nonatomic, retain) NSString *imageUrl;
 @property (nullable, nonatomic, retain) NSNumber *index;
+@property (nullable, nonatomic, retain) NSNumber *readyCount;
 @property (nullable, nonatomic, retain) NSString *pageUrl;
 @property (nullable, nonatomic, retain) NSNumber *status;
 @property (nullable, nonatomic, retain) NSString *title;

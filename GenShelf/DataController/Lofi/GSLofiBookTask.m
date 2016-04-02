@@ -99,7 +99,7 @@
 
 @implementation GSLofiBookTask
 
-- (id)initWithItem:(GSBookItem *)item queue:(NSOperationQueue *)queue {
+- (id)initWithItem:(GSModelNetBook *)item queue:(NSOperationQueue *)queue {
     self = [super init];
     if (self) {
         _item = item;
@@ -109,7 +109,7 @@
 }
 
 - (void)run {
-    if (_item.status >= GSBookItemStatusComplete) {
+    if (_item.bookStatus >= GSBookStatusComplete) {
         [self complete];
     }else {
         NSURL *url = [NSURL URLWithString:_item.otherData ? _item.otherData : _item.pageUrl];
@@ -134,12 +134,20 @@
     NSArray *pNodes = [doc nodesForXPath:@"//div[@id='gh']/div[@class='gi']"
                                    error:&error];
     CheckError
-    NSMutableArray<GSPageItem *> *pages = [NSMutableArray<GSPageItem *> array];
+    NSMutableOrderedSet<GSModelNetPage *> *pages = [NSMutableOrderedSet<GSModelNetPage *> orderedSet];
     for (GDataXMLNode *pNode in pNodes) {
         GDataXMLElement *a = (GDataXMLElement*)[pNode firstNodeForXPath:@"a"
                                                                   error:&error];
         CheckErrorC
-        GSPageItem *page = [GSPageItem itemWithUrl:[a attributeForName:@"href"].stringValue];
+        NSString *href = [a attributeForName:@"href"].stringValue;
+        if (!href) {
+            continue;
+        }
+        GSModelNetPage *page = [GSModelNetPage fetchOrCreate:[NSPredicate predicateWithFormat:@"pageUrl==%@", href]
+                                                 constructor:^(id object) {
+                                                     GSModelNetPage *page = object;
+                                                     page.pageUrl = href;
+                                                 }];
         GDataXMLElement *img = (GDataXMLElement*)[a firstNodeForXPath:@"img"
                                                                 error:&error];
         CheckErrorC

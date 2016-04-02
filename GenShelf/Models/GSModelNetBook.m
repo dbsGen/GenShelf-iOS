@@ -14,6 +14,12 @@
 
 const NSTimeInterval GSTimeADay = 3600*3;
 
+@interface GSModelNetBook ()
+
+@property (nonatomic, assign) NSInteger count;
+
+@end
+
 @implementation GSModelNetBook
 
 @synthesize percent = _percent, loading = _loading, delegate = _delegate;
@@ -29,6 +35,24 @@ const NSTimeInterval GSTimeADay = 3600*3;
 - (void)setPercent:(CGFloat)percent {
     if (percent != _percent) {
         _percent = percent;
+        if ([_delegate respondsToSelector:@selector(bookItem:progress:)]) {
+            [_delegate bookItem:self progress:_percent];
+        }
+    }
+}
+
+- (NSInteger)count {
+    return self.readyCount.integerValue;
+}
+
+- (void)setCount:(NSInteger)count {
+    count = MIN(count, self.pages.count);
+    if (self.count != count) {
+        self.readyCount = [NSNumber numberWithInteger:count];
+        if (!self.pages.count) {
+            self.percent = 0;
+        }else
+            self.percent = (float)count / self.pages.count;
     }
 }
 
@@ -150,6 +174,8 @@ const NSTimeInterval GSTimeADay = 3600*3;
     if (!self.loading && self.bookStatus != GSBookStatusPagesComplete) {
         self.loading = YES;
     }
+    self.count += 1;
+    [self save];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_PROGRESS
                                                         object:self
                                                       userInfo:nil];
@@ -157,7 +183,9 @@ const NSTimeInterval GSTimeADay = 3600*3;
 
 - (void)remove {
     self.mark = [NSNumber numberWithBool:NO];
-    [self removePages:self.pages];
+    for (GSModelNetPage *page in self.pages) {
+        [page remove];
+    }
     [self setStatus:GSBookStatusNotStart loading:NO];
     [self save];
     [[NSNotificationCenter defaultCenter] postNotificationName:BOOK_ITEM_REMOVE
@@ -203,19 +231,31 @@ const NSTimeInterval GSTimeADay = 3600*3;
     hd.page = [NSNumber numberWithInteger:page];
     hd.hasNext = [NSNumber numberWithBool:hasNext];
     hd.date = [NSDate date];
-    for (GSBookItem *bi in items) {
-        [bi updateData];
-        [hd addBooksObject:bi.model];
-    }
+    hd.books = items;
     [[GCoreDataManager shareManager] save];
 }
 
 + (void)cleanCachedItems {
-    
+    NSArray *all = [GSModelHomeData fetch:[NSPredicate predicateWithFormat:@"source == %@", [GSGlobals selectedDataControl]]];
+    for (GSModelHomeData *data in all) {
+        [data remove];
+    }
 }
 
 - (void)pageComplete:(GSModelNetPage *)page {
-    
+    for (GSModelNetPage *pt in self.pages) {
+        if (pt.pageStatus != GSPageStatusComplete) {
+            return;
+        }
+    }
+    [self pagesComplete];
+}
+
+- (void)awakeFromFetch {
+    if (self.source == nil) {
+        self.source = @"Lofi";
+    }
+    self.percent = (float)self.count / self.pages.count;
 }
 
 @end

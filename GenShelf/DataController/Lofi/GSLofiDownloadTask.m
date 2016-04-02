@@ -14,20 +14,20 @@
 #import "GSLofiDataControl.h"
 
 @interface GSLofiPageTask : GSTask <ASIHTTPRequestDelegate> {
-    GSPageItem *_item;
+    GSModelNetPage *_item;
     NSOperationQueue *_queue;
 }
 
-@property (nonatomic, strong) GSBookItem *bookItem;
+@property (nonatomic, strong) GSModelNetBook *bookItem;
 @property (nonatomic, strong) ASIHTTPRequest *request;
 
-- (id)initWithItem:(GSPageItem *)item queue:(NSOperationQueue *)queue;
+- (id)initWithItem:(GSModelNetPage *)item queue:(NSOperationQueue *)queue;
 
 @end
 
 @implementation GSLofiPageTask
 
-- (id)initWithItem:(GSPageItem *)item queue:(NSOperationQueue *)queue {
+- (id)initWithItem:(GSModelNetPage *)item queue:(NSOperationQueue *)queue {
     self = [super init];
     if (self) {
         _item = item;
@@ -104,7 +104,7 @@
 
 @implementation GSLofiDownloadTask
 
-- (id)initWithItem:(GSBookItem *)item queue:(NSOperationQueue *)queue {
+- (id)initWithItem:(GSModelNetBook *)item queue:(NSOperationQueue *)queue {
     self = [super init];
     if (self) {
         _item = item;
@@ -115,11 +115,11 @@
 }
 
 - (void)run {
-    if (_item.status == GSBookItemStatusComplete) {
+    if (_item.bookStatus == GSBookStatusComplete) {
         [_item startLoading];
         _taskCount = 0;
-        [_item.pages enumerateObjectsUsingBlock:^(GSPageItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-            if (obj.status != GSPageItemStatusComplete) {
+        [_item.pages enumerateObjectsUsingBlock:^(GSModelNetPage * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if (obj.pageStatus != GSPageStatusComplete) {
                 [_downloadQueue createTask:PageDownloadIdentifier(obj)
                                    creator:^GSTask *{
                                        GSLofiPageTask *task = [[GSLofiPageTask alloc] initWithItem:obj
@@ -177,8 +177,8 @@
 }
 
 - (void)stopTasks {
-    [_item.pages enumerateObjectsUsingBlock:^(GSPageItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
-        if (obj.status != GSPageItemStatusComplete) {
+    [_item.pages enumerateObjectsUsingBlock:^(GSModelNetPage * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if (obj.pageStatus != GSPageStatusComplete) {
             GSTask *task = [_downloadQueue task:PageDownloadIdentifier(obj)];
             if (task) {
                 [task cancel];

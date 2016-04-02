@@ -9,7 +9,7 @@
 #import "GSSearchViewController.h"
 #import "GSideMenuController.h"
 #import "SRRefreshView.h"
-#import "GSBookItem.h"
+#import "GSModelNetBook.h"
 #import "GSGlobals.h"
 #import "GSBottomLoadingCell.h"
 #import "GSBookCell.h"
@@ -19,7 +19,7 @@
 #define MIN_LENGTH 3
 
 @interface GSSearchViewController () <UISearchBarDelegate, UITableViewDelegate, UITableViewDataSource, SRRefreshDelegate> {
-    NSMutableArray<GSBookItem *> *_datas;
+    NSMutableArray<GSModelNetBook *> *_datas;
     NSInteger   _index;
     BOOL    _hasNext;
     BOOL    _loading;
@@ -141,7 +141,7 @@
             cell = [[GSBookCell alloc] initWithStyle:UITableViewCellStyleDefault
                                      reuseIdentifier:identifier];
         }
-        GSBookItem *item = [_datas objectAtIndex:indexPath.row];
+        GSModelNetBook *item = [_datas objectAtIndex:indexPath.row];
         cell.imageUrl = item.imageUrl;
         cell.titleLabel.text = item.title;
         return cell;
@@ -154,7 +154,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.row < _datas.count) {
-        GSBookItem *item = [_datas objectAtIndex:indexPath.row];
+        GSModelNetBook *item = [_datas objectAtIndex:indexPath.row];
         GSPreviewViewController *preview = [[GSPreviewViewController alloc] init];
         preview.item = item;
         [self.navigationController pushViewController:preview
@@ -228,15 +228,15 @@
 
 - (void)onTaskComplete:(GSRequestTask *)task {
     if (task.tag == 1) {
-        _datas = [NSMutableArray<GSBookItem *> arrayWithArray:task.books];
+        _datas = [NSMutableArray<GSModelNetBook *> arrayWithArray:task.books];
         [_tableView reloadData];
         [_refreshView endRefresh];
         _index = task.index;
         _hasNext = task.hasMore;
     }else if (task.tag == 2) {
-        NSArray<GSBookItem *> *arr = task.books;
+        NSArray<GSModelNetBook *> *arr = task.books;
         NSMutableArray<NSIndexPath *> *indexes = [NSMutableArray array];
-        [arr enumerateObjectsUsingBlock:^(GSBookItem * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        [arr enumerateObjectsUsingBlock:^(GSModelNetBook * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
             if (![_datas containsObject:obj]) {
                 [indexes addObject:[NSIndexPath indexPathForRow:_datas.count
                                                       inSection:0]];

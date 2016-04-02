@@ -7,6 +7,9 @@
 //
 
 #import "GSModelNetPage.h"
+#import "GSPictureManager.h"
+#import "GCoreDataManager.h"
+#import "GSModelNetBook.h"
 
 @implementation GSModelNetPage
 
@@ -16,6 +19,54 @@
 
 - (GSPageStatus)pageStatus {
     return  [self.status integerValue];
+}
+
+- (void)checkStatus {
+    if (![[NSFileManager defaultManager] fileExistsAtPath:self._imagePath]) {
+        self.pageStatus = GSPageStatusNotStart;
+    }else {
+        self.pageStatus = GSPageStatusComplete;
+    }
+}
+
+- (NSString *)imagePath {
+    if (self.pageStatus == GSPageStatusComplete) {
+        return [self _imagePath];
+    }
+    return nil;
+}
+
+- (NSString *)_imagePath {
+    return [[GSPictureManager defaultManager] path:self.book
+                                              page:self];
+}
+
+- (void)requestImage {
+    self.pageStatus = GSPageStatusProgressing;
+    [self save];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PAGE_ITEM_REQUEST_IMAGE
+                                                        object:self
+                                                      userInfo:@{@"src": self.imageUrl}];
+}
+
+- (void)complete {
+    self.pageStatus = GSPageStatusComplete;
+    [self save];
+    [[NSNotificationCenter defaultCenter] postNotificationName:PAGE_ITEM_SET_IMAGE
+                                                        object:self
+                                                      userInfo:@{@"src": self.imageUrl}];
+    [self.book pageProgress];
+}
+
+- (void)reset {
+    self.pageStatus = GSPageStatusNotStart;
+    [self save];
+}
+
+- (void)awakeFromFetch {
+    if (self.source == nil) {
+        self.source = @"Lofi";
+    }
 }
 
 @end

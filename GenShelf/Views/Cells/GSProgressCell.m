@@ -70,7 +70,7 @@
     }
 }
 
-- (void)setData:(GSBookItem *)data {
+- (void)setData:(GSModelNetBook *)data {
     if (_data != data) {
         if (_data) {
             _data.delegate = nil;
@@ -97,23 +97,23 @@
 }
 
 - (void)updateStatus {
-    switch (_data.status) {
-        case GSBookItemStatusNotStart:
+    switch (_data.bookStatus) {
+        case GSBookStatusNotStart:
             if (_data.loading) {
                 _detailLabel.text = local(Loading list);
             }else {
                 _detailLabel.text = local(Not start);
             }
             break;
-        case GSBookItemStatusComplete:
-        case GSBookItemStatusProgressing:
+        case GSBookStatusComplete:
+        case GSBookStatusProgressing:
             if (_data.loading) {
                 _detailLabel.text = local(Progressing);
             }else {
                 _detailLabel.text = local(Paused);
             }
             break;
-        case GSBookItemStatusPagesComplete:
+        case GSBookStatusPagesComplete:
             _detailLabel.text = local(Complete);
             break;
             
@@ -124,7 +124,7 @@
 }
 
 - (void)updateLoading {
-    if (_data.status == GSBookItemStatusPagesComplete) {
+    if (_data.bookStatus == GSBookStatusPagesComplete) {
         _resumeButton.hidden = YES;
         _pauseButton.hidden = YES;
         _deleteButton.hidden = NO;
@@ -161,11 +161,11 @@
 
 #pragma mark - item delegate
 
-- (void)bookItem:(GSBookItem *)item progress:(CGFloat)percent {
+- (void)bookItem:(GSModelNetBook *)item progress:(CGFloat)percent {
     [_progressView setPercent:percent animated:YES];
 }
 
-- (void)bookItem:(GSBookItem *)item status:(GSBookItemStatus)status loading:(BOOL)loading {
+- (void)bookItem:(GSModelNetBook *)item status:(GSBookStatus)status loading:(BOOL)loading {
     [self updateStatus];
 }
 

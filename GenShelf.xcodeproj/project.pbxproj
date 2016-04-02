@@ -29,7 +29,6 @@
 		B22305D01C783632001B18F5 /* SRSlimeView.m in Sources */ = {isa = PBXBuildFile; fileRef = B22305CC1C783632001B18F5 /* SRSlimeView.m */; };
 		B22675EB1C7C355600B5D5CC /* no_image.png in Resources */ = {isa = PBXBuildFile; fileRef = B22675E91C7C355600B5D5CC /* no_image.png */; };
 		B22675EC1C7C355600B5D5CC /* no_image@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B22675EA1C7C355600B5D5CC /* no_image@2x.png */; };
-		B22675EF1C7C44DC00B5D5CC /* GSPageItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B22675EE1C7C44DC00B5D5CC /* GSPageItem.m */; };
 		B23366BD1C7EEDE8003EA467 /* GSModelNetBook+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = B23366AC1C7EEDE8003EA467 /* GSModelNetBook+CoreDataProperties.m */; };
 		B23366BE1C7EEDE8003EA467 /* GSModelNetBook.m in Sources */ = {isa = PBXBuildFile; fileRef = B23366AE1C7EEDE8003EA467 /* GSModelNetBook.m */; };
 		B23366C21C7EEDE8003EA467 /* GSModelHomeData.m in Sources */ = {isa = PBXBuildFile; fileRef = B23366B61C7EEDE8003EA467 /* GSModelHomeData.m */; };
@@ -369,7 +368,6 @@
 		B2F181391C7C13F200DA5BF3 /* GSRadiusImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F181381C7C13F200DA5BF3 /* GSRadiusImageView.m */; };
 		B2F44C221C78A1D900639756 /* GSDataControl.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C211C78A1D900639756 /* GSDataControl.m */; };
 		B2F44C261C78AA3700639756 /* NSURL+QueryDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C251C78AA3700639756 /* NSURL+QueryDictionary.m */; };
-		B2F44C2F1C78BD5C00639756 /* GSBookItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C2E1C78BD5C00639756 /* GSBookItem.m */; };
 		B2F44C331C78C3FE00639756 /* GDataXMLNode.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C321C78C3FE00639756 /* GDataXMLNode.m */; };
 		B2F44C431C7CA2C300639756 /* GSPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C421C7CA2C300639756 /* GSPreviewViewController.m */; };
 		B2F44C461C7CB3D000639756 /* GSThumCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F44C451C7CB3D000639756 /* GSThumCell.m */; };
@@ -450,8 +448,6 @@
 		B22305CC1C783632001B18F5 /* SRSlimeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRSlimeView.m; sourceTree = "<group>"; };
 		B22675E91C7C355600B5D5CC /* no_image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = no_image.png; sourceTree = "<group>"; };
 		B22675EA1C7C355600B5D5CC /* no_image@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "no_image@2x.png"; sourceTree = "<group>"; };
-		B22675ED1C7C44DC00B5D5CC /* GSPageItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPageItem.h; sourceTree = "<group>"; };
-		B22675EE1C7C44DC00B5D5CC /* GSPageItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSPageItem.m; sourceTree = "<group>"; };
 		B23366AB1C7EEDE8003EA467 /* GSModelNetBook+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "GSModelNetBook+CoreDataProperties.h"; sourceTree = "<group>"; };
 		B23366AC1C7EEDE8003EA467 /* GSModelNetBook+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "GSModelNetBook+CoreDataProperties.m"; sourceTree = "<group>"; };
 		B23366AD1C7EEDE8003EA467 /* GSModelNetBook.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSModelNetBook.h; sourceTree = "<group>"; };
@@ -527,6 +523,7 @@
 		B26936F41C844D2100D2D35E /* MTFlipAnimationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MTFlipAnimationView.m; sourceTree = "<group>"; };
 		B279C0891C951C93009AB881 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		B279C08A1C951C93009AB881 /* back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "back@2x.png"; sourceTree = "<group>"; };
+		B294F6FF1CAF5B61006539EC /* GenShelf 4.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "GenShelf 4.xcdatamodel"; sourceTree = "<group>"; };
 		B296F6E61C7F26E30031AA62 /* GSTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSTask.h; sourceTree = "<group>"; };
 		B296F6E71C7F26E30031AA62 /* GSTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSTask.m; sourceTree = "<group>"; };
 		B296F6EA1C8326870031AA62 /* GSLofiDownloadTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSLofiDownloadTask.h; sourceTree = "<group>"; };
@@ -1119,8 +1116,6 @@
 		B2F44C211C78A1D900639756 /* GSDataControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSDataControl.m; sourceTree = "<group>"; };
 		B2F44C241C78AA3700639756 /* NSURL+QueryDictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+QueryDictionary.h"; sourceTree = "<group>"; };
 		B2F44C251C78AA3700639756 /* NSURL+QueryDictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+QueryDictionary.m"; sourceTree = "<group>"; };
-		B2F44C2D1C78BD5C00639756 /* GSBookItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSBookItem.h; sourceTree = "<group>"; };
-		B2F44C2E1C78BD5C00639756 /* GSBookItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GSBookItem.m; sourceTree = "<group>"; };
 		B2F44C311C78C3FE00639756 /* GDataXMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GDataXMLNode.h; sourceTree = "<group>"; };
 		B2F44C321C78C3FE00639756 /* GDataXMLNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GDataXMLNode.m; sourceTree = "<group>"; };
 		B2F44C411C7CA2C300639756 /* GSPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GSPreviewViewController.h; sourceTree = "<group>"; };
@@ -2422,10 +2417,6 @@
 				B2DAF4251CA23A90004196E5 /* EHentai */,
 				B2ABBA2B1C8019B900C02B7D /* Lofi */,
 				B296F6E21C7F26D30031AA62 /* TaskQueue */,
-				B2F44C2D1C78BD5C00639756 /* GSBookItem.h */,
-				B2F44C2E1C78BD5C00639756 /* GSBookItem.m */,
-				B22675ED1C7C44DC00B5D5CC /* GSPageItem.h */,
-				B22675EE1C7C44DC00B5D5CC /* GSPageItem.m */,
 				B2F44C201C78A1D900639756 /* GSDataControl.h */,
 				B2F44C211C78A1D900639756 /* GSDataControl.m */,
 				B2ABBA331C80278900C02B7D /* GSDataDefines.h */,
@@ -2684,7 +2675,6 @@
 				B2DC70421C98011700F4C9CA /* ZXRSSDataCharacter.m in Sources */,
 				B2DC705A1C98011700F4C9CA /* ZXUPCEANExtension2Support.m in Sources */,
 				B2DC70711C98011700F4C9CA /* ZXPDF417BarcodeRow.m in Sources */,
-				B2F44C2F1C78BD5C00639756 /* GSBookItem.m in Sources */,
 				B2DC6FC71C98011700F4C9CA /* ZXAddressBookDoCoMoResultParser.m in Sources */,
 				B2DC70491C98011700F4C9CA /* ZXCode128Writer.m in Sources */,
 				B2DC702A1C98011700F4C9CA /* ZXAI013103decoder.m in Sources */,
@@ -2735,7 +2725,6 @@
 				B23366C21C7EEDE8003EA467 /* GSModelHomeData.m in Sources */,
 				B26936F71C844D2100D2D35E /* MTBlockOperation.m in Sources */,
 				B2DC6FEE1C98011700F4C9CA /* ZXWhiteRectangleDetector.m in Sources */,
-				B22675EF1C7C44DC00B5D5CC /* GSPageItem.m in Sources */,
 				B2DC70431C98011700F4C9CA /* ZXRSSFinderPattern.m in Sources */,
 				B2DC6FFD1C98011700F4C9CA /* ZXGridSampler.m in Sources */,
 				B22305C41C78250E001B18F5 /* GCoreDataManager.m in Sources */,
@@ -3162,7 +3151,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Guang Chen (F2294U3C6L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: bo yu (39W5WTNDBE)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "GenShelf/GenShelf-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -3177,7 +3166,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "025f61c2-30c4-4143-9352-331cbbf76468";
+				PROVISIONING_PROFILE = "f82b43e1-25fc-4d0f-9da5-ac3b28935152";
 			};
 			name = Debug;
 		};
@@ -3185,7 +3174,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Guang Chen (F2294U3C6L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: bo yu (39W5WTNDBE)";
 				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "GenShelf/GenShelf-Prefix.pch";
 				HEADER_SEARCH_PATHS = (
@@ -3200,7 +3189,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ri.GenShelf;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "025f61c2-30c4-4143-9352-331cbbf76468";
+				PROVISIONING_PROFILE = "f82b43e1-25fc-4d0f-9da5-ac3b28935152";
 			};
 			name = Release;
 		};
@@ -3306,11 +3295,12 @@
 		B24CD93F1CA154D100E3FFD9 /* GenShelf.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				B294F6FF1CAF5B61006539EC /* GenShelf 4.xcdatamodel */,
 				B2DAF44D1CA280BD004196E5 /* GenShelf 3.xcdatamodel */,
 				B24CD9421CA154E000E3FFD9 /* GenShelf 2.xcdatamodel */,
 				B24CD9401CA154D100E3FFD9 /* GenShelf.xcdatamodel */,
 			);
-			currentVersion = B2DAF44D1CA280BD004196E5 /* GenShelf 3.xcdatamodel */;
+			currentVersion = B294F6FF1CAF5B61006539EC /* GenShelf 4.xcdatamodel */;
 			path = GenShelf.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

@@ -7,17 +7,17 @@
 //
 
 #import "GSTask.h"
-#import "GSBookItem.h"
+#import "GSModelNetBook.h"
 
 @interface GSRequestTask : GSTask {
 @protected
     BOOL        _hasMore;
     NSUInteger  _index;
-    NSArray<GSBookItem*> *_books;
+    NSArray<GSModelNetBook*> *_books;
 }
 
 @property (nonatomic, readonly) NSUInteger index;
-@property (nonatomic, readonly) NSArray<GSBookItem*> *books;
+@property (nonatomic, readonly) NSArray<GSModelNetBook*> *books;
 @property (nonatomic, readonly) BOOL hasMore;
 
 @end

@@ -7,16 +7,16 @@
 //
 
 #import "GSTask.h"
-#import "GSBookItem.h"
+#import "GSModelNetBook.h"
 
 @class ASIHTTPRequest;
 
 @interface GSEHentaiBookTask : GSTask {
-    GSBookItem *_item;
+    GSModelNetBook *_item;
     NSOperationQueue *_queue;
 }
 
-- (id)initWithItem:(GSBookItem *)item queue:(NSOperationQueue *)queue;
+- (id)initWithItem:(GSModelNetBook *)item queue:(NSOperationQueue *)queue;
 
 @end
 
